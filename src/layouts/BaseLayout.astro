@@ -1,5 +1,5 @@
 ---
-import { SITE, THEME_CONFIG, THEMES } from "../config";
+import { ANALYTICS, SITE, THEME_CONFIG, THEMES } from "../config";
 import { ClientRouter } from "astro:transitions";
 import LeftSidebar from "../components/layout/LeftSidebar.astro";
 import RightMain from "../components/layout/RightMain.astro";
@@ -40,6 +40,15 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Person', name: 'Byu
     <meta name="twitter:title" content={`${title} | ${SITE.title}`} />
     <meta name="twitter:description" content={description} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {import.meta.env.PROD && ANALYTICS.umami?.websiteId && ANALYTICS.umami.src && (
+      <script
+        is:inline
+        defer
+        src={ANALYTICS.umami.src}
+        data-website-id={ANALYTICS.umami.websiteId}
+        data-domains={profileURL.hostname}
+      ></script>
+    )}
     <ClientRouter />
     <script is:inline>
       function applyPreferredTheme() {
