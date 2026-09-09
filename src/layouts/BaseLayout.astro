@@ -19,7 +19,7 @@ const profileURL = new URL(withBase('/'), Astro.site || SITE.website);
 const light = THEMES[THEME_CONFIG.themeLight];
 const dark = THEMES[THEME_CONFIG.themeDark];
 const themeVars = Object.entries({ lightBg: light.background, lightFg: light.foreground, lightAccent: light.accent, lightMuted: light.muted, lightBorder: light.border, lightSurface: light.surface, darkBg: dark.background, darkFg: dark.foreground, darkAccent: dark.accent, darkMuted: dark.muted, darkBorder: dark.border, darkSurface: dark.surface }).map(([key,value]) => `--${key}:${value}`).join(';');
-const jsonLd = { '@context': 'https://schema.org', '@type': 'Person', name: 'Byumsu Sean Kim', alternateName: 'Sean Kim', url: profileURL.href, alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'Cornell University' }, { '@type': 'CollegeOrUniversity', name: 'Purdue University' }], sameAs: ['https://github.com/seankimism','https://www.linkedin.com/in/byumsukim'], description: SITE.desc };
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Person', name: 'Byumsu Sean Kim', alternateName: 'Sean Kim', url: profileURL.href, jobTitle: 'Lead Scientist, Upstream R&D', worksFor: { '@type': 'Organization', name: 'Lonza Biologics' }, alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'Cornell University' }, { '@type': 'CollegeOrUniversity', name: 'Purdue University' }], sameAs: ['https://github.com/seankimism','https://www.linkedin.com/in/byumsukim'], description: SITE.desc };
 ---
 <!doctype html>
 <html lang="en" style={themeVars}>
