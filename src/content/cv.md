@@ -140,6 +140,52 @@ sections:
         institution: "ASME IMECE"
         period: "2019"
 
+  - id: "conference-abstracts"
+    title: "Conference abstracts"
+    entries:
+      - title: "Flexible Support Materials Maintain Disc Height and Support the Formation of Hydrated Tissue Engineered Intervertebral Discs in Vivo"
+        institution: "Journal of Clinical and Translational Science, 8(S1), 21 · Abstract 79"
+        period: "2024"
+        description: "Fidai A, Kim B, Lintz M, Gadjradj P, Kirnaz S, Boadi B, Hussain I, Hartl R."
+        links:
+          - label: "Published abstract"
+            url: "https://doi.org/10.1017/cts.2024.80"
+      - title: "Microscale Strain Concentrations in Tissue-Engineered Osteochondral Implants Are Dictated by Local Composition and Architecture"
+        institution: "TERMIS-AM · Oral abstract 40"
+        period: "2023"
+        description: "Kim B, Kelly T, Jung H, Beane OS, Bhumiratana S, Cohen I, Bonassar LJ."
+        links:
+          - label: "Conference program"
+            url: "https://am2023.termis.org/wp-content/uploads/2023/04/2023-TERMIS-AM-Final-Program-V8.pdf#page=22"
+      - title: "Loading of Tissue-Engineered Cartilage Determines the Fate of Chondrocyte"
+        institution: "TERMIS-AM · Oral abstract 73"
+        period: "2022"
+        description: "Kim B, Cohen I, Bonassar L."
+        links:
+          - label: "Conference program"
+            url: "https://am2022.termis.org/wp-content/uploads/2022/07/TERMIS-22-V4.pdf#page=31"
+      - title: "Loading Condition During Culture Dictates Micromechanical Behavior and Composition in Tissue-Engineered Osteochondral Implants"
+        institution: "Orthopaedic Research Society Annual Meeting · Poster 1478"
+        period: "2022"
+        description: "Kim B, Kelly T-A, Jung HJ, Beane OS, Bhumiratana S, Cohen I, Bonassar L."
+        links:
+          - label: "Conference program"
+            url: "https://www.ors.org/wp-content/uploads/2022/01/ORS22_Posters_1_11_22.pdf#page=138"
+      - title: "Identifying the Strain Threshold for Loading-Induced Chondrocyte Damage in Tissue-Engineered Cartilage"
+        institution: "Orthopaedic Research Society Annual Meeting · Poster 1482"
+        period: "2022"
+        description: "Kim B, Cohen I, Bonassar L."
+        links:
+          - label: "Conference program"
+            url: "https://www.ors.org/wp-content/uploads/2022/01/ORS22_Posters_1_11_22.pdf#page=138"
+      - title: "Architecture Dependent Compressive Failure Modes in Scaffolds for Articular Cartilage Repair"
+        institution: "Orthopaedic Research Society Annual Meeting · Poster 1518"
+        period: "2020"
+        description: "Kim B, Middendorf J, Diamantides N, Cohen I, Bouklas N, Bonassar L."
+        links:
+          - label: "Conference program"
+            url: "https://www.ors.org/wp-content/uploads/2020/02/ORS_2020_Poster_Book_v5.FINAL_web.pdf"
+
   - id: "professional-service"
     title: "Professional Service"
     entries:
