@@ -1,0 +1,13 @@
+---
+import { NAV_LINKS } from "../../config";
+import { withBase } from "../../utils/paths";
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<nav class="navbar" aria-label="Main navigation"><ul class="nav-links">
+  {NAV_LINKS.filter(link => link.isActive).map(link => {
+    const href = withBase(link.href);
+    const normalized = href.replace(/\/$/, '') || '/';
+    const active = currentPath === normalized || (link.href !== '/' && currentPath.startsWith(`${normalized}/`));
+    return <li><a href={href} class={`nav-link ${active ? 'active' : 'inactive'}`} aria-current={active ? 'page' : undefined}>{link.label}<span class="nav-link-line" /></a></li>;
+  })}
+</ul></nav>

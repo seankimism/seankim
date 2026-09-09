@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../utils/paths';
+---
+<BaseLayout title="Page not found" robots="noindex, nofollow"><header class="page-header"><p class="eyebrow">404</p><h1 class="page-title">Page not found</h1></header><p>This page may have moved. <a href={withBase('/')}>Return to the homepage</a> or browse <a href={withBase('/projects/')}>projects</a> and <a href={withBase('/publications/')}>publications</a>.</p></BaseLayout>

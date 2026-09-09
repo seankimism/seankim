@@ -1,0 +1,10 @@
+---
+import { THEME_CONFIG } from "../../config";
+import Icon from "../ui/Icon.astro";
+---
+<footer class="footer">
+  <span class="body-xs">© {new Date().getFullYear()} Sean Kim</span>
+  <div class="footer-actions"><a href="mailto:bk525@cornell.edu">Get in touch</a>
+    {THEME_CONFIG.lightAndDark && <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Switch color theme"><Icon name="Sun" size={18} /><span>Theme</span></button>}
+  </div>
+</footer>

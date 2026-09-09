@@ -1,0 +1,26 @@
+---
+import { getEntry, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CVSection from "../../components/content/CVSection.astro";
+const cv = (await getEntry('cv','cv'))!;
+const { Content } = await render(cv);
+---
+<BaseLayout title="Curriculum vitae">
+  <header class="page-header">
+    <p class="eyebrow">Experience & qualifications</p>
+    <h1 class="page-title">Curriculum vitae</h1>
+    <p class="page-subtitle">{cv.data.title}</p>
+  </header>
+  <CVSection
+    id="professional-experience"
+    title="Professional experience"
+    entries={cv.data.experience.map(entry => ({ ...entry, title: entry.role }))}
+  />
+  <CVSection
+    id="education"
+    title="Education"
+    entries={cv.data.education.map(entry => ({ ...entry, title: entry.degree }))}
+  />
+  {cv.data.sections.map(section => <CVSection {...section} />)}
+  <div class="prose"><Content /></div>
+</BaseLayout>

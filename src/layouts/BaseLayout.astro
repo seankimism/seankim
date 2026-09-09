@@ -1,0 +1,75 @@
+---
+import { SITE, THEME_CONFIG, THEMES } from "../config";
+import { ClientRouter } from "astro:transitions";
+import LeftSidebar from "../components/layout/LeftSidebar.astro";
+import RightMain from "../components/layout/RightMain.astro";
+import { withBase } from "../utils/paths";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "katex/dist/katex.min.css";
+import "../styles/global.css";
+interface Props { title: string; description?: string; ogImage?: string; ogType?: "website" | "article"; robots?: string; }
+const { title, description = SITE.desc, ogType = 'website', robots = 'index, follow' } = Astro.props;
+const canonicalPath = Astro.url.pathname.replace(/\/404\/?$/, '/404.html');
+const canonicalURL = new URL(canonicalPath, Astro.site || SITE.website);
+const profileURL = new URL(withBase('/'), Astro.site || SITE.website);
+const light = THEMES[THEME_CONFIG.themeLight];
+const dark = THEMES[THEME_CONFIG.themeDark];
+const themeVars = Object.entries({ lightBg: light.background, lightFg: light.foreground, lightAccent: light.accent, lightMuted: light.muted, lightBorder: light.border, lightSurface: light.surface, darkBg: dark.background, darkFg: dark.foreground, darkAccent: dark.accent, darkMuted: dark.muted, darkBorder: dark.border, darkSurface: dark.surface }).map(([key,value]) => `--${key}:${value}`).join(';');
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Person', name: 'Byumsu Sean Kim', alternateName: 'Sean Kim', url: profileURL.href, jobTitle: 'Lead Scientist, Upstream R&D', worksFor: { '@type': 'Organization', name: 'Lonza Biologics' }, alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'Cornell University' }, { '@type': 'CollegeOrUniversity', name: 'Purdue University' }], sameAs: ['https://github.com/seankimism','https://www.linkedin.com/in/byumsukim'], description: SITE.desc };
+---
+<!doctype html>
+<html lang="en" style={themeVars}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href={withBase(SITE.favicon)} />
+    <link rel="canonical" href={canonicalURL} />
+    <title>{title} | {SITE.title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={SITE.author} />
+    <meta name="robots" content={robots} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | ${SITE.title}`} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`${title} | ${SITE.title}`} />
+    <meta name="twitter:description" content={description} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <ClientRouter />
+    <script is:inline>
+      function applyPreferredTheme() {
+        let theme;
+        try { theme = localStorage.getItem('theme'); } catch {}
+        if (theme !== 'light' && theme !== 'dark') theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = theme;
+      }
+      applyPreferredTheme();
+      document.addEventListener('astro:after-swap', applyPreferredTheme);
+    </script>
+    <script>
+      function connectThemeToggle() {
+        const toggle = document.getElementById('theme-toggle');
+        if (!toggle || toggle.dataset.connected) return;
+        toggle.dataset.connected = 'true';
+        const updateLabel = () => toggle.setAttribute('aria-label', `Switch to ${document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'} theme`);
+        updateLabel();
+        toggle.addEventListener('click', () => {
+          const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+          document.documentElement.dataset.theme = next;
+          try { localStorage.setItem('theme', next); } catch {}
+          updateLabel();
+        });
+      }
+      document.addEventListener('astro:page-load', connectThemeToggle);
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell"><LeftSidebar /><RightMain><slot /></RightMain></div>
+  </body>
+</html>

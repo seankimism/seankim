@@ -1,0 +1,25 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import { withBase } from '../utils/paths';
+interface Props { collection: 'projects' | 'publications'; id: string; }
+const { collection, id } = Astro.props;
+const entry = (await getEntry(collection,id))!;
+const { Content } = await render(entry);
+const data = entry.data;
+const project = collection === 'projects';
+const paper = 'author' in data ? data : null;
+---
+<BaseLayout title={data.title} description={data.description} ogType="article">
+  <a class="detail-back" href={withBase(`/${collection}/`)}>← All {collection}</a>
+  <article><h1 class="detail-heading">{data.title}</h1>
+  <div class="detail-meta">
+    {project && 'organization' in data && <div class="project-meta"><span class="status">{data.status}</span><span>{data.organization}</span><span>{data.period}</span></div>}
+    {paper && <><p class="publication-authors">{paper.author}</p><p class="publication-venue">{paper.journal}{paper.citation ? ` · ${paper.citation}` : ''} · {paper.year}</p><span class="status">{paper.status || 'Published'}</span></>}
+    {data.tags.length > 0 && <ul class="topic-list" aria-label="Topics">{data.tags.map(tag => <li>{tag}</li>)}</ul>}
+  </div>
+  {paper?.external_url && <div class="detail-links"><a class="download-button" href={paper.external_url} target="_blank" rel="noopener noreferrer">{paper.category === 'preprint' ? 'Read preprint' : 'Read publication'} ↗</a></div>}
+  <div class="prose"><Content /></div>
+  {paper && <section class="detail-citation"><h2>Citation</h2><p>{paper.author} ({paper.year}). {paper.title}. {paper.journal}{paper.citation ? `, ${paper.citation}` : ''}.{paper.doi && <> <a href={paper.external_url}>doi:{paper.doi}</a></>}</p></section>}
+  </article>
+</BaseLayout>

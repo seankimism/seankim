@@ -1,0 +1,18 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../utils/paths";
+const publications = (await getCollection('publications')).sort((a,b) => b.data.year-a.data.year || a.data.order-b.data.order);
+const sections = [
+  { key: 'journal', label: 'Journal articles' },
+  { key: 'chapter', label: 'Book chapter' },
+  { key: 'preprint', label: 'Preprint' },
+];
+const notes = (await getEntry('publicationNotes', 'publication-notes'))!;
+const { Content: NotesContent } = await render(notes);
+---
+<BaseLayout title="Publications">
+  <header class="page-header"><p class="eyebrow">Scientific work</p><h1 class="page-title">Publications</h1><p class="page-subtitle">Research in biomechanics, tissue engineering, and biofabrication.</p><div class="cv-downloads"><a class="download-button" href="https://bit.ly/GScholarKim" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a></div></header>
+  {sections.map(section => <section class="publication-section" aria-labelledby={`section-${section.key}`}><h2 id={`section-${section.key}`}>{section.label}</h2>{publications.filter(p => p.data.category === section.key).map(publication => <article class="publication-entry"><div class="project-meta"><span class="publication-year">{publication.data.year}</span>{publication.data.category !== 'journal' && publication.data.category !== 'chapter' && <span class="status">{publication.data.status}</span>}</div><h3><a href={withBase(`/publications/${publication.id}/`)}>{publication.data.title}</a></h3><p class="publication-authors">{publication.data.author.split(/(Byumsu Kim)/).map(part => part === 'Byumsu Kim' ? <strong>{part}</strong> : part)}</p><p class="publication-venue">{publication.data.journal}{publication.data.citation && ` · ${publication.data.citation}`}</p><div class="publication-links">{publication.data.external_url && <a href={publication.data.external_url} target="_blank" rel="noopener noreferrer">{publication.data.category === 'preprint' ? 'Preprint' : 'DOI'} ↗</a>}<a href={withBase(`/publications/${publication.id}/`)}>Citation →</a></div></article>)}</section>)}
+  <section class="publication-section"><h2>{notes.data.title}</h2><div class="prose"><NotesContent /></div></section>
+</BaseLayout>
