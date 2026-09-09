@@ -2,10 +2,6 @@
 name: 'Byumsu “Sean” Kim'
 title: "Bioprocess Development & Tissue Engineering | PAT, Scale-up & Digital Biomanufacturing"
 experience:
-  - role: "Lead Scientist, Upstream R&D"
-    institution: "Lonza Biologics · Portsmouth, NH"
-    period: "September 2026 – Present"
-    description: "R&D programs implementing process analytical technology for mammalian cell culture across monoclonal antibody, bispecific, and non-mAb modalities."
   - role: "Staff Bioprocess Engineer"
     institution: "Ark Biotech · Cambridge, MA"
     period: "February 2026 – September 2026"

@@ -10,7 +10,9 @@ Prepared 2026-09-09.
 
 The supplied PDFs were used as references when creating the site. The online CV combines the résumé's professional experience with the academic CV's qualifications. The academic CV PDF was removed from the website at the user's request; the sidebar résumé download remains available. The CV page presents the online record without PDF download buttons or the former comparison note.
 
-Professional title/date precedence: Lonza Lead Scientist, Upstream R&D (September 2026–Present); Ark Staff Bioprocess Engineer (February–September 2026); Ark Senior Bioprocess Engineer (December 2023–January 2026). The older CV's Staff Computational Bioprocess Engineer title/current status and January 2024 Senior start were not used.
+The online CV and downloadable résumé omit the most recent role at the user's request.
+
+Professional title/date precedence: Ark Staff Bioprocess Engineer (February–September 2026); Ark Senior Bioprocess Engineer (December 2023–January 2026). The older CV's Staff Computational Bioprocess Engineer title/current status and January 2024 Senior start were not used.
 
 ## Publication inventory
 
