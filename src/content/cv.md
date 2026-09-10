@@ -119,7 +119,7 @@ sections:
         description: "Led a team of three exploring the medical device and biologics ecosystem for tissue-engineered intervertebral discs, conducting more than 100 customer discovery interviews."
 
   - id: "talks-and-conference-contributions"
-    title: "Talks and conference contributions"
+    title: "Selected talks"
     entries:
       - title: "Cellular Agriculture Innovation in Boston"
         institution: "International Cellular Agriculture Network"
@@ -141,7 +141,7 @@ sections:
         period: "2019"
 
   - id: "conference-abstracts"
-    title: "Conference abstracts"
+    title: "Selected conference abstracts"
     entries:
       - title: "Flexible Support Materials Maintain Disc Height and Support the Formation of Hydrated Tissue Engineered Intervertebral Discs in Vivo"
         institution: "Journal of Clinical and Translational Science, 8(S1), 21 · Abstract 79"
