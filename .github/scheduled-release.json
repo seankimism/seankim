@@ -3,7 +3,7 @@
   "pullRequest": 1,
   "base": "main",
   "branch": "lonza-start-update",
-  "headSha": "8adc8f0cdbb6b418f4487d4c860b57308935afbf",
+  "headSha": "9d7f4ad8030250187e2ec8c3e989728f184198eb",
   "notBefore": "2026-09-28T04:01:00Z",
   "expiresAt": "2026-09-29T04:01:00Z",
   "displayTime": "September 28, 2026 at 12:01 a.m. America/New_York (EDT)",
