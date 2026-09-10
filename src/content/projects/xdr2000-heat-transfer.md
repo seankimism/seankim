@@ -2,10 +2,10 @@
 title: "Thermal model of a 2,000 L single-use bioreactor"
 description: "Building the thermal layer of a cell-culture process model, from media hold heating and experimental validation to control, biological, and physicochemical coupling."
 organization: "Independent project"
-period: "2026"
+period: "2026–present"
 status: "In progress"
 tags: ["Heat transfer", "Bioreactor modeling", "Thermal simulation"]
-order: 2
+order: 0
 featured: true
 ---
 
