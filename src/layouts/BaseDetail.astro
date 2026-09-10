@@ -23,3 +23,34 @@ const paper = 'author' in data ? data : null;
   {paper && <section class="detail-citation"><h2>Citation</h2><p>{paper.author} ({paper.year}). {paper.title}. {paper.journal}{paper.citation ? `, ${paper.citation}` : ''}.{paper.doi && <> <a href={paper.external_url}>doi:{paper.doi}</a></>}</p></section>}
   </article>
 </BaseLayout>
+
+<script>
+  // Size local result exports to their content, including their mobile controls.
+  // Observing the inner main avoids a feedback loop with the iframe's own height.
+  function connectResultFrames() {
+    document.querySelectorAll<HTMLIFrameElement>('iframe[data-content-height]').forEach(frame => {
+      if (frame.dataset.connected) return;
+      frame.dataset.connected = 'true';
+      let observer: ResizeObserver | undefined;
+      const connect = () => {
+        observer?.disconnect();
+        if (new URL(frame.src).origin !== window.location.origin) return;
+        const doc = frame.contentDocument;
+        const main = doc?.querySelector('main');
+        if (!doc?.body || !main || !frame.contentWindow) return;
+        const resize = () => {
+          const bodyStyle = frame.contentWindow!.getComputedStyle(doc.body);
+          const padding = parseFloat(bodyStyle.paddingTop) + parseFloat(bodyStyle.paddingBottom);
+          frame.style.height = `${Math.ceil(main.getBoundingClientRect().height + padding + 2)}px`;
+        };
+        observer = new ResizeObserver(resize);
+        observer.observe(main);
+        resize();
+      };
+      frame.addEventListener('load', connect);
+      connect();
+      document.addEventListener('astro:before-swap', () => observer?.disconnect(), { once: true });
+    });
+  }
+  document.addEventListener('astro:page-load', connectResultFrames);
+</script>

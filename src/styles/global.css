@@ -138,6 +138,24 @@ li::marker { color:var(--accent); }
 .research-video iframe { display:block; width:100%; height:auto; min-height:200px; aspect-ratio:16 / 9; border:0; border-radius:6px; background:var(--surface); }
 .research-video figcaption { margin-top:10px; font-size:.875rem; line-height:1.6; color:var(--text-muted); }
 .research-video figcaption a { display:inline-block; margin-left:4px; }
+.xdr-figure { margin:24px 0 34px; }
+.xdr-figure > a { display:block; border:1px solid var(--border); border-radius:6px; overflow:hidden; background:#f9fbfc; }
+.xdr-figure img { display:block; width:100%; height:auto; }
+.xdr-figure figcaption,.xdr-explorer figcaption { margin-top:10px; color:var(--text-muted); font-size:.875rem; line-height:1.65; }
+.xdr-conditions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 24px; margin:22px 0; padding:20px 22px; border:1px solid var(--border); border-radius:6px; background:var(--surface); }
+.xdr-conditions dt { color:var(--text-muted); font-size:.875rem; }
+.xdr-conditions dd { margin:3px 0 0; font-size:1rem; font-weight:500; }
+.xdr-explorer { margin:24px 0; }
+.xdr-explorer iframe { display:block; width:100%; border:1px solid var(--border); border-radius:6px; background:#f8f7f3; }
+.xdr-experiment-plan { margin:22px 0; max-width:100%; overflow-x:auto; border:1px solid var(--border); border-radius:6px; }
+.xdr-experiment-plan:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+.xdr-experiment-plan table { width:100%; min-width:38rem; border-collapse:collapse; font-size:.875rem; line-height:1.65; }
+.xdr-experiment-plan th,.xdr-experiment-plan td { padding:14px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+.xdr-experiment-plan th { background:var(--surface); font-weight:600; }
+.xdr-experiment-plan th:first-child { width:22%; }
+.xdr-experiment-plan th:nth-child(2) { width:45%; }
+.xdr-experiment-plan tr:last-child td { border-bottom:0; }
+@media (max-width:520px) { .xdr-conditions { grid-template-columns:1fr; gap:14px; padding:18px; } }
 .detail-citation { margin-top:30px; border-top:1px solid var(--border); padding-top:20px; }
 .detail-citation h2 { margin-bottom:12px; }
 .detail-citation p { color:var(--text-muted); font-size:.9375rem; overflow-wrap:anywhere; }
