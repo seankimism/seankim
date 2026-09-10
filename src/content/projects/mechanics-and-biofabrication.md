@@ -13,14 +13,13 @@ featured: true
 
 My dissertation, *Mechanically Informed Design Controls for Tissue Engineered Cartilage Biofabrication*, investigated the relationship between mechanical stimuli, scaffold architecture, and the behavior of cells in engineered cartilage. I worked in [Lawrence Bonassar's research group](https://bonassar.research.engineering.cornell.edu/) at Cornell University.
 
-Related publication: [The influence of chondrocyte source on the manufacturing reproducibility of human tissue engineered cartilage](https://doi.org/10.1016/j.actbio.2021.07.003) — *Acta Biomaterialia*, 2021.
-
 ## Cartilage and scaffold mechanics
 
 I investigated how local physical stimuli and mechanical instabilities influence chondrocyte behavior. This work connected the global mechanical response of porous collagen scaffolds to the local environment experienced by cells.
 
 ### Related publications
 
+- [The influence of chondrocyte source on the manufacturing reproducibility of human tissue engineered cartilage](https://doi.org/10.1016/j.actbio.2021.07.003) — *Acta Biomaterialia*, 2021.
 - [The Role of Buckling Instabilities in the Global and Local Mechanical Response in Porous Collagen Scaffolds](https://doi.org/10.1007/s11340-022-00853-7) — *Experimental Mechanics*, 2022.
 - [Instabilities induced by mechanical loading determine the viability of chondrocytes grown on porous scaffolds](https://doi.org/10.1016/j.jbiomech.2023.111591) — *Journal of Biomechanics*, 2023.
 - [Microscale strain concentrations in tissue-engineered osteochondral implants are dictated by local compositional thresholds and architecture](https://doi.org/10.1016/j.jbiomech.2023.111882) — *Journal of Biomechanics*, 2024.
