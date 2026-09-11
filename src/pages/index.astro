@@ -5,7 +5,10 @@ import { SOCIALS } from "../config";
 import { withBase } from "../utils/paths";
 const bio = (await getEntry('bio','bio'))!;
 const { Content } = await render(bio);
-const projects = (await getCollection('projects')).filter(p => p.data.featured).sort((a,b) => a.data.order-b.data.order);
+// One project per organization: the newest (lowest `order`, matching the Projects page) is shown,
+// and organizations are listed in the order of their newest project.
+const allProjects = (await getCollection('projects')).sort((a,b) => a.data.order-b.data.order);
+const projects = allProjects.filter((p, i) => allProjects.findIndex(q => q.data.organization === p.data.organization) === i);
 const papers = (await getCollection('publications')).filter(p => p.data.featured).sort((a,b) => b.data.year-a.data.year);
 const linkedIn = SOCIALS.find(link => link.name === 'LinkedIn' && link.isActive);
 ---

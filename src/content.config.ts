@@ -18,7 +18,6 @@ const projects = defineCollection({
     title: z.string(), description: z.string(), organization: z.string(),
     period: z.string(), status: z.enum(["Past work", "In progress", "Planned"]),
     tags: z.array(z.string()).default([]), order: z.number(),
-    featured: z.boolean().default(false),
   }),
 });
 const bio = defineCollection({

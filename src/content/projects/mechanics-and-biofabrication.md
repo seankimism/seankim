@@ -6,7 +6,6 @@ period: "2019–2023"
 status: "Past work"
 tags: ["Biomechanics", "Biofabrication", "Finite element analysis", "Bioreactor design"]
 order: 3
-featured: true
 ---
 
 ## Doctoral research

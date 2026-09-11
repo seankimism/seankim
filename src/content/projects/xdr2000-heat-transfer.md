@@ -6,7 +6,6 @@ period: "2026–present"
 status: "In progress"
 tags: ["Heat transfer", "Bioreactor modeling", "Thermal simulation"]
 order: 0
-featured: true
 ---
 
 ## Problem statement

@@ -21,7 +21,7 @@ export function checkControlResults(directory = 'public/thermal-control') {
   assert.deepEqual(catalog.volumes_l, [400, 1000, 2000]);
   assert.deepEqual(catalog.p_scales, [0.25, 0.5, 0.75, 1, 1.5, 2, 3]);
   assert.deepEqual(catalog.i_scales, [0.25, 0.5, 0.75, 1, 1.5, 2, 3]);
-  assert.deepEqual(catalog.defaults, {volume_l: 1000, p_index: 3, i_index: 3});
+  assert.deepEqual(catalog.defaults, {volume_l: 2000, p_index: 3, i_index: 3});
   assert.equal(catalog.files.length, 147);
   assert.deepEqual(catalog.conditions, {
     duration_s: 129600, display_step_s: 60, controller_sample_s: 5,

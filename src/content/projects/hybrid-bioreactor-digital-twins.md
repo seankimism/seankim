@@ -6,7 +6,6 @@ period: "2023-2026"
 status: "Past work"
 tags: ["Mechanistic modeling", "Machine learning", "Cell culture", "Process Development"]
 order: 1
-featured: true
 ---
 
 ## The problem
