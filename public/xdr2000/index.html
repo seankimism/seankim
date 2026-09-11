@@ -23,7 +23,7 @@
           <div class="slider-ends"><span>400 L</span><span>2,000 L</span></div>
         </div>
         <div class="volume-input"><input id="volume" type="number" min="400" max="2000" step="1" value="1000" required inputmode="numeric" aria-describedby="simulation-status"><span aria-hidden="true">L</span></div>
-        <button id="simulate" class="simulate-button" type="submit">Load results</button>
+        <button id="simulate" class="simulate-button" type="submit">Simulate</button>
         <p id="simulation-status" class="simulation-status" role="status" aria-live="polite">Showing 1,000 L</p>
       </form>
       <div class="visuals">
@@ -316,14 +316,14 @@
       volumeInput.setCustomValidity(valid?'':`Enter a whole number from ${limits.min} to ${limits.max} liters.`);
       if(valid){volumeSlider.value=String(volume);volumeSlider.style.setProperty('--progress',`${100*(volume-limits.min)/(limits.max-limits.min)}%`);}
       status.dataset.error=String(!valid);
-      status.textContent=valid?(volume===data.volume_l?showingVolume():`${showingVolume()} · Select Load results to view ${fmt(volume,0)} L.`):`${showingVolume()} · Enter ${fmt(limits.min,0)}–${fmt(limits.max,0)} L in whole liters.`;
+      status.textContent=valid?(volume===data.volume_l?showingVolume():`${showingVolume()} · Select Simulate to apply ${fmt(volume,0)} L.`):`${showingVolume()} · Enter ${fmt(limits.min,0)}–${fmt(limits.max,0)} L in whole liters.`;
     }
     volumeInput.addEventListener('input',pendingVolumeChanged);
     volumeSlider.addEventListener('input',()=>{volumeInput.value=volumeSlider.value;pendingVolumeChanged();});
     pendingVolumeChanged();
     function setLoading(busy) {
       loading=busy;
-      $('simulate').disabled=busy;$('simulate').textContent=busy?'Loading…':'Load results';
+      $('simulate').disabled=busy;$('simulate').textContent=busy?'Simulating…':'Simulate';
       volumeInput.disabled=busy;volumeSlider.disabled=busy;
       $('time').disabled=busy||duration===0;$('play').disabled=busy||duration===0;
       $('volume-form').setAttribute('aria-busy',String(busy));
@@ -348,7 +348,7 @@
       if(!validVolume(volume)){pendingVolumeChanged();volumeInput.reportValidity();return;}
       if(volume===data.volume_l){pendingVolumeChanged();return;}
       setPlaying(false);setLoading(true);status.dataset.error='false';
-      status.textContent=`Loading results for ${fmt(volume,0)} L…`;
+      status.textContent=`Simulating ${fmt(volume,0)} L…`;
       const controller=new AbortController();
       const timeout=setTimeout(()=>controller.abort(),20000);
       try {
@@ -356,7 +356,7 @@
         applySimulation(result);
       } catch(error){
         status.dataset.error='true';
-        status.textContent=`Could not load results for ${fmt(volume,0)} L. ${showingVolume()}. Try again.`;
+        status.textContent=`Could not complete the simulation for ${fmt(volume,0)} L. ${showingVolume()}. Try again.`;
       } finally {
         clearTimeout(timeout);setLoading(false);
       }

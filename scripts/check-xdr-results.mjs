@@ -7,6 +7,9 @@ import { validateResult } from '../public/xdr2000/result-loader.js';
 
 const root = path.resolve(process.argv[2] || 'public/xdr2000');
 const html = readFileSync(path.join(root, 'index.html'), 'utf8');
+assert.match(html, />Simulate<\/button>/);
+assert.match(html, /Simulating \$\{fmt\(volume,0\)\} L/);
+assert.ok(!/Load results|Loading results|Could not load results/.test(html), 'Implementation language is visible in the explorer.');
 const embedded = JSON.parse(html.match(/<script type="application\/json" id="model-data">([\s\S]*?)<\/script>/)[1]);
 assert.match(embedded.results_root, /^\.\/results\/[a-f0-9]{12}\/$/);
 const {colors, volume_limits_l, results_root, ...defaultResult} = embedded;

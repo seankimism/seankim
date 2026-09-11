@@ -63,7 +63,7 @@ The explorer opens with 1,000 L of medium at 4 °C. Water enters the jacket at a
   <div><dt>Liquid target</dt><dd>36.5 °C</dd></div>
 </dl>
 
-Choose a media volume between **400 and 2,000 L** in **1 L increments**, then select **Load results**. Each volume has a separately calculated simulation; the explorer loads its saved temperature response and vessel view. The inlet, initial-temperature, and room conditions remain the same.
+Choose a media volume between **400 and 2,000 L** in **1 L increments**, then select **Simulate** to explore its temperature response and vessel view. The inlet, initial-temperature, and room conditions remain the same.
 
 Play the simulation or move the time slider to follow the temperatures. Drag the vessel to rotate the cutaway; the wall colors show the temperature of each steel band. Compare the time to target at different fill volumes.
 
@@ -72,7 +72,7 @@ Play the simulation or move the time slider to follow the temperatures. Drag the
   <figcaption><a href="/xdr2000/index.html" target="_blank" rel="noopener noreferrer">Open the interactive explorer in a full window ↗</a></figcaption>
 </figure>
 
-For the default 1,000 L case, the simulated temperatures at eight hours are **38.6 °C in the liquid, 39.6 °C in the jacket water, and 34.0 °C in the headspace**. Heating continues after the target is reached: the 36.5 °C target marks a temperature crossing and does not switch off heating. The values in the explorer update when a different volume is loaded.
+For the default 1,000 L case, the simulated temperatures at eight hours are **38.6 °C in the liquid, 39.6 °C in the jacket water, and 34.0 °C in the headspace**. Heating continues after the target is reached: the 36.5 °C target marks a temperature crossing and does not switch off heating. The values in the explorer update when a different volume is simulated.
 
 The geometry and heat-transfer properties are simplified model inputs. The curves represent simulated temperature responses.
 
