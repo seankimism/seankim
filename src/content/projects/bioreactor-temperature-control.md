@@ -62,14 +62,36 @@ At the reference tuning and 2,000 L, the warm-up is limited by the equipment rat
 
 ## Metabolic heat: fed-batch and perfusion
 
-As viable cell density increases, metabolic heat can turn a heating requirement into a cooling requirement. Two published CHO profiles provide different loads for the same 2,000 L thermal model:
+As viable cell density increases, metabolic heat can turn a heating requirement into a cooling requirement. Two published CHO profiles provide different loads for the same 2,000 L thermal model. Both use an assumed 20 pW of metabolic heat per viable cell, informed by direct CHO320 calorimetry reported by [Guan and Kemp (1999)](https://doi.org/10.1023/A:1008038515285). This is a shared modeling assumption, not a measured rate for either culture.
 
-- Fed-batch: NISTCHO clone 31 with standard feeding, from Figure 1B and Supplemental File 4 of [Dahodwala and colleagues (2025)](https://doi.org/10.1002/biot.70012). The study reports numerical VCD means and standard deviations from spin-tube cultures, so the density history comes from a much smaller scale than the vessel modeled here. The inoculum is set at 0.3 million cells/mL; the mean peak is near 17.9 million cells/mL on day 9, declining to 11.4 million cells/mL at day 17.
-- Perfusion: BRX#A from Figure 1b of [Zhang and colleagues (2024)](https://doi.org/10.1002/bit.28674). The Merck study used a 1.8 L working volume at 36.5 °C. VCD points digitized from the figure rise from an assumed 0.5 million cells/mL inoculum to 102 million cells/mL, then fluctuate and decline to about 50 million cells/mL at day 28.
+<div class="xdr-sources">
+  <section aria-label="Fed-batch thermal-load source">
+    <p class="eyebrow">Fed-batch</p>
+    <p class="xdr-source-name">NISTCHO clone 31, standard feeding</p>
+    <p>Published VCD means and standard deviations from Figure 1B and Supplemental File 4 of <a href="https://doi.org/10.1002/biot.70012">Dahodwala and colleagues (2025)</a>. The cultures were spin tubes, so the density history comes from a much smaller scale than the vessel modeled here.</p>
+    <dl>
+      <dt>Inoculum</dt><dd>0.3 million cells/mL (set)</dd>
+      <dt>Peak</dt><dd>17.9 million cells/mL on day 9</dd>
+      <dt>End</dt><dd>11.4 million cells/mL on day 17</dd>
+      <dt>Peak heat at 2,000 L</dt><dd>0.72 kW</dd>
+    </dl>
+  </section>
+  <section aria-label="Perfusion thermal-load source">
+    <p class="eyebrow">Perfusion</p>
+    <p class="xdr-source-name">BRX#A, 1.8 L working volume at 36.5 °C</p>
+    <p>VCD digitized from Figure 1b of <a href="https://doi.org/10.1002/bit.28674">Zhang and colleagues (2024)</a>, a Merck study. The readings are approximate; the profile rises steeply, then fluctuates and declines over four weeks.</p>
+    <dl>
+      <dt>Inoculum</dt><dd>0.5 million cells/mL (assumed)</dd>
+      <dt>Peak</dt><dd>102 million cells/mL on day 15</dd>
+      <dt>End</dt><dd>about 50 million cells/mL on day 28</dd>
+      <dt>Peak heat at 2,000 L</dt><dd>4.08 kW</dd>
+    </dl>
+  </section>
+</div>
 
 Straight-line interpolation preserves each profile's timing, peaks, and decline. Both cases use a constant 36.5 °C setpoint, the reference tuning, and the equipment limits above. The cultures are different cell lines and processes; their VCD histories provide two thermal-load scenarios rather than a controlled biological comparison.
 
-Both profiles use an assumed 20 pW of metabolic heat per viable cell, informed by direct CHO320 calorimetry reported by [Guan and Kemp (1999)](https://doi.org/10.1023/A:1008038515285). This is a shared modeling assumption, not a measured rate for either culture. At 2,000 L it gives a peak metabolic heat of about 0.72 kW for fed-batch and 4.08 kW for perfusion. Against the 0.75 kW passive loss, the two loads fall on opposite sides of the line: at 20 pW per cell and 2,000 L, the vessel sheds the heat of about 19 million cells/mL on its own. The fed-batch peak sits just below that density; the perfusion culture passes it around day 6.
+Against the 0.75 kW passive loss, the two peak loads fall on opposite sides of the line: at 20 pW per cell and 2,000 L, the vessel sheds the heat of about 19 million cells/mL on its own. The fed-batch peak sits just below that density; the perfusion culture passes it around day 6.
 
 Volume remains fixed at 2,000 L. Volume changes from feeding, sampling, or bleeding, and heat exchange with feed and harvest streams, are excluded so that the changing metabolic heat is the only disturbance. The examples replay the published density histories without reproducing the complete fed-batch or perfusion process.
 
@@ -104,15 +126,8 @@ The perfusion case holds a 36.5 °C setpoint for its 28-day observation window. 
   <figcaption>Perfusion at a constant 36.5 °C target, with 20 pW per viable cell and a fixed 2,000 L volume. The shaded band marks ±0.2 °C. Heating-only ends at the configured 40 °C culture stop. The source VCD history comes from a culture maintained at 36.5 °C; it does not predict cell survival after simulated overheating.</figcaption>
 </figure>
 
-## What decides it: passive heat loss and scale
+## Passive heat loss sets the cooling threshold
 
 For a given vessel, room, and setpoint, the passive heat loss is fixed, about 0.75 kW here. Whether a process needs cooling depends on whether its metabolic heat exceeds that value, which comes down to viable cell density, per-cell heat rate, and the volume that shares the loss. Within this vessel the loss barely changes with fill (0.80 kW at 400 L, 0.75 kW at 2,000 L), so the threshold density is set mainly by how many liters share it: about 19 million cells/mL at 2,000 L against roughly 100 million cells/mL at 400 L.
 
 Across scales the effect is stronger. For geometrically similar reactors, heat-transfer area grows with the square of the linear dimension while volume grows with the cube, so a tenfold increase in volume leaves each liter with about $10^{1/3} \approx 2.2$ times less area. A process that holds temperature by turning down the heater at 200 L can therefore need installed cooling at 2,000 L, both to hold the setpoint at peak density and to carry out downward temperature shifts within a useful time.
-
-## Next steps
-
-- Estimate metabolic heat from oxygen uptake rate instead of a fixed 20 pW per cell, following the biological-coupling plan in the [thermal-model article](/projects/xdr2000-heat-transfer/#future-directions).
-- Apply the 36.5 to 33 °C shift from the explorer during the fed-batch profile, where heating-only operation has no way to cool 2,000 L on demand.
-- Tune heating-only and heating-and-cooling operation separately, and replace the schematic loop with measured TCU behavior and sensor response.
-- Extend the comparison to other reactor scales with their own geometry, heat-transfer parameters, and utility limits, to test the area-per-volume argument directly.

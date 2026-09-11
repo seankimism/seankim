@@ -145,6 +145,14 @@ li::marker { color:var(--accent); }
 .xdr-conditions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 24px; margin:22px 0; padding:20px 22px; border:1px solid var(--border); border-radius:6px; background:var(--surface); }
 .xdr-conditions dt { color:var(--text-muted); font-size:.875rem; }
 .xdr-conditions dd { margin:3px 0 0; font-size:1rem; font-weight:500; }
+.xdr-sources { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin:22px 0; }
+.xdr-sources > section { padding:20px 22px; border:1px solid var(--border); border-radius:6px; background:var(--surface); }
+.xdr-sources .eyebrow { margin:0 0 6px; }
+.xdr-sources .xdr-source-name { margin:0 0 8px; font-weight:600; line-height:1.4; }
+.xdr-sources p { margin:0 0 .85rem; font-size:.9375rem; line-height:1.65; }
+.xdr-sources dl { display:grid; grid-template-columns:auto minmax(0,1fr); gap:6px 14px; margin:0; font-size:.875rem; line-height:1.5; }
+.xdr-sources dt { color:var(--text-muted); }
+.xdr-sources dd { margin:0; font-weight:500; }
 .xdr-explorer { margin:24px 0; }
 .xdr-explorer iframe { display:block; width:100%; border:1px solid var(--border); border-radius:6px; background:#f8f7f3; }
 .xdr-experiment-plan { margin:22px 0; max-width:100%; overflow-x:auto; border:1px solid var(--border); border-radius:6px; }
@@ -156,6 +164,7 @@ li::marker { color:var(--accent); }
 .xdr-experiment-plan th:nth-child(2) { width:45%; }
 .xdr-experiment-plan tr:last-child td { border-bottom:0; }
 @media (max-width:520px) { .xdr-conditions { grid-template-columns:1fr; gap:14px; padding:18px; } }
+@media (max-width:640px) { .xdr-sources { grid-template-columns:1fr; } .xdr-sources > section { padding:18px; } }
 .detail-citation { margin-top:30px; border-top:1px solid var(--border); padding-top:20px; }
 .detail-citation h2 { margin-bottom:12px; }
 .detail-citation p { color:var(--text-muted); font-size:.9375rem; overflow-wrap:anywhere; }
