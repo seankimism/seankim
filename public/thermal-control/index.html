@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore how proportional gain and integral time change the simulated temperature response of a single-use bioreactor.">
+  <title>Tune the temperature controller</title>
+  <link rel="stylesheet" href="./explorer.css">
+</head>
+<body>
+  <main id="explorer" data-ready="false">
+    <header class="intro">
+      <p class="eyebrow"><span aria-hidden="true"></span>Temperature control explorer</p>
+      <h1>Tune the temperature controller</h1>
+      <p>Adjust the outer culture controller and compare heating only with active heating and cooling. The inner jacket controller stays fixed.</p>
+    </header>
+
+    <section class="control-card" aria-label="Controller settings">
+      <div class="operating-controls">
+        <div class="field">
+          <label for="volume">Culture volume</label>
+          <select id="volume" disabled><option value="400">400 L</option><option value="1000" selected>1,000 L</option><option value="2000">2,000 L</option></select>
+        </div>
+      </div>
+      <div class="gain-controls">
+        <div class="gain-field">
+          <div class="gain-heading"><label for="p-gain">Proportional gain <span>P</span></label><output id="p-value" for="p-gain">—</output></div>
+          <input id="p-gain" class="range" type="range" min="0" max="6" step="1" value="3" disabled aria-describedby="p-help p-scale">
+          <div class="range-ends" id="p-scale"><span>0.25× baseline</span><span>3× baseline</span></div>
+          <p id="p-help" class="help">Higher P makes a larger adjustment for the same temperature error.</p>
+        </div>
+        <div class="gain-field">
+          <div class="gain-heading"><label for="i-gain">Integral time <span>T<sub>i</sub></span></label><output id="i-value" for="i-gain">—</output></div>
+          <input id="i-gain" class="range" type="range" min="0" max="6" step="1" value="3" disabled aria-describedby="i-help i-scale">
+          <div class="range-ends" id="i-scale"><span>0.25× baseline</span><span>3× baseline</span></div>
+          <p id="i-help" class="help">Lower T<sub>i</sub> means stronger integral action on persistent temperature error.</p>
+        </div>
+      </div>
+      <div class="presets"><span>Illustrative settings</span><button type="button" data-preset="gentle" disabled>Gentle</button><button type="button" data-preset="baseline" disabled aria-pressed="true">Baseline</button><button type="button" data-preset="aggressive" disabled>Aggressive</button><button type="button" id="reset" class="text-button" disabled>Reset tuning</button></div>
+    </section>
+
+    <div class="result-status"><p id="status" role="status" aria-live="polite">Loading the response library…</p><button type="button" id="retry" hidden>Try again</button></div>
+    <section id="results" class="results" aria-busy="true" aria-label="Temperature responses" hidden>
+      <div class="chart-toolbar">
+        <div class="segmented" role="group" aria-label="Chart time window"><button type="button" id="view-full" aria-pressed="true">Full run</button><button type="button" id="view-shift" aria-pressed="false">Temperature shift</button></div>
+      </div>
+      <div id="legend" class="legend" aria-label="Chart legend"></div>
+
+      <div class="plots">
+        <figure class="plot-panel">
+          <div class="plot-heading"><h2>Culture temperature</h2><p>4 → 36.5 °C, then 33 °C at 16 h</p></div>
+          <svg id="temperature-chart" class="chart" role="img" aria-labelledby="temperature-title temperature-description"><title id="temperature-title">Culture temperature response</title><desc id="temperature-description">Culture temperature trajectories for heating only and heating with cooling at the selected controller settings.</desc></svg>
+        </figure>
+        <figure class="plot-panel jacket-panel">
+          <div class="plot-heading"><h2>Jacket temperature</h2><p>Mixed water circulating around the vessel</p></div>
+          <svg id="jacket-chart" class="chart" role="img" aria-labelledby="jacket-title jacket-description"><title id="jacket-title">Jacket water temperature response</title><desc id="jacket-description">Mixed jacket water temperatures for heating only and heating with cooling.</desc></svg>
+        </figure>
+        <figure class="plot-panel error-panel">
+          <div class="plot-heading"><h2>Temperature error</h2><p>Culture − setpoint · shaded band ±0.2 °C</p></div>
+          <svg id="error-chart" class="chart" role="img" aria-labelledby="error-title error-description"><title id="error-title">Culture temperature error</title><desc id="error-description">The full temperature error for both control modes in the selected time window. The shaded region is the plus or minus 0.2 degree hold band.</desc></svg>
+        </figure>
+      </div>
+
+    </section>
+    <noscript><p class="no-script">Enable JavaScript to use the controller explorer.</p></noscript>
+  </main>
+  <script type="module" src="./explorer.js"></script>
+</body>
+</html>

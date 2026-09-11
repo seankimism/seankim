@@ -15,7 +15,7 @@ Temperature connects physicochemical and biological behavior in cell culture, in
 
 These dynamics depend on both operating conditions and reactor design. Changes in fill volume, feed temperature and addition rate, metabolic activity, and utility conditions can alter the heating or cooling required to maintain culture temperature. For geometrically similar vessels, the heat-transfer area available per unit of culture volume decreases as scale increases, which can slow the thermal response under otherwise comparable conditions. Representing these effects is necessary to understand how process variability translates into temperature deviations and changing demands on the control system. In practice, this means predicting how closely the culture follows a programmed temperature shift, how far its temperature dips during a cold feed addition, and how much heating and cooling margin remains as scale increases.
 
-This project establishes the thermal foundation for simulating these interactions. I chose Cytiva's XDR-2000 L single-use bioreactor (SUB) as an example and represented it with simplified geometry. The initial model describes heat exchange between the jacket water, steel wall, culture medium, headspace, and surrounding room to predict the thermal response of the vessel and its contents. Heat transfer through the wall includes bag-film and contact resistance. The control loop that adjusts jacket-water temperature is planned for the next stage.
+This project establishes the thermal foundation for simulating these interactions. I chose Cytiva's XDR-2000 L single-use bioreactor (SUB) as an example and represented it with simplified geometry. The model describes heat exchange between the jacket water, steel wall, culture medium, headspace, and surrounding room to predict the thermal response of the vessel and its contents. Heat transfer through the wall includes bag-film and contact resistance. A cascade controller extends this thermal model to heating, holding temperature, and programmed temperature shifts.
 
 The first application is warming the medium during the media hold phase, before inoculation. With no cells present, this case isolates physical heat exchange from metabolic heat generation and provides a starting point for calibrating and validating the thermal model.
 
@@ -35,10 +35,10 @@ The model connects four parts: circulating jacket water, the steel wall, culture
 In the 1,000 L case shown here, the steel wall is divided into 185 horizontal bands. Each band represents a complete ring around the vessel, stores heat, and exchanges heat with its neighbors and adjacent compartments. Thermal resistance between neighboring bands determines the heat flow along the wall, while the liquid and headspace remain bulk states.
 
 <figure class="xdr-figure">
-  <a href="/xdr2000/xdr2000_mesh_detail.png" target="_blank" rel="noopener noreferrer" aria-label="Open the thermal mesh detail figure at full size">
-    <img src="/xdr2000/xdr2000_mesh_detail.png" alt="Reactor cutaway and enlarged mesh detail showing one temperature per circumferential steel band, heat exchange between neighboring bands, nominal 15 mm band height, and 3 mm wall thickness." width="4800" height="2700" loading="lazy" decoding="async" />
+  <a href="/xdr2000/xdr2000_mesh_detail.png?v=bf646a3ff40a" target="_blank" rel="noopener noreferrer" aria-label="Open the thermal mesh detail figure at full size">
+    <img src="/xdr2000/xdr2000_mesh_detail.png?v=bf646a3ff40a" alt="Reactor cutaway and enlarged mesh detail showing one temperature per circumferential steel band, heat exchange between neighboring bands, nominal 15 mm band height, and 3 mm wall thickness." width="4800" height="2700" loading="lazy" decoding="async" />
   </a>
-  <figcaption>One temperature is assigned to each steel ring. The mesh uses a nominal band height of 15 mm and a modeled wall thickness of 3 mm.</figcaption>
+  <figcaption>The reactor cutaway locates the selected wall bands (left); complete rings and an enlarged wall segment show their connections (right). One temperature is assigned to each steel ring. The mesh uses a nominal band height of 15 mm and a modeled wall thickness of 3 mm.</figcaption>
 </figure>
 
 ## 03 / Connect the heat-transfer pathways
@@ -76,6 +76,8 @@ For the default 1,000 L case, the simulated temperatures at eight hours are **38
 
 The geometry and heat-transfer properties are simplified model inputs. The curves represent simulated temperature responses.
 
+The next article, [Controlling temperature in a 2,000 L single-use bioreactor](/projects/bioreactor-temperature-control/), adds cascade control to this thermal model. Its interactive explorer compares culture and jacket temperatures as controller tuning changes, including heating-only and heating/cooling operation.
+
 ## Calibration and experimental validation
 
 The next step is to estimate the uncertain thermal parameters and test predictions against independent cell-free experiments. The proposed plan below separates calibration runs from independent validation experiments. Heating and cooling tests across working volumes, with repeated reference runs, have precedent in [Cytiva's XDR characterization study](https://cdn.cytivalifesciences.com/api/public/content/digi-23201-pdf); the matrix below is a proposed study for this model.
@@ -84,7 +86,7 @@ The next step is to estimate the uncertain thermal parameters and test predictio
 
 Record synchronized liquid temperatures at multiple positions, jacket inlet and outlet temperatures, jacket flow, accessible wall temperatures, headspace temperature, and room temperature. Also record fill volume, agitation, and bag installation. Check sensor offsets and response times before testing. Spatial liquid measurements would test the assumption that one bulk temperature represents the culture medium.
 
-Use measured jacket conditions as boundary inputs; replaying a varying inlet history would require extending the current constant-inlet formulation.
+Use measured jacket conditions as boundary inputs for the thermal model. Replaying measured inlet histories remains a planned extension of the open-loop warm-up model; the controller explorer instead calculates its inlet conditions from the modeled TCU and circulation loop.
 
 ### Proposed experiment matrix
 
@@ -106,7 +108,7 @@ The cell-free model provides the starting point for three planned layers of coup
 
 ### 1. Control and scale
 
-Add jacket feedback control to execute temperature shifts and maintain the setpoint during media hold. As biological coupling is introduced, evaluate the same controller under a changing metabolic heat load. Extend the model to other reactor scales using the corresponding geometry, heat-transfer parameters, and utility limits. This would allow comparisons of heating and cooling capacity, control response, and conditions under which heat removal may begin to limit the process.
+Refine the current cascade-control comparison using measured TCU behavior, sensor response, and separate tuning for heating-only and heating/cooling operation. As biological coupling is introduced, evaluate the controller under a changing metabolic heat load. Extend the model to other reactor scales using the corresponding geometry, heat-transfer parameters, and utility limits. This would allow comparisons of heating and cooling capacity, control response, and conditions under which heat removal may begin to limit the process.
 
 ### 2. Biological coupling
 

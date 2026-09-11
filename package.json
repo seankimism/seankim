@@ -7,9 +7,10 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/check-xdr-results.mjs dist/xdr2000",
+    "build": "astro build && node scripts/check-xdr-results.mjs dist/xdr2000 && node scripts/check-control-results.mjs dist/thermal-control",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test:control": "node --test scripts/control-loader.test.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
