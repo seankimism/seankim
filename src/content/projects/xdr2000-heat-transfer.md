@@ -24,8 +24,8 @@ The first application is warming the medium during the media hold phase, before 
 The model connects four parts: circulating jacket water, the steel wall, culture medium, and headspace air. The medium is assumed to be well mixed, with a uniform temperature throughout the liquid. The headspace also has one bulk temperature, while the wall temperature varies with height.
 
 <figure class="xdr-figure">
-  <a href="../../xdr2000/xdr2000_mesh_3d.png" target="_blank" rel="noopener noreferrer" aria-label="Open the reactor overview figure at full size">
-    <img src="../../xdr2000/xdr2000_mesh_3d.png" alt="Cutaway of the simplified Cytiva XDR-2000 L SUB model showing the water jacket, steel wall, 1,000 L of culture medium, and headspace air." width="2400" height="1839" decoding="async" fetchpriority="high" />
+  <a href="/xdr2000/xdr2000_mesh_3d.png" target="_blank" rel="noopener noreferrer" aria-label="Open the reactor overview figure at full size">
+    <img src="/xdr2000/xdr2000_mesh_3d.png" alt="Cutaway of the simplified Cytiva XDR-2000 L SUB model showing the water jacket, steel wall, 1,000 L of culture medium, and headspace air." width="2400" height="1839" decoding="async" fetchpriority="high" />
   </a>
   <figcaption>The modeled vessel is approximately 1.22 m in diameter and 2.73 m high. This cutaway illustrates the 1,000 L case. Select the figure to view it at full size.</figcaption>
 </figure>
@@ -35,8 +35,8 @@ The model connects four parts: circulating jacket water, the steel wall, culture
 In the 1,000 L case shown here, the steel wall is divided into 185 horizontal bands. Each band represents a complete ring around the vessel, stores heat, and exchanges heat with its neighbors and adjacent compartments. Thermal resistance between neighboring bands determines the heat flow along the wall, while the liquid and headspace remain bulk states.
 
 <figure class="xdr-figure">
-  <a href="../../xdr2000/xdr2000_mesh_detail.png" target="_blank" rel="noopener noreferrer" aria-label="Open the thermal mesh detail figure at full size">
-    <img src="../../xdr2000/xdr2000_mesh_detail.png" alt="Reactor cutaway and enlarged mesh detail showing one temperature per circumferential steel band, heat exchange between neighboring bands, nominal 15 mm band height, and 3 mm wall thickness." width="4800" height="2700" loading="lazy" decoding="async" />
+  <a href="/xdr2000/xdr2000_mesh_detail.png" target="_blank" rel="noopener noreferrer" aria-label="Open the thermal mesh detail figure at full size">
+    <img src="/xdr2000/xdr2000_mesh_detail.png" alt="Reactor cutaway and enlarged mesh detail showing one temperature per circumferential steel band, heat exchange between neighboring bands, nominal 15 mm band height, and 3 mm wall thickness." width="4800" height="2700" loading="lazy" decoding="async" />
   </a>
   <figcaption>One temperature is assigned to each steel ring. The mesh uses a nominal band height of 15 mm and a modeled wall thickness of 3 mm.</figcaption>
 </figure>
@@ -46,8 +46,8 @@ In the 1,000 L case shown here, the steel wall is divided into 185 horizontal ba
 The wall mesh connects the circulating jacket water to the liquid and headspace through the single-use bag. Below the liquid level, wall bands exchange heat with the culture medium; above it, they exchange heat with headspace air. Both paths include the resistance of the bag film and its contact with the steel wall. Conduction links neighboring steel bands, while the exposed wall and jacket also exchange heat with the room. The bag is represented as a thermal resistance rather than a separate temperature state.
 
 <figure class="xdr-figure">
-  <a href="../../xdr2000/heat_transfer_interactions.png?v=f1ba715716a9" target="_blank" rel="noopener noreferrer" aria-label="Open the heat-transfer interactions diagram at full size">
-    <img src="../../xdr2000/heat_transfer_interactions.png?v=f1ba715716a9" alt="Thermal network connecting jacket water, steel wall mesh, culture medium, headspace air, and room. Resistor symbols on the steel-to-liquid and steel-to-headspace paths represent bag-film and contact resistance. Neighboring steel elements exchange heat by conduction." width="3652" height="1584" loading="lazy" decoding="async" />
+  <a href="/xdr2000/heat_transfer_interactions.png?v=f1ba715716a9" target="_blank" rel="noopener noreferrer" aria-label="Open the heat-transfer interactions diagram at full size">
+    <img src="/xdr2000/heat_transfer_interactions.png?v=f1ba715716a9" alt="Thermal network connecting jacket water, steel wall mesh, culture medium, headspace air, and room. Resistor symbols on the steel-to-liquid and steel-to-headspace paths represent bag-film and contact resistance. Neighboring steel elements exchange heat by conduction." width="3652" height="1584" loading="lazy" decoding="async" />
   </a>
   <figcaption>Resistor symbols represent bag-film and contact resistance. Solid arrows show heat-exchange paths; dashed arrows mark the jacket-water supply and return. The room temperature and water-inlet conditions are model inputs.</figcaption>
 </figure>
@@ -68,8 +68,8 @@ Choose a media volume between **400 and 2,000 L**, then select **Simulate** to r
 Play the simulation or move the time slider to follow the temperatures. Drag the vessel to rotate the cutaway; the wall colors show the temperature of each steel band. Compare the time to target at different fill volumes.
 
 <figure class="xdr-explorer">
-  <iframe src="../../xdr2000/index.html" title="Interactive bioreactor heat-transfer simulation: adjustable media volume, rotatable vessel, temperature curves, and time slider" width="800" height="1300" loading="lazy" data-content-height></iframe>
-  <figcaption><a href="../../xdr2000/index.html" target="_blank" rel="noopener noreferrer">Open the interactive explorer in a full window ↗</a></figcaption>
+  <iframe src="/xdr2000/index.html" title="Interactive bioreactor heat-transfer simulation: adjustable media volume, rotatable vessel, temperature curves, and time slider" width="800" height="1300" loading="lazy" data-content-height></iframe>
+  <figcaption><a href="/xdr2000/index.html" target="_blank" rel="noopener noreferrer">Open the interactive explorer in a full window ↗</a></figcaption>
 </figure>
 
 For the default 1,000 L case, the simulated temperatures at eight hours are **38.6 °C in the liquid, 39.6 °C in the jacket water, and 34.0 °C in the headspace**. Heating continues after the target is reached: the 36.5 °C target marks a temperature crossing and does not switch off heating. The values in the explorer update when a different volume is simulated.

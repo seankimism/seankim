@@ -4,6 +4,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import rehypeBasePath from './src/utils/rehype-base-path.mjs';
 
 const repository = process.env.GITHUB_REPOSITORY?.split('/')[1] || '';
 const owner = process.env.GITHUB_REPOSITORY_OWNER || 'seankimism';
@@ -13,7 +14,7 @@ export default defineConfig({
   site: process.env.SITE_URL || `https://${owner}.github.io`,
   base,
   trailingSlash: 'always',
-  markdown: { remarkPlugins: [remarkMath], rehypePlugins: [rehypeKatex] },
+  markdown: { remarkPlugins: [remarkMath], rehypePlugins: [rehypeKatex, [rehypeBasePath, { base }]] },
   vite: { plugins: [tailwindcss()] },
   integrations: [sitemap()],
 });
