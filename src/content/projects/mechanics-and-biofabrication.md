@@ -3,7 +3,6 @@ title: "Mechanics-informed tissue engineering"
 description: "Connecting scaffold mechanics, cell behavior, and bioreactor design to the manufacture of engineered tissues."
 organization: "Cornell University"
 period: "2019–2023"
-status: "Past work"
 tags: ["Biomechanics", "Biofabrication", "Finite element analysis", "Bioreactor design"]
 order: 3
 ---

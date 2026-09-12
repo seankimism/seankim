@@ -14,7 +14,7 @@ const paper = 'author' in data ? data : null;
   <a class="detail-back" href={withBase(`/${collection}/`)}>← All {collection}</a>
   <article><h1 class="detail-heading">{data.title}</h1>
   <div class="detail-meta">
-    {project && 'organization' in data && <div class="project-meta"><span class="status">{data.status}</span><span>{data.organization}</span><span>{data.period}</span></div>}
+    {project && 'organization' in data && <div class="project-meta"><span>{data.organization}</span><span>{data.period}</span></div>}
     {paper && <><p class="publication-authors">{paper.author}</p><p class="publication-venue">{paper.journal}{paper.citation ? ` · ${paper.citation}` : ''} · {paper.year}</p><span class="status">{paper.status || 'Published'}</span></>}
     {data.tags.length > 0 && <ul class="topic-list" aria-label="Topics">{data.tags.map(tag => <li>{tag}</li>)}</ul>}
   </div>

@@ -3,7 +3,6 @@ title: "Controlling temperature in a 2,000 L single-use bioreactor"
 description: "An interactive comparison of culture and jacket temperature responses under cascade control, from heating-only operation to heating and cooling, and the metabolic heat load that decides which one a process needs."
 organization: "Independent project"
 period: "2026–present"
-status: "In progress"
 tags: ["Temperature control", "Bioreactor modeling", "Process dynamics"]
 order: -1
 ---

@@ -16,7 +16,7 @@ const projects = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
   schema: z.object({
     title: z.string(), description: z.string(), organization: z.string(),
-    period: z.string(), status: z.enum(["Past work", "In progress", "Planned"]),
+    period: z.string(),
     tags: z.array(z.string()).default([]), order: z.number(),
   }),
 });
