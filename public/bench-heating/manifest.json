@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "playback": "Precomputed frames with linear display interpolation; default culture replays keep volume fixed; custom bolus additions step volume and cumulative feed; no calculation of new scenarios",
+  "playback": "Precomputed frames with linear display interpolation; fed-batch boluses step volume, liquid level and cumulative feed; perfusion keeps volume fixed; no calculation of new scenarios",
   "temperature_rounding_c": 0.0001,
   "vessels": [
     {
@@ -9,7 +9,8 @@
       "band_count": 50,
       "frames": {
         "controlled": 1441,
-        "fed_batch": 1633,
+        "fed_batch_cold_feed": 1405,
+        "fed_batch_warm_feed": 1405,
         "perfusion": 2689
       }
     },
@@ -19,7 +20,8 @@
       "band_count": 55,
       "frames": {
         "controlled": 721,
-        "fed_batch": 1633,
+        "fed_batch_cold_feed": 1405,
+        "fed_batch_warm_feed": 1405,
         "perfusion": 2689
       }
     }
@@ -27,8 +29,8 @@
   "files": [
     {
       "path": "index.html",
-      "bytes": 5457352,
-      "sha256": "a8d77d3b127d90973280a1ceb00d17e4d12f8aca8aa9b5cf4ea913befc61e81a"
+      "bytes": 6687599,
+      "sha256": "b05ac841bbddc5cf4f47a61aa09cff8507b7dcc743e805ce0186057a7582183d"
     },
     {
       "path": "applikon3l/vessel_3d.png",
@@ -38,7 +40,7 @@
     {
       "path": "applikon3l/vessel_3d.svg",
       "bytes": 2986407,
-      "sha256": "7389592a47807ac397ac4f98f26ae46205d54b2ddae98e963aadbff882c2c308"
+      "sha256": "c076ebd7c3027a066c561110ce260abb20c456721ff38074b5f2e575c85eddc2"
     },
     {
       "path": "applikon3l/temperature_over_time.png",
@@ -48,27 +50,47 @@
     {
       "path": "applikon3l/temperature_over_time.svg",
       "bytes": 145174,
-      "sha256": "043d57539048fab488439f945bd4a01e480b51c329f85317980befd78b73f5bc"
+      "sha256": "df133579d263343c0a7e216582347aabc64329049e686f1d2594559f4c3cda15"
     },
     {
-      "path": "applikon3l/fed_batch/vessel_3d.png",
-      "bytes": 272473,
-      "sha256": "983c95fd47a53a5a00c9426b5a3c5c45f15a5bcf768d58154b3ec5db3acde90f"
+      "path": "applikon3l/fed_batch_cold_feed/vessel_3d.png",
+      "bytes": 278082,
+      "sha256": "49683470c1760f7219002af00681597f3657a500157d8ec578ba97b0c628940f"
     },
     {
-      "path": "applikon3l/fed_batch/vessel_3d.svg",
-      "bytes": 2986418,
-      "sha256": "8ccee602103e1714f8fdd9a61d14105180c200f45c25c60af49ee05529af96bf"
+      "path": "applikon3l/fed_batch_cold_feed/vessel_3d.svg",
+      "bytes": 2986458,
+      "sha256": "02c9a11238ddd7be8e09e5632e0289e2fc5415f1e3964f317eeb2ff3d727b12e"
     },
     {
-      "path": "applikon3l/fed_batch/temperature_over_time.png",
-      "bytes": 197085,
-      "sha256": "14c5c52d1d28b93be09d14354276e61fcab303058e09f6b1d738d1ee49596874"
+      "path": "applikon3l/fed_batch_cold_feed/temperature_over_time.png",
+      "bytes": 217113,
+      "sha256": "a48f66eda2b53ef5ed41caa6af3f0143de5c6a337f86064ffb66800f3a723b9d"
     },
     {
-      "path": "applikon3l/fed_batch/temperature_over_time.svg",
-      "bytes": 29574,
-      "sha256": "ba024bf59fd03b5ae8fcac0ab1d0c29c2778a64a8f4057d16113f70f0167d810"
+      "path": "applikon3l/fed_batch_cold_feed/temperature_over_time.svg",
+      "bytes": 35530,
+      "sha256": "6187e6fceeef7c7c747fa29ee0f16673b57f7c36c6ec6800e5bce25677e88d62"
+    },
+    {
+      "path": "applikon3l/fed_batch_warm_feed/vessel_3d.png",
+      "bytes": 277190,
+      "sha256": "6445d8cac0af7b968aa3265d247d7b74d5d8413060c46c3e116448d77f38092d"
+    },
+    {
+      "path": "applikon3l/fed_batch_warm_feed/vessel_3d.svg",
+      "bytes": 2986459,
+      "sha256": "6a2ee4c990a53a3cc9805396750d0ea69dc74d18dc040ed9a8e7fe93e6032fa8"
+    },
+    {
+      "path": "applikon3l/fed_batch_warm_feed/temperature_over_time.png",
+      "bytes": 216903,
+      "sha256": "977b58508fd38c8340397d84e3628cc67de24a43490545fdd131083d5555b388"
+    },
+    {
+      "path": "applikon3l/fed_batch_warm_feed/temperature_over_time.svg",
+      "bytes": 34967,
+      "sha256": "691621866f90bb60d3fe751ae2e79e1b558900865d7cd8cfe55f8edd2ee8c1eb"
     },
     {
       "path": "applikon3l/perfusion/vessel_3d.png",
@@ -78,7 +100,7 @@
     {
       "path": "applikon3l/perfusion/vessel_3d.svg",
       "bytes": 2986419,
-      "sha256": "e2048f6f35386c9cffdbb77ad66a1b1a9edf3af84f9e5557620df410579f3796"
+      "sha256": "38685726107b1f507a7652be697d00a5735eb0fe02869726edebbc6962ed580e"
     },
     {
       "path": "applikon3l/perfusion/temperature_over_time.png",
@@ -88,7 +110,7 @@
     {
       "path": "applikon3l/perfusion/temperature_over_time.svg",
       "bytes": 30005,
-      "sha256": "746b2986fdf73c3515ad392b1daaf79f54d28ab22d68a5f0dec7968c3dbf4617"
+      "sha256": "fc7dc950ce6d8a435720130d4a1d0ac086e9467b160ae701fbc5953ec9b1081b"
     },
     {
       "path": "ambr250/vessel_3d.png",
@@ -98,7 +120,7 @@
     {
       "path": "ambr250/vessel_3d.svg",
       "bytes": 3145371,
-      "sha256": "dac33f66f24e514449977c6a137cfa4b4b4e40ef245b404e2c09945ed3af041d"
+      "sha256": "2a77763048b0d2bbc735e53ca0eb66eb4997df216c15ff7328c656db7a679c81"
     },
     {
       "path": "ambr250/temperature_over_time.png",
@@ -108,27 +130,47 @@
     {
       "path": "ambr250/temperature_over_time.svg",
       "bytes": 85862,
-      "sha256": "9b1b654a51dc544209c6d42756740ddf4356f579543bc0671998fe0cf895a5e3"
+      "sha256": "ea9822da32fb92df2fb67fb5adcd8914dc00a31e29bd53d5de6e6d9eb2dd8045"
     },
     {
-      "path": "ambr250/fed_batch/vessel_3d.png",
-      "bytes": 289062,
-      "sha256": "a7612a87e9c6592d17f619ee7ac31cb6ad5368dfbcc4a9504a53f2c034499c1f"
+      "path": "ambr250/fed_batch_cold_feed/vessel_3d.png",
+      "bytes": 295482,
+      "sha256": "67b8ab2ea121b8d534d28e39f354a7707ea0e964ecfcd0551d9dc8ef720dc45d"
     },
     {
-      "path": "ambr250/fed_batch/vessel_3d.svg",
-      "bytes": 3145404,
-      "sha256": "14dddc087619662d87f85d0656e4ddfb51625bc59243d3ef1364a4dc6d6ed8fc"
+      "path": "ambr250/fed_batch_cold_feed/vessel_3d.svg",
+      "bytes": 3145424,
+      "sha256": "713605fb87ab1acd412c0decaf7caeefe329819d027963132801a07260cc7c76"
     },
     {
-      "path": "ambr250/fed_batch/temperature_over_time.png",
-      "bytes": 194068,
-      "sha256": "5e4f9bd36d3f33c5afa35310109f73b1cce2d5df47dc16c2b99d0477a02272a1"
+      "path": "ambr250/fed_batch_cold_feed/temperature_over_time.png",
+      "bytes": 206809,
+      "sha256": "e57b1b8a90b68e9c9d806dbb2c4ae2691e0adf3d288ee1109766d93862ce76f3"
     },
     {
-      "path": "ambr250/fed_batch/temperature_over_time.svg",
-      "bytes": 29530,
-      "sha256": "ab3fc9a397903f85aad6a016039079d3ac770907b3765fc1acf00ed7d5824814"
+      "path": "ambr250/fed_batch_cold_feed/temperature_over_time.svg",
+      "bytes": 32531,
+      "sha256": "917021c3a2d36dbc835eef37b86574b5a36d2ae0585b20e00c3c0b36a92310b5"
+    },
+    {
+      "path": "ambr250/fed_batch_warm_feed/vessel_3d.png",
+      "bytes": 292311,
+      "sha256": "8c80a9a0e3727b281e25b8171fc0ea0644dcb194275df7aad629070174a280c7"
+    },
+    {
+      "path": "ambr250/fed_batch_warm_feed/vessel_3d.svg",
+      "bytes": 3145429,
+      "sha256": "e0d0b0a727978824b542f8e9ddd226edef9f27e6e0d356de013f7df0f00404f0"
+    },
+    {
+      "path": "ambr250/fed_batch_warm_feed/temperature_over_time.png",
+      "bytes": 207585,
+      "sha256": "e4c51f115ae136e6f1beff8ce2a61ed6db98e9ad9302cbb1ee8c6bbb9e80d39e"
+    },
+    {
+      "path": "ambr250/fed_batch_warm_feed/temperature_over_time.svg",
+      "bytes": 33186,
+      "sha256": "46029e3a581e1f48f0cdc1302854b826a44b9c0ae31b2d021c40f9840f4192f9"
     },
     {
       "path": "ambr250/perfusion/vessel_3d.png",
@@ -138,7 +180,7 @@
     {
       "path": "ambr250/perfusion/vessel_3d.svg",
       "bytes": 3145409,
-      "sha256": "048e8b3b1555f46237052e50c0e40240cc4d7a7f859ad2e0659f34da8a2b7546"
+      "sha256": "1cd794feeaa3703589e5e76cfa81e7801e59c973266fe37e647e7b524cefd1b1"
     },
     {
       "path": "ambr250/perfusion/temperature_over_time.png",
@@ -148,12 +190,12 @@
     {
       "path": "ambr250/perfusion/temperature_over_time.svg",
       "bytes": 29935,
-      "sha256": "c55268da77cde5c07d1e3a36688ecee6ee240ac3028b78e675db08dfaae35dfd"
+      "sha256": "8022b3dbd8e7a67e9b9bcf46e62ec9c249abad4c9c1d4f51458f75b4c9390609"
     },
     {
       "path": "README.md",
-      "bytes": 2030,
-      "sha256": "ecedf8af08fa59c71167dad290dd847f9b979763ff9739961a3b9dc99f75a830"
+      "bytes": 2449,
+      "sha256": "b5dafe0af9c6dcff20599119072c78a21e0d66722446fc02b171fbd7fe45bd43"
     }
   ]
 }

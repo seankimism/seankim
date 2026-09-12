@@ -241,11 +241,11 @@ The high-density perfusion profile also remains within the hold band at both ben
   <figcaption>Fixed-volume replay of the same Zhang BRX#A profile used at 2,000 L. Both bench cases complete all 28 days with positive heater power and zero active cooling. These are idealized thermal responses with prescribed biology; the small calculated errors are not claims about sensor accuracy or real equipment performance.</figcaption>
 </figure>
 
-The 3D playback shows the two bench heat paths and their temperature fields. Select a culture profile to follow cell heat and heater demand, or the warmup case to inspect the response from cold medium. The cell-density histories are shown in the comparison above; the viewer reports cell density at the selected time. Culture volume stays fixed throughout each simulation. Changes from feeding, sampling, or bleeding are not included in this application; modeling those volume changes and their heat effects is future work.
+The 3D playback shows the two bench heat paths and their temperature fields. Select the warmup case to inspect the response from cold medium, or a culture profile to follow cell heat and heater demand. The two fed-batch scenarios add feed: cell-free boluses of 3 % of the starting volume every other day from day 2 to day 12 of a 14-day run, once with feed at 4 °C and once at 20 °C. The 3 L vessel starts at 2 L and the ambr 250 at 180 mL; at each bolus the liquid level, volume, and cumulative feed step, the culture temperature drops by the volume-weighted mix (about 0.95 °C for 4 °C feed and 0.48 °C for 20 °C feed) and recovers within about 15 minutes, and the displayed cell density is diluted while the cell count is unchanged. Each bolus is an instantaneous, well-mixed addition; feed composition, evaporation, and sampling are not modeled. The perfusion scenario keeps its constant volume. The viewer reports cell density at the selected time; the density histories are shown in the comparison above.
 
 <figure class="xdr-explorer">
-  <iframe src="/bench-heating/index.html?v=a8d77d3b127d" title="Bench-scale temperature simulation: compare fixed-volume fed-batch and perfusion at 2 L and 200 mL with 3D vessel playback" width="800" height="1700" loading="lazy" data-content-height></iframe>
-  <figcaption><a href="/bench-heating/index.html?v=a8d77d3b127d" target="_blank" rel="noopener noreferrer">Open the bench-scale simulation in a full window ↗</a></figcaption>
+  <iframe src="/bench-heating/index.html?v=b05ac841bbdd" title="Bench-scale temperature simulation: warmup, fed-batch with 4 °C or 20 °C feed boluses, and perfusion for the 3 L and ambr 250 vessels with 3D vessel playback" width="800" height="1700" loading="lazy" data-content-height></iframe>
+  <figcaption><a href="/bench-heating/index.html?v=b05ac841bbdd" target="_blank" rel="noopener noreferrer">Open the bench-scale simulation in a full window ↗</a></figcaption>
 </figure>
 
 ## Why cooling becomes a scale-up requirement
@@ -323,7 +323,7 @@ Couple the heat source to temperature-dependent growth, death, and productivity 
 
 ### Changing culture volume
 
-Extend the fixed-volume examples to account for feeding, sampling, and bleeding. A changing culture volume would change the amount of medium being heated and the vessel surface in contact with it. Future simulations would update those quantities and include the heat carried by incoming and outgoing streams.
+The bench viewer's fed-batch scenarios now include scheduled feed boluses: each addition changes the amount of medium being heated and the vessel surface in contact with it, and carries the sensible heat of the feed. The same scenario runs at 2,000 L from a 1,500 L start, where a cold 45 L bolus takes about 40 minutes to recover through the jacket rather than 15 minutes through a bench element. Remaining work: sampling and bleeding, feeds pumped over a finite time rather than added at once, perfusion inlet and harvest stream heat, and evaporation.
 
 ### Gas transfer and other heat sources
 
