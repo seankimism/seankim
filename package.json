@@ -10,12 +10,10 @@
     "build": "astro build && node scripts/check-xdr-results.mjs dist/xdr2000 && node scripts/check-control-results.mjs dist/thermal-control",
     "preview": "astro preview",
     "astro": "astro",
-    "test:control": "node --test scripts/control-loader.test.mjs"
+    "test": "node --test scripts/*.test.mjs src/utils/*.test.mjs .github/scripts/*.test.mjs"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
-    "@fontsource-variable/inter": "^5.2.8",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@tailwindcss/vite": "^4.2.2",

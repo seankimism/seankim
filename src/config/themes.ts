@@ -1,4 +1,4 @@
-import type { Theme, ThemeColors, ThemeName } from "../types/themes";
+import type { Theme, ThemeColors, ThemeName } from "../types";
 
 export { type Theme, type ThemeName, type ThemeColors };
 

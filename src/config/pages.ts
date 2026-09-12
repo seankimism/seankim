@@ -4,8 +4,4 @@ export const PAGES: PagesConfig = {
     projects: { title: "Projects", subtitle: "Selected work in bioprocess development, modeling, and biofabrication.", isActive: true },
     publications: { title: "Publications", subtitle: "Research in biomechanics, tissue engineering, and biofabrication.", isActive: true },
     cv: { title: "Curriculum vitae", subtitle: "Professional experience, education, and academic qualifications.", isActive: true },
-    blog: { title: "Notes", subtitle: "", isActive: false },
-    talks: { title: "Talks", subtitle: "", isActive: false },
-    teaching: { title: "Teaching", subtitle: "", isActive: false },
-    tags: { title: "Topics", subtitle: "", isActive: false },
 };

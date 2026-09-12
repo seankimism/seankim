@@ -1,8 +1,8 @@
 ---
-import { SOCIALS, SOCIAL_ICONS } from "../../config";
+import { SOCIALS, SOCIAL_ICONS } from "../config";
 import { getEntry } from "astro:content";
-import Icon from "../ui/Icon.astro";
-import { withBase } from "../../utils/paths";
+import Icon from "./Icon.astro";
+import { withBase } from "../utils/paths";
 const bio = (await getEntry("bio", "bio"))!.data;
 ---
 <aside class="sidebar profile-sidebar" aria-label="Profile and contact">

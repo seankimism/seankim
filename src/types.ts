@@ -3,10 +3,7 @@ export interface SiteConfig {
     author: string;
     desc: string;
     title: string;
-    ogImage: string;
-    postPerPage: number;
     favicon: string;
-    lang: string;
 }
 
 export interface ThemeConfig {
@@ -15,20 +12,9 @@ export interface ThemeConfig {
     themeDark: string;
 }
 
-export interface SettingsConfig {
-    showTagsInNavbar: boolean;
-    showRSSInFooter: boolean;
-    addDevToolsInProduction: boolean;
-}
-
-export interface UmamiAnalyticsConfig {
-    websiteId: string;
-    src: string;
-}
-
 export interface AnalyticsConfig {
     ga4Id?: string;
-    umami?: UmamiAnalyticsConfig;
+    umami?: { websiteId: string; src: string };
 }
 
 export interface NavLink {
@@ -51,3 +37,18 @@ export interface PageConfig {
 }
 
 export type PagesConfig = Record<string, PageConfig>;
+
+export interface ThemeColors {
+    background: string;
+    foreground: string;
+    accent: string;
+    muted: string;
+    border: string;
+    surface: string;
+}
+
+export interface Theme extends ThemeColors {
+    isDark: boolean;
+}
+
+export type ThemeName = string;

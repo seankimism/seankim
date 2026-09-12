@@ -110,7 +110,7 @@ model or website export. The controller rendering is a separate PNG asset under
 Run:
 
 ```powershell
-npm.cmd run test:control
+npm.cmd test
 $env:SITE_BASE_PATH='/seankim'
 npm.cmd run build
 ```
