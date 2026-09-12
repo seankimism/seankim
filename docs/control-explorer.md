@@ -35,12 +35,13 @@ changes at 16 h so visitors can see the preceding hold and the transition.
 The article also compares source-derived CHO fed-batch and perfusion loads
 through three static results-only exports:
 
-- `public/xdr2000/cho_vcd_comparison.png`: published NISTCHO clone-31
+- `public/xdr2000/cho_profile_comparison_20pw.png`: published NISTCHO clone-31
   standard-feed means (Dahodwala 2025, Figure 1B, DOI 10.1002/biot.70012) and
   digitized BRX#A perfusion VCD (Zhang 2024, Figure 1b, DOI 10.1002/bit.28674).
-  This is a single VCD panel with units of million cells/mL; fed-batch error
-  bars retain published standard deviations where available. Metabolic heat
-  remains a simulation input but is not plotted in this figure.
+  The upper panel shows VCD in million cells/mL; fed-batch error bars retain
+  published standard deviations where available. The lower panel shows the
+  corresponding metabolic heat at 20 pW per viable cell and a fixed 2,000 L
+  culture volume.
 - `public/xdr2000/nistcho_fedbatch_temperature_20pw.png`: the 17-day fed-batch
   controller comparison at a constant 36.5 C. The two responses overlap because
   neither case calls for active cooling at the selected heat rate.
