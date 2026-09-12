@@ -244,8 +244,8 @@ The high-density perfusion profile also remains within the hold band at both ben
 The 3D playback shows the two bench heat paths and their temperature fields. Select a culture profile to follow cell heat and heater demand, or the warmup case to inspect the response from cold medium. The cell-density histories are shown in the comparison above; the viewer reports cell density at the selected time. Culture volume stays fixed throughout each simulation. Changes from feeding, sampling, or bleeding are not included in this application; modeling those volume changes and their heat effects is future work.
 
 <figure class="xdr-explorer">
-  <iframe src="/bench-heating/index.html" title="Bench-scale temperature simulation: compare fixed-volume fed-batch and perfusion at 2 L and 200 mL with 3D vessel playback" width="800" height="1700" loading="lazy" data-content-height></iframe>
-  <figcaption><a href="/bench-heating/index.html" target="_blank" rel="noopener noreferrer">Open the bench-scale simulation in a full window ↗</a></figcaption>
+  <iframe src="/bench-heating/index.html?v=a8d77d3b127d" title="Bench-scale temperature simulation: compare fixed-volume fed-batch and perfusion at 2 L and 200 mL with 3D vessel playback" width="800" height="1700" loading="lazy" data-content-height></iframe>
+  <figcaption><a href="/bench-heating/index.html?v=a8d77d3b127d" target="_blank" rel="noopener noreferrer">Open the bench-scale simulation in a full window ↗</a></figcaption>
 </figure>
 
 ## Why cooling becomes a scale-up requirement
