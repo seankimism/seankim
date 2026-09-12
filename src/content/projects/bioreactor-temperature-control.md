@@ -241,7 +241,7 @@ The high-density perfusion profile also remains within the hold band at both ben
   <figcaption>Fixed-volume replay of the same Zhang BRX#A profile used at 2,000 L. Both bench cases complete all 28 days with positive heater power and zero active cooling. These are idealized thermal responses with prescribed biology; the small calculated errors are not claims about sensor accuracy or real equipment performance.</figcaption>
 </figure>
 
-The 3D playback shows the two bench heat paths and their temperature fields. Select a culture profile to follow cell heat and heater demand, or a warmup case to inspect the response from cold medium.
+The 3D playback shows the two bench heat paths and their temperature fields. Select a culture profile to follow cell heat and heater demand, or the warmup case to inspect the response from cold medium. The cell-density histories are shown in the comparison above; the viewer reports cell density at the selected time. **Culture volume stays fixed throughout each simulation.** Changes from feeding, sampling, or bleeding are not included in this application; modeling those volume changes and their heat effects is future work.
 
 <figure class="xdr-explorer">
   <iframe src="/bench-heating/index.html" title="Bench-scale temperature simulation: compare fixed-volume fed-batch and perfusion at 2 L and 200 mL with 3D vessel playback" width="800" height="1700" loading="lazy" data-content-height></iframe>
@@ -321,6 +321,10 @@ Estimate metabolic heat from oxygen uptake rate (OUR), initially using roughly *
 
 Couple the heat source to temperature-dependent growth, death, and productivity kinetics. A temperature shift, such as **36.5 to 33 °C**, could then change both heat transfer and cellular behavior. In the current results, cell density is imposed and does not respond to the simulated temperature.
 
+### Changing culture volume
+
+Extend the fixed-volume examples to account for feeding, sampling, and bleeding. A changing culture volume would change the amount of medium being heated and the vessel surface in contact with it. Future simulations would update those quantities and include the heat carried by incoming and outgoing streams.
+
 ### Gas transfer and other heat sources
 
-Connect temperature to O₂ and CO₂ solubility, the volumetric mass-transfer coefficient ($k_La$), and CO₂/bicarbonate equilibria and pH. Develop a pCO₂ model as part of this layer, and extend the illustrated heat balances to include feed and harvest streams, agitation heat, and evaporative cooling. These connections would allow temperature, gas transfer, and culture behavior to evolve together.
+Connect temperature to O₂ and CO₂ solubility, the volumetric mass-transfer coefficient ($k_La$), and CO₂/bicarbonate equilibria and pH. Develop a pCO₂ model as part of this layer, and extend the illustrated heat balances to include agitation heat and evaporative cooling. These connections would allow temperature, gas transfer, and culture behavior to evolve together.

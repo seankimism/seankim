@@ -18,6 +18,7 @@
     @media(max-width:900px){.process-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.process-plots{gap:18px}.selectors{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)!important}}@media(max-width:720px){.process-panel{padding:22px 20px}.process-plots{grid-template-columns:1fr;gap:25px}.process-metrics{gap:15px 8px}.process-metric-value{font-size:19px}}@media(max-width:490px){.selectors{grid-template-columns:1fr!important}.process-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:720px){.process-metrics.flow-bolus{grid-template-columns:repeat(2,minmax(0,1fr))}}
     .intro .selectors{width:100%;min-width:0;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+    .process-plots{grid-template-columns:minmax(0,1fr)}
     @media(max-width:490px){.intro .selectors{grid-template-columns:1fr!important}}
   </style>
 </head>
@@ -63,12 +64,12 @@
         <h2 id="process-title">Culture conditions</h2>
         <p id="process-description" class="process-description"></p>
         <p id="process-assumptions" class="process-assumptions"></p>
-        <p id="flow-model-note" class="process-assumptions" hidden>Fixed-volume metabolic-heat replay; feed, harvest, and retention-loop heat are excluded, matching the 2000 L simulation.</p>
+        <p id="flow-model-note" class="process-assumptions" hidden>Culture volume is held fixed; changes from feeding, sampling, or bleeding are not included. Modeling volume changes and their heat effects is future work.</p>
         <p class="process-source">Cell-profile source: <a id="process-source" target="_blank" rel="noopener noreferrer"></a></p>
         <div id="process-metrics" class="process-metrics" aria-label="Culture conditions at the selected time">
           <div><p class="process-metric-label">Cell heat</p><p class="process-metric-value"><output id="cell-heat-value"></output><span class="unit"> W</span></p></div>
           <div><p class="process-metric-label">Viable cell density</p><p class="process-metric-value"><output id="vcd-value"></output><span class="unit"> M/mL</span></p></div>
-          <div><p class="process-metric-label">Culture volume</p><p class="process-metric-value"><output id="culture-volume-value"></output><span class="unit" id="culture-volume-unit"> L</span></p></div>
+          <div><p id="culture-volume-label" class="process-metric-label">Culture volume</p><p class="process-metric-value"><output id="culture-volume-value"></output><span class="unit" id="culture-volume-unit"> L</span></p></div>
           <div id="feed-added-metric" hidden><p class="process-metric-label">Feed added</p><p class="process-metric-value"><output id="feed-added-value"></output><span class="unit" id="feed-added-unit"> mL</span></p></div>
           <div id="inlet-flow-metric"><p class="process-metric-label" id="inlet-flow-label">Inlet flow</p><p class="process-metric-value"><output id="inlet-flow-value"></output><span class="unit"> L/day</span></p></div>
           <div id="outlet-flow-metric"><p class="process-metric-label">Outlet flow</p><p class="process-metric-value"><output id="outlet-flow-value"></output><span class="unit"> L/day</span></p></div>
@@ -77,7 +78,6 @@
         <p id="process-summary" class="process-summary"></p>
         <div class="process-plots">
           <div class="process-plot"><h2>Heat load and temperature control</h2><div class="plot-legend"><span class="legend-item"><i class="line-swatch" style="color:#be7030"></i>Cell heat</span><span class="legend-item"><i class="line-swatch" style="color:#305582"></i>Heater / cooler</span><span id="flow-heat-legend" class="legend-item"><i class="line-swatch dashed" style="color:#17816d"></i>Net flow heat</span></div><div class="process-chart-frame"><svg id="heat-chart" class="chart" role="img" aria-labelledby="heat-chart-title heat-chart-desc"><title id="heat-chart-title">Cell heat, heater or cooler power, and net flow heat over culture time</title><desc id="heat-chart-desc">Positive power adds heat; negative power removes heat. The vertical cursor follows the time slider.</desc><g id="heat-chart-content"></g></svg></div><p id="heat-plot-note" class="plot-note">Positive power adds heat; negative power removes heat. Net flow heat includes the thermal effect of inlet and outlet streams.</p></div>
-          <div class="process-plot"><h2>Cell density and culture volume</h2><div class="plot-legend"><span class="legend-item"><i class="line-swatch" style="color:#805b9a"></i>VCD &middot; left axis</span><span class="legend-item"><i class="line-swatch dashed" style="color:#d84384"></i>Volume &middot; right axis</span></div><div class="process-chart-frame"><svg id="culture-chart" class="chart" role="img" aria-labelledby="culture-chart-title culture-chart-desc"><title id="culture-chart-title">Viable cell density and culture volume over time</title><desc id="culture-chart-desc">Viable cell density uses the left axis in millions of cells per milliliter; culture volume uses the right axis in liters. The vertical cursor follows the time slider.</desc><g id="culture-chart-content"></g></svg></div><p class="plot-note">The 3D liquid level follows the saved culture-volume history.</p></div>
         </div>
       </section>
       <p id="live-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
@@ -92,6 +92,7 @@
     const $ = id => document.getElementById(id);
     const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
     const fmt = (value, digits = 1) => Number(value).toLocaleString('en-US', {maximumFractionDigits:digits});
+    const fixedVolumeNote = 'Culture volume is held fixed; changes from feeding, sampling, or bleeding are not included. Modeling volume changes and their heat effects is future work.';
     const timeWords = seconds => data && data.process ? `${fmt(seconds / 86400, 2)} days` : `${fmt(seconds / 60, 1)} min`;
     const volumeWords = liters => liters<1?`${fmt(liters*1000,0)} mL`:`${fmt(liters,2)} L`;
     const timeClock = seconds => {
@@ -237,10 +238,6 @@
       ];
       if(!['excluded','bolus'].includes(data.process.flow_model))heatSeries.push({key:'flow_heat_w',values:data.process.flow_heat_w,color:colors.air,dashed:true});
       renderProcessChart('heat-chart',heatSeries,'Power (W)');
-      renderProcessChart('culture-chart',[
-        {key:'vcd_million_ml',values:data.process.vcd_million_ml,color:'#805b9a'},
-        {key:'volume_l',values:data.process.volume_l,color:colors.media,right:true,dashed:true,stepwise:data.process.flow_model==='bolus'}
-      ],'VCD (million/mL)','Volume (L)');
     }
     function updateProcessDisplay() {
       if(!state.process)return;
@@ -479,7 +476,8 @@
       yMin=Math.floor((minimum-2)/5)*5; yMax=Math.ceil((maximum+2)/5)*5;
       const process=data.process;
       const volume=volumeWords(process?state.process.volume_l:vessel.volume_l);
-      $('scenario-note').textContent=process?`${process.title} \u00b7 ${volume} initial volume \u00b7 ${fmt(data.target_c)} \u00b0C hold from the start`:`${volume} media \u00b7 ${fmt(data.initial_media_c)} \u00b0C start \u00b7 ${fmt(data.room_c)} \u00b0C room \u00b7 ${fmt(data.ceiling_c)} \u00b0C element ceiling`;
+      const fixedCulture=process&&process.flow_model==='excluded';
+      $('scenario-note').textContent=process?`${process.title} \u00b7 ${volume} ${fixedCulture?'fixed culture volume':'initial volume'} \u00b7 ${fmt(data.target_c)} \u00b0C hold from the start`:`${volume} media \u00b7 ${fmt(data.initial_media_c)} \u00b0C start \u00b7 ${fmt(data.room_c)} \u00b0C room \u00b7 ${fmt(data.ceiling_c)} \u00b0C element ceiling`;
       $('element-label').textContent=vessel.element_name;
       $('element-outline-label').textContent=vessel.element_name;
       $('wall-label').textContent=`${vessel.wall_material} wall`;
@@ -495,13 +493,14 @@
       if(process){
         const flowExcluded=process.flow_model==='excluded',bolus=process.flow_model==='bolus';
         const showContinuousFlow=!flowExcluded&&!bolus;
+        $('culture-volume-label').textContent=flowExcluded?'Fixed culture volume':'Culture volume';
         $('process-title').textContent=process.title;
         $('process-description').textContent=process.description;
         const initialCondition=bolus?`feed prewarmed to ${fmt(process.inlet_temperature_c)} \u00b0C; culture starts at ${fmt(data.initial_media_c)} \u00b0C`:`fixed culture volume ${volume}; media initially at ${fmt(data.initial_media_c)} \u00b0C`;
         const inletCondition=showContinuousFlow?`; inlet at ${fmt(process.inlet_temperature_c)} \u00b0C`:'';
         $('process-assumptions').textContent=`Assumptions: ${fmt(process.specific_heat_pw_cell,2)} pW per cell; ${initialCondition}${inletCondition}; room at ${fmt(data.room_c)} \u00b0C.`;
         $('flow-model-note').hidden=showContinuousFlow;
-        $('flow-model-note').textContent=bolus?'Scheduled bolus feeds mix into the culture; the liquid level steps at each addition.':'Fixed-volume metabolic-heat replay; feed, harvest, and retention-loop heat are excluded, matching the 2000 L simulation.';
+        $('flow-model-note').textContent=bolus?'Scheduled bolus feeds mix into the culture; the liquid level steps at each addition.':fixedVolumeNote+' Feed, harvest, and retention-loop heat are excluded, matching the 2,000 L simulation.';
         ['inlet-flow-metric','outlet-flow-metric','flow-heat-metric','flow-heat-legend'].forEach(id=>{$(id).hidden=!showContinuousFlow;});
         $('feed-added-metric').hidden=!bolus;
         $('process-metrics').classList.toggle('flow-excluded',flowExcluded);
@@ -555,7 +554,7 @@
       if(ctx)ctx.setTransform(dpr,0,0,dpr,0,0);drawVessel();
     }).observe(canvas);
     new ResizeObserver(entries=>{const rect=entries[0].contentRect;if(rect.width>0&&rect.height>0)renderChart(rect.width,rect.height);}).observe(svg.parentElement);
-    ['heat-chart','culture-chart'].forEach(id=>new ResizeObserver(entries=>{const rect=entries[0].contentRect;if(rect.width>0&&rect.height>0)renderProcessCharts();}).observe($(id).parentElement));
+    new ResizeObserver(entries=>{const rect=entries[0].contentRect;if(rect.width>0&&rect.height>0)renderProcessCharts();}).observe($('heat-chart').parentElement);
     applyScenario();
   })();
   </script>
