@@ -242,7 +242,7 @@ The high-density perfusion profile also remains within the hold band at both ben
   <figcaption>Fixed-volume replay of the same Zhang BRX#A profile used at 2,000 L. Both bench cases complete all 28 days with positive heater power and zero active cooling. These are idealized thermal responses with prescribed biology; the small calculated errors are not claims about sensor accuracy or real equipment performance.</figcaption>
 </figure>
 
-The 3D playback below shows the two bench heat paths and their temperature fields. It opens on the media warm-up; use the scenario menu to follow a culture. The fed-batch scenarios include the feed additions described in the next section, and the perfusion replay keeps its constant volume. The viewer reports cell density at the selected time; the density histories are shown in the comparison above.
+The 3D playback below shows the bench heat paths and their temperature fields, with the XDR-2000 available in the same vessel menu for comparison. It opens on the 3 L media warm-up; use the scenario menu to follow a culture. The fed-batch scenarios include the feed additions described in the next section, and the perfusion replay keeps its constant volume. The viewer reports cell density at the selected time; the density histories are shown in the comparison above.
 
 <figure class="xdr-explorer">
   <iframe src="/bench-heating/index.html?v=8e6b3425b248#vessel=applikon3l&mode=controlled" title="Bench-scale temperature simulation: warm-up, fed-batch, and perfusion for the 3 L and ambr 250 vessels with 3D vessel playback" width="800" height="1700" loading="lazy" data-content-height></iframe>
@@ -295,12 +295,7 @@ The scenario is the same at every scale: a 14-day NISTCHO fed-batch with cell-fr
   <figcaption>The day-6 bolus at all three scales. The initial drop is a volume ratio, so it is the same everywhere: a 3 % bolus 32.5 °C colder than the culture lowers it by 0.03/1.03 × 32.5 ≈ 0.95 °C, and by 0.48 °C for 20 °C feed. Recovery is where scale shows: the bench elements act on the wall directly and return the culture to the ±0.2 °C band in 10–15 minutes, while the 2,000 L jacket path takes 20–35 minutes and is limited by the 40 °C jacket ceiling rather than by TCU power. Later boluses dilute into a larger volume, so the drop shrinks from 0.95 to 0.83 °C by day 12.</figcaption>
 </figure>
 
-The same viewer now carries the XDR-2000 alongside the bench vessels, all at their fed-batch starting volumes, so the feeding response can be compared across scales interactively. It opens on the 2,000 L vessel with 4 °C feed: scrub to day 2, 4, or 6 to watch the liquid level, volume, and cumulative feed step at each bolus while the culture dips and the jacket water responds; switch to the 20 °C feed or to a bench vessel for the same schedule. Feed composition, evaporation, and sampling are not modeled, and each bolus is added at once; a pumped feed would spread the same drop over the pumping time.
-
-<figure class="xdr-explorer">
-  <iframe src="/bench-heating/index.html?v=8e6b3425b248#vessel=xdr2000&mode=fed_batch_cold_feed" title="Fed-batch feeding simulation across scales: the XDR-2000, 3 L, and ambr 250 vessels with scheduled feed boluses at 4 or 20 degrees and 3D vessel playback" width="800" height="1700" loading="lazy" data-content-height></iframe>
-  <figcaption><a href="/bench-heating/index.html?v=8e6b3425b248#vessel=xdr2000&mode=fed_batch_cold_feed" target="_blank" rel="noopener noreferrer">Open the feeding simulation in a full window ↗</a></figcaption>
-</figure>
+To see a bolus happen, use the viewer above: it carries the XDR-2000 alongside the bench vessels, all at their fed-batch starting volumes. Select a vessel, choose the 4 °C or 20 °C fed-batch scenario, and scrub to day 2, 4, or 6 to watch the liquid level, volume, and cumulative feed step while the culture dips and the element or jacket water responds. Feed composition, evaporation, and sampling are not modeled, and each bolus is added at once; a pumped feed would spread the same drop over the pumping time.
 
 ## Calibration and experimental validation
 
