@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/check-xdr-results.mjs dist/xdr2000 && node scripts/check-control-results.mjs dist/thermal-control",
+    "build": "astro build && node scripts/check-xdr-results.mjs dist/xdr2000 && node scripts/check-control-results.mjs dist/thermal-control && node scripts/check-bench-results.mjs dist/bench-heating && node scripts/check-project-redirect.mjs dist",
     "preview": "astro preview",
     "astro": "astro",
     "test": "node --test scripts/*.test.mjs src/utils/*.test.mjs .github/scripts/*.test.mjs"

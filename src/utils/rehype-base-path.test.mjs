@@ -6,7 +6,7 @@ test('raw HTML image URLs resolve identically before and after client navigation
   const image = { type: 'raw', value: '<img src="/xdr2000/xdr2000_mesh_3d.png" fetchpriority="high">' };
   rehypeBasePath({ base: '/seankim/' })({ type: 'root', children: [image] });
   const source = image.value.match(/src="([^"]+)"/)[1];
-  for (const page of ['/seankim/', '/seankim/projects/', '/seankim/projects/xdr2000-heat-transfer/']) {
+  for (const page of ['/seankim/', '/seankim/projects/', '/seankim/projects/bioreactor-temperature-control/']) {
     assert.equal(new URL(source, `https://example.com${page}`).pathname, '/seankim/xdr2000/xdr2000_mesh_3d.png');
   }
 });

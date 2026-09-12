@@ -1,0 +1,21 @@
+---
+import { withBase } from '../../utils/paths';
+
+const destination = withBase('/projects/bioreactor-temperature-control/');
+const target = `${destination}#how-heat-moves-through-the-vessel`;
+const canonical = new URL(destination, Astro.site ?? Astro.url).href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href={canonical} />
+    <title>Bioreactor thermal model — page moved</title>
+  </head>
+  <body>
+    <p>The thermal model is now part of the <a href={target}>bioreactor temperature-control project</a>.</p>
+  </body>
+</html>

@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "playback": "Precomputed frames with linear display interpolation; default culture replays keep volume fixed; custom bolus additions step volume and cumulative feed; no calculation of new scenarios",
+  "temperature_rounding_c": 0.0001,
+  "vessels": [
+    {
+      "id": "applikon3l",
+      "volume_l": 2.0,
+      "band_count": 50,
+      "frames": {
+        "controlled": 1441,
+        "fed_batch": 1633,
+        "perfusion": 2689
+      }
+    },
+    {
+      "id": "ambr250",
+      "volume_l": 0.2,
+      "band_count": 55,
+      "frames": {
+        "controlled": 721,
+        "fed_batch": 1633,
+        "perfusion": 2689
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 5460804,
+      "sha256": "00fcdd7333c65439cf05b7153781ced5c75ed54a67fb0288d8d8f4ab5da0e90e"
+    },
+    {
+      "path": "applikon3l/vessel_3d.png",
+      "bytes": 268060,
+      "sha256": "284f64725f175dda99edfbcf0aac551db1a50aa3d945a8e7f460a04d78bd0da5"
+    },
+    {
+      "path": "applikon3l/vessel_3d.svg",
+      "bytes": 3092012,
+      "sha256": "961bb94896e51828bf734e6760627e751df1c8e8545aae03e09c3ac29168141b"
+    },
+    {
+      "path": "applikon3l/temperature_over_time.png",
+      "bytes": 181062,
+      "sha256": "ff80b8612f3677923eec2b5a6dce660c070af12c2028edc77c2c36f12d0c2d68"
+    },
+    {
+      "path": "applikon3l/temperature_over_time.svg",
+      "bytes": 151539,
+      "sha256": "c82e6b07ed17d110309d5849382892b229168604b61def386c572b1adc46f5e2"
+    },
+    {
+      "path": "applikon3l/fed_batch/vessel_3d.png",
+      "bytes": 272473,
+      "sha256": "983c95fd47a53a5a00c9426b5a3c5c45f15a5bcf768d58154b3ec5db3acde90f"
+    },
+    {
+      "path": "applikon3l/fed_batch/vessel_3d.svg",
+      "bytes": 3092023,
+      "sha256": "342f1917bc7d988d85c52bb92ca0618c42322f3a5873b9647bba77ae8c854232"
+    },
+    {
+      "path": "applikon3l/fed_batch/temperature_over_time.png",
+      "bytes": 197085,
+      "sha256": "14c5c52d1d28b93be09d14354276e61fcab303058e09f6b1d738d1ee49596874"
+    },
+    {
+      "path": "applikon3l/fed_batch/temperature_over_time.svg",
+      "bytes": 30358,
+      "sha256": "be676d0aeef2555ebc2d55163c880de7a1d7edad8fddd348ae862a5db9ab8e43"
+    },
+    {
+      "path": "applikon3l/perfusion/vessel_3d.png",
+      "bytes": 272755,
+      "sha256": "b570fcb44597fa3eb30f61f14c854a93df7f4d7b2ec7d8150b5156967cbac022"
+    },
+    {
+      "path": "applikon3l/perfusion/vessel_3d.svg",
+      "bytes": 3092024,
+      "sha256": "96fb68fde411f796df64d019309af93a4fab509540b8b2889d6b060b151f4e7c"
+    },
+    {
+      "path": "applikon3l/perfusion/temperature_over_time.png",
+      "bytes": 238917,
+      "sha256": "af86b03d185173c716b0132309b6165555b71f2ed902f829e85e2bef627c0f0a"
+    },
+    {
+      "path": "applikon3l/perfusion/temperature_over_time.svg",
+      "bytes": 30859,
+      "sha256": "670c26584db534ed0f8b376e0c35589b97d736a484c2804c422d1fca28e4fdc9"
+    },
+    {
+      "path": "ambr250/vessel_3d.png",
+      "bytes": 287449,
+      "sha256": "3cfcb22e7978adc583ad4b83b6b02ff99326dfec066f254b85084b1acc5c602a"
+    },
+    {
+      "path": "ambr250/vessel_3d.svg",
+      "bytes": 3256607,
+      "sha256": "de86e043d56f21818b6115fa4f348e6fc4e02aac00395ad51ea80dc6077fa20d"
+    },
+    {
+      "path": "ambr250/temperature_over_time.png",
+      "bytes": 190918,
+      "sha256": "c9ddd6299ef880eb9cd67d5e50d0b9849dd651deeca2f066f4cd709a600a8aed"
+    },
+    {
+      "path": "ambr250/temperature_over_time.svg",
+      "bytes": 89444,
+      "sha256": "6883d06049e887636f79e591f193c8cfc328fe8372297d8044d76d1af37a7744"
+    },
+    {
+      "path": "ambr250/fed_batch/vessel_3d.png",
+      "bytes": 289062,
+      "sha256": "a7612a87e9c6592d17f619ee7ac31cb6ad5368dfbcc4a9504a53f2c034499c1f"
+    },
+    {
+      "path": "ambr250/fed_batch/vessel_3d.svg",
+      "bytes": 3256640,
+      "sha256": "533b3a1831d2506affed91576ada7b8c366178048ccbaa3056845372054e154c"
+    },
+    {
+      "path": "ambr250/fed_batch/temperature_over_time.png",
+      "bytes": 194068,
+      "sha256": "5e4f9bd36d3f33c5afa35310109f73b1cce2d5df47dc16c2b99d0477a02272a1"
+    },
+    {
+      "path": "ambr250/fed_batch/temperature_over_time.svg",
+      "bytes": 30313,
+      "sha256": "9fe9eea58b5635a0f35b2349b41843168d4bcc5f67f9771a1cbb7ecf789f9c52"
+    },
+    {
+      "path": "ambr250/perfusion/vessel_3d.png",
+      "bytes": 287670,
+      "sha256": "129fa7af583d9d58cfb5431e426bf39b34961ad1029cd4bb3d1f6f4ef90dd494"
+    },
+    {
+      "path": "ambr250/perfusion/vessel_3d.svg",
+      "bytes": 3256645,
+      "sha256": "600f701d7c0105f264e272b004bc35eede139fbd21bc06d413bde83e96fc5e75"
+    },
+    {
+      "path": "ambr250/perfusion/temperature_over_time.png",
+      "bytes": 223806,
+      "sha256": "ea2dd73f1e747ee9e45b1bb29db642e1abbdf6c207b55aac7c0bd8c9c1c1be10"
+    },
+    {
+      "path": "ambr250/perfusion/temperature_over_time.svg",
+      "bytes": 30786,
+      "sha256": "4fb358bd277b8a532e4f6f1c649e9a9f676e9d7cf3a573a21b5c486d0358e8ef"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2055,
+      "sha256": "9216ee2568632364c5487757b1d6707935962029555c37d44f855c437622ab8c"
+    }
+  ]
+}

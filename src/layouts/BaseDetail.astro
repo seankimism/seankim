@@ -49,8 +49,17 @@ const paper = 'author' in data ? data : null;
       };
       frame.addEventListener('load', connect);
       connect();
-      document.addEventListener('astro:before-swap', () => observer?.disconnect(), { once: true });
+      document.addEventListener('astro:before-swap', () => {
+        observer?.disconnect();
+        frame.removeEventListener('load', connect);
+        delete frame.dataset.connected;
+      }, { once: true });
     });
   }
   document.addEventListener('astro:page-load', connectResultFrames);
+  // Direct page loads must not depend on an Astro navigation event.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', connectResultFrames, { once: true });
+  }
+  connectResultFrames();
 </script>

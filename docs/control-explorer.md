@@ -1,8 +1,13 @@
 # Temperature-controller explorer
 
-`public/thermal-control/` is a results viewer embedded in the dedicated controller
-project article at `/projects/bioreactor-temperature-control/`. The original
-heat-transfer project at `/projects/xdr2000-heat-transfer/` links to this article.
+`public/thermal-control/` is a results viewer embedded in the combined thermal-model
+and temperature-control article at `/projects/bioreactor-temperature-control/`.
+The article also retains the model foundation, calibration discussion, and
+warm-up explorer from the former heat-transfer project. Its old URL,
+`/projects/xdr2000-heat-transfer/`, redirects to the combined article's
+`#how-heat-moves-through-the-vessel` section. The redirect uses the configured
+deployment base, includes a fallback link, and does not create another project
+listing because it is a static route rather than a content entry.
 The viewer contains no thermal solver or controller implementation. All
 trajectories are computed in the separate modeling repository and exported
 through an explicit allowlist of response fields.
@@ -115,13 +120,15 @@ $env:SITE_BASE_PATH='/seankim'
 npm.cmd run build
 ```
 
-The production build checks both the original warm-up catalog and the new
-controller catalog, including complete setting coverage, result integrity,
-schema, operating bounds, and accidental solver exposure. Relative asset paths
-and the existing Markdown base-path handling support GitHub Pages subpaths.
+The production build checks the warm-up, controller, and bench result exports,
+including complete setting coverage, result integrity, schema, operating bounds,
+and accidental solver exposure. It also verifies the legacy redirect, its
+destination section, and the single merged project listing. Relative asset paths
+and the existing Markdown base-path handling support both root deployment and
+GitHub Pages subpaths such as `/seankim`.
 
-Before publishing, inspect the standalone explorer and its embedded controller
-article on desktop and mobile, and follow the link from the original
-heat-transfer article. Exercise gain changes, volume selection, reset, the shift
+Before publishing, inspect the standalone explorer and its combined project
+article on desktop and mobile, and open the old heat-transfer URL to confirm
+that it reaches the retained model section. Exercise gain changes, volume selection, reset, the shift
 view, and recovery from failed downloads. Check that both modes remain visible
 and the error axis contains the complete response in each time window.
