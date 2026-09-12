@@ -10,9 +10,10 @@ const scenarios = ['controlled', 'fed_batch_cold_feed', 'fed_batch_warm_feed', '
 // (volume steps up); perfusion keeps its constant volume with stream heat excluded.
 const cultureKinds = {fed_batch_cold_feed: 'fed_batch', fed_batch_warm_feed: 'fed_batch', perfusion: 'perfusion'};
 const feedTemperatures = {fed_batch_cold_feed: 4, fed_batch_warm_feed: 20};
-const volumes = {applikon3l: 2, ambr250: 0.2};
-const feedStartVolumes = {applikon3l: 2, ambr250: 0.18};
-const volumeEnvelopes = {applikon3l: 3, ambr250: 0.25};
+// Vessel display volumes: the bench warm-ups and the XDR-2000 cascade entry at 1,500 L.
+const volumes = {applikon3l: 2, ambr250: 0.2, xdr2000: 1500};
+const feedStartVolumes = {applikon3l: 2, ambr250: 0.18, xdr2000: 1500};
+const volumeEnvelopes = {applikon3l: 3, ambr250: 0.25, xdr2000: 2000};
 const keys = (value, expected, label) => {
   assert.ok(value && typeof value === 'object' && !Array.isArray(value), `Invalid ${label}`);
   assert.deepEqual(Object.keys(value).sort(), expected.split(' ').sort(), `Unexpected fields in ${label}`);

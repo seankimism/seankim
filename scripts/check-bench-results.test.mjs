@@ -11,8 +11,8 @@ const display = () => readBenchDisplay(readFileSync(path.join(source, 'index.htm
 
 test('published bench export passes artifact and display checks', () => {
   const result = checkBenchResults(source);
-  assert.equal(result.vessels, 2);
-  assert.equal(result.scenarios, 8);
+  assert.equal(result.vessels, 3);
+  assert.equal(result.scenarios, 12);
 });
 
 test('source input injected into otherwise valid display data is rejected', () => {
@@ -43,7 +43,7 @@ test('fed-batch scenarios carry scheduled boluses whose volume balance closes', 
       const p = vessel.scenarios[name].process;
       assert.equal(p.flow_model, 'bolus');
       assert.equal(p.inlet_temperature_c, name === 'fed_batch_cold_feed' ? 4 : 20);
-      const start = vessel.id === 'ambr250' ? 0.18 : 2;
+      const start = {ambr250: 0.18, applikon3l: 2, xdr2000: 1500}[vessel.id];
       assert.ok(Math.abs(p.volume_l[0] - start) <= 1e-8);
       const steps = p.volume_l.filter((volume, index) => index > 0 && volume > p.volume_l[index - 1]).length;
       assert.equal(steps, 6, 'Six scheduled boluses');

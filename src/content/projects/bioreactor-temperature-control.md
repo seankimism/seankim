@@ -242,6 +242,13 @@ The high-density perfusion profile also remains within the hold band at both ben
   <figcaption>Fixed-volume replay of the same Zhang BRX#A profile used at 2,000 L. Both bench cases complete all 28 days with positive heater power and zero active cooling. These are idealized thermal responses with prescribed biology; the small calculated errors are not claims about sensor accuracy or real equipment performance.</figcaption>
 </figure>
 
+The 3D playback below shows the two bench heat paths and their temperature fields. It opens on the media warm-up; use the scenario menu to follow a culture. The fed-batch scenarios include the feed additions described in the next section, and the perfusion replay keeps its constant volume. The viewer reports cell density at the selected time; the density histories are shown in the comparison above.
+
+<figure class="xdr-explorer">
+  <iframe src="/bench-heating/index.html?v=8e6b3425b248#vessel=applikon3l&mode=controlled" title="Bench-scale temperature simulation: warm-up, fed-batch, and perfusion for the 3 L and ambr 250 vessels with 3D vessel playback" width="800" height="1700" loading="lazy" data-content-height></iframe>
+  <figcaption><a href="/bench-heating/index.html?v=8e6b3425b248#vessel=applikon3l&mode=controlled" target="_blank" rel="noopener noreferrer">Open the bench-scale simulation in a full window ↗</a></figcaption>
+</figure>
+
 ## Why cooling becomes a scale-up requirement
 
 Small vessels have more surface area for each liter of culture. That gives heat a larger area to escape through relative to the amount of medium being kept warm. At the same cell density, a larger culture generates proportionally more heat, while the vessel's surface area grows more slowly. Cooling from the surrounding room therefore becomes less effective per liter as scale increases.
@@ -279,27 +286,20 @@ A successful heating-only bench run therefore provides limited evidence about co
 
 The comparisons above keep each culture at a fixed volume so that cell heat is the only changing load. A real fed-batch adds feed, and each addition changes three things at once: the amount of medium being heated, the vessel surface in contact with it, and the temperature of the culture, because the feed arrives colder than 36.5 °C. The model now handles that. Each bolus is applied as an instantaneous, well-mixed addition: the plant is rebuilt at the new volume, the culture temperature becomes the volume-weighted mix of culture and feed, the wall-band temperatures are remapped onto the new liquid level, and the controller carries on from its current state. The cell inventory stays fixed at the source density times the starting volume, so a cell-free bolus dilutes the density without adding cells.
 
-The scenario is the same at every scale: a 14-day NISTCHO fed-batch with cell-free boluses of 3 % of the starting volume every other day from day 2 to day 12, once with feed straight from the fridge at 4 °C and once at room temperature, 20 °C. The ambr 250 starts at 180 mL (5.4 mL boluses), the 3 L vessel at 2 L (60 mL), and the XDR-2000 at 1,500 L (45 L), ending at 212 mL, 2.36 L, and 1,770 L.
+The scenario is the same at every scale: a 14-day NISTCHO fed-batch with cell-free boluses of 3 % of the starting volume every other day from day 2 to day 12, once with feed straight from the fridge at 4 °C and once at room temperature, 20 °C. The ambr 250 starts at 180 mL (5.4 mL boluses), the 3 L vessel at 2 L (60 mL), and the XDR-2000 at 1,500 L (45 L).
 
 <figure class="xdr-figure">
-  <a href="/fedbatch-feed/feed_scale_comparison.png?v=3ade2faaeb63" target="_blank" rel="noopener noreferrer" aria-label="Open the three-scale feed bolus comparison at full size">
-    <img src="/fedbatch-feed/feed_scale_comparison.png?v=3ade2faaeb63" alt="Six panels comparing the day-6 feed bolus at three scales. Top row: culture temperature drops about 0.95 degrees for 4 degree feed and 0.48 degrees for 20 degree feed in the ambr 250, the 3 L vessel, and the XDR-2000, then recovers within 10 to 15 minutes at bench scale and 20 to 35 minutes at 2,000 L. Bottom row: applied heater power as a percentage of rated heating rises briefly after each bolus." width="2376" height="1296" loading="lazy" decoding="async" />
+  <a href="/fedbatch-feed/feed_scale_comparison.png?v=ba06524b20ad" target="_blank" rel="noopener noreferrer" aria-label="Open the three-scale feed bolus comparison at full size">
+    <img src="/fedbatch-feed/feed_scale_comparison.png?v=ba06524b20ad" alt="Three panels comparing the day-6 feed bolus in the ambr 250, the 3 L vessel, and the XDR-2000. Culture temperature drops about 0.95 degrees for 4 degree feed and 0.48 degrees for 20 degree feed in every vessel, then recovers within 10 to 15 minutes at bench scale and 20 to 35 minutes at 2,000 L." width="2376" height="827" loading="lazy" decoding="async" />
   </a>
   <figcaption>The day-6 bolus at all three scales. The initial drop is a volume ratio, so it is the same everywhere: a 3 % bolus 32.5 °C colder than the culture lowers it by 0.03/1.03 × 32.5 ≈ 0.95 °C, and by 0.48 °C for 20 °C feed. Recovery is where scale shows: the bench elements act on the wall directly and return the culture to the ±0.2 °C band in 10–15 minutes, while the 2,000 L jacket path takes 20–35 minutes and is limited by the 40 °C jacket ceiling rather than by TCU power. Later boluses dilute into a larger volume, so the drop shrinks from 0.95 to 0.83 °C by day 12.</figcaption>
 </figure>
 
-<figure class="xdr-figure">
-  <a href="/fedbatch-feed/xdr2000_feed_comparison.png?v=766258f4d731" target="_blank" rel="noopener noreferrer" aria-label="Open the 2,000 L fed-batch feed comparison at full size">
-    <img src="/fedbatch-feed/xdr2000_feed_comparison.png?v=766258f4d731" alt="Fourteen-day XDR-2000 fed-batch from 1,500 L with six 45 L boluses: culture temperature with brief dips at each feed, stepped liquid volume from 1,500 to 1,770 L, viable cell density diluted at each bolus, metabolic heat peaking near 540 W on day 9, applied power in kilowatts with spikes at each bolus, and a close-up of the day-6 bolus for 4 and 20 degree feed." width="1980" height="3060" loading="lazy" decoding="async" />
-  </a>
-  <figcaption>The full 2,000 L run from 1,500 L. Volume steps at each bolus; the displayed cell density is diluted while the cell count is unchanged; cell heat peaks near 537 W on day 9 and lets the heater ease from 0.8 to 0.2 kW. Warming the cold feed costs about 10 kWh over the run against roughly 150 kWh of hold losses, so the feed temperature matters for the transient, not the energy bill. With 20 °C feed the cascade briefly calls for cooling on recovery late in the run, when little hold demand remains to absorb the overshoot.</figcaption>
-</figure>
-
-The 3D playback below shows the two bench vessels. Select the warmup case to inspect the response from cold medium, a fed-batch scenario to watch the liquid level, volume, and cumulative feed step at each bolus while the culture temperature dips and recovers, or the perfusion replay at constant volume. The viewer reports cell density at the selected time. Feed composition, evaporation, and sampling are not modeled, and each bolus is added at once; a pumped feed would spread the same drop over the pumping time.
+The same viewer now carries the XDR-2000 alongside the bench vessels, all at their fed-batch starting volumes, so the feeding response can be compared across scales interactively. It opens on the 2,000 L vessel with 4 °C feed: scrub to day 2, 4, or 6 to watch the liquid level, volume, and cumulative feed step at each bolus while the culture dips and the jacket water responds; switch to the 20 °C feed or to a bench vessel for the same schedule. Feed composition, evaporation, and sampling are not modeled, and each bolus is added at once; a pumped feed would spread the same drop over the pumping time.
 
 <figure class="xdr-explorer">
-  <iframe src="/bench-heating/index.html?v=b05ac841bbdd" title="Bench-scale temperature simulation: warmup, fed-batch with 4 °C or 20 °C feed boluses, and perfusion for the 3 L and ambr 250 vessels with 3D vessel playback" width="800" height="1700" loading="lazy" data-content-height></iframe>
-  <figcaption><a href="/bench-heating/index.html?v=b05ac841bbdd" target="_blank" rel="noopener noreferrer">Open the bench-scale simulation in a full window ↗</a></figcaption>
+  <iframe src="/bench-heating/index.html?v=8e6b3425b248#vessel=xdr2000&mode=fed_batch_cold_feed" title="Fed-batch feeding simulation across scales: the XDR-2000, 3 L, and ambr 250 vessels with scheduled feed boluses at 4 or 20 degrees and 3D vessel playback" width="800" height="1700" loading="lazy" data-content-height></iframe>
+  <figcaption><a href="/bench-heating/index.html?v=8e6b3425b248#vessel=xdr2000&mode=fed_batch_cold_feed" target="_blank" rel="noopener noreferrer">Open the feeding simulation in a full window ↗</a></figcaption>
 </figure>
 
 ## Calibration and experimental validation

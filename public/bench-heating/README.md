@@ -3,11 +3,13 @@
 Open index.html directly, or copy this entire bench-heating folder into your website's public directory.
 The page contains its own scripts and precomputed display histories and works offline.
 
-Choose the vessel and scenario; drag the 3D cutaway, play, or scrub time.
-Coral outlines identify the heating blanket or holder block; surface colors show temperature.
+Choose the vessel and scenario; drag the 3D cutaway, play, or scrub time. Open index.html#vessel=<id>&mode=<scenario> to start on a given view.
+Coral outlines identify the heating blanket, holder block, or water jacket; surface colors show temperature.
+The XDR-2000 entry runs its cascade jacket control at 1,500 L so that the same feed schedule can be compared across scales.
 
-- Applikon 3 L glass vessel: 2 L medium, 4 C initial medium, 80 C assumed element ceiling.
-- ambr 250 vessel: 0.2 L medium, 20 C initial medium, 60 C assumed element ceiling.
+- Applikon 3 L glass vessel: 2 L medium, 4 C initial medium, 80 C assumed heating blanket ceiling.
+- ambr 250 vessel: 0.2 L medium, 20 C initial medium, 60 C assumed holder block ceiling.
+- Xcellerex XDR-2000: 1500 L medium, 4 C initial medium, 40 C assumed jacket water ceiling.
 
 - Applikon 3 L glass vessel, Fed-batch with cells, 4 °C feed boluses: 14 days, 2 to 2.36 L, 36.5 C setpoint, 20 pW/cell.
 - Applikon 3 L glass vessel, Fed-batch with cells, 20 °C feed boluses: 14 days, 2 to 2.36 L, 36.5 C setpoint, 20 pW/cell.
@@ -15,6 +17,9 @@ Coral outlines identify the heating blanket or holder block; surface colors show
 - ambr 250 vessel, Fed-batch with cells, 4 °C feed boluses: 14 days, 0.18 to 0.2124 L, 36.5 C setpoint, 20 pW/cell.
 - ambr 250 vessel, Fed-batch with cells, 20 °C feed boluses: 14 days, 0.18 to 0.2124 L, 36.5 C setpoint, 20 pW/cell.
 - ambr 250 vessel, Perfusion with cells: 28 days, 0.2 to 0.2 L, 36.5 C setpoint, 20 pW/cell.
+- Xcellerex XDR-2000, Fed-batch with cells, 4 °C feed boluses: 14 days, 1500 to 1770 L, 36.5 C setpoint, 20 pW/cell.
+- Xcellerex XDR-2000, Fed-batch with cells, 20 °C feed boluses: 14 days, 1500 to 1770 L, 36.5 C setpoint, 20 pW/cell.
+- Xcellerex XDR-2000, Perfusion with cells: 28 days, 1500 to 1500 L, 36.5 C setpoint, 20 pW/cell.
 
 Culture scenarios start at controlled equilibrium. The two fed-batch scenarios add cell-free boluses of 3 % of the starting volume every other day from day 2 to day 12 (14 days), at 4 C or 20 C feed temperature; the volume, liquid level, and cumulative feed step at each bolus and the culture temperature dips and recovers.
 Fed-batch uses the NISTCHO density history with the cell inventory fixed at the starting volume, so boluses dilute the displayed density; perfusion uses the Zhang BRX#A density history at constant volume with stream enthalpy excluded.
