@@ -213,8 +213,8 @@ The bench models use a single controller responding to culture temperature. The 
 </dl>
 
 <figure class="xdr-figure">
-  <a href="/xdr2000/bench/bench_control_architecture.png" target="_blank" rel="noopener noreferrer" aria-label="Open the control diagrams for the 3 L and ambr 250 bench reactors at full size">
-    <img src="/xdr2000/bench/bench_control_architecture.png" alt="Two bench control diagrams. In each, culture temperature feeds back to a single PI controller that commands limited element power. The 3 L vessel uses a heating blanket and glass wall; the ambr 250 uses a heating and cooling block and polycarbonate wall. Cell heat enters the culture and surfaces exchange heat with the room." width="2160" height="2280" loading="lazy" decoding="async" />
+  <a href="/xdr2000/bench/bench_control_architecture.png?v=354694fc961e" target="_blank" rel="noopener noreferrer" aria-label="Open the control diagrams for the 3 L and ambr 250 bench reactors at full size">
+    <img src="/xdr2000/bench/bench_control_architecture.png?v=354694fc961e" alt="Two bench control diagrams. In each, culture temperature feeds back to a single PI controller that commands limited element power. The 3 L vessel uses a heating blanket and glass wall; the ambr 250 uses a heating and cooling block and polycarbonate wall. Cell heat enters the culture and surfaces exchange heat with the room." width="2160" height="2160" loading="lazy" decoding="async" />
   </a>
   <figcaption>One culture-temperature measurement feeds one proportional–integral (PI) controller in each bench model. The 3 L blanket supplies heat; the ambr block can heat or cool. Power and element-temperature limits constrain the output. The 2,000 L model also uses a separate feedback loop for jacket temperature. The diagrams show the modeled control structures and assumed element-temperature ceilings.</figcaption>
 </figure>
