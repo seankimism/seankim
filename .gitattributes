@@ -1,0 +1,5 @@
+# Keep checksummed bench exports identical on Windows and the Pages runner.
+public/bench-heating/**/*.html text eol=lf
+public/bench-heating/**/*.md text eol=lf
+public/bench-heating/**/*.json text eol=lf
+public/bench-heating/**/*.svg text eol=lf

@@ -10,20 +10,62 @@ Inspired by [AstroPaper](https://github.com/satnaing/astro-paper).
 
 ## Unified CSS Class System
 
-All styles are defined in `@src/styles/global.css`. No inline `<style>` allowed in components.
+All styles are defined in `src/styles/global.css`. No inline `<style>` allowed in components. The classes below are the ones in use; add new ones there rather than inline.
 
-### Typography Classes
+### Typography and text
 | Class | Description |
 |-------|-------------|
-| `title-xl` | Page title (1.5rem, 800) |
-| `title-lg` | Section title (1.25rem, 700) |
-| `title-md` | Subsection (1.1rem, 700) |
-| `body` | Body text (0.95rem, 1.65 line-height) |
-| `body-sm` | Small text (0.85rem) |
-| `body-xs` | Tiny text (0.75rem) |
-| `mono` | Code/text (JetBrains Mono) |
+| `page-title` / `page-subtitle` / `page-header` | Listing-page header |
+| `detail-heading` / `detail-meta` / `detail-back` | Project and publication page header |
+| `eyebrow` | Small uppercase accent label |
+| `section-title` / `section-heading` | Section headings on the About page |
+| `body-xs` / `file-label` | Small muted and mono labels |
+| `prose` | Markdown content wrapper (headings, lists, code, images) |
 
-### Layout Classes
+### Layout shell
+| Class | Description |
+|-------|-------------|
+| `site-shell` | Two-column grid, collapses below 1024px |
+| `sidebar`, `profile-*`, `social-link`, `resume-link` | Sticky profile sidebar |
+| `navbar`, `nav-links`, `nav-link` | Top navigation with active indicator |
+| `main-content`, `main-body` | Scrollable content column |
+| `footer`, `footer-actions`, `theme-toggle` | Site footer |
+| `skip-link` | Keyboard skip navigation |
+
+### About page
+| Class | Description |
+|-------|-------------|
+| `home-bio`, `home-section` | Bio and section spacing |
+| `focus-list`, `focus-row`, `focus-number` | Numbered research-focus rows |
+| `home-projects`, `home-project`, `read-more` | Selected-work cards |
+| `home-paper`, `publication-year` | Selected publications |
+| `contact-section` | Closing contact block |
+
+### Listings and detail pages
+| Class | Description |
+|-------|-------------|
+| `project-list`, `project-entry`, `project-meta` | Projects listing and project header meta |
+| `topic-list` | Tag chips |
+| `publication-section`, `publication-entry`, `publication-venue`, `publication-authors`, `publication-links`, `status` | Publications listing and detail |
+| `detail-links`, `download-button`, `detail-citation` | Publication actions and citation |
+| `cv-entry`, `entry-*`, `cv-downloads` | CV sections |
+
+### Project-page content blocks (used from markdown)
+| Class | Description |
+|-------|-------------|
+| `xdr-figure` | Linked full-width figure with caption |
+| `xdr-explorer` | Embedded interactive explorer iframe |
+| `xdr-conditions` | Two-column definition list of settings |
+| `xdr-sources` | Side-by-side source cards |
+| `xdr-experiment-plan` | Scrollable table wrapper |
+| `arc-list`, `arc-row`, `arc-number` | Numbered narrative arcs |
+| `paper-list`, `paper-card`, `paper-card-figure`, `paper-card-links`, `no-figure` | Publication cards with optional figure |
+| `research-video`, `video-grid` | Embedded videos, optionally in a two-column grid |
+| `project-lede`, `dissertation-note` | Lede paragraph and muted dissertation line |
+
+---
+
+## Layout Classes
 | Class | Description |
 |-------|-------------|
 | `container-narrow` | Max-width 800px |
@@ -171,24 +213,15 @@ All styles are defined in `@src/styles/global.css`. No inline `<style>` allowed 
 ```
 src/
 ├── components/
-│   ├── layout/
-│   │   ├── LeftSidebar.astro   (uses .sidebar, .sidebar-avatar, .sidebar-name, .social-link)
-│   │   ├── Navbar.astro        (uses .navbar, .nav-links, .nav-link, .btn-icon)
-│   │   ├── RightMain.astro     (uses .main-content, .main-body)
-│   │   └── Footer.astro        (uses .footer)
-│   ├── content/
-│   │   └── ContentLinks.astro
-│   └── ui/
-│       ├── BaseItemCard.astro  (uses .card, .card-title, .card-meta, .card-desc)
-│       ├── Tag.astro          (uses .tag)
-│       ├── BackLink.astro    (uses .back-link)
-│       ├── ShareButtons.astro (uses .icon-btn)
-│       └── Icon.astro
+│   ├── LeftSidebar.astro   (uses .sidebar, .profile-*, .social-link)
+│   ├── Navbar.astro        (uses .navbar, .nav-links, .nav-link)
+│   ├── RightMain.astro     (uses .main-content, .main-body)
+│   ├── Footer.astro        (uses .footer, .theme-toggle)
+│   ├── CVSection.astro
+│   └── Icon.astro
 ├── layouts/
 │   ├── BaseLayout.astro
-│   ├── BaseDetail.astro       (uses .prose, .page-title, .card-meta)
-│   ├── BaseListing.astro      (uses .item-list, .page-header)
-│   └── DevToolsLayout.astro
+│   └── BaseDetail.astro       (uses .prose, .detail-heading, .project-meta)
 └── styles/
     └── global.css             (all unified classes)
 ```

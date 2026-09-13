@@ -3,10 +3,8 @@ title: "Hybrid bioreactor digital twins and scale-down modeling"
 description: "Hybrid modeling and AMBR250 scale-down studies supporting bioprocess development, characterization, and optimization."
 organization: "Ark Biotech"
 period: "2023-2026"
-status: "Past work"
 tags: ["Mechanistic modeling", "Machine learning", "Cell culture", "Process Development"]
 order: 1
-featured: true
 ---
 
 ## The problem
