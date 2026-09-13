@@ -243,8 +243,6 @@ The high-density perfusion profile also remains within the hold band at both ben
   <figcaption>Fixed-volume replay of the same Zhang BRX#A profile used at 2,000 L. Both bench cases complete all 28 days with positive heater power and zero active cooling. These are idealized thermal responses with prescribed biology; the small calculated errors are not claims about sensor accuracy or real equipment performance.</figcaption>
 </figure>
 
-The 3D playback below shows the bench heat paths and their temperature fields, with the XDR-2000 available in the same vessel menu for comparison. It opens on the 3 L media warm-up; use the scenario menu to follow a culture. The two fed-batch scenarios are the 14-day fed runs described in the next section, with 4 °C or 20 °C boluses, rather than the fixed-volume replays above; the perfusion replay keeps its constant volume. The viewer reports cell density at the selected time; the density histories are shown in the comparison above.
-
 <figure class="xdr-explorer">
   <iframe src="/bench-heating/index.html?v=8e6b3425b248#vessel=applikon3l&mode=controlled" title="Temperature simulation viewer: warm-up, fed-batch with feed boluses, and perfusion for the 3 L, ambr 250, and XDR-2000 vessels with 3D vessel playback" width="800" height="1700" loading="lazy" data-content-height></iframe>
   <figcaption><a href="/bench-heating/index.html?v=8e6b3425b248#vessel=applikon3l&mode=controlled" target="_blank" rel="noopener noreferrer">Open the simulation viewer in a full window ↗</a></figcaption>
