@@ -42,8 +42,9 @@ through three static results-only exports:
   published standard deviations where available. The lower panel shows the
   corresponding metabolic heat at 20 pW per viable cell and a fixed 2,000 L
   culture volume.
-- `public/xdr2000/nistcho_fedbatch_temperature_20pw.png`: the 17-day fed-batch
-  controller comparison at a constant 36.5 C. The two responses overlap because
+- `public/xdr2000/nistcho_fedbatch_temperature_20pw.png`: the 14-day fed-batch
+  controller comparison at a constant 36.5 C (the first 14 days of the 17-day
+  published history). The two responses overlap because
   neither case calls for active cooling at the selected heat rate.
 - `public/xdr2000/zhang2024_perfusion_temperature_20pw.png`: the 28-day perfusion
   temperature comparison at the same constant target and per-cell heat rate.
