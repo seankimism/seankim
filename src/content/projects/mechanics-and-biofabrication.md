@@ -11,21 +11,21 @@ order: 3
 
 ## Mechanical design of engineered tissues
 
-Engineered tissues experience mechanical loading during manufacture, maturation, and implantation. However, bulk measurements do not resolve the local deformation experienced by cells within these constructs. My research examined this relationship between global and local mechanics in porous collagen scaffolds for cartilage and biological intervertebral disc implants. Related work addressed the bioreactor systems used to manufacture engineered tissue.
+Engineered tissues experience mechanical loading during manufacture, maturation, and implantation. However, bulk mechanical measurements do not resolve the local deformation that cells experience within these constructs, and the relationship between global loading and the local mechanical environment in engineered tissues remains poorly understood. Understanding this relationship is critical for designing constructs that survive loading and for manufacturing them reproducibly. As such, my doctoral research investigated the relationship among scaffold architecture, local composition, and the micromechanical environment in porous collagen scaffolds for cartilage and in biological intervertebral disc implants. More specifically, I (i) mapped local instabilities and cell death in collagen scaffolds under compression, (ii) developed finite element models and a bioabsorbable support for tissue-engineered disc implants, and (iii) contributed to an automated, closed bioreactor for mechanical conditioning of meniscus grafts.
 
-Destructive mechanical testing limits assessment to sampled constructs from each batch. The local failures and compositional thresholds identified in these studies suggest parameters that could inform non-destructive assessment of construct readiness.
+Notably, manufacturers currently assess engineered cartilage by destructive mechanical testing of sampled constructs from each batch. The local failure modes and compositional thresholds identified in these studies suggest local instabilities and local composition as potential quality parameters that could be monitored non-destructively.
 
 <p class="dissertation-note">Dissertation: <em>Mechanically Informed Design Controls for Tissue Engineered Cartilage Biofabrication: Importance of Micro Failure, Architecture, and Composition</em>, Cornell University, 2023.</p>
 
 <div class="arc-list">
-  <div class="arc-row"><span class="arc-number">01</span><div><h3>Local mechanics and cell viability</h3><p>Buckling, densification, and local compositional thresholds determine where strain concentrates within engineered cartilage. These local responses influence chondrocyte viability and identify regions susceptible to mechanical overload.</p></div></div>
-  <div class="arc-row"><span class="arc-number">02</span><div><h3>Implant placement and mechanical support</h3><p>Anatomic variation and implant placement influence loading of biological disc implants. Flexible bioabsorbable supports maintain disc height while the implanted tissue matures.</p></div></div>
-  <div class="arc-row"><span class="arc-number">03</span><div><h3>Manufacturing reproducibility</h3><p>Cell source contributes to variation among constructs, while local composition provides a potential parameter for non-destructive quality control. A closed, automated bioreactor standardizes mechanical conditioning during tissue manufacture.</p></div></div>
+  <div class="arc-row"><span class="arc-number">01</span><div><h3>Local mechanics and cell viability</h3><p>Buckling, densification, and local compositional thresholds dictate where strain concentrates within engineered cartilage. Such local instabilities, rather than bulk strain, are the primary mechanical driver of chondrocyte death.</p></div></div>
+  <div class="arc-row"><span class="arc-number">02</span><div><h3>Implant placement and mechanical support</h3><p>Anatomic variation and implant placement set the loads on biological disc implants. A flexible bioabsorbable support maintains disc height while the implanted tissue matures.</p></div></div>
+  <div class="arc-row"><span class="arc-number">03</span><div><h3>Manufacturing reproducibility</h3><p>Cell source accounts for much of the variation among constructs, while local composition provides a potential parameter for non-destructive quality control. A closed, automated bioreactor standardizes mechanical conditioning during tissue manufacture.</p></div></div>
 </div>
 
 ## Local mechanics and cell fate
 
-Fast confocal microscopy combined with digital image correlation was used to map local strain in scaffolds and tissues during loading. These measurements connected scaffold architecture and tissue composition with the mechanical environment at the cellular scale.
+I utilized fast confocal microscopy combined with digital image correlation to map local strain in scaffolds and tissues during loading. Such measurements connected scaffold architecture and tissue composition to the micromechanical environment at the cellular scale, from empty scaffolds to living tissue.
 
 <div class="paper-list">
   <article class="paper-card">
@@ -33,7 +33,7 @@ Fast confocal microscopy combined with digital image correlation was used to map
     <div class="paper-card-body">
       <p class="eyebrow">Experimental Mechanics · 2022</p>
       <h3><a href="https://doi.org/10.1007/s11340-022-00853-7" target="_blank" rel="noopener noreferrer">The role of buckling instabilities in the global and local mechanical response in porous collagen scaffolds</a></h3>
-      <p>Confined compression and confocal strain mapping were used to compare honeycomb and sponge collagen scaffolds. Both architectures exhibited linear, plateau, and densification regions, with local instabilities such as snap-through buckling contributing to the plateau response. Despite similar bulk behavior, their local strain distributions differed: honeycomb scaffolds deformed uniformly through their depth, whereas sponge scaffolds collapsed at their boundaries.</p>
+      <p>We performed multi-scale mechanical analysis on honeycomb and sponge collagen scaffolds using confined compression and confocal strain mapping. The global response of both architectures followed the pattern characteristic of cellular solids, with linear, plateau, and densification regions, and the plateau corresponded to local instabilities such as snap-through buckling. Interestingly, the two architectures were nearly indistinguishable in bulk but distinct at the local scale: honeycomb scaffolds experienced a unimodal strain distribution throughout their depth, whereas sponge scaffolds collapsed at the boundaries, which makes local strain mapping critical for designing porous scaffold architectures.</p>
       <p class="paper-card-links"><a href="/publications/collagen-scaffold-buckling/">Publication details</a></p>
     </div>
   </article>
@@ -42,7 +42,7 @@ Fast confocal microscopy combined with digital image correlation was used to map
     <div class="paper-card-body">
       <p class="eyebrow">bioRxiv preprint · 2024</p>
       <h3><a href="https://doi.org/10.1101/2024.06.18.599620" target="_blank" rel="noopener noreferrer">3D in-situ characterization reveals the instability-induced auxetic behavior of collagen scaffolds for tissue engineering</a></h3>
-      <p>In-situ micro-CT during compression showed that strut instabilities also produced auxetic behavior in these scaffolds, which contracted laterally under compressive loading. This response was concentrated near the construct boundaries. Such deformation could create gaps at the interface where an implant must integrate with native cartilage.</p>
+      <p>In-situ micro-CT during compression revealed that the same strut instabilities produce auxetic behavior: the scaffolds contracted laterally as they were compressed. This response was concentrated near the construct boundaries, where an implant must integrate with native cartilage. Such lateral contraction may open gaps at the interface and compromise integration.</p>
       <p class="paper-card-links"><a href="/publications/collagen-scaffold-auxetic-behavior/">Publication details</a></p>
     </div>
   </article>
@@ -51,7 +51,7 @@ Fast confocal microscopy combined with digital image correlation was used to map
     <div class="paper-card-body">
       <p class="eyebrow">Journal of Biomechanics · 2023</p>
       <h3><a href="https://doi.org/10.1016/j.jbiomech.2023.111591" target="_blank" rel="noopener noreferrer">Instabilities induced by mechanical loading determine the viability of chondrocytes grown on porous scaffolds</a></h3>
-      <p>Local strain and cell death were mapped in chondrocyte-seeded honeycomb and sponge scaffolds under compression. Cell death remained at control levels in elastically deformed regions, showed an increasing trend in buckled regions, and increased markedly in densified regions. Loading orientation had a greater influence on cell viability than scaffold type, indicating the importance of scaffold alignment relative to in vivo loading.</p>
+      <p>We utilized fast confocal microscopy combined with strain mapping to analyze architecture-dependent instabilities and subsequent chondrocyte death in honeycomb and sponge scaffolds under compression. Both scaffolds exhibited elastic, buckled, and densified deformation modes. Cell death was minimal in elastic regions and trended upward in buckled regions. More interestingly, cell death increased significantly in densified regions, and scaffold orientation was far more important than scaffold architecture for chondrocyte viability. These results suggest that aligning the scaffold with the direction of in vivo load might be crucial for preventing cell death after implantation.</p>
       <p class="paper-card-links"><a href="/publications/chondrocyte-viability-scaffold-instabilities/">Publication details</a></p>
     </div>
   </article>
@@ -60,7 +60,7 @@ Fast confocal microscopy combined with digital image correlation was used to map
     <div class="paper-card-body">
       <p class="eyebrow">Book chapter · Electromechanobiology of Cartilage and Osteoarthritis · 2023</p>
       <h3><a href="https://doi.org/10.1007/978-3-031-25588-5_2" target="_blank" rel="noopener noreferrer">Understanding the influence of local physical stimuli on chondrocyte behavior</a></h3>
-      <p>This chapter reviews five decades of research on chondrocyte mechanobiology, from bulk biosynthesis assays to real-time confocal imaging of individual cells. It examines how static, dynamic, and injurious loading generate local stimuli through matrix deformation, interstitial fluid flow, hydrostatic pressure, and physicochemical changes.</p>
+      <p>In this chapter, we reviewed five decades of research on chondrocyte mechanobiology, from bulk biosynthesis assays to real-time confocal imaging of individual cells. More specifically, we examined how static, dynamic, and injurious loading generate the local physical stimuli that chondrocytes experience, including matrix deformation, interstitial fluid flow, hydrostatic pressure, and physicochemical changes.</p>
       <p class="paper-card-links"><a href="/publications/physical-stimuli-chondrocyte-behavior/">Publication details</a></p>
     </div>
   </article>
@@ -69,7 +69,7 @@ Fast confocal microscopy combined with digital image correlation was used to map
     <div class="paper-card-body">
       <p class="eyebrow">Acta Biomaterialia · 2021</p>
       <h3><a href="https://doi.org/10.1016/j.actbio.2021.07.003" target="_blank" rel="noopener noreferrer">The influence of chondrocyte source on the manufacturing reproducibility of human tissue engineered cartilage</a></h3>
-      <p>More than 200 human tissue-engineered cartilage constructs from seven chondrocyte sources were tested in compression, friction, and shear. Compressive properties varied by orders of magnitude and friction varied fivefold among cell sources, while shear modulus did not change. Depth-dependent strain fields also varied with cell source. These results identify compressive properties and local mechanics as relevant measures of manufacturing reproducibility.</p>
+      <p>This study tested more than 200 human tissue-engineered cartilage constructs from seven chondrocyte sources in compression, friction, and shear. Compressive properties varied by orders of magnitude among cell sources and friction varied fivefold, while shear modulus did not change. In addition, depth-dependent strain fields varied with cell source. These results highlight compressive properties and local mechanics as the relevant measures of manufacturing reproducibility.</p>
       <p class="paper-card-links"><a href="/publications/cartilage-manufacturing-reproducibility/">Publication details</a></p>
     </div>
   </article>
@@ -78,7 +78,7 @@ Fast confocal microscopy combined with digital image correlation was used to map
     <div class="paper-card-body">
       <p class="eyebrow">Journal of Biomechanics · 2024</p>
       <h3><a href="https://doi.org/10.1016/j.jbiomech.2023.111882" target="_blank" rel="noopener noreferrer">Microscale strain concentrations in tissue-engineered osteochondral implants are dictated by local compositional thresholds and architecture</a></h3>
-      <p>Osteochondral implants were grown by fusing mesenchymal stem cell bodies onto trabecular bone. Confocal strain mapping and infrared composition maps showed strain concentrations at poorly integrated spheroid boundaries, where aggrecan concentration was low and collagen concentration was high. Compressive strain increased more than threefold below a distinct aggrecan threshold. These findings suggest that local composition governs the micromechanical environment and may provide a quality-control parameter for tissue manufacture.</p>
+      <p>We investigated osteochondral implants manufactured by fusing condensed mesenchymal cell bodies onto trabecular bone, combining confocal strain mapping with Fourier transform infrared spectroscopy to register local strain against local composition. Under compression, strain concentrated at poorly integrated spheroid boundaries, where aggrecan concentration was low and collagen concentration was high. Remarkably, we identified a strong threshold relationship between the two: below a distinct aggrecan concentration, the constructs experienced a greater than threefold increase in compressive strain. This study suggests that local composition is the primary driver of the micromechanical environment and a potential quality control parameter for tissue manufacturing.</p>
       <p class="paper-card-links"><a href="/publications/osteochondral-strain-concentrations/">Publication details</a></p>
     </div>
   </article>
@@ -87,7 +87,7 @@ Fast confocal microscopy combined with digital image correlation was used to map
     <div class="paper-card-body">
       <p class="eyebrow">Journal of Biomechanics · 2025</p>
       <h3><a href="https://doi.org/10.1016/j.jbiomech.2025.112843" target="_blank" rel="noopener noreferrer">Local shear properties of rabbit articular cartilage capture surface region mechanics of human, equine, and bovine tissue</a></h3>
-      <p>Depth-resolved measurements showed that the shear properties of rabbit articular cartilage match those of the surface and upper-middle zones of human, equine, and bovine tissue. These results support the use of rabbit cartilage as a preclinical model for surface mechanics and tissue integration studies.</p>
+      <p>Depth-resolved shear measurements showed that rabbit articular cartilage recapitulates the shear properties of the surface and upper-middle zones of human, equine, and bovine tissue. As such, the rabbit is a suitable preclinical model for surface mechanics and integration studies, where an engineered cartilage repair must succeed.</p>
       <p class="paper-card-links"><a href="/publications/cartilage-local-shear/">Publication details</a></p>
     </div>
   </article>
@@ -112,14 +112,14 @@ Fast confocal microscopy combined with digital image correlation was used to map
 
 ## Fit and support for disc implants
 
-Biological disc implants replace degenerated tissue with living tissue. Their performance depends on the mechanical environment of the disc space and on maintaining that space during tissue maturation.
+Biological disc implants replace degenerated tissue with living tissue. However, their in vivo performance depends on the mechanical environment of the disc space, and maintaining that space while the implanted tissue matures remains a major hurdle.
 
 <div class="paper-list">
   <article class="paper-card no-figure">
     <div class="paper-card-body">
       <p class="eyebrow">International Journal of Spine Surgery · 2021</p>
       <h3><a href="https://doi.org/10.14444/8052" target="_blank" rel="noopener noreferrer">Pathomechanism and biomechanics of degenerative disc disease: features of healthy and degenerated discs</a></h3>
-      <p>This review examines the structure and mechanics of healthy and degenerated intervertebral discs, including how degeneration alters the loading conditions that a disc replacement must accommodate.</p>
+      <p>This review examines the structure and mechanics of healthy and degenerated intervertebral discs. In particular, it describes how degeneration alters the loading conditions that any disc replacement must accommodate.</p>
       <p class="paper-card-links"><a href="/publications/degenerative-disc-biomechanics/">Publication details</a></p>
     </div>
   </article>
@@ -128,7 +128,7 @@ Biological disc implants replace degenerated tissue with living tissue. Their pe
     <div class="paper-card-body">
       <p class="eyebrow">JOR Spine · 2023</p>
       <h3><a href="https://doi.org/10.1002/jsp2.1307" target="_blank" rel="noopener noreferrer">Finite element modeling to predict the influence of anatomic variation and implant placement on performance of biological intervertebral disc implants</a></h3>
-      <p>CT-based finite element models of the minipig cervical spine reproduced the in vivo failure locations of PLA support cages. Stress concentrated at contacts between vertebral endplate features and the cage, corresponding to the fracture locations observed in animals. Simulations of implant displacement and joint tilt showed how placement and posture affect cage stress and migration risk, providing guidance for implant placement.</p>
+      <p>We developed CT-based finite element models of the minipig cervical spine to understand the in vivo failure of PLA support cages. Stress concentrated where bony features of the vertebral endplates contacted the cage, which corresponded to the fracture locations observed in animals. Furthermore, simulating implant displacement and joint tilt showed how placement and posture change cage stress and migration risk, providing guidance for implant placement prior to surgery.</p>
       <p class="paper-card-links"><a href="/publications/disc-implant-finite-element-modeling/">Publication details</a></p>
     </div>
   </article>
@@ -137,7 +137,7 @@ Biological disc implants replace degenerated tissue with living tissue. Their pe
     <div class="paper-card-body">
       <p class="eyebrow">JOR Spine · 2024</p>
       <h3><a href="https://doi.org/10.1002/jsp2.1363" target="_blank" rel="noopener noreferrer">Flexible support material maintains disc height and supports the formation of hydrated tissue engineered intervertebral discs in vivo</a></h3>
-      <p>A flexible, bioresorbable 3D-printed support tolerated nearly twice the deformation of stiff PLA without fracture. In the minipig cervical spine, the flexible support restored native disc height for six weeks, while PLA cages fractured within four weeks. Tissue-engineered discs implanted in flexible cages formed hydrated tissue with approximately half the T2 signal of native disc. For the materials and animal model examined, support flexibility maintained the disc space during tissue formation.</p>
+      <p>We designed a flexible, bioresorbable 3D-printed support that tolerated nearly twice the deformation of stiff PLA without fracture. In the minipig cervical spine, the flexible support restored native disc height for six weeks, whereas PLA cages fractured within four weeks. In addition, tissue-engineered discs implanted in flexible cages formed hydrated tissue with approximately half the T2 signal of native disc. These results indicate that support flexibility, rather than stiffness, is what maintains the disc space during tissue formation.</p>
       <p class="paper-card-links"><a href="/publications/intervertebral-disc-support/">Publication details</a></p>
     </div>
   </article>
@@ -150,7 +150,7 @@ Biological disc implants replace degenerated tissue with living tissue. Their pe
 
 ## Manufacturing systems
 
-Reproducible tissue manufacture requires consistent mechanical conditioning. This work addressed that requirement by automating mechanical stimulation within a closed bioreactor system.
+Reproducible tissue manufacture requires consistent mechanical conditioning, yet manual handling introduces variability between constructs. This work automated mechanical stimulation within a closed bioreactor system.
 
 <div class="paper-list">
   <article class="paper-card">
@@ -158,10 +158,10 @@ Reproducible tissue manufacture requires consistent mechanical conditioning. Thi
     <div class="paper-card-body">
       <p class="eyebrow">Patent application · US 2024/0124815 A1 · 2024</p>
       <h3><a href="https://patents.google.com/patent/US20240124815A1/en" target="_blank" rel="noopener noreferrer">Modular and autonomous bioreactor for tissue-engineered meniscus constructs</a></h3>
-      <p>In collaboration with Charlotte Lee and Lawrence Bonassar, I contributed to the development of a modular bioreactor for mechanical conditioning of bone–collagen–bone meniscal enthesis grafts. A fixed base, sliding carriage, and worm-gear drive apply stretching within a sealed, battery-powered housing. The system operates in a standard incubator without external wiring or manual handling during conditioning, and a microcontroller applies a consistent stretching schedule. Stretched constructs elongated and exhibited collagen fiber reorganization relative to unstretched controls.</p>
+      <p>With Charlotte Lee and Lawrence Bonassar, I developed a modular bioreactor for mechanical conditioning of bone–collagen–bone meniscal enthesis grafts. A fixed base, sliding carriage, and worm-gear drive apply stretching within a sealed, battery-powered housing, so the system operates in a standard incubator without external wiring or manual handling. A microcontroller applies the same stretching schedule to every construct. Stretched constructs elongated and exhibited collagen fiber reorganization compared to unstretched controls.</p>
       <p class="paper-card-links"><a href="https://patents.google.com/patent/US20240124815A1/en" target="_blank" rel="noopener noreferrer">Read patent ↗</a></p>
     </div>
   </article>
 </div>
 
-These studies connect measurements of the local cellular environment with scaffold design, implant support, and controlled tissue conditioning. Local strain and composition maps identify relevant mechanical features, while defined support designs and automated conditioning address reproducibility during manufacture. My bioprocess work applies this approach to cell-culture manufacturing through physics-based models and scale-down systems.
+Collectively, these studies show that the micromechanical environment, rather than bulk mechanics, dictates cell viability and construct performance, and that local strain and composition are measurable parameters for controlling it. Overall, mechanically informed design controls, from scaffold architecture to implant support to automated conditioning, are crucial for manufacturing engineered tissues reproducibly. My bioprocess work applies the same approach to cell-culture manufacturing through physics-based models and scale-down systems.
