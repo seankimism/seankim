@@ -5,8 +5,15 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 
 const checksum = bytes => createHash('sha256').update(bytes).digest('hex');
-const scenarios = ['controlled', 'fed_batch', 'perfusion'];
-const volumes = {applikon3l: 2, ambr250: 0.2};
+const scenarios = ['controlled', 'fed_batch_cold_feed', 'fed_batch_warm_feed', 'perfusion'];
+// Culture scenarios: the two fed-batch cases add scheduled cell-free boluses
+// (volume steps up); perfusion keeps its constant volume with stream heat excluded.
+const cultureKinds = {fed_batch_cold_feed: 'fed_batch', fed_batch_warm_feed: 'fed_batch', perfusion: 'perfusion'};
+const feedTemperatures = {fed_batch_cold_feed: 4, fed_batch_warm_feed: 20};
+// Vessel display volumes: the bench warm-ups and the XDR-2000 cascade entry at 1,500 L.
+const volumes = {applikon3l: 2, ambr250: 0.2, xdr2000: 1500};
+const feedStartVolumes = {applikon3l: 2, ambr250: 0.18, xdr2000: 1500};
+const volumeEnvelopes = {applikon3l: 3, ambr250: 0.25, xdr2000: 2000};
 const keys = (value, expected, label) => {
   assert.ok(value && typeof value === 'object' && !Array.isArray(value), `Invalid ${label}`);
   assert.deepEqual(Object.keys(value).sort(), expected.split(' ').sort(), `Unexpected fields in ${label}`);
@@ -67,7 +74,7 @@ export function validateBenchDisplay(data) {
     assert.ok(Math.abs(boundary - g.total_height_m) < 1e-10);
     keys(vessel.scenarios, scenarios.join(' '), 'default scenarios');
     for (const [name, scenario] of Object.entries(vessel.scenarios)) {
-      const culture = name === 'fed_batch' || name === 'perfusion';
+      const culture = Object.hasOwn(cultureKinds, name);
       keys(scenario, 'times_s media_c element_c air_c wall_c power_w target_c hold_tolerance_c target_time_s settled_time_s ceiling_c initial_media_c room_c color_min_c color_max_c' + (culture ? ' process' : ''), 'scenario');
       const times = scenario.times_s;
       assert.ok(Array.isArray(times) && times.length >= 2);
@@ -97,19 +104,38 @@ export function validateBenchDisplay(data) {
         finite(p[field], field);
         if (field !== 'inlet_temperature_c') assert.ok(p[field] >= 0);
       });
-      assert.equal(p.kind, name);
+      assert.equal(p.kind, cultureKinds[name]);
       assert.equal(p.time_unit, 'days');
-      assert.equal(p.flow_model, 'excluded', 'Default culture replay must exclude stream heat');
       assert.equal(p.specific_heat_pw_cell, 20);
       assert.match(p.profile_source_url, /^https:\/\/doi\.org\/10\./);
       for (const field of historyFields.split(' ')) {
         series(p[field], times.length, field);
         assert.ok(p[field].every(value => value >= 0));
       }
-      assert.ok(p.volume_l.every(volume => volume === vessel.volume_l), 'Default culture volume must remain fixed');
-      assert.ok(p.liquid_height_m.every(height => Math.abs(height - g.liquid_height_m) <= 1e-8), 'Fixed-volume fill changed');
-      for (const field of ['flow_heat_w', 'inlet_flow_l_day', 'outlet_flow_l_day', 'cumulative_feed_l', 'cumulative_harvest_l']) {
-        assert.ok(p[field].every(value => value === 0), `Excluded flow contains nonzero ${field}`);
+      // Neither public scenario carries continuous stream heat.
+      for (const field of ['flow_heat_w', 'inlet_flow_l_day', 'outlet_flow_l_day', 'cumulative_harvest_l']) {
+        assert.ok(p[field].every(value => value === 0), `Unexpected nonzero ${field}`);
+      }
+      if (p.kind === 'fed_batch') {
+        assert.equal(p.flow_model, 'bolus', 'Fed-batch scenarios must carry scheduled feed boluses');
+        assert.equal(p.inlet_temperature_c, feedTemperatures[name], 'Unexpected feed temperature');
+        assert.ok(Math.abs(p.volume_l[0] - feedStartVolumes[vessel.id]) <= 1e-8, 'Unexpected fed-batch starting volume');
+        assert.equal(p.cumulative_feed_l[0], 0);
+        p.volume_l.forEach((volume, index) => {
+          assert.ok(volume <= volumeEnvelopes[vessel.id] + 1e-8, 'Fed-batch volume exceeds the vessel envelope');
+          assert.ok(Math.abs(volume - (p.volume_l[0] + p.cumulative_feed_l[index])) <= 2e-8, 'Fed-batch volume balance does not close');
+          if (index === 0) return;
+          const step = volume - p.volume_l[index - 1];
+          assert.ok(step >= -1e-12, 'Fed-batch volume must not decrease');
+          const rise = p.liquid_height_m[index] - p.liquid_height_m[index - 1];
+          assert.ok(step > 1e-12 ? rise > 0 : Math.abs(rise) <= 1e-9, 'Liquid level must follow the volume steps');
+        });
+        assert.ok(p.volume_l.at(-1) > p.volume_l[0], 'Fed-batch scenario must add at least one bolus');
+      } else {
+        assert.equal(p.flow_model, 'excluded', 'Perfusion replay must exclude stream heat');
+        assert.ok(p.volume_l.every(volume => volume === vessel.volume_l), 'Perfusion volume must remain fixed');
+        assert.ok(p.liquid_height_m.every(height => Math.abs(height - g.liquid_height_m) <= 1e-8), 'Fixed-volume fill changed');
+        assert.ok(p.cumulative_feed_l.every(value => value === 0), 'Perfusion replay contains nonzero cumulative_feed_l');
       }
       p.metabolic_heat_w.forEach((heat, index) => {
         const expected = p.vcd_million_ml[index] * p.volume_l[index] * p.specific_heat_pw_cell * 1e-3;
@@ -139,7 +165,7 @@ export function checkBenchResults(directory = 'public/bench-heating') {
   assert.ok(Array.isArray(manifest.files));
   const permitted = new Set(['index.html', 'README.md']);
   for (const vessel of Object.keys(volumes)) {
-    for (const folder of ['', '/fed_batch', '/perfusion']) {
+    for (const folder of ['', '/fed_batch_cold_feed', '/fed_batch_warm_feed', '/perfusion']) {
       for (const figure of ['vessel_3d', 'temperature_over_time']) {
         for (const format of ['png', 'svg']) permitted.add(`${vessel}${folder}/${figure}.${format}`);
       }
@@ -179,5 +205,5 @@ export function checkBenchResults(directory = 'public/bench-heating') {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const result = checkBenchResults(process.argv[2]);
-  console.log(`PASS: ${result.vessels} bench vessels, ${result.scenarios} scenarios, ${result.files} allowlisted assets, checksums, aligned frames, and fixed-volume culture replays (${(result.bytes / 1e6).toFixed(1)} MB).`);
+  console.log(`PASS: ${result.vessels} bench vessels, ${result.scenarios} scenarios, ${result.files} allowlisted assets, checksums, aligned frames, bolus fed-batch volume balances, and fixed-volume perfusion (${(result.bytes / 1e6).toFixed(1)} MB).`);
 }
