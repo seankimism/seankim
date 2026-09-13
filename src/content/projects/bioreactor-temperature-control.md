@@ -243,6 +243,8 @@ The high-density perfusion profile also remains within the hold band at both ben
   <figcaption>Fixed-volume replay of the same Zhang BRX#A profile used at 2,000 L. Both bench cases complete all 28 days with positive heater power and zero active cooling. These are idealized thermal responses with prescribed biology; the small calculated errors are not claims about sensor accuracy or real equipment performance.</figcaption>
 </figure>
 
+The 3D playback below shows simulated temperature changes during fed-batch and perfusion across the three vessel scales.
+
 <figure class="xdr-explorer">
   <iframe src="/bench-heating/index.html?v=8e6b3425b248#vessel=applikon3l&mode=controlled" title="Temperature simulation viewer: warm-up, fed-batch with feed boluses, and perfusion for the 3 L, ambr 250, and XDR-2000 vessels with 3D vessel playback" width="800" height="1700" loading="lazy" data-content-height></iframe>
   <figcaption><a href="/bench-heating/index.html?v=8e6b3425b248#vessel=applikon3l&mode=controlled" target="_blank" rel="noopener noreferrer">Open the simulation viewer in a full window ↗</a></figcaption>
@@ -250,15 +252,15 @@ The high-density perfusion profile also remains within the hold band at both ben
 
 ## Feeding: when the culture volume changes
 
-The comparisons above keep each culture at a fixed volume so that cell heat is the only changing load. A real fed-batch adds feed, and each addition changes three things at once: the amount of medium being heated, the vessel surface in contact with it, and the temperature of the culture, because the feed arrives colder than 36.5 °C. The model now handles that. Each bolus is applied as an instantaneous, well-mixed addition: the plant is rebuilt at the new volume, the culture temperature becomes the volume-weighted mix of culture and feed, the wall-band temperatures are remapped onto the new liquid level, and the controller carries on from its current state. The cell inventory stays fixed at the source density times the starting volume, so a cell-free bolus dilutes the density without adding cells.
+Feed additions increase culture volume and briefly cool the medium. The figure below compares the temperature response to the day-6 bolus in the 14-day NISTCHO fed-batch simulation across the ambr 250, 3 L glass vessel, and XDR-2000. Blue curves show feed added at 4 °C; orange curves show feed at 20 °C.
 
-The scenario is the same at every scale: a 14-day NISTCHO fed-batch with cell-free boluses of 3 % of the starting volume every other day from day 2 to day 12, once with feed straight from the fridge at 4 °C and once at room temperature, 20 °C. The ambr 250 starts at 180 mL (5.4 mL boluses), the 3 L vessel at 2 L (60 mL), and the XDR-2000 at 1,500 L (45 L).
+At the same feed-to-culture volume ratio, the modeled temperature drop is the same at every scale: about 0.89 °C for 4 °C feed and 0.45 °C for 20 °C feed. Recovery takes longer in the XDR-2000. Both bench vessels return to the ±0.2 °C target band in about 15 minutes with 4 °C feed and 10 minutes with 20 °C feed, compared with 35 and 20 minutes in the XDR-2000. Warmer feed therefore reduces both the initial dip and the time outside the band in these simulations.
 
 <figure class="xdr-figure">
   <a href="/fedbatch-feed/feed_scale_comparison.png?v=ba06524b20ad" target="_blank" rel="noopener noreferrer" aria-label="Open the three-scale feed bolus comparison at full size">
-    <img src="/fedbatch-feed/feed_scale_comparison.png?v=ba06524b20ad" alt="Three panels comparing the day-6 feed bolus in the ambr 250, the 3 L vessel, and the XDR-2000. Culture temperature drops about 0.95 degrees for 4 degree feed and 0.48 degrees for 20 degree feed in every vessel, then recovers within 10 to 15 minutes at bench scale and 20 to 35 minutes at 2,000 L." width="2376" height="827" loading="lazy" decoding="async" />
+    <img src="/fedbatch-feed/feed_scale_comparison.png?v=ba06524b20ad" alt="Three panels comparing the day-6 feed bolus in the ambr 250, the 3 L vessel, and the XDR-2000. Culture temperature drops about 0.89 degrees for 4 degree feed and 0.45 degrees for 20 degree feed in every vessel, then returns to the target band in about 15 and 10 minutes at bench scale, respectively, versus 35 and 20 minutes in the XDR-2000." width="2376" height="827" loading="lazy" decoding="async" />
   </a>
-  <figcaption>The day-6 bolus at all three scales. The initial drop is a volume ratio, so it is the same everywhere: a 3 % bolus 32.5 °C colder than the culture lowers it by 0.03/1.03 × 32.5 ≈ 0.95 °C, and by 0.48 °C for 20 °C feed. Recovery is where scale shows: the bench elements act on the wall directly and return the culture to the ±0.2 °C band in 10–15 minutes, while the 2,000 L jacket path takes 20–35 minutes and is limited by the 40 °C jacket ceiling rather than by TCU power. Later boluses dilute into a larger volume, so the drop shrinks from 0.95 to 0.83 °C by day 12.</figcaption>
+  <figcaption>Day-6 feed addition at time zero; dashed line: 36.5 °C setpoint; shaded region: ±0.2 °C band. Arrows mark approximate times to re-enter the band. Each cell-free bolus is 3 % of starting volume: 5.4 mL for 180 mL, 60 mL for 2 L, and 45 L for 1,500 L. Feeds occur every other day from day 2 to day 12, so two earlier additions have increased the volume by 6 % before this event. The model assumes instantaneous, complete mixing.</figcaption>
 </figure>
 
 ## Why cooling becomes a scale-up requirement
