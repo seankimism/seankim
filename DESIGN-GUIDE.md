@@ -26,7 +26,7 @@ All styles are defined in `src/styles/global.css`. No inline `<style>` allowed i
 | Class | Description |
 |-------|-------------|
 | `site-shell` | Two-column grid, collapses below 1024px |
-| `sidebar`, `profile-*`, `social-link`, `resume-link` | Sticky profile sidebar |
+| `sidebar`, `profile-*`, `social-link` | Sticky profile sidebar |
 | `navbar`, `nav-links`, `nav-link` | Top navigation with active indicator |
 | `main-content`, `main-body` | Scrollable content column |
 | `footer`, `footer-actions`, `theme-toggle` | Site footer |

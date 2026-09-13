@@ -4,11 +4,11 @@ Prepared 2026-09-09.
 
 ## Source priorities
 
-- `Sean_Kim_Resume.pdf`: current professional titles, dates, responsibilities, results, and Purdue GPA.
+- `Sean_Kim_Resume.pdf` (reference only; not distributed): current professional titles, dates, responsibilities, results, and Purdue GPA.
 - `Sean_Kim_CV.pdf`: education, academic research, teaching, qualifications, honors, talks, bibliography, and patent filings.
 - Publisher and DOI metadata: bibliographic titles, author lists, publication years, and article links.
 
-The supplied PDFs were used as references when creating the site. The online CV combines the résumé's professional experience with the academic CV's qualifications. The academic CV PDF was removed from the website at the user's request; the sidebar résumé download remains available. The CV page presents the online record without PDF download buttons or the former comparison note.
+The supplied PDFs were used as references when creating the site. The online CV combines the résumé's professional experience with the academic CV's qualifications. Neither PDF is distributed from the website: the academic CV PDF was removed at the user's request, and the sidebar résumé download was removed on 2026-09-12 as redundant with the online CV. The CV page presents the online record without PDF download buttons or the former comparison note.
 
 Professional title/date precedence: Lonza Lead Scientist, Upstream R&D (September 2026–Present); Ark Staff Bioprocess Engineer (February–September 2026); Ark Senior Bioprocess Engineer (December 2023–January 2026). The older CV's Staff Computational Bioprocess Engineer title/current status and January 2024 Senior start were not used.
 
@@ -33,7 +33,7 @@ Minor author-name normalization follows DOI records: Alikhan B. Fidai, Donghwan 
 
 ## Project summaries
 
-The two write-ups summarize documented personal contributions. `Past work` does not claim the employer's entire project is finished. The combined Ark project covers hybrid bioreactor digital twins, AMBR250 scale-down modeling, and process optimization. It uses 2026, reflecting the Staff role under which the résumé lists the main contributions, rather than the entire Ark employment period. The digital-twin work does not claim a deployed autonomous controller, validated prediction accuracy, or an open-source code release. The AMBR250 titer improvement (40%) and 15 kL yield improvement (10%) remain separate process-development results, without attributing them to the digital twin; no baselines or validation statistics were invented.
+The two write-ups summarize documented personal contributions. `Past work` does not claim the employer's entire project is finished. The combined Ark project covers hybrid bioreactor digital twins, AMBR250 scale-down modeling, and process optimization. It uses 2026, reflecting the Staff role under which the résumé lists the main contributions, rather than the entire Ark employment period. The digital-twin work does not claim a deployed autonomous controller, validated prediction accuracy, or an open-source code release. Employer-specific figures from the résumé (production-bioreactor volumes, percentage titer and yield improvements, program counts, and the closed-loop control claim) are generalized on the public site as of 2026-09-12. The titer and yield improvements remain separate process-development results, without attributing them to the digital twin; no baselines or validation statistics were invented.
 
 Cartilage mechanics, disc-support finite element modeling, and meniscus bioreactor work are identified as related but distinct research efforts. Future projects can be added through the existing content structure; no speculative commitments have been published.
 

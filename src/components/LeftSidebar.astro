@@ -27,6 +27,5 @@ const bio = (await getEntry("bio", "bio"))!.data;
     <div class="profile-socials">
       {SOCIALS.filter(s => s.isActive).map(s => <a class="social-link" href={s.href} aria-label={s.linkTitle} title={s.linkTitle} target={s.name === 'Mail' ? undefined : '_blank'} rel="noopener noreferrer"><Icon name={SOCIAL_ICONS[s.name]} size={21} /></a>)}
     </div>
-    <a class="resume-link" href={withBase('/files/Sean_Kim_Resume.pdf')} target="_blank" rel="noopener noreferrer"><Icon name="ExternalLink" size={16} /> Resume <span class="file-label">PDF</span></a>
   </div>
 </aside>

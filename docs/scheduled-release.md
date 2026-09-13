@@ -34,4 +34,4 @@ To cancel, disable **Scheduled portfolio merge** in GitHub Actions or close pull
 
 To reschedule, update both the cron expression in `.github/workflows/scheduled-merge.yml` and the `notBefore`/`expiresAt` timestamps in `.github/scheduled-release.json`. Update `displayTime` to match. The release window is limited to 24 hours. Keep the timezone conversion in mind: September's Eastern time is UTC-4.
 
-The draft retains the original **September 2026** employment start month. The publication date controls when the content becomes visible, not the employment dates in the CV or Resume.
+The draft retains the original **September 2026** employment start month. The publication date controls when the content becomes visible, not the employment dates in the CV.
