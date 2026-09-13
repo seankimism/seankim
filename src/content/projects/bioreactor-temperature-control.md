@@ -250,7 +250,7 @@ The 3D playback below shows simulated temperature changes during fed-batch and p
   <figcaption><a href="/bench-heating/index.html?v=8e6b3425b248#vessel=applikon3l&mode=controlled" target="_blank" rel="noopener noreferrer">Open the simulation viewer in a full window ↗</a></figcaption>
 </figure>
 
-## Feeding: when the culture volume changes
+## Feeding: temperature drop and recovery
 
 Feed additions increase culture volume and briefly cool the medium. The figure below compares the temperature response to the day-6 bolus in the 14-day NISTCHO fed-batch simulation across the ambr 250, 3 L glass vessel, and XDR-2000. Blue curves show feed added at 4 °C; orange curves show feed at 20 °C.
 
