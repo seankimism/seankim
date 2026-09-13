@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Explore how proportional gain and integral time change the simulated temperature response of a single-use bioreactor.">
+  <meta name="description" content="Simulated effects of proportional gain and integral time on temperature control in a single-use bioreactor.">
   <title>Tune the temperature controller</title>
   <link rel="stylesheet" href="./explorer.css">
 </head>
@@ -12,7 +12,7 @@
     <header class="intro">
       <p class="eyebrow"><span aria-hidden="true"></span>Temperature control explorer</p>
       <h1>Tune the temperature controller</h1>
-      <p>Adjust the outer culture controller and compare heating only with active heating and cooling. The inner jacket controller stays fixed.</p>
+      <p>The plots compare heating-only and heating–cooling responses at different outer culture-controller settings. The inner jacket-controller tuning remains fixed.</p>
     </header>
 
     <section class="control-card" aria-label="Controller settings">
@@ -27,13 +27,13 @@
           <div class="gain-heading"><label for="p-gain">Proportional gain <span>P</span></label><output id="p-value" for="p-gain">—</output></div>
           <input id="p-gain" class="range" type="range" min="0" max="6" step="1" value="3" disabled aria-describedby="p-help p-scale">
           <div class="range-ends" id="p-scale"><span>0.25× baseline</span><span>3× baseline</span></div>
-          <p id="p-help" class="help">Higher P makes a larger adjustment for the same temperature error.</p>
+          <p id="p-help" class="help">Increasing P produces a larger control adjustment for a given temperature error.</p>
         </div>
         <div class="gain-field">
           <div class="gain-heading"><label for="i-gain">Integral time <span>T<sub>i</sub></span></label><output id="i-value" for="i-gain">—</output></div>
           <input id="i-gain" class="range" type="range" min="0" max="6" step="1" value="3" disabled aria-describedby="i-help i-scale">
           <div class="range-ends" id="i-scale"><span>0.25× baseline</span><span>3× baseline</span></div>
-          <p id="i-help" class="help">Lower T<sub>i</sub> means stronger integral action on persistent temperature error.</p>
+          <p id="i-help" class="help">Decreasing T<sub>i</sub> strengthens integral action on persistent temperature error.</p>
         </div>
       </div>
       <div class="presets"><span>Illustrative settings</span><button type="button" data-preset="gentle" disabled>Gentle</button><button type="button" data-preset="baseline" disabled aria-pressed="true">Baseline</button><button type="button" data-preset="aggressive" disabled>Aggressive</button><button type="button" id="reset" class="text-button" disabled>Reset tuning</button></div>

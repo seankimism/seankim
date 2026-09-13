@@ -11,10 +11,10 @@ researchAreas:
     description: "Scaffold mechanics, cell behavior, and bioreactor design for tissue quality and manufacturing reproducibility."
 ---
 
-I am a bioprocess engineer who uses physics-based models and experiments to make cell-based manufacturing predictable and reproducible. My work spans upstream process development, computational modeling, and tissue engineering, and the common thread is understanding the mechanisms behind a process well enough to control it.
+I am a bioprocess engineer working in upstream process development, computational modeling, and tissue engineering. I combine physics-based models with experiments to understand the mechanisms that govern cell-based manufacturing and improve process control and reproducibility.
 
-In upstream development, I have worked from benchtop to manufacturing scale on problems ranging from media optimization to reactor design. I build cell culture processes and scale-down models, and I use them to characterize processes and transfer them between scales. Alongside that experimental work, I build hybrid modeling frameworks that combine first-principles biophysics with machine learning to simulate bioreactor behavior and guide scale-up decisions.
+My upstream development work includes media optimization, reactor design, and cell culture process development from benchtop to manufacturing scale. I use scale-down models to characterize culture conditions and support process transfer between scales. In parallel, I develop hybrid models that combine first-principles biophysics with machine learning to simulate bioreactor behavior and evaluate scale-up conditions.
 
-My tissue engineering research examines how cell source, cell behavior, and scaffold mechanics shape engineered constructs. That work informs manufacturing methods, design controls, and bioreactor designs for producing engineered tissues with consistent quality.
+My tissue engineering research examines how cell source, cell behavior, and scaffold mechanics affect the properties of engineered constructs. These relationships inform manufacturing methods, design controls, and bioreactor designs for improving tissue quality and reproducibility.
 
-I earned a B.S. in Mechanical Engineering at Purdue University, then an M.S. and Ph.D. in Mechanical and Aerospace Engineering at Cornell University, where I researched mechanically informed design controls for tissue-engineered cartilage.
+I earned a B.S. in Mechanical Engineering at Purdue University and an M.S. and Ph.D. in Mechanical and Aerospace Engineering at Cornell University. My doctoral research investigated mechanically informed design controls for tissue-engineered cartilage.

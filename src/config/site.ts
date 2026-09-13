@@ -3,7 +3,7 @@ import type { SiteConfig, ThemeConfig, AnalyticsConfig } from "../types";
 export const SITE: SiteConfig = {
     website: "https://seankimism.github.io/",
     author: 'Byumsu “Sean” Kim',
-    desc: "Sean Kim works across upstream bioprocess development, process analytical technology, computational modeling, and tissue engineering.",
+    desc: "Sean Kim is a bioprocess engineer specializing in upstream process development, process analytical technology, computational modeling, and tissue engineering.",
     title: "Sean Kim",
     favicon: "/favicon.svg",
 };
