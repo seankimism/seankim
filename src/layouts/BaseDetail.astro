@@ -1,6 +1,7 @@
 ---
 import { getEntry, render } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
+import { SITE } from '../config';
 import { withBase } from '../utils/paths';
 interface Props { collection: 'projects' | 'publications'; id: string; }
 const { collection, id } = Astro.props;
@@ -9,8 +10,30 @@ const { Content } = await render(entry);
 const data = entry.data;
 const project = collection === 'projects';
 const paper = 'author' in data ? data : null;
+// Structured data: the page as a scholarly article or article, plus its breadcrumb trail.
+const site = Astro.site || SITE.website;
+const absolute = (path: string) => new URL(withBase(path), site).href;
+const pageURL = absolute(`/${collection}/${id}/`);
+const me = { '@type': 'Person', '@id': `${absolute('/')}#person`, name: 'Byumsu Sean Kim', url: absolute('/') };
+const breadcrumb = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+  { '@type': 'ListItem', position: 1, name: 'Home', item: absolute('/') },
+  { '@type': 'ListItem', position: 2, name: project ? 'Projects' : 'Publications', item: absolute(`/${collection}/`) },
+  { '@type': 'ListItem', position: 3, name: data.title, item: pageURL },
+] };
+const article = paper
+  ? { '@context': 'https://schema.org', '@type': 'ScholarlyArticle', '@id': pageURL, headline: paper.title, url: pageURL, mainEntityOfPage: pageURL,
+      author: paper.author.split(/,\s*/).map(name => name === 'Byumsu Kim' ? me : { '@type': 'Person', name }),
+      datePublished: String(paper.year),
+      isPartOf: { '@type': paper.category === 'chapter' ? 'Book' : 'Periodical', name: paper.journal },
+      ...(paper.description && { description: paper.description }),
+      ...(paper.doi && { identifier: { '@type': 'PropertyValue', propertyID: 'DOI', value: paper.doi } }),
+      ...(paper.external_url && { sameAs: paper.external_url }),
+      ...(paper.image && { image: absolute(paper.image) }) }
+  : { '@context': 'https://schema.org', '@type': 'Article', '@id': pageURL, headline: data.title, description: data.description, url: pageURL, mainEntityOfPage: pageURL,
+      author: me, ...(data.tags.length > 0 && { keywords: data.tags.join(', ') }),
+      ...('organization' in data && { sourceOrganization: { '@type': 'Organization', name: data.organization } }) };
 ---
-<BaseLayout title={data.title} description={data.description} ogType="article">
+<BaseLayout title={data.title} description={data.description} ogType="article" ogImage={paper?.image} ogImageAlt={paper?.imageAlt} jsonLd={[article, breadcrumb]}>
   <a class="detail-back" href={withBase(`/${collection}/`)}>← All {collection}</a>
   <article><h1 class="detail-heading">{data.title}</h1>
   <div class="detail-meta">
@@ -19,7 +42,11 @@ const paper = 'author' in data ? data : null;
     {data.tags.length > 0 && <ul class="topic-list" aria-label="Topics">{data.tags.map(tag => <li>{tag}</li>)}</ul>}
   </div>
   {paper?.external_url && <div class="detail-links"><a class="download-button" href={paper.external_url} target="_blank" rel="noopener noreferrer">{paper.category === 'preprint' ? 'Read preprint' : 'Read publication'} ↗</a></div>}
-  <div class="prose"><Content /></div>
+  <div class="prose">
+    {paper?.description && <p>{paper.description}</p>}
+    {paper?.image && <figure class="xdr-figure"><a href={paper.external_url} target="_blank" rel="noopener noreferrer" aria-label="Open the publication"><img src={withBase(paper.image)} alt={paper.imageAlt ?? ''} width={paper.imageWidth} height={paper.imageHeight} loading="lazy" decoding="async" /></a></figure>}
+    <Content />
+  </div>
   {paper && <section class="detail-citation"><h2>Citation</h2><p>{paper.author} ({paper.year}). {paper.title}. {paper.journal}{paper.citation ? `, ${paper.citation}` : ''}.{paper.doi && <> <a href={paper.external_url}>doi:{paper.doi}</a></>}</p></section>}
   </article>
 </BaseLayout>

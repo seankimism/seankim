@@ -16,5 +16,5 @@ export default defineConfig({
   trailingSlash: 'always',
   markdown: { remarkPlugins: [remarkMath], rehypePlugins: [rehypeKatex, [rehypeBasePath, { base }]] },
   vite: { plugins: [tailwindcss()] },
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: page => !page.includes('/projects/xdr2000-heat-transfer/') })],
 });
