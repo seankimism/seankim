@@ -24,7 +24,6 @@ Agitation influences the distribution of feed additions and heat within a biorea
     <li><a href="#feeding-and-changing-liquid-volume">Continuous and bolus feeds</a></li>
     <li><a href="#the-original-well-mixed-baseline">Original well-mixed baseline</a></li>
     <li><a href="#conclusion-and-next-steps">Conclusion and next steps</a></li>
-    <li><a href="#validation-and-animation-gallery">Validation and animation gallery</a></li>
   </ol>
 </nav>
 
@@ -438,13 +437,3 @@ The well-mixed Applikon model approached 36.5 °C from below and satisfied the s
 The well-mixed model provides a useful first estimate of bulk heating when heat redistribution is fast relative to the heating process. In the agitated PI-controlled cases, the well-mixed and liquid-cell models both reached the bulk settling criterion, although finite mixing delayed settling. The acceptability of this delay depends on the temperature and timing tolerances of the process. Agreement in bulk temperature did not ensure that the entire liquid reached the target temperature. A liquid mesh is therefore useful for examining cold regions, heating without agitation and local cooling after feed addition. The reliability of these predictions depends on the assumed mixing, buoyant circulation and wall heat transfer, in addition to mesh resolution.
 
 I plan to extend this analysis to dissolved oxygen (DO) and nutrient distributions. Local gas transfer, feed addition and cellular consumption may sustain concentration gradients even when temperature is nearly uniform. The next step is to include these sources and sinks in the liquid-cell model, followed by coupling to a mechanistic cell-line model. This would allow me to examine when bulk measurements represent the conditions experienced by cells, and whether the magnitude and duration of local gradients could influence growth, metabolism and productivity.
-
-<span id="validating-each-vessel"></span>
-
-## Validation and animation gallery
-
-The mixing parity plots assess agreement with the fitted literature values. Several values were read from charts, and XDR-200 and AMBR each contribute one selected point. Differences in vessel geometry, internals, tracer method and injection location limit transfer to new conditions. The nominal AMBR inputs also combine two sources, which remains a limitation of that calibration. Independent measurements are needed to evaluate predictive performance.
-
-I checked energy and volume conservation, geometric consistency, solver tolerances, feed-event timing and controller continuity. These checks assess the numerical implementation of the stated equations. Experimental measurements at multiple positions and liquid fills are still required to validate mixing, thermal transport and local feed responses. In particular, the assumed wall-driven circulation and the coarse feed mesh require further evaluation before using the predicted agitation-off fields or local temperature extremes to guide operating decisions.
-
-[Open all thermal animations and figures](/agitation-thermal/index.html) to compare fixed-boundary heating, PI control and top feeding across vessels.
