@@ -2,6 +2,7 @@
 title: "Bioreactor agitation and mixing"
 description: "Agitation and mixing calibration, spatial heating, mesh sensitivity and temperature recovery during feeding across cell-culture bioreactors."
 organization: "Independent project"
+publishedDate: "2026-09-14"
 period: "2026-present"
 tags: ["Agitation", "Mixing time", "Heat transfer", "Scale-up"]
 order: 0

@@ -3,13 +3,10 @@ import { getEntry, getCollection, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { SOCIALS } from "../config";
 import { withBase } from "../utils/paths";
-import { isPublished } from "../utils/content";
+import { selectNewestProjects } from "../utils/project-selection.mjs";
 const bio = (await getEntry('bio','bio'))!;
 const { Content } = await render(bio);
-// One project per organization: the newest (lowest `order`, matching the Projects page) is shown,
-// and organizations are listed in the order of their newest project.
-const allProjects = (await getCollection('projects')).filter(isPublished).sort((a,b) => a.data.order-b.data.order);
-const projects = allProjects.filter((p, i) => allProjects.findIndex(q => q.data.organization === p.data.organization) === i);
+const projects = selectNewestProjects(await getCollection('projects'));
 const papers = (await getCollection('publications')).filter(p => p.data.featured).sort((a,b) => b.data.year-a.data.year);
 const linkedIn = SOCIALS.find(link => link.name === 'LinkedIn' && link.isActive);
 ---

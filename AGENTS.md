@@ -26,7 +26,7 @@
 - **No `<style>` in `.astro` files** - Use global.css classes
 - **Two-column layout:** Left sidebar (sticky profile), right main (scrollable content)
 - **Markdown-driven:** All content in `.md` files with YAML frontmatter; project pages may use inline HTML for figures and cards
-- **Projects on the About page** are selected automatically: the lowest `order` per `organization`
+- **Projects on the About page** are selected automatically: the newest `publishedDate` per `organization`, excluding drafts. The separate Projects listing retains its manual `order`.
 - **Drafts:** a project with `draft: true` renders in `npm run dev` but is excluded from production builds, listings, and the sitemap (`src/utils/content.ts`)
 - **Theme config:** `THEME_CONFIG` selects the light and dark palettes from `themes.ts`
 

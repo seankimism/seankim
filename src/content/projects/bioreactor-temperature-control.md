@@ -2,6 +2,7 @@
 title: "Bioreactor temperature control: from bench to 2,000 L"
 description: "An investigation of how vessel scale, metabolic heat, and feed additions affect culture temperature and cooling requirements from bench scale to 2,000 L."
 organization: "Independent project"
+publishedDate: "2026-09-11"
 period: "2026–present"
 tags: ["Temperature control", "Bioreactor modeling", "Scale-up"]
 order: -1

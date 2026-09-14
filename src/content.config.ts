@@ -19,6 +19,8 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(), description: z.string(), organization: z.string(),
     period: z.string(),
+    /** Publication of the project page, independent of research period or routine edits. */
+    publishedDate: z.coerce.date(),
     tags: z.array(z.string()).default([]), order: z.number(),
     /** Drafts render in `npm run dev` but are left out of production builds. */
     draft: z.boolean().default(false),

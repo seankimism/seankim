@@ -2,6 +2,7 @@
 title: "Mechanics-informed tissue engineering"
 description: "Investigating how scaffold mechanics, cell behavior, and bioreactor design influence the manufacture of engineered tissues."
 organization: "Cornell University"
+publishedDate: "2026-09-09"
 period: "2019–2023"
 tags: ["Biomechanics", "Biofabrication", "Finite element analysis", "Bioreactor design"]
 order: 3
