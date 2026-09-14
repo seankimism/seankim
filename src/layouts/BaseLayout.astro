@@ -109,6 +109,26 @@ const jsonLdBlocks = [person, ...extraJsonLd];
       }
       document.addEventListener('astro:page-load', connectThemeToggle);
     </script>
+    <script>
+      // Delegation survives Astro page swaps without reconnecting each player.
+      document.addEventListener('click', (event) => {
+        if (!(event.target instanceof Element)) return;
+        const button = event.target.closest('.youtube-player__button');
+        if (!(button instanceof HTMLButtonElement)) return;
+        const player = button.closest<HTMLElement>('.youtube-player[data-youtube-id]');
+        const videoId = player?.dataset.youtubeId;
+        if (!player || !videoId || !/^[A-Za-z0-9_-]{11}$/.test(videoId)) return;
+        const frame = document.createElement('iframe');
+        frame.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
+        frame.title = player.dataset.youtubeTitle || 'Bioreactor simulation';
+        frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        frame.allowFullscreen = true;
+        frame.referrerPolicy = 'strict-origin-when-cross-origin';
+        frame.tabIndex = 0;
+        player.replaceChildren(frame);
+        frame.focus();
+      });
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
