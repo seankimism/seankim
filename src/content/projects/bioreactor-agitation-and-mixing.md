@@ -5,6 +5,7 @@ organization: "Independent project"
 period: "2026-present"
 tags: ["Agitation", "Mixing time", "Scale-up"]
 order: 0
+draft: true
 ---
 
 Agitation controls the dispersion of additions and the transfer of mechanical energy to the culture. However, matching rotational speed across vessel sizes does not preserve power per volume, tip speed, or mixing time, and the correlations used to predict mixing time were developed for geometries that differ from tall, unbaffled cell-culture vessels. As such, the objective of this project was to compare these quantities across cell-culture bioreactors and to examine whether a common mixing-time correlation, with a circulation factor calibrated for each vessel, recaptures literature mixing times. I (i) calculated power per volume, tip speed, Reynolds number, and dissipation scales for each vessel, (ii) fitted a circulation factor per vessel against 26 literature mixing times from 11 vessels, and (iii) compared this vessel-specific calibration against a single global factor.

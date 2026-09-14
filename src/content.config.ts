@@ -20,6 +20,8 @@ const projects = defineCollection({
     title: z.string(), description: z.string(), organization: z.string(),
     period: z.string(),
     tags: z.array(z.string()).default([]), order: z.number(),
+    /** Drafts render in `npm run dev` but are left out of production builds. */
+    draft: z.boolean().default(false),
   }),
 });
 const bio = defineCollection({
