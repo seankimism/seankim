@@ -1,0 +1,427 @@
+{
+  "version": "sean-kim-model-figure-v4",
+  "attribution": "Sean Kim · seankimism.github.io/seankim",
+  "scope": "Original modeling figures; excludes published-paper illustrations, portraits and video posters",
+  "files": {
+    "agitation-thermal/figures/ambr250_200ml_10s_sensitivity_time_series.svg": {
+      "source_sha256": "49fee13d52a461454d194cd83b74f6ebd89d6b20e58c7a3d63195904255862e2",
+      "sha256": "ddf2b034ea1ef62f51ae45a2dfeb9594e9aa9bd1f2f6017bb2d263f748559ee8",
+      "bytes": 51643
+    },
+    "agitation-thermal/figures/ambr250_200ml_comparison.svg": {
+      "source_sha256": "202f8a007420681260d5e900613d4110155ce020c770928440cd49bbc2fd5f5c",
+      "sha256": "4e3c450ac5bf496f7a88d475e32e8a0d66715f8556dbc1ef01b030d4dc66de65",
+      "bytes": 222773
+    },
+    "agitation-thermal/figures/ambr250_200ml_vertical_cross_sections.svg": {
+      "source_sha256": "534663b6e32fb94df10b1985af711608a41df69274ca0c0385696e51f3458644",
+      "sha256": "43257407d54d02c21db14354f916468f0146e99a99448ad4b4edfcf8c6fc3d34",
+      "bytes": 706779
+    },
+    "agitation-thermal/figures/ambr250_200ml_vertical_time_montage.png": {
+      "source_sha256": "99294c84b99cc4416b22a2e598c52b24a4734b57c9518aa1488d82ef0ecca6c6",
+      "sha256": "9dba20bceab47c57e0c906a08ea8b2147da0866878b7a32477e62ec3f08c845f",
+      "bytes": 588344
+    },
+    "agitation-thermal/figures/ambr250_200ml_warmup_time_series.svg": {
+      "source_sha256": "6140ab9d9b17b76461a2f303c363dee1fb946d6e6f15409c8a76a2c2fc0ebd8b",
+      "sha256": "868076805aedf0cc1072ae13f2f8b940a4fe3faaabbb57cb04c83b9f58d28fad",
+      "bytes": 134909
+    },
+    "agitation-thermal/figures/applikon3l_2l_sensitivity_time_series.svg": {
+      "source_sha256": "7dc33d9ba993547b30227f3c1b2011131a02497b54bab3f95e976778f4709293",
+      "sha256": "d2ab3a630eda921f3574db88209ae5e49969502c923e2aa632628c37bbb084ac",
+      "bytes": 137726
+    },
+    "agitation-thermal/figures/initial_mesh_cost_bulk_accuracy.svg": {
+      "source_sha256": "e0c154c031a09d724cee08220bf89ef7f7b1f3a2eb7a38175ffa945777fbaec7",
+      "sha256": "ffa7cd387f62940e7e97cc1c86718b570a3bc840a25f17c7ee40e6c3602caf9c",
+      "bytes": 53640
+    },
+    "agitation-thermal/figures/initial_mesh_cost_spatial_accuracy.svg": {
+      "source_sha256": "64e8d83a55521b91752ef28d270a1015dd86d9c5e348e3d8ae0d259252c8cf2d",
+      "sha256": "fa2bc4c2d2a0d8c50536425355e31cf092e29e162f1f9a4ce0653e5121fbccc2",
+      "bytes": 83780
+    },
+    "agitation-thermal/figures/initial_mesh_runtime_vs_cells.svg": {
+      "source_sha256": "d684de1eda4f55d16cfdc0ade74b5565ba266e40b98b858c67c6dec39b27014c",
+      "sha256": "431049304b5640f5fcb49fd42aace3460fa9a3a4413b37d354d5b3db8ed1fa60",
+      "bytes": 109519
+    },
+    "agitation-thermal/figures/large_mesh_directional_checks.svg": {
+      "source_sha256": "9587bbaa051b06ab8a3596af6eb8aa240bee4d25a33f0096979c02c94fd10520",
+      "sha256": "e38265785060393f313ea2269d38e6bbb9eda57f481f535bf893cef17ef4f182",
+      "bytes": 33719
+    },
+    "agitation-thermal/figures/liquid_uniform_comparison_fixed.svg": {
+      "source_sha256": "4870894230ca190e03f5be171d3a8128e7af2c65c1261238a01c3b3e6a6151cf",
+      "sha256": "ffa01bf606420587c01729366865e81a1a63dd5bcfef268fdb1693e2b02a1f44",
+      "bytes": 67403
+    },
+    "agitation-thermal/figures/liquid_uniform_comparison_pi.svg": {
+      "source_sha256": "0d587d31742d3abfd1cfa9952bcb065cc7a01a668fe52d0baa20e53bf723b34a",
+      "sha256": "195a97e22f101ef7a67d844934c39b1491fc3ed3b67807dd5ac4e9c91804a455",
+      "bytes": 66789
+    },
+    "agitation-thermal/figures/operating_mesh_cost_bulk_accuracy.svg": {
+      "source_sha256": "01de8c5e053b989c73e1c38897beeb286fea34ab9dc42ece923fd8e1c94893be",
+      "sha256": "0feb79bb0d93201a6acf783277c291ff4952046c62d9eb999047dfebdd6fee4a",
+      "bytes": 54423
+    },
+    "agitation-thermal/figures/operating_mesh_cost_spatial_accuracy.svg": {
+      "source_sha256": "9eae369773954e770e3f14abea5724dbf9aae4a80c0ace7c6d9c11f1f8269043",
+      "sha256": "d7431517db3deed13a087b0d540b1c2dc0bde08ed4a143164b09cc9a9c2e109e",
+      "bytes": 84574
+    },
+    "agitation-thermal/figures/operating_mesh_runtime_vs_cells.svg": {
+      "source_sha256": "9e09f126f02ff85bbb40e7753b917fe4c03d7c14907fb9f4bccdf22a6378994d",
+      "sha256": "cc85ff88aee7045aa6cea01b78b40f97929ad85c6843712c313aa26edae2086b",
+      "bytes": 109591
+    },
+    "agitation-thermal/figures/xdr2000_1000l_comparison.svg": {
+      "source_sha256": "7a91e135c59ffb8d76379d28402d7ae9e1d4ad7e54af47d52a9772cb7c23cb4d",
+      "sha256": "742aaf70d60f067db521bf1aa9a7dd1c199b8656b4bd157134f35a98025bf52b",
+      "bytes": 560121
+    },
+    "agitation-thermal/figures/xdr2000_1000l_vertical_cross_sections.svg": {
+      "source_sha256": "124cff565c7064c7c4c13630c91ca1d0ac385022d445992d6d2971cf272ba0dc",
+      "sha256": "0803edd2c82f571778f8cfd6c53f27b554e041d84b5d37e576da37a4580dc12b",
+      "bytes": 506605
+    },
+    "agitation-thermal/figures/xdr2000_1000l_vertical_time_montage.png": {
+      "source_sha256": "bcaff95fb557a2973e4fc32c552b66bdcb17af3e0c3213253ddf1a1061a7336c",
+      "sha256": "e8212d3fab689910b7acb6fb39c65b16d32acdea4ddf5d9dcdabef15f12c72d4",
+      "bytes": 325178
+    },
+    "agitation-thermal/figures/xdr2000_1000l_warmup_time_series.svg": {
+      "source_sha256": "30017bbb2638d1a7f58b0922536af4c284e092b586e2ee13f75233af861fe034",
+      "sha256": "a5a8aa595964214f35652cc5bca18bf97dc55a9c419fc138894d23430505d540",
+      "bytes": 432196
+    },
+    "agitation-thermal/figures/xdr2000_2000l_sensitivity_time_series.svg": {
+      "source_sha256": "4d0243ac8c2aebb57a091f6560dc10f49dab7f492848d0a574cf36cdb3bb6d53",
+      "sha256": "ba7fce7ee22e491debad9218a3594f004fcd3fcbef2e971e9068655c481824a1",
+      "bytes": 139193
+    },
+    "bench-heating/ambr250/fed_batch_cold_feed/temperature_over_time.png": {
+      "source_sha256": "e57b1b8a90b68e9c9d806dbb2c4ae2691e0adf3d288ee1109766d93862ce76f3",
+      "sha256": "4a3e172da43d3da7c16c6baab825f2bcc2b0b1302ecc3f2af19a7fe0882fb968",
+      "bytes": 312051
+    },
+    "bench-heating/ambr250/fed_batch_cold_feed/temperature_over_time.svg": {
+      "source_sha256": "0f87653b1fa7f2b9feb88ce465093e41f6ef77515d25d5f07e6b71c201b4bdc5",
+      "sha256": "e84458759ba070ab01b0797dc277e5d10cacef1ce8ab29f238db390032b8232b",
+      "bytes": 34255
+    },
+    "bench-heating/ambr250/fed_batch_cold_feed/vessel_3d.png": {
+      "source_sha256": "67b8ab2ea121b8d534d28e39f354a7707ea0e964ecfcd0551d9dc8ef720dc45d",
+      "sha256": "eaa5d2dc7c6892463d3f0048d81d7f056ba665a78f6f616de2420a033244b760",
+      "bytes": 428858
+    },
+    "bench-heating/ambr250/fed_batch_cold_feed/vessel_3d.svg": {
+      "source_sha256": "3958c74d86161f5f417fb64fa240e2b8f7ae3f1c5634d848d8754b58659b2abb",
+      "sha256": "201583585cac726f2126180e43a9c01a69e9bf82b8abcafc5ceef82b54022a80",
+      "bytes": 3147137
+    },
+    "bench-heating/ambr250/fed_batch_warm_feed/temperature_over_time.png": {
+      "source_sha256": "e4c51f115ae136e6f1beff8ce2a61ed6db98e9ad9302cbb1ee8c6bbb9e80d39e",
+      "sha256": "a86c6741fbcec302acf4dca6ab7da3d5d995a28ba9fd3912ab5163ff011ae596",
+      "bytes": 311770
+    },
+    "bench-heating/ambr250/fed_batch_warm_feed/temperature_over_time.svg": {
+      "source_sha256": "8181513c457ae4cb3509832e1cfa614d30e6f54d3bd535e25353c1e4bd69180d",
+      "sha256": "b040d7831198fcae37b1872b179d4f03cde788ba27a71a0523f3e0f49e210dad",
+      "bytes": 34910
+    },
+    "bench-heating/ambr250/fed_batch_warm_feed/vessel_3d.png": {
+      "source_sha256": "8c80a9a0e3727b281e25b8171fc0ea0644dcb194275df7aad629070174a280c7",
+      "sha256": "5b9f312ceffc08e66f440d9ad3cf156ab934eb0f4d9566a39db9c49736b862fb",
+      "bytes": 428253
+    },
+    "bench-heating/ambr250/fed_batch_warm_feed/vessel_3d.svg": {
+      "source_sha256": "2ef86b73853985efe6fbdc8bfdc6b040c58c98f44b64744bb79ebe3ad07a1421",
+      "sha256": "d63b5bd31ae22993b8f6e32d9ef544cd40d5cbe8b54beb549f45cf55feeb5ea7",
+      "bytes": 3147142
+    },
+    "bench-heating/ambr250/perfusion/temperature_over_time.png": {
+      "source_sha256": "ea2dd73f1e747ee9e45b1bb29db642e1abbdf6c207b55aac7c0bd8c9c1c1be10",
+      "sha256": "faf573ca51f349a60312af3bfbaeb3ae7d25ab638e87be2cb9a7900030edcdb8",
+      "bytes": 327354
+    },
+    "bench-heating/ambr250/perfusion/temperature_over_time.svg": {
+      "source_sha256": "de9e1be96d842757ba33204a43200a4fae6562321d8497c0a43f4d4f6b4ab666",
+      "sha256": "beed22218f4965e683cae2305575c8d15be91d4003bfb27746e987db25e97074",
+      "bytes": 31659
+    },
+    "bench-heating/ambr250/perfusion/vessel_3d.png": {
+      "source_sha256": "129fa7af583d9d58cfb5431e426bf39b34961ad1029cd4bb3d1f6f4ef90dd494",
+      "sha256": "3777bb88f4140c633d79b6fabbdbe7ef971f3c1f7b36581461b2112ca3d90be0",
+      "bytes": 423227
+    },
+    "bench-heating/ambr250/perfusion/vessel_3d.svg": {
+      "source_sha256": "389b2b6440147c2159e24a463687bc70169d79ec655ca996e3f3f14329d57bd7",
+      "sha256": "e14c497a255aebc0b17626d71d6ceb7e8158f0b3e25bb1488dfde7d5bd8ddd39",
+      "bytes": 3147122
+    },
+    "bench-heating/ambr250/temperature_over_time.png": {
+      "source_sha256": "b315a7c1e47cb5a2501e5476bd690549207e2200ede1d11e804a8a2776618ac9",
+      "sha256": "5e15b831b3720c2f14dfaff0ca8d75428f052e38a5a94f5c323900c226f9ccf9",
+      "bytes": 271714
+    },
+    "bench-heating/ambr250/temperature_over_time.svg": {
+      "source_sha256": "66910857ac0223d71992579ea4665f178c06b7d4411bb0ea25bea13670a350c4",
+      "sha256": "fd97d3e7a13982edb949533ea5e2d81547de586fd60f82069f81bc53e91757df",
+      "bytes": 87592
+    },
+    "bench-heating/ambr250/vessel_3d.png": {
+      "source_sha256": "3cfcb22e7978adc583ad4b83b6b02ff99326dfec066f254b85084b1acc5c602a",
+      "sha256": "dd9739f15abb6ad32f8abc53c4c1217055a2852456998bf034f9dcf0e4f1e2a1",
+      "bytes": 420618
+    },
+    "bench-heating/ambr250/vessel_3d.svg": {
+      "source_sha256": "07f4a21312b44bd35a655e071cdda679e0cacfabbdd86b996a1a8adc55446d42",
+      "sha256": "c5ebd83db46f0af519a59bb1fd70d6cb562e9dc8fd201c52eeecbc20690365bd",
+      "bytes": 3147084
+    },
+    "bench-heating/applikon3l/fed_batch_cold_feed/temperature_over_time.png": {
+      "source_sha256": "a48f66eda2b53ef5ed41caa6af3f0143de5c6a337f86064ffb66800f3a723b9d",
+      "sha256": "f92c418a482a3466e89571f4f48f9dbc3726d6058d8e64f6067bf6f447c82610",
+      "bytes": 324004
+    },
+    "bench-heating/applikon3l/fed_batch_cold_feed/temperature_over_time.svg": {
+      "source_sha256": "6782d71e97447c3ec94ac8080470719cd576af46e9dd18200d3d9e4d6ea2dde7",
+      "sha256": "8b9c4735b9fa1927c8107ca3be4a90e6c5f88863d2b40525a89dec3c3c0e35a7",
+      "bytes": 37254
+    },
+    "bench-heating/applikon3l/fed_batch_cold_feed/vessel_3d.png": {
+      "source_sha256": "49683470c1760f7219002af00681597f3657a500157d8ec578ba97b0c628940f",
+      "sha256": "9cdd05ffda3dab5590fd781b5c87a95b781c1a7ab5bc1215a8dac6f1564e1a52",
+      "bytes": 409066
+    },
+    "bench-heating/applikon3l/fed_batch_cold_feed/vessel_3d.svg": {
+      "source_sha256": "40cfd0f9c0d33b554e829c61827b2da5820a48a881b6e28313d307c5345418c5",
+      "sha256": "61ad97bcb7680e9a36a5b25eda806b28d59642b22d716f4122d8a03360c92013",
+      "bytes": 2988171
+    },
+    "bench-heating/applikon3l/fed_batch_warm_feed/temperature_over_time.png": {
+      "source_sha256": "977b58508fd38c8340397d84e3628cc67de24a43490545fdd131083d5555b388",
+      "sha256": "2a460eb85540bcccf44e2e06ab3119a3976431558739f8c9e349898d7044c2a3",
+      "bytes": 322438
+    },
+    "bench-heating/applikon3l/fed_batch_warm_feed/temperature_over_time.svg": {
+      "source_sha256": "1fa907f216e3b67cd12deacda7596c5818cb74487ef3aa5254c5743e32610724",
+      "sha256": "75a4b892288fbe83b712421ee324f31e5a8f9f749b2fc7f0b19dd683ddc6e45d",
+      "bytes": 36691
+    },
+    "bench-heating/applikon3l/fed_batch_warm_feed/vessel_3d.png": {
+      "source_sha256": "6445d8cac0af7b968aa3265d247d7b74d5d8413060c46c3e116448d77f38092d",
+      "sha256": "f9740b41b560aeba6cdd5cb252878eee5efb4fb2339b379a46b4536c98be71c1",
+      "bytes": 409301
+    },
+    "bench-heating/applikon3l/fed_batch_warm_feed/vessel_3d.svg": {
+      "source_sha256": "d52bb164c4c2ad6aa4f145d38922d0f273a1b79ddeb14f99eca3a0210dfdc19b",
+      "sha256": "638f113f5169191c4a5f451b1731d34cd20bf0786dec6fc4392ea2f596c50894",
+      "bytes": 2988172
+    },
+    "bench-heating/applikon3l/perfusion/temperature_over_time.png": {
+      "source_sha256": "af86b03d185173c716b0132309b6165555b71f2ed902f829e85e2bef627c0f0a",
+      "sha256": "2962419e1235583df31e9048d3e16693d3d2096e1f60743f6021b27c60a9492d",
+      "bytes": 335793
+    },
+    "bench-heating/applikon3l/perfusion/temperature_over_time.svg": {
+      "source_sha256": "471faf312795886135f5f6f266c7f5a48f8043a31755db5b4fabe203a19e4ebf",
+      "sha256": "9608c6df30602d08dec4959f451a77a13f966cc389746fe28b33dd709edc9e7e",
+      "bytes": 31729
+    },
+    "bench-heating/applikon3l/perfusion/vessel_3d.png": {
+      "source_sha256": "b570fcb44597fa3eb30f61f14c854a93df7f4d7b2ec7d8150b5156967cbac022",
+      "sha256": "7826fcf779b13f2da54be23b9c0ae239addbbf38b730f420f475f705d1b28404",
+      "bytes": 405936
+    },
+    "bench-heating/applikon3l/perfusion/vessel_3d.svg": {
+      "source_sha256": "6a901e7b1f1084509af5c862080b2beedd57785174466a11b87591355e743e33",
+      "sha256": "0175cf36dca1946eda53eddce9a21919fd1216594159ba3a499a98970103b81a",
+      "bytes": 2988132
+    },
+    "bench-heating/applikon3l/temperature_over_time.png": {
+      "source_sha256": "e1462d446f603f94215078908bbfdb3b5a4bf60123fdf5fb07c5be30387059e9",
+      "sha256": "4d59391ee80476eec4b1793d0317cb178420f86b7817c96c2f8fb4ade190be8a",
+      "bytes": 258550
+    },
+    "bench-heating/applikon3l/temperature_over_time.svg": {
+      "source_sha256": "e632833e4ac91422f2740466322cbe4dad3cddeea592d9bafcb2014da2f6571d",
+      "sha256": "d8674fa65a4c16399541cf83da8472534dc85cd95a8e770a452c920ae46aab63",
+      "bytes": 146907
+    },
+    "bench-heating/applikon3l/vessel_3d.png": {
+      "source_sha256": "284f64725f175dda99edfbcf0aac551db1a50aa3d945a8e7f460a04d78bd0da5",
+      "sha256": "c20ffe781977da0616a662ae7cb8ecf91a2f14f504ea977f13d4626e7a599414",
+      "bytes": 400551
+    },
+    "bench-heating/applikon3l/vessel_3d.svg": {
+      "source_sha256": "7680dfb70a997d8192b23defce91681b27beb1dc4258784d4a4030984d2469ef",
+      "sha256": "4953cf6e0f30f01cfc0d0f1ecef153ee03fed854e84fc59459b42e62d0b4d050",
+      "bytes": 2988120
+    },
+    "bench-heating/xdr2000/fed_batch_cold_feed/temperature_over_time.png": {
+      "source_sha256": "6d90e048f7f7b4259ce0aa36a8ed596320622757792ec77911778acc086133c9",
+      "sha256": "1eaa0ee4277a9003ebfd9e85f54d020ec433647fe745a09d767a8afd81a2e9aa",
+      "bytes": 351927
+    },
+    "bench-heating/xdr2000/fed_batch_cold_feed/temperature_over_time.svg": {
+      "source_sha256": "a0f95e7fd7c214e9f1d07466a46740ab9b565a9f7fd0be27197fa87cfc8d33e8",
+      "sha256": "c0d9ac62b52c06263aeae5d26e3b14a50f1e4356504457119193a4a8b8b27727",
+      "bytes": 36710
+    },
+    "bench-heating/xdr2000/fed_batch_cold_feed/vessel_3d.png": {
+      "source_sha256": "340b8c693bf4941fdabb7feccb74b695441515b3cb885f0f0e7524b674eb4ec6",
+      "sha256": "e407e574e19c3cab7f96f14b143c620f4c8538f5641908e5c0d1874823d809e0",
+      "bytes": 459606
+    },
+    "bench-heating/xdr2000/fed_batch_cold_feed/vessel_3d.svg": {
+      "source_sha256": "bb739290760e408bad26e3bb7ece32b535b82ce038ab2778207fe9497ba8f60d",
+      "sha256": "8ade3e0d28b6cd4759a9d75cfc4876ba54746e406dfc36aa5e3528c74d2de18d",
+      "bytes": 3859246
+    },
+    "bench-heating/xdr2000/fed_batch_warm_feed/temperature_over_time.png": {
+      "source_sha256": "1364a5ba225f2f28b2a9e349673ae38f1557201486fa6cb9225a7d3361a162ae",
+      "sha256": "d2b582bcbf702d8bfc1d018d5de0f4f85663ae3208c83a897c6c37d8f261dde5",
+      "bytes": 351318
+    },
+    "bench-heating/xdr2000/fed_batch_warm_feed/temperature_over_time.svg": {
+      "source_sha256": "3adb96ec63b8ea624e70f0c0a21f4fdb68effa068eac7ccae274d03b115cbe77",
+      "sha256": "18bdc013f3fadee52f643043155fe69839ad4785abdb4019314b276ac0e3c0d6",
+      "bytes": 36811
+    },
+    "bench-heating/xdr2000/fed_batch_warm_feed/vessel_3d.png": {
+      "source_sha256": "6eed6f7e39b1209e2bc647bd17f215fcd9aba2b6b2bd95627ed0ea5f7f445126",
+      "sha256": "6834577e8050e89ea85af2ac1e2b1b6c65025f9b3b028fd5c637459ae6f4a712",
+      "bytes": 460303
+    },
+    "bench-heating/xdr2000/fed_batch_warm_feed/vessel_3d.svg": {
+      "source_sha256": "30f37d30c094c77934ab3d00d52e72dede5c1516d9021d69abaae9a05e21904c",
+      "sha256": "639ddd16e50caab6fa8983490a4a800920fc3fefa6a052f07673ff8f7b0c55d4",
+      "bytes": 3859247
+    },
+    "bench-heating/xdr2000/perfusion/temperature_over_time.png": {
+      "source_sha256": "eba2dc0d16e6a158e24335c74fe4ad3f00adfcab3606a40bfb0000deaaf4f483",
+      "sha256": "ad4ba0a75477779a177b3ef01f168570e348e6d85c694788bff462725c01cfd3",
+      "bytes": 359810
+    },
+    "bench-heating/xdr2000/perfusion/temperature_over_time.svg": {
+      "source_sha256": "b899b777d98b541ed5f1e1d0fdf0ed9ed2639af37dcb2b53a30d4e99cfaf29d8",
+      "sha256": "8b2dfaf0b45e9b0b033ca22018d21c0987d44ed133e57f7816842d8c74b5cbd9",
+      "bytes": 32422
+    },
+    "bench-heating/xdr2000/perfusion/vessel_3d.png": {
+      "source_sha256": "e12e7f96a5f26d0a08c8a269837fcf7a74be71cd4a3c19ad9d7120fc8f267bf7",
+      "sha256": "5771d0c6b797903755c3eb467d70b0d03fb3ac805169b3fb876921dfe2f898f6",
+      "bytes": 455826
+    },
+    "bench-heating/xdr2000/perfusion/vessel_3d.svg": {
+      "source_sha256": "62de6c268ecf2cdd15a3d3bb420ada085a001a27a4bdb0a733e3b35e6e0f3fbf",
+      "sha256": "b4183bbb854070d11543d8210285255fc39eca676f1ca4c45d6c3df411879b83",
+      "bytes": 3859217
+    },
+    "bench-heating/xdr2000/temperature_over_time.png": {
+      "source_sha256": "52ada9fb6bc86c28a8b593da8e18a888dec80080fafee8f2ff54cfc87ab67bb1",
+      "sha256": "bc5539608541b552c05e10caf2ba0c886bce35b698db75df3a2e0b40c24aa551",
+      "bytes": 272791
+    },
+    "bench-heating/xdr2000/temperature_over_time.svg": {
+      "source_sha256": "c9cf323be0594034e521661226361a6c27e5c0bb3f1e14fedf742718194172f4",
+      "sha256": "e86fedc0c906478c42b497500cff3fa64850570fd4f466cc789ef4e50a0f634b",
+      "bytes": 39665
+    },
+    "bench-heating/xdr2000/vessel_3d.png": {
+      "source_sha256": "5f4fa6c5e71fc15da9768d4bd133977e97ece8e375e673a7e1e465d2f741441f",
+      "sha256": "fd08c8cdeb71e61ed5bf1e359ab7d876356b80ad46eb3262cafc461c6ec64780",
+      "bytes": 452960
+    },
+    "bench-heating/xdr2000/vessel_3d.svg": {
+      "source_sha256": "eb6b8d0b76e63a50cff6d17ca0189f1abe7b4d75bf2ba6ef7f57d80663079d59",
+      "sha256": "6f8354f29693c8e7d9215347a8453032d65c71bc9a8ddb2f887c9e7e363bf85a",
+      "bytes": 3859204
+    },
+    "fedbatch-feed/feed_scale_comparison.png": {
+      "source_sha256": "ba06524b20add8f8b8d73f23a37115ec13b767ddc56a4dad86e94c1b1f5c6b6b",
+      "sha256": "fe54df552e3cc4efa2a83e94a01b7cce9b77022789e55106ef89ce18576f35ad",
+      "bytes": 192811
+    },
+    "mixing/shared_circulation_factor_parity.png": {
+      "source_sha256": "b6996e2fb107fe2cd68472eb7492b3d185a9f00507f9359dffd517e0168e7b68",
+      "sha256": "66598e6d93669ebb6ecf580dd750a90605eca58ada283bf678c65008b0c2eb32",
+      "bytes": 220924
+    },
+    "mixing/shared_circulation_factor_parity.svg": {
+      "source_sha256": "0a343063b7611aa145f959a0e22c686e94337c25604568859b84d3fbcf5a01b2",
+      "sha256": "b71ca0e888dbeb4c130d2f1a96e8368a5c2a76b9c8ab5a9999e7cf4cfdae6f71",
+      "bytes": 73310
+    },
+    "mixing/vessel_specific_circulation_factor_parity.png": {
+      "source_sha256": "ae1ba2752b7f7589e5dd78fc6f389ae50918ce932d154424200877ac485418d1",
+      "sha256": "e19e75034fa24c9e4a625548548d72a4def26363307a597f3cb0bc0126964182",
+      "bytes": 223354
+    },
+    "mixing/vessel_specific_circulation_factor_parity.svg": {
+      "source_sha256": "39fbecf5be47e3601508c813b984f8e2ca71844492d22b49e7e71121ae21cb24",
+      "sha256": "ac548d9d40fb60c20c8b9ef67f6d644cbd7ba6051ba54051caacda4738e5b46c",
+      "bytes": 74053
+    },
+    "xdr2000/bench/bench_control_architecture.png": {
+      "source_sha256": "354694fc961e8c77805be04782d3bd633a4e21e7b48a2e7713b23735489551c4",
+      "sha256": "c015dbfa7ca78b471d327c76f8b8177500b6eeb6188b54e07f999f6b1336789d",
+      "bytes": 365743
+    },
+    "xdr2000/bench/fed_batch_temperature_20pw.png": {
+      "source_sha256": "62863da37ba425f8fe03b06a0cc13ac0c02803460a4ab7b0143a9cd0f578270a",
+      "sha256": "36518fed9436edc1216d46511cefd6e39c7c349b94b25bee276017f72a0d1aa2",
+      "bytes": 204035
+    },
+    "xdr2000/bench/perfusion_temperature_20pw.png": {
+      "source_sha256": "36ba5e6c0e84bd97ae9ce5d62f692eadbf1cacad3d3e97172fe0002a30ee1b91",
+      "sha256": "a302b5552a69aad1269b27be9e17efefbdd38e2ea5a12ac9ff1c6e37172ed84b",
+      "bytes": 210418
+    },
+    "xdr2000/bioreactor_thermal_system_3d.png": {
+      "source_sha256": "f5eb7f4bffe30f324cfd526844ba67e5461242267813ea6681cbf6323ec1a6fe",
+      "sha256": "131d9cc22d0191d08ee95bea32ee9dea1d8a984ae66923f350d10f579f3a8d9d",
+      "bytes": 901099
+    },
+    "xdr2000/cho_profile_comparison_20pw.png": {
+      "source_sha256": "839ad5d054ee1f550fae62a29bf97369f1e7802794e1cd58728199dcda40f82d",
+      "sha256": "f86aed6ef6ed357f2e29fba520d57f5d3261cb88b457e28c48585a24d6945857",
+      "bytes": 176727
+    },
+    "xdr2000/control_architecture.png": {
+      "source_sha256": "c790b73fc0810a9ece803519ad33715ed1e3b04cf46db011d45cafa060656d92",
+      "sha256": "fdd268303690390103779a6fb7151189649b60b25b3187da7188c38f1c1fd4ff",
+      "bytes": 358002
+    },
+    "xdr2000/heat_transfer_interactions.png": {
+      "source_sha256": "f1ba715716a9a145959d90ee8e637bad58d27087502b70e1c397bd12d71765a9",
+      "sha256": "60aab1d4a084637977e697f3b15c3f543baa0b5ada56dc885abde74648bdf15a",
+      "bytes": 422327
+    },
+    "xdr2000/nistcho_fedbatch_temperature_20pw.png": {
+      "source_sha256": "0a56c59d4e599dd962dcddf30cf4d6648e24bb12f1e34b123a077161c462fd34",
+      "sha256": "f2dff7d4f4db04f41fea219feae7cd4247a58e47cc22d592cc86296cc09b5a88",
+      "bytes": 168162
+    },
+    "xdr2000/xdr2000_mesh_3d.png": {
+      "source_sha256": "dc79a64b4369f22dee560441047429f1cdfaa04baf3ba0f09ab57def9bb99efd",
+      "sha256": "4c802d0a5c2b92085ed8896ecd6121c6a1ccbc3aee7b9e78c34519685c95dcea",
+      "bytes": 608147
+    },
+    "xdr2000/xdr2000_mesh_detail.png": {
+      "source_sha256": "bf646a3ff40a20a65c30201bedf49f9f81005a165c831e1f77e0c32f56b9b667",
+      "sha256": "e93a04513e4b3681073d3ad80cabedf3ca4746196719aac945df6a1969be67cc",
+      "bytes": 1280183
+    },
+    "xdr2000/zhang2024_perfusion_temperature_20pw.png": {
+      "source_sha256": "377e364e99e9dc392b349c3097d0608819aab18a981984371f274e6399baea09",
+      "sha256": "4d7f1c23ff0cf5cd32b2b7b50b81635f1f8a47fcfbd8bee611b073129ac14633",
+      "bytes": 167148
+    }
+  }
+}

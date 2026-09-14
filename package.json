@@ -6,6 +6,9 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "watermark:figures": "node scripts/watermark-model-figures.mjs",
+    "predev": "npm run watermark:figures",
+    "prebuild": "npm run watermark:figures",
     "dev": "astro dev",
     "build": "astro build && node scripts/check-xdr-results.mjs dist/xdr2000 && node scripts/check-control-results.mjs dist/thermal-control && node scripts/check-bench-results.mjs dist/bench-heating && node scripts/check-project-redirect.mjs dist",
     "preview": "astro preview",
@@ -22,5 +25,8 @@
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "sharp": "0.34.5"
   }
 }

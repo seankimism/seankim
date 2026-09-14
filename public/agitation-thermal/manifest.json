@@ -1,0 +1,279 @@
+{
+  "format": "media checksums and hosted-video references only",
+  "created_utc": "2026-09-14T16:15:25.537667+00:00",
+  "exporter_sha256": "1f7489521e38c60c5fb0e2ad724e9809c4625a9797e43f1dc499d4de028d8cd0",
+  "scientific_datasets_included": false,
+  "video_host": "youtube",
+  "media_count": 15,
+  "figure_count": 20,
+  "youtube_video_count": 15,
+  "local_video_count": 0,
+  "artifacts": {
+    "bolus/ambr250.html": {
+      "sha256": "3e769ccccd8d4ef83cdc136728395ba8d51a074da7248388e747d9d33492219c",
+      "bytes": 3851
+    },
+    "bolus/posters/ambr250_fixed_rpm_three_boluses.png": {
+      "sha256": "09a87c82dd7fd04ced514b8bdad19e3b71f263fbdb6a9f12fdbcf44ef901b85f",
+      "bytes": 214714
+    },
+    "bolus/posters/xdr2000_fixed_rpm_three_boluses.png": {
+      "sha256": "0b5d5cf1b954b062bc7efe90fd83c6c8248ad2f457c1e5f2e5af04dc04fc1cd2",
+      "bytes": 155322
+    },
+    "bolus/xdr2000.html": {
+      "sha256": "575c6bd8e4827c47aca319728db5cada357d702fd8695a3989bfb19bff41bd1e",
+      "bytes": 3853
+    },
+    "continuous/ambr250.html": {
+      "sha256": "6b7fb330574a93f012f4453cec5e279563fda90f015fe638a26cef4b235df32c",
+      "bytes": 3572
+    },
+    "continuous/posters/ambr250_agitation_on_top_feed.png": {
+      "sha256": "e04c0e3e0149e2e2ba0b97f45a054acdef9ca1d66d268234995746a97357546c",
+      "bytes": 169462
+    },
+    "controlled/ambr250.html": {
+      "sha256": "4154a15bfbd3ddb2a484214b07b2e012ce30abb69c1e918fca89538a8f01720e",
+      "bytes": 4572
+    },
+    "controlled/applikon3l.html": {
+      "sha256": "3830c1a6ed537dffc54c183b9063f862e9e35c742a082e62f37c2f67765a5d97",
+      "bytes": 4658
+    },
+    "controlled/index.html": {
+      "sha256": "f0017ad18bc62868778745c3722757a15ff2e5b9e511d92c93f7bd74b8a490fb",
+      "bytes": 8759
+    },
+    "controlled/posters/ambr250_10s.png": {
+      "sha256": "fc881ca524fc2510a545257cf9bbcf0ad9a307085b1cf3ee5fd7b1c99d01a0ad",
+      "bytes": 357705
+    },
+    "controlled/posters/ambr250_off.png": {
+      "sha256": "d00ba7a76f40ca1d2a6a4dfcfe68dda9475e88577528624ab33a36e19e715b8d",
+      "bytes": 367611
+    },
+    "controlled/posters/applikon3l_5s.png": {
+      "sha256": "6c68693bafb26660e7da64b5db088f2981f93b5977dbe6714bded2b37191e15d",
+      "bytes": 271418
+    },
+    "controlled/posters/applikon3l_off.png": {
+      "sha256": "732117fdf9b2ad42dd2c0c19ff17776531dedb01983ded199e485b119f0b9f54",
+      "bytes": 284322
+    },
+    "controlled/posters/xdr2000_30s.png": {
+      "sha256": "19fdeae622e7573cefcb05bfb7dd9e9a4609458c9dd4837abbb99378bdee702b",
+      "bytes": 262364
+    },
+    "controlled/posters/xdr2000_off.png": {
+      "sha256": "c234943831c4f59b2c5fc974a90f5cd82099591acab0269138aa5cdee3668e5a",
+      "bytes": 279858
+    },
+    "controlled/xdr2000.html": {
+      "sha256": "1e7d2b6f41242c2cc80d7404ad5084bfed1f088416c4f3e4945052d67d307de5",
+      "bytes": 4624
+    },
+    "figures/ambr250_200ml_10s_sensitivity_time_series.svg": {
+      "sha256": "ddf2b034ea1ef62f51ae45a2dfeb9594e9aa9bd1f2f6017bb2d263f748559ee8",
+      "bytes": 51643
+    },
+    "figures/ambr250_200ml_comparison.svg": {
+      "sha256": "4e3c450ac5bf496f7a88d475e32e8a0d66715f8556dbc1ef01b030d4dc66de65",
+      "bytes": 222773
+    },
+    "figures/ambr250_200ml_vertical_cross_sections.svg": {
+      "sha256": "43257407d54d02c21db14354f916468f0146e99a99448ad4b4edfcf8c6fc3d34",
+      "bytes": 706779
+    },
+    "figures/ambr250_200ml_vertical_time_montage.png": {
+      "sha256": "9dba20bceab47c57e0c906a08ea8b2147da0866878b7a32477e62ec3f08c845f",
+      "bytes": 588344
+    },
+    "figures/ambr250_200ml_warmup_time_series.svg": {
+      "sha256": "868076805aedf0cc1072ae13f2f8b940a4fe3faaabbb57cb04c83b9f58d28fad",
+      "bytes": 134909
+    },
+    "figures/applikon3l_2l_sensitivity_time_series.svg": {
+      "sha256": "d2ab3a630eda921f3574db88209ae5e49969502c923e2aa632628c37bbb084ac",
+      "bytes": 137726
+    },
+    "figures/initial_mesh_cost_bulk_accuracy.svg": {
+      "sha256": "ffa7cd387f62940e7e97cc1c86718b570a3bc840a25f17c7ee40e6c3602caf9c",
+      "bytes": 53640
+    },
+    "figures/initial_mesh_cost_spatial_accuracy.svg": {
+      "sha256": "fa2bc4c2d2a0d8c50536425355e31cf092e29e162f1f9a4ce0653e5121fbccc2",
+      "bytes": 83780
+    },
+    "figures/initial_mesh_runtime_vs_cells.svg": {
+      "sha256": "431049304b5640f5fcb49fd42aace3460fa9a3a4413b37d354d5b3db8ed1fa60",
+      "bytes": 109519
+    },
+    "figures/large_mesh_directional_checks.svg": {
+      "sha256": "e38265785060393f313ea2269d38e6bbb9eda57f481f535bf893cef17ef4f182",
+      "bytes": 33719
+    },
+    "figures/liquid_uniform_comparison_fixed.svg": {
+      "sha256": "ffa01bf606420587c01729366865e81a1a63dd5bcfef268fdb1693e2b02a1f44",
+      "bytes": 67403
+    },
+    "figures/liquid_uniform_comparison_pi.svg": {
+      "sha256": "195a97e22f101ef7a67d844934c39b1491fc3ed3b67807dd5ac4e9c91804a455",
+      "bytes": 66789
+    },
+    "figures/operating_mesh_cost_bulk_accuracy.svg": {
+      "sha256": "0feb79bb0d93201a6acf783277c291ff4952046c62d9eb999047dfebdd6fee4a",
+      "bytes": 54423
+    },
+    "figures/operating_mesh_cost_spatial_accuracy.svg": {
+      "sha256": "d7431517db3deed13a087b0d540b1c2dc0bde08ed4a143164b09cc9a9c2e109e",
+      "bytes": 84574
+    },
+    "figures/operating_mesh_runtime_vs_cells.svg": {
+      "sha256": "cc85ff88aee7045aa6cea01b78b40f97929ad85c6843712c313aa26edae2086b",
+      "bytes": 109591
+    },
+    "figures/xdr2000_1000l_comparison.svg": {
+      "sha256": "742aaf70d60f067db521bf1aa9a7dd1c199b8656b4bd157134f35a98025bf52b",
+      "bytes": 560121
+    },
+    "figures/xdr2000_1000l_vertical_cross_sections.svg": {
+      "sha256": "0803edd2c82f571778f8cfd6c53f27b554e041d84b5d37e576da37a4580dc12b",
+      "bytes": 506605
+    },
+    "figures/xdr2000_1000l_vertical_time_montage.png": {
+      "sha256": "e8212d3fab689910b7acb6fb39c65b16d32acdea4ddf5d9dcdabef15f12c72d4",
+      "bytes": 325178
+    },
+    "figures/xdr2000_1000l_warmup_time_series.svg": {
+      "sha256": "a5a8aa595964214f35652cc5bca18bf97dc55a9c419fc138894d23430505d540",
+      "bytes": 432196
+    },
+    "figures/xdr2000_2000l_sensitivity_time_series.svg": {
+      "sha256": "ba7fce7ee22e491debad9218a3594f004fcd3fcbef2e971e9068655c481824a1",
+      "bytes": 139193
+    },
+    "fixed/ambr250.html": {
+      "sha256": "d9c589c58d9d3862465314aa1e625a579810ee64fbb869756ed5977168a5d588",
+      "bytes": 4576
+    },
+    "fixed/applikon3l.html": {
+      "sha256": "94668474e0eb445e192df16d6ad46fc53a255f01c42b1119c07d2851419e45f0",
+      "bytes": 4662
+    },
+    "fixed/index.html": {
+      "sha256": "5ab8e3918656c4ec55f8102bf529ef86e7d855be930a725a830124e84314ea19",
+      "bytes": 8767
+    },
+    "fixed/posters/ambr250_10s.png": {
+      "sha256": "7e852f4572d6727fbf7114b6af6b850878fb2d17b673de6bf9480c435ef87c2e",
+      "bytes": 357620
+    },
+    "fixed/posters/ambr250_off.png": {
+      "sha256": "7b90ecfc3ddb906e6959ed4ffed8f0689b370f10d06fd58cedcc51fb35b0fe50",
+      "bytes": 367875
+    },
+    "fixed/posters/applikon3l_5s.png": {
+      "sha256": "8727494b2dc7015732a531dac091f3f2ee5de31a043b404d81e5c8972b27d504",
+      "bytes": 271604
+    },
+    "fixed/posters/applikon3l_off.png": {
+      "sha256": "953721a503b0a80edf23d3f10060a2cef42ff55508b0a4587fe605b17316016f",
+      "bytes": 284423
+    },
+    "fixed/posters/xdr2000_30s.png": {
+      "sha256": "5bf607c2244af4dcf6116716337630a2ec29305cbd3d3d9a31b2f7c7757de003",
+      "bytes": 263755
+    },
+    "fixed/posters/xdr2000_off.png": {
+      "sha256": "d336d6444e7f5c5bccd08840b5d81c8a2ad612286fb9c16be84a762732f09a40",
+      "bytes": 279842
+    },
+    "fixed/xdr2000.html": {
+      "sha256": "2783e6d17be74214e569b7d0dae2a1f70f42ac4da3e6100cdc7817f19ef00a61",
+      "bytes": 4628
+    },
+    "index.html": {
+      "sha256": "0f8a92f88bb8de52443a79eb46263b71dccc17ae909e85f626037d9985a27df3",
+      "bytes": 14312
+    }
+  },
+  "artifact_bytes": 8727634,
+  "youtube_videos": [
+    {
+      "source_media_path": "bolus/animations/ambr250_fixed_rpm_three_boluses.mp4",
+      "youtube_video_id": "z-HeyuPGuS0",
+      "source_sha256": "53c4ac81ba665cdffefa569f9cc1fe881f845a4c5d15b58ad400ef428d7682dc"
+    },
+    {
+      "source_media_path": "bolus/animations/xdr2000_fixed_rpm_three_boluses.mp4",
+      "youtube_video_id": "CcaWp2ERPKI",
+      "source_sha256": "3d55b6d99a8bb635a94f9732e28251a55448b4ff80ec1863cd60a734da302e6e"
+    },
+    {
+      "source_media_path": "continuous/animations/ambr250_agitation_on_top_feed.mp4",
+      "youtube_video_id": "uxsH2nxGo14",
+      "source_sha256": "265c792d92c7fe8c8aa9fe877a71703fe916353a1c798392b6e4f78ed33dd166"
+    },
+    {
+      "source_media_path": "controlled/animations/ambr250_10s.mp4",
+      "youtube_video_id": "vWDyzcVEasw",
+      "source_sha256": "ea269717db565cdadb99c02fa5bd10333bec9e4cbe40c1b7246e8d2685b7329e"
+    },
+    {
+      "source_media_path": "controlled/animations/ambr250_off.mp4",
+      "youtube_video_id": "5EVSXXdrkbc",
+      "source_sha256": "176479ce772927453ec1a9e38a638c7d289ec7994111fab3f4c49a59225a221c"
+    },
+    {
+      "source_media_path": "controlled/animations/applikon3l_5s.mp4",
+      "youtube_video_id": "K3MycGQ5YKo",
+      "source_sha256": "676ad5ced63dc5818c7cfe880abd4b222d531e3432253fcd2c866d081714c9cc"
+    },
+    {
+      "source_media_path": "controlled/animations/applikon3l_off.mp4",
+      "youtube_video_id": "RQqO05G8K2E",
+      "source_sha256": "c2b29b0f35f628b07bda3bbda5598d4c9b0be5a9f89f4f2f97fb5dbd600f1efa"
+    },
+    {
+      "source_media_path": "controlled/animations/xdr2000_30s.mp4",
+      "youtube_video_id": "KZUUcZs1KBE",
+      "source_sha256": "0d3fd59c481f8960c80e30712e9b753dcfd4a75d300636f3cf675df256f25034"
+    },
+    {
+      "source_media_path": "controlled/animations/xdr2000_off.mp4",
+      "youtube_video_id": "Et4q5rd8OYI",
+      "source_sha256": "796ea0968516af289efd423e49149576453952e795c671502fb604a1162c18f2"
+    },
+    {
+      "source_media_path": "fixed/animations/ambr250_10s.mp4",
+      "youtube_video_id": "MhLYPuZ5U98",
+      "source_sha256": "5b295c4f1644701a77bcf50537821b6baef4eafca2e4de6a5e9a1c5f002770a4"
+    },
+    {
+      "source_media_path": "fixed/animations/ambr250_off.mp4",
+      "youtube_video_id": "jPryh0mxFzA",
+      "source_sha256": "0d82dbb8ff174af8a97334965616169c5333fcb1b399fd9de9bfc22cf0d0822c"
+    },
+    {
+      "source_media_path": "fixed/animations/applikon3l_5s.mp4",
+      "youtube_video_id": "5n14OQyLCGg",
+      "source_sha256": "e5a971938112e3938ac4ccca248347de424d6301b6e215c07dd329d2a6a48946"
+    },
+    {
+      "source_media_path": "fixed/animations/applikon3l_off.mp4",
+      "youtube_video_id": "myoZSlOsXKI",
+      "source_sha256": "01b9647c0b3a2f212acf76b9ce09d21c7ab645f048d906917618b7af858a7489"
+    },
+    {
+      "source_media_path": "fixed/animations/xdr2000_30s.mp4",
+      "youtube_video_id": "_aUtnSDyXbo",
+      "source_sha256": "77496c305fd71682809cfebb27b08e0db83aa38ade906d7c9d0c12ac38aad7af"
+    },
+    {
+      "source_media_path": "fixed/animations/xdr2000_off.mp4",
+      "youtube_video_id": "cyiFmI-HQvo",
+      "source_sha256": "999b44b948aa52ffe1d227a0fbca5025d6a53861377cad2d0c2ddfe2cd47849d"
+    }
+  ]
+}

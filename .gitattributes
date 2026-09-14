@@ -3,3 +3,9 @@ public/bench-heating/**/*.html text eol=lf
 public/bench-heating/**/*.md text eol=lf
 public/bench-heating/**/*.json text eol=lf
 public/bench-heating/**/*.svg text eol=lf
+
+# Watermarked figure hashes must also survive a fresh Windows/Linux checkout.
+public/**/*.svg text eol=lf
+public/agitation-thermal/**/*.html text eol=lf
+public/agitation-thermal/**/*.json text eol=lf
+public/figure-watermarks.json text eol=lf

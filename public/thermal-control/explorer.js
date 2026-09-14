@@ -215,6 +215,7 @@ function buildPlot(id, kind) {
     }
     group.append(svgNode('path', { class: 'trace', d: path, stroke: item.color, 'stroke-dasharray': item.dash, 'data-mode': item.mode }));
   }
+  window.ModelFigureWatermark.svg(svg, plot);
 }
 function renderPlots() {
   if (!state.scenario || $('results').hidden) return;
