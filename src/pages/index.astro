@@ -12,7 +12,7 @@ const projects = allProjects.filter((p, i) => allProjects.findIndex(q => q.data.
 const papers = (await getCollection('publications')).filter(p => p.data.featured).sort((a,b) => b.data.year-a.data.year);
 const linkedIn = SOCIALS.find(link => link.name === 'LinkedIn' && link.isActive);
 ---
-<BaseLayout title="About">
+<BaseLayout title="About" fullTitle="Byumsu “Sean” Kim - Bioprocess Engineer">
   <header class="page-header"><p class="eyebrow">Bioprocessing · Modeling · Biofabrication</p><h1 class="page-title">About me</h1></header>
   <div class="prose home-bio"><Content /></div>
   <section class="home-section" aria-labelledby="focus-heading"><h2 id="focus-heading" class="section-title">Research focus</h2><div class="focus-list">{bio.data.researchAreas.map((area,index) => <div class="focus-row"><span class="focus-number">0{index+1}</span><div><h3>{area.title}</h3><p>{area.description}</p></div></div>)}</div></section>

@@ -10,5 +10,10 @@ doi: "10.1002/jsp2.1363"
 citation: "7(3), e1363"
 featured: false
 order: 1
+description: "A flexible bioresorbable support maintained native disc height for six weeks in the minipig cervical spine, while stiff PLA cages fractured within four."
+image: "/cornell/intervertebral-disc-support.jpg"
+imageAlt: "Two bar charts of terminal disc height index normalized to native disc: flexible FPLA cages match native height while stiff PLA cages fall to discectomy levels, and stably implanted tissue-engineered discs match native height while displaced ones sit between native and discectomy."
+imageWidth: 709
+imageHeight: 321
 ---
 

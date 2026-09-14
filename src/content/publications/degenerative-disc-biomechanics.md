@@ -10,5 +10,6 @@ doi: "10.14444/8052"
 citation: "15(s1), 10–25"
 featured: false
 order: 8
+description: "A review of healthy and degenerated intervertebral disc structure and mechanics, and how degeneration alters the loads a disc replacement must accommodate."
 ---
 

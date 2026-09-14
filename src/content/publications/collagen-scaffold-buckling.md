@@ -10,5 +10,10 @@ doi: "10.1007/s11340-022-00853-7"
 citation: "62(7), 1067–1077"
 featured: false
 order: 6
+description: "Honeycomb and sponge collagen scaffolds share a bulk cellular-solid response but differ in local buckling instabilities, revealed by confocal strain mapping."
+image: "/cornell/collagen-scaffold-buckling.png"
+imageAlt: "Compressive stress–strain curve of a honeycomb collagen scaffold with confocal images at four points along it: undeformed columnar pores, first buckling at the end of the linear region, local collapse bands forming, and a global collapse band with densification."
+imageWidth: 737
+imageHeight: 318
 ---
 

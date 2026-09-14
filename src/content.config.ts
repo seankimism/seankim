@@ -10,6 +10,8 @@ const publications = defineCollection({
     doi: z.string().optional(), citation: z.string().optional(),
     description: z.string().optional(), featured: z.boolean().default(false),
     order: z.number().default(0), tags: z.array(z.string()).default([]),
+    image: z.string().optional(), imageAlt: z.string().optional(),
+    imageWidth: z.number().optional(), imageHeight: z.number().optional(),
   }),
 });
 const projects = defineCollection({
