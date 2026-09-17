@@ -39,7 +39,7 @@ const person = {
   '@context': 'https://schema.org', '@type': 'Person', '@id': `${profileURL.href}#person`,
   name: 'Byumsu Sean Kim', givenName: 'Byumsu', familyName: 'Kim', alternateName: ['Sean Kim', 'Byumsu Kim'],
   url: profileURL.href, image: new URL(withBase('/images/sean-kim.jpg'), Astro.site || SITE.website).href,
-  jobTitle: SEO.jobTitle, description: SITE.desc, knowsAbout: SEO.knowsAbout,
+  jobTitle: SEO.jobTitle, worksFor: { '@type': 'Organization', name: 'Lonza Biologics' }, description: SITE.desc, knowsAbout: SEO.knowsAbout,
   alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'Cornell University' }, { '@type': 'CollegeOrUniversity', name: 'Purdue University' }],
   sameAs: SEO.sameAs,
 };

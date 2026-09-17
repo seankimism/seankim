@@ -1,5 +1,7 @@
 # Scheduled portfolio publication
 
+The Lonza update was released early on September 16, 2026 at the user's request. The September 28 cron trigger has been removed. The original release plan below is retained for reference.
+
 The prepared update is in [pull request #1](https://github.com/seankimism/seankim/pull/1), from `lonza-start-update` into `main`.
 
 Publication is scheduled for **September 28, 2026 at 12:01 a.m. Eastern daylight time (America/New_York)**, which is **04:01 UTC**. GitHub Actions can start scheduled jobs late, and the build and deployment take additional time. The website will remain unchanged until the scheduled merge and successful deployment.

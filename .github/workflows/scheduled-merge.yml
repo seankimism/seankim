@@ -1,9 +1,6 @@
 name: Scheduled portfolio merge
 
 on:
-  schedule:
-    # September 28, 00:01 EDT = 04:01 UTC. The script also checks the year.
-    - cron: '1 4 28 9 *'
   workflow_dispatch:
     inputs:
       dry_run:

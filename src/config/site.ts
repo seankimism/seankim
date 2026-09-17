@@ -12,7 +12,7 @@ export const SEO: SeoConfig = {
     imageWidth: 1200,
     imageHeight: 630,
     imageAlt: "Byumsu “Sean” Kim, bioprocess engineer: upstream process development, digital twins, and tissue engineering.",
-    jobTitle: "Bioprocess Engineer",
+    jobTitle: "Lead Scientist, Upstream R&D",
     sameAs: [
         "https://www.linkedin.com/in/byumsukim",
         "https://scholar.google.com/citations?user=WE92tgwAAAAJ",
