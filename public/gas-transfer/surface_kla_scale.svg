@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560" width="760" height="560" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Segoe UI, Helvetica, Arial, sans-serif">
+  <title id="t">Measured free-surface oxygen and carbon dioxide transfer coefficients against working volume</title>
+  <desc id="d">Both axes are logarithmic. The data span working volumes of about 0.2 to 2000 litres. Solid green and dashed orange lines show the Bowers 2008 oxygen and carbon dioxide measurements in four vessels from 8 to 2000 litres. The purple circle is Clark 2020, ambr 250 at 215 mL and 300 rpm, with a surface oxygen transfer coefficient of 1.10 per hour. Capped vertical bars show selected oxygen-transfer conditions for Al-Ramadhani at 0.3 L, Wyrobnik at 1 L, Scargiali at 5.4 L, de Lamotte at 16.5 L and Schlaich at 40 L. The Schlaich range covers up-pumping at 60 to 90 rpm. These ranges are not measurement error bars.</desc>
+  <rect width="760" height="560" fill="#ffffff"/>
+  <g stroke="#e5e7eb" stroke-width="0.8">
+    <line x1="88" y1="342.0494" x2="734" y2="342.0494"/>
+    <line x1="88" y1="283.1584" x2="734" y2="283.1584"/>
+    <line x1="88" y1="238.5377" x2="734" y2="238.5377"/>
+    <line x1="88" y1="193.9169" x2="734" y2="193.9169"/>
+    <line x1="88" y1="135.026" x2="734" y2="135.026"/>
+    <line x1="88" y1="90.4052" x2="734" y2="90.4052"/>
+    <line x1="88" y1="45.7844" x2="734" y2="45.7844"/>
+    <line x1="230.0086" y1="28" x2="230.0086" y2="356"/>
+    <line x1="371.9377" y1="28" x2="371.9377" y2="356"/>
+    <line x1="513.9463" y1="28" x2="513.9463" y2="356"/>
+    <line x1="655.8754" y1="28" x2="655.8754" y2="356"/>
+  </g>
+  <g fill="none" stroke="#242424" stroke-width="1.1">
+    <path d="M88,28 V356 H734"/>
+    <line x1="82" y1="342.0494" x2="88" y2="342.0494"/>
+    <line x1="82" y1="283.1584" x2="88" y2="283.1584"/>
+    <line x1="82" y1="238.5377" x2="88" y2="238.5377"/>
+    <line x1="82" y1="193.9169" x2="88" y2="193.9169"/>
+    <line x1="82" y1="135.026" x2="88" y2="135.026"/>
+    <line x1="82" y1="90.4052" x2="88" y2="90.4052"/>
+    <line x1="82" y1="45.7844" x2="88" y2="45.7844"/>
+    <line x1="88" y1="356" x2="88" y2="362"/>
+    <line x1="230.0086" y1="356" x2="230.0086" y2="362"/>
+    <line x1="371.9377" y1="356" x2="371.9377" y2="362"/>
+    <line x1="513.9463" y1="356" x2="513.9463" y2="362"/>
+    <line x1="655.8754" y1="356" x2="655.8754" y2="362"/>
+  </g>
+  <g stroke="#242424" stroke-width="0.8">
+    <line x1="130.7369" y1="356" x2="130.7369" y2="359.5"/>
+    <line x1="155.7364" y1="356" x2="155.7364" y2="359.5"/>
+    <line x1="173.4738" y1="356" x2="173.4738" y2="359.5"/>
+    <line x1="187.232" y1="356" x2="187.232" y2="359.5"/>
+    <line x1="198.4732" y1="356" x2="198.4732" y2="359.5"/>
+    <line x1="207.9776" y1="356" x2="207.9776" y2="359.5"/>
+    <line x1="216.2106" y1="356" x2="216.2106" y2="359.5"/>
+    <line x1="223.4727" y1="356" x2="223.4727" y2="359.5"/>
+    <line x1="272.7057" y1="356" x2="272.7057" y2="359.5"/>
+    <line x1="297.7052" y1="356" x2="297.7052" y2="359.5"/>
+    <line x1="315.4426" y1="356" x2="315.4426" y2="359.5"/>
+    <line x1="329.2008" y1="356" x2="329.2008" y2="359.5"/>
+    <line x1="340.4421" y1="356" x2="340.4421" y2="359.5"/>
+    <line x1="349.9464" y1="356" x2="349.9464" y2="359.5"/>
+    <line x1="358.1795" y1="356" x2="358.1795" y2="359.5"/>
+    <line x1="365.4415" y1="356" x2="365.4415" y2="359.5"/>
+    <line x1="414.6746" y1="356" x2="414.6746" y2="359.5"/>
+    <line x1="439.674" y1="356" x2="439.674" y2="359.5"/>
+    <line x1="457.4114" y1="356" x2="457.4114" y2="359.5"/>
+    <line x1="471.1696" y1="356" x2="471.1696" y2="359.5"/>
+    <line x1="482.4109" y1="356" x2="482.4109" y2="359.5"/>
+    <line x1="491.9153" y1="356" x2="491.9153" y2="359.5"/>
+    <line x1="500.1483" y1="356" x2="500.1483" y2="359.5"/>
+    <line x1="507.4104" y1="356" x2="507.4104" y2="359.5"/>
+    <line x1="556.6434" y1="356" x2="556.6434" y2="359.5"/>
+    <line x1="581.6429" y1="356" x2="581.6429" y2="359.5"/>
+    <line x1="599.3803" y1="356" x2="599.3803" y2="359.5"/>
+    <line x1="613.1385" y1="356" x2="613.1385" y2="359.5"/>
+    <line x1="624.3798" y1="356" x2="624.3798" y2="359.5"/>
+    <line x1="633.8841" y1="356" x2="633.8841" y2="359.5"/>
+    <line x1="642.1172" y1="356" x2="642.1172" y2="359.5"/>
+    <line x1="649.3792" y1="356" x2="649.3792" y2="359.5"/>
+    <line x1="698.6122" y1="356" x2="698.6122" y2="359.5"/>
+    <line x1="723.6117" y1="356" x2="723.6117" y2="359.5"/>
+  </g>
+  <g fill="#242424" font-size="13">
+    <text x="76" y="346.5494" text-anchor="end">0.02</text>
+    <text x="76" y="287.6584" text-anchor="end">0.05</text>
+    <text x="76" y="243.0377" text-anchor="end">0.1</text>
+    <text x="76" y="198.4169" text-anchor="end">0.2</text>
+    <text x="76" y="139.526" text-anchor="end">0.5</text>
+    <text x="76" y="94.9052" text-anchor="end">1</text>
+    <text x="76" y="50.2844" text-anchor="end">2</text>
+    <text x="88" y="379" text-anchor="middle">0.1</text>
+    <text x="230.0086" y="379" text-anchor="middle">1</text>
+    <text x="371.9377" y="379" text-anchor="middle">10</text>
+    <text x="513.9463" y="379" text-anchor="middle">100</text>
+    <text x="655.8754" y="379" text-anchor="middle">1000</text>
+  </g>
+  <g fill="#242424" font-size="15">
+    <text transform="translate(24 192) rotate(-90)" text-anchor="middle">Surface k<tspan baseline-shift="sub" font-size="11">L</tspan>a (h<tspan baseline-shift="super" font-size="11">−1</tspan>)</text>
+    <text x="411" y="409" text-anchor="middle">Working volume (L)</text>
+  </g>
+  <!-- Logarithmic axes; Clark is a single measured condition and capped bars show selected ranges. -->
+  <g id="measurements">
+    <circle cx="135.2091" cy="84.2697" r="4.4" fill="#914c82" stroke="#fff" stroke-width="1.3"><title>Clark 2020: 0.215 L, 300 rpm, surface oxygen kLa 1.10 h^-1</title></circle>
+    <line x1="155.7027" y1="38.3299" x2="155.7027" y2="72.1948" stroke="#285d86" stroke-width="2.3" stroke-linecap="round"/>
+    <line x1="151.7249" y1="72.1948" x2="159.6805" y2="72.1948" stroke="#285d86" stroke-width="2.3" stroke-linecap="round"/>
+    <line x1="151.7249" y1="38.3299" x2="159.6805" y2="38.3299" stroke="#285d86" stroke-width="2.3" stroke-linecap="round"/>
+    <line x1="230.0086" y1="72.0883" x2="230.0086" y2="165.6961" stroke="#ac7718" stroke-width="2.3" stroke-linecap="round"/>
+    <line x1="226.0308" y1="165.6961" x2="233.9865" y2="165.6961" stroke="#ac7718" stroke-width="2.3" stroke-linecap="round"/>
+    <line x1="226.0308" y1="72.0883" x2="233.9865" y2="72.0883" stroke="#ac7718" stroke-width="2.3" stroke-linecap="round"/>
+    <line x1="333.83" y1="168.4649" x2="333.83" y2="203.6078" stroke="#697586" stroke-width="2.3" stroke-linecap="round"/>
+    <line x1="329.8522" y1="203.6078" x2="337.8079" y2="203.6078" stroke="#697586" stroke-width="2.3" stroke-linecap="round"/>
+    <line x1="329.8522" y1="168.4649" x2="337.8079" y2="168.4649" stroke="#697586" stroke-width="2.3" stroke-linecap="round"/>
+    <line x1="402.8057" y1="60.8" x2="402.8057" y2="216.9195" stroke="#c34124" stroke-width="2.3" stroke-linecap="round"/>
+    <line x1="398.8278" y1="216.9195" x2="406.7835" y2="216.9195" stroke="#c34124" stroke-width="2.3" stroke-linecap="round"/>
+    <line x1="398.8278" y1="60.8" x2="406.7835" y2="60.8" stroke="#c34124" stroke-width="2.3" stroke-linecap="round"/>
+    <line x1="457.4611" y1="71.9818" x2="457.4611" y2="97.2208" stroke="#578bc1" stroke-width="2.3" stroke-linecap="round"/>
+    <line x1="453.4833" y1="97.2208" x2="461.4389" y2="97.2208" stroke="#578bc1" stroke-width="2.3" stroke-linecap="round"/>
+    <line x1="453.4833" y1="71.9818" x2="461.4389" y2="71.9818" stroke="#578bc1" stroke-width="2.3" stroke-linecap="round"/>
+    <path d="M358.1744,179.5403 L542.9049,238.5377 L602.4133,271.3377 L698.6768,283.1584" fill="none" stroke="#41816b" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="358.1744" cy="179.5403" r="4.4" fill="#41816b" stroke="#fff" stroke-width="1.3"/>
+    <circle cx="542.9049" cy="238.5377" r="4.4" fill="#41816b" stroke="#fff" stroke-width="1.3"/>
+    <circle cx="602.4133" cy="271.3377" r="4.4" fill="#41816b" stroke="#fff" stroke-width="1.3"/>
+    <circle cx="698.6768" cy="283.1584" r="4.4" fill="#41816b" stroke="#fff" stroke-width="1.3"/>
+    <path d="M358.1744,212.4468 L542.9049,252.9143 L602.4133,297.4286 L698.6768,315.9584" fill="none" stroke="#ae623e" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
+    <circle cx="358.1744" cy="212.4468" r="4.4" fill="#ae623e" stroke="#fff" stroke-width="1.3"/>
+    <circle cx="542.9049" cy="252.9143" r="4.4" fill="#ae623e" stroke="#fff" stroke-width="1.3"/>
+    <circle cx="602.4133" cy="297.4286" r="4.4" fill="#ae623e" stroke="#fff" stroke-width="1.3"/>
+    <circle cx="698.6768" cy="315.9584" r="4.4" fill="#ae623e" stroke="#fff" stroke-width="1.3"/>
+  </g>
+  <g id="legend" fill="#242424" font-size="13">
+    <circle cx="103" cy="439" r="4.4" fill="#914c82" stroke="#fff" stroke-width="1.3"/>
+    <text x="130" y="443.5">Clark, ambr 250</text>
+    <g stroke="#285d86" stroke-width="2.3" fill="none"><path d="M103,455 V469 M98,455 H108 M98,469 H108"/></g>
+    <text x="130" y="466.5">Al-Ramadhani, 0.3 L</text>
+    <g stroke="#ac7718" stroke-width="2.3" fill="none"><path d="M103,478 V492 M98,478 H108 M98,492 H108"/></g>
+    <text x="130" y="489.5">Wyrobnik, 1 L</text>
+    <g stroke="#697586" stroke-width="2.3" fill="none"><path d="M103,501 V515 M98,501 H108 M98,515 H108"/></g>
+    <text x="130" y="512.5">Scargiali, 5.4 L</text>
+    <g stroke="#c34124" stroke-width="2.3" fill="none"><path d="M424,432 V446 M419,432 H429 M419,446 H429"/></g>
+    <text x="451" y="443.5">de Lamotte, 16.5 L</text>
+    <g stroke="#578bc1" stroke-width="2.3" fill="none"><path d="M424,455 V469 M419,455 H429 M419,469 H429"/></g>
+    <text x="451" y="466.5">Schlaich, 40 L</text>
+    <g stroke="#41816b" stroke-width="2.3" fill="none"><path d="M409,485 H439"/><circle cx="424" cy="485" r="3.7" fill="#41816b" stroke="#ffffff" stroke-width="1.2"/></g>
+    <text x="451" y="489.5">Bowers 2008, O<tspan baseline-shift="sub" font-size="10">2</tspan></text>
+    <g stroke="#ae623e" stroke-width="2.3" fill="none"><path d="M409,508 H439" stroke-dasharray="6 4"/><circle cx="424" cy="508" r="3.7" fill="#ae623e" stroke="#ffffff" stroke-width="1.2"/></g>
+    <text x="451" y="512.5">Bowers 2008, CO<tspan baseline-shift="sub" font-size="10">2</tspan></text>
+  </g>
+<g transform="translate(0 0)"><g id="sean-kim-model-figure-v4" aria-hidden="true" pointer-events="none" font-family="Arial, sans-serif" text-anchor="middle" fill="#334155" fill-opacity=".12" stroke="white" stroke-opacity=".25" stroke-width="0.882" paint-order="stroke"><g transform="translate(167.20 156.80) rotate(-22)"><text x="0" y="0" font-size="19.6" font-weight="600">Sean Kim</text><text x="0" y="18.032000000000004" font-size="10.780000000000001">seankimism.github.io/seankim</text></g><g transform="translate(167.20 386.40) rotate(-22)"><text x="0" y="0" font-size="19.6" font-weight="600">Sean Kim</text><text x="0" y="18.032000000000004" font-size="10.780000000000001">seankimism.github.io/seankim</text></g><g transform="translate(380.00 156.80) rotate(-22)"><text x="0" y="0" font-size="19.6" font-weight="600">Sean Kim</text><text x="0" y="18.032000000000004" font-size="10.780000000000001">seankimism.github.io/seankim</text></g><g transform="translate(380.00 386.40) rotate(-22)"><text x="0" y="0" font-size="19.6" font-weight="600">Sean Kim</text><text x="0" y="18.032000000000004" font-size="10.780000000000001">seankimism.github.io/seankim</text></g><g transform="translate(592.80 156.80) rotate(-22)"><text x="0" y="0" font-size="19.6" font-weight="600">Sean Kim</text><text x="0" y="18.032000000000004" font-size="10.780000000000001">seankimism.github.io/seankim</text></g><g transform="translate(592.80 386.40) rotate(-22)"><text x="0" y="0" font-size="19.6" font-weight="600">Sean Kim</text><text x="0" y="18.032000000000004" font-size="10.780000000000001">seankimism.github.io/seankim</text></g></g></g></svg>

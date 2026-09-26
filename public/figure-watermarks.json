@@ -348,6 +348,141 @@
       "sha256": "fe54df552e3cc4efa2a83e94a01b7cce9b77022789e55106ef89ce18576f35ad",
       "bytes": 192811
     },
+    "gas-transfer/shake-flask/kla_vs_rpm.png": {
+      "source_sha256": "d2474851749542739e4fcdbd82b4a2db3055dfc9825d47d1ef10215cd3ac2e52",
+      "sha256": "f2ae1e6ad785196a861845b053ecfb69cc8d3c496b7aeab65ab19166854b61da",
+      "bytes": 348597
+    },
+    "gas-transfer/shake-flask/kla_vs_rpm.svg": {
+      "source_sha256": "aaafa1463a8cdcde13e70bd5175566e091f23177e4673569a8cb7f1d1bb80c78",
+      "sha256": "2482c2ad4a827d7a4b7a366c3f5a4a52fdd5f7319cd3d666fac456d925e2ed10",
+      "bytes": 94764
+    },
+    "gas-transfer/shake-flask/power_vs_rpm.png": {
+      "source_sha256": "30d3c69bceb1c36b5a75ff637d6921df4a123e54dc02a2a88f4bf82001f1e165",
+      "sha256": "a5cc159913caa8c0d63b255c99e6e57d804e32cc456aef0ff482f7d43a6893d4",
+      "bytes": 427704
+    },
+    "gas-transfer/shake-flask/power_vs_rpm.svg": {
+      "source_sha256": "8b98f281b9a138f4e0dbbd4444e5575b985ca5ec5a9794da2bd87052084a660b",
+      "sha256": "afda285dc047b12fde05d05d12166300cdf5e8f121ecbbf5b0d6dd4a8b4d6d72",
+      "bytes": 143890
+    },
+    "gas-transfer/shake-flask/size_and_orbit.png": {
+      "source_sha256": "d311d19f034cddb0c1d149f770d3648de14c4592cf2b5028319f80eece9eef13",
+      "sha256": "2d628c34a01014de83c70ebf1ee2e5e01544342440b12023775014b2fcfe4030",
+      "bytes": 279142
+    },
+    "gas-transfer/shake-flask/size_and_orbit.svg": {
+      "source_sha256": "4fe38a15d1623078fcc144e51b2bf423c9dc5272b9915382916fa361bb06f25c",
+      "sha256": "71c39aa4ad5fcfc7d2e39ab6cfa95177d324224945db83c33652622c14d8e2a2",
+      "bytes": 62277
+    },
+    "gas-transfer/surface_kla_global_expanded_fit.svg": {
+      "source_sha256": "01a4e948c3f9ca8e1ab64d20a342ca89e9d7abfd529f32967f736e5ab2a67a79",
+      "sha256": "798acdefa735979f1e5b88e167a32195f4cb249f76d24329a65efd3ef38ae8c0",
+      "bytes": 24002
+    },
+    "gas-transfer/surface_kla_global_expanded_holdout.svg": {
+      "source_sha256": "f1530a99d2000c09e0a2c10206882d569fae787a9957d3014c79b85987ed5cc1",
+      "sha256": "3c62554f28aac3d76cbd98bb2d06a3d0964b56ff1723760a8ad192743e2d0351",
+      "bytes": 24006
+    },
+    "gas-transfer/surface_kla_scale.svg": {
+      "source_sha256": "66ab9c3fae386377148b10b62ad9dcc1eb767a37f8bb517148604e0b907c4fe2",
+      "sha256": "5c023e1603af2d0d7ddbc02ca1e88e5a9f58ab4649d6cdecef10a1b9c12617c9",
+      "bytes": 12167
+    },
+    "gas-transfer/tracking/balance_verification.svg": {
+      "source_sha256": "cf27135495bb9a9fb8aee56b23776b1978997af0aef5311786e4a172189196c2",
+      "sha256": "7b4af1d2c3c455072ebd733f6d34cb43e013208aa6af49e1ec4f24119e33c6a6",
+      "bytes": 23760
+    },
+    "gas-transfer/tracking/utilization_sensitivity.svg": {
+      "source_sha256": "5d6f7e3c380c41772b7e75f5a7d9a5fc130b702a0e6853528b57e950fe929255",
+      "sha256": "4cacfe4144b7147eb09f265c6c34690aa8845e7573074cfd0fa170c0ee2f7fb3",
+      "bytes": 34110
+    },
+    "gas-transfer/wave-bag/capacity_maps.png": {
+      "source_sha256": "1a07ca992f0b7798c22b901b2dd49f71cc3f719d2dfcf0c17dd910e8b22c00f8",
+      "sha256": "b3ecdef2e1c33ceed9ac32a5ba09ccc099c4fdcdb0fb8360b9b0c51c29f861fe",
+      "bytes": 306628
+    },
+    "gas-transfer/wave-bag/capacity_maps.svg": {
+      "source_sha256": "0e4a317172f8bcdc78c93832cc04497d1a3fb78ee7eb685d2b8b0e8f51c93c7e",
+      "sha256": "b7a232c99817bcf5681253ce23b9f64f68d111e18bee30ab39508326f8129ea0",
+      "bytes": 54942
+    },
+    "gas-transfer/wave-bag/capacity_power_maps.png": {
+      "source_sha256": "7bbf167cf4af1d101aa749a05e81e54b25a496eff6f75e87adf9418a0f9118b4",
+      "sha256": "3204f76872f407ad6b6864639d92ca83033b3b5be16d4577109e76e98e35a6a3",
+      "bytes": 392320
+    },
+    "gas-transfer/wave-bag/capacity_power_maps.svg": {
+      "source_sha256": "31f931da34888214bb1834be7e8b55ca56ff2810a8ae59af2a3b104e40b78624",
+      "sha256": "17e564f6beb3581f5c7fbd8d4563b30fc15d7da5aa912a3451c9f6e7e9454e0a",
+      "bytes": 96484
+    },
+    "gas-transfer/wave-bag/ofat_capacity.png": {
+      "source_sha256": "fd677ec22c528c8031d55429de1c64dce3c7ec545a76d975bd6f79173023a34a",
+      "sha256": "33864e113f8707d9b8dff55a20ed5df1ddb705a2becfda40752933c3e71af980",
+      "bytes": 144119
+    },
+    "gas-transfer/wave-bag/ofat_capacity.svg": {
+      "source_sha256": "ecd10c5f56da508cd519ded4803dcbec42db94fb4789c2eb27ca0276351078af",
+      "sha256": "b5775a39bc646c8dfe62658d57a2d46a109be4ab015595cb89e7917443ef8247",
+      "bytes": 42120
+    },
+    "gas-transfer/wave-bag/ofat_power.png": {
+      "source_sha256": "2177a1ed94a0c4cc4dc2f156d8abf80f016144d84f11cb068472ed4020c37826",
+      "sha256": "b1d304aaa5b1e0f1296ed11e72cf86d3e117a126565028c550aaf6511eebd4b4",
+      "bytes": 88101
+    },
+    "gas-transfer/wave-bag/ofat_power.svg": {
+      "source_sha256": "64d4943f6f90bf8d8a6c2b02136ce15b1a399e25d49067eb163d7089e1aa97b9",
+      "sha256": "aee03a689a594ae6368570559b334239c25075406b06b265ef5545bdbc648fa1",
+      "bytes": 28092
+    },
+    "gas-transfer/wave-bag/ofat_steady_do.png": {
+      "source_sha256": "52ba8a272d1b97b8fcca28ecee997a082df0dde60746d2d3d95c684a47e598f4",
+      "sha256": "b24d8f4b6a217aef8c675204393637b4d2b0423df67e799b6fb728b8177c431a",
+      "bytes": 144162
+    },
+    "gas-transfer/wave-bag/ofat_steady_do.svg": {
+      "source_sha256": "c06d33f5f56c16cc26acb5403fdccc2d2084a226106fdad2b77c8d4bcd08ff84",
+      "sha256": "17a262114fdf1484d6e46cce4ac4b2b53dd313fcd00a2684f211bc8af66fc666",
+      "bytes": 42371
+    },
+    "gas-transfer/wave-bag/power_maps.png": {
+      "source_sha256": "8c5536cfa4bb5632bd07af2f0d9c5c801295c87a67dda164e55a6c5997bcedf1",
+      "sha256": "8ec63081d45c1bd2f7cb97c2f4f78a87d7a300561f2f3535cc9436653783028c",
+      "bytes": 319145
+    },
+    "gas-transfer/wave-bag/power_maps.svg": {
+      "source_sha256": "9a2ba4403fbf7478423a07c845131eb8efc1a837aeb4b7076e05dcc6a5d41fb3",
+      "sha256": "f4402ad4c844f261d9a80291f8ea6c8bbab226f89ed04fb2ad5048c1d0ed850a",
+      "bytes": 53784
+    },
+    "gas-transfer/wave-bag/transient_comparison.png": {
+      "source_sha256": "c95d6699bee4f0079b78f21b8d6c69aeb6b9dc817266f6b4d7799b8505e32418",
+      "sha256": "6ce97d894c318139c0fe7d8e8730978622eb5a4cc5e5d7e326dcb4b73bcb0991",
+      "bytes": 157718
+    },
+    "gas-transfer/wave-bag/transient_comparison.svg": {
+      "source_sha256": "7279405501813606f343dded374ae7efd0bc1fda24f7ab1300cf70b257c74750",
+      "sha256": "71aa615e7bf7eb9b2b80e70f08d79c554a15492913b85de8ad044aaaead62eee",
+      "bytes": 39152
+    },
+    "gas-transfer/wave-bag/transient_do.png": {
+      "source_sha256": "955d55ed75f2a1a2f3af0bd08a33409e63c6f67075e5e9085af953c70c52cb1d",
+      "sha256": "87cb435732a7a662bc8e762e7078fdb8e4621c29f3b0a3b5318f160b41c7a63a",
+      "bytes": 216697
+    },
+    "gas-transfer/wave-bag/transient_do.svg": {
+      "source_sha256": "66aa630d95ffa381641d4a3607c7a3d268da42771965863b67c7f7839317f9b1",
+      "sha256": "5550f62a33cceb2b21813f2d349f4dc62d0cecdd71ccf21736c5574afc25fe99",
+      "bytes": 65820
+    },
     "mixing/shared_circulation_factor_parity.png": {
       "source_sha256": "b6996e2fb107fe2cd68472eb7492b3d185a9f00507f9359dffd517e0168e7b68",
       "sha256": "66598e6d93669ebb6ecf580dd750a90605eca58ada283bf678c65008b0c2eb32",

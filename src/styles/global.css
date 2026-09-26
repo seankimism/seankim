@@ -206,6 +206,17 @@ li::marker { color:var(--accent); }
 .xdr-scale-table th:nth-child(2) { width:30%; }
 .xdr-scale-table caption { padding:14px 16px; text-align:left; color:var(--text-muted); }
 .xdr-scale-table tbody th { background:transparent; font-weight:500; }
+/* Data comparisons share the project table frame without experiment-plan column widths. */
+.xdr-data-table th:first-child,.xdr-data-table th:nth-child(2) { width:auto; }
+.xdr-data-table td { font-variant-numeric:tabular-nums; }
+.xdr-numeric-table th:first-child { min-width:9rem; }
+.xdr-numeric-table th:not(:first-child),.xdr-numeric-table td:not(:first-child) { text-align:right; }
+.xdr-numeric-table td:not(:first-child) { white-space:nowrap; }
+.xdr-input-table th:first-child { width:10%; }
+.xdr-input-table th:nth-child(2),.xdr-input-table th:nth-child(3) { width:25%; }
+.xdr-parameter-table th:first-child { width:28%; }
+.xdr-parameter-table th:nth-child(2),.xdr-parameter-table th:nth-child(3) { width:10%; }
+.xdr-parameter-table td:nth-child(2),.xdr-parameter-table td:nth-child(3) { white-space:nowrap; }
 @media (max-width:520px) { .project-outline ol { grid-template-columns:1fr; } }
 @media (max-width:520px) { .xdr-conditions { grid-template-columns:1fr; gap:14px; padding:18px; } }
 @media (max-width:640px) { .xdr-sources { grid-template-columns:1fr; } .xdr-sources > section { padding:18px; } }

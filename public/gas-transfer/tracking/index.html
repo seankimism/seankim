@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Headspace O2 and N2 tracking</title>
+<style>
+:root{color-scheme:light;--ink:#263643;--muted:#546471;--border:#dce3e7;--small:#176f8a;--large:#c57129}
+*{box-sizing:border-box}body{margin:0;background:#fafbf9;color:var(--ink);font:15px/1.5 system-ui,sans-serif}main{max-width:1080px;margin:auto;padding:22px}h1{font:600 23px/1.25 system-ui;margin:0 0 8px}p{margin:6px 0 18px}.muted{color:var(--muted);font-size:13px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:18px;background:white;border:1px solid var(--border);border-radius:8px;padding:18px}label{display:block;font-weight:600}input[type=range]{width:100%;accent-color:var(--small);min-height:36px}#large{accent-color:var(--large)}output{font-weight:600}.chart{width:100%;display:block;background:white;border:1px solid var(--border);border-radius:6px;margin:16px 0}.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:13px}.small{color:var(--small)}.large{color:var(--large)}.time{margin:14px 0 8px}button{padding:7px 13px;border:1px solid #9caeb9;border-radius:5px;background:white;color:var(--ink);cursor:pointer}.table-wrap{overflow-x:auto}table{border-collapse:collapse;min-width:570px;width:100%;font-size:13px}th,td{padding:9px;border-bottom:1px solid var(--border);text-align:right}th:first-child,td:first-child{text-align:left}.error{color:#9b2424}a{color:var(--small)}svg text{font-family:system-ui,sans-serif}details{margin:12px 0}summary{cursor:pointer;font-weight:600}@media(max-width:600px){main{padding:12px}.controls{grid-template-columns:1fr;gap:10px;padding:12px}h1{font-size:20px}.muted{font-size:12px}}
+</style></head><body><main>
+<h1>Headspace gas tracking</h1>
+<p>Adjust the assumed fraction of sparger oxygen consumed by the culture. The same fed-batch cell-density trend and SOUR apply at both scales.</p>
+<div class="controls">
+<div><label for="small">ambr250 / 200 mL utilisation: <output id="small-value" for="small">50%</output></label><input id="small" type="range" min="5" max="95" step="5" value="50"><div class="muted">Air sparge 1 mL/min · air overlay 1 mL/min · headspace 150 mL</div></div>
+<div><label for="large">2,000 L utilisation: <output id="large-value" for="large">50%</output></label><input id="large" type="range" min="5" max="95" step="5" value="50"><div class="muted">Air sparge 10 L/min · air overlay 10 L/min · headspace 970.33 L</div></div>
+</div>
+<p class="muted">Illustrative assumptions, 5–95% in 5-point steps. No liquid kLa or DO target is inferred. At low demand, fixed air alone can give utilisation below the selected value.</p>
+<div class="legend"><span class="small">━ ambr250 O₂　┄ ambr250 N₂</span><span class="large">━ 2,000 L O₂　┄ 2,000 L N₂</span></div>
+<svg id="gas-chart" class="chart" viewBox="0 0 900 310" role="img" aria-label="Headspace oxygen and nitrogen percentages over fourteen days"></svg>
+<p class="muted">Dry gas composition. The 0.97% initial air remainder is retained. With equal utilisation and matched gas inputs per liquid volume, both scales approach the same composition; headspace volume changes the response time.</p>
+<svg id="flow-chart" class="chart" viewBox="0 0 900 245" role="img" aria-label="Calculated pure oxygen sparging per liquid volume over fourteen days"></svg>
+<div class="time"><label for="day">Inspect culture day: <output id="day-value" for="day">9.00</output></label><input id="day" type="range" min="0" max="336" step="1" value="216"></div>
+<div id="snapshot" class="table-wrap" aria-live="polite"></div>
+<p class="muted" id="biology"></p><p class="muted" id="realised"></p>
+<button id="reset" type="button">Reset utilisation to 50%</button>
+<details><summary>Interpretation and assumptions</summary><p class="muted">SOUR is 5.5 pmol/cell/day; VCD follows the published NISTCHO standard-feed spin-tube profile. Liquid volumes are fixed. Net uptake is assigned to the sparger gas, with negligible liquid O₂/N₂ storage, no N₂ consumption and no separate surface-exchange term. Gas flows use dry 0 °C and 101,325 Pa; headspaces are well mixed at 35.5 °C and 101,325 Pa. The pressure-controlled vent carries the current headspace composition. O₂ utilisation is an assumed gas-use efficiency, not a prediction from bubble size, agitation or liquid kLa. These trajectories demonstrate gas accounting; they do not establish adequate oxygen transfer or culture performance.</p></details>
+<p class="muted" id="status">Loading trajectories…</p>
+</main><script>
+const $=id=>document.getElementById(id);let data;
+const keys=['ambr250','xdr2000'],colors=['#176f8a','#c57129'];
+function svgChart(id,series,maxY,label,height){const width=Math.max(280,$(id).clientWidth||900),left=68,right=18,top=22,bottom=59,w=width-left-right,h=height-top-bottom;let s='';$(id).setAttribute('viewBox',`0 0 ${width} ${height}`);
+for(let i=0;i<=4;i++){let v=maxY*i/4,y=top+h-i*h/4;s+=`<line x1="${left}" y1="${y}" x2="${width-right}" y2="${y}" stroke="#e2e6ea"/><text x="58" y="${y+4}" text-anchor="end" font-size="12" fill="#546471">${maxY<.01?v.toFixed(4):maxY<=.1?v.toFixed(3):v.toFixed(0)}</text>`}
+for(const d of (width<450?[0,4,8,12,14]:[0,2,4,6,8,10,12,14])){let x=left+w*d/14;s+=`<text x="${x}" y="${height-37}" text-anchor="middle" font-size="12" fill="#546471">${d}</text>`}
+s+=`<text x="${left+w/2}" y="${height-19}" text-anchor="middle" font-size="13" fill="#263643">Culture day</text><text x="17" y="${top+h/2}" transform="rotate(-90 17 ${top+h/2})" text-anchor="middle" font-size="13" fill="#263643">${label}</text>`;
+for(const a of series){let p=a.values.map((v,i)=>`${left+w*data.time_days[i]/14},${top+h-h*v/maxY}`).join(' ');s+=`<polyline points="${p}" fill="none" stroke="${a.color}" stroke-width="2.3" ${a.dash?'stroke-dasharray="7 5"':''}/>`}
+let x=left+w*data.time_days[+$('day').value]/14;s+=`<line x1="${x}" y1="${top}" x2="${x}" y2="${top+h}" stroke="#82919b" stroke-dasharray="3 4"/>`;
+s+=`<text x="${width-right}" y="${height-4}" text-anchor="end" font-size="9" fill="#73808a">Sean Kim · illustrative model</text>`;$(id).innerHTML=s}
+function update(){if(!data)return;const values=[+$('small').value,+$('large').value],i=+$('day').value;
+$('small-value').textContent=values[0]+'%';$('large-value').textContent=values[1]+'%';$('day-value').textContent=data.time_days[i].toFixed(2);
+const runs=keys.map((k,j)=>data.vessels[k].series[String(values[j])]);let gas=[],flow=[];
+runs.forEach((r,j)=>{gas.push({values:r.headspace_o2_percent_dry,color:colors[j]},{values:r.headspace_n2_percent_dry,color:colors[j],dash:true});flow.push({values:r.sparger_o2_vvm,color:colors[j]})});
+svgChart('gas-chart',gas,100,'Headspace gas (% dry)',310);let ymax=Math.max(.002,...flow.flatMap(s=>s.values))*1.15;svgChart('flow-chart',flow,ymax,'Pure O₂ flow (vvm)',245);
+let rows=runs.map((r,j)=>{let scale=j?1000:1,unit=j?'L/min':'mL/min';return `<tr><th scope="row">${data.vessels[keys[j]].label}</th><td>${r.headspace_o2_percent_dry[i].toFixed(2)}%</td><td>${r.headspace_n2_percent_dry[i].toFixed(2)}%</td><td>${(r.sparger_o2_ml_min[i]/scale).toFixed(3)} ${unit}</td><td>${(r.bubble_o2_to_headspace_ml_min[i]/scale).toFixed(3)} ${unit}</td></tr>`}).join('');
+$('snapshot').innerHTML=`<table><thead><tr><th>Scale</th><th>Headspace O₂</th><th>Headspace N₂</th><th>Pure O₂ feed</th><th>Bubble O₂ to headspace</th></tr></thead><tbody>${rows}</tbody></table>`;
+$('biology').textContent=`Day ${data.time_days[i].toFixed(2)}: VCD ${data.vcd_million_ml[i].toFixed(2)} million cells/mL · OUR ${(data.vcd_million_ml[i]*data.sour_pmol_cell_day/24).toFixed(3)} mmol/L/h. Flow values are O₂ equivalents at the reference conditions.`;
+$('realised').textContent=`Realised sparger O₂ utilisation: ambr250 ${runs[0].actual_utilization_percent[i].toFixed(1)}% · 2,000 L ${runs[1].actual_utilization_percent[i].toFixed(1)}%. Fixed air can lower this below the selected assumption.`}
+for(const id of ['small','large','day'])$(id).addEventListener('input',update);$('reset').onclick=()=>{$('small').value=50;$('large').value=50;update()};
+window.addEventListener('resize',update);
+fetch('results.json').then(r=>{if(!r.ok)throw Error('Results unavailable');return r.json()}).then(d=>{data=d;update();$('status').textContent='Analytical washout and species-balance checks passed. Experimental validation remains separate.'}).catch(e=>{$('status').textContent=e.message;$('status').className='error'});
+</script></body></html>
