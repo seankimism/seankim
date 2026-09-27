@@ -348,6 +348,16 @@
       "sha256": "fe54df552e3cc4efa2a83e94a01b7cce9b77022789e55106ef89ce18576f35ad",
       "bytes": 192811
     },
+    "gas-transfer/surface_kla_global_expanded_fit.svg": {
+      "source_sha256": "2a24529421cb0904d64e12c99c8fd553ac1c8e9a26e0b0cb3f145a69acf03967",
+      "sha256": "67aa2f7b51057dd87deea22a66195ff175ef1e73c1539fd84b4c9ec66998d9ab",
+      "bytes": 40182
+    },
+    "gas-transfer/surface_kla_scale.svg": {
+      "source_sha256": "797187082b96b66bd1d4d3874ff0a6c3843a20148c237d76cf853277850597b7",
+      "sha256": "81848e8d35685d73fe663a2057fbc620ded7382549f721ed08ae3dc44b6b2a94",
+      "bytes": 41843
+    },
     "mixing/shared_circulation_factor_parity.png": {
       "source_sha256": "b6996e2fb107fe2cd68472eb7492b3d185a9f00507f9359dffd517e0168e7b68",
       "sha256": "66598e6d93669ebb6ecf580dd750a90605eca58ada283bf678c65008b0c2eb32",

@@ -7,7 +7,7 @@ import sharp from 'sharp';
 export const VERSION = 'sean-kim-model-figure-v4';
 const repository = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const checksum = bytes => createHash('sha256').update(bytes).digest('hex');
-const roots = ['agitation-thermal/figures', 'bench-heating', 'fedbatch-feed', 'mixing', 'xdr2000'];
+const roots = ['agitation-thermal/figures', 'bench-heating', 'fedbatch-feed', 'gas-transfer', 'mixing', 'xdr2000'];
 const readJson = async (file, fallback) => JSON.parse(await readFile(file, 'utf8').catch(error => {
   if (error.code === 'ENOENT' && fallback !== undefined) return JSON.stringify(fallback);
   throw error;

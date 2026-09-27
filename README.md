@@ -14,3 +14,7 @@ The initial dates follow the existing page history: Ark and Cornell on September
 9, 2026; the temperature-control page on September 11; and the completed
 agitation page's publication from draft on September 14.
 
+
+## New laptop setup
+
+See the [new-laptop setup guide](docs/new-laptop-setup.md) for cloning the recovery branch, installing dependencies, and restoring optional original figures.
