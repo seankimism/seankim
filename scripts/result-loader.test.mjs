@@ -7,14 +7,17 @@ import { loadResult, validateResult } from '../public/xdr2000/result-loader.js';
 const root = new URL('../public/xdr2000/results/80fe850c4a34/', import.meta.url);
 const read = volume => readFileSync(new URL(`${volume}.json.gz`, root));
 const result = JSON.parse(gunzipSync(read(1000)));
+const manifest = readFileSync(new URL('manifest.json', root));
+const withCatalog = fetchResult => async (url, options) => url.endsWith('manifest.json')
+  ? new Response(manifest) : fetchResult(url, options);
 
 test('loads exact endpoint and neighboring volumes from compressed responses', async () => {
   for (const volume of [400, 401, 999, 1000, 1001, 1999, 2000]) {
     let requested;
-    const loaded = await loadResult('./results/version/', volume, {fetchResult: async url => {
+    const loaded = await loadResult('./results/version/', volume, {fetchResult: withCatalog(async url => {
       requested = url;
       return new Response(read(volume));
-    }});
+    })});
     assert.equal(requested, `./results/version/${volume}.json.gz`);
     assert.equal(loaded.volume_l, volume);
     assert.equal(loaded.times_s.at(-1), 28800);
@@ -22,7 +25,7 @@ test('loads exact endpoint and neighboring volumes from compressed responses', a
 });
 
 test('accepts a response automatically decompressed by the host', async () => {
-  const loaded = await loadResult('./', 1000, {fetchResult: async () => new Response(gunzipSync(read(1000)))});
+  const loaded = await loadResult('./', 1000, {fetchResult: withCatalog(async () => new Response(gunzipSync(read(1000))))});
   assert.deepEqual(loaded, result);
 });
 
@@ -35,7 +38,7 @@ test('rejects invalid input without requesting a file', async () => {
 test('rejects missing, damaged, and wrong-volume downloads', async () => {
   await assert.rejects(loadResult('./', 1000, {fetchResult: async () => new Response('missing', {status:404})}), /downloaded/);
   await assert.rejects(loadResult('./', 1000, {fetchResult: async () => new Response('invalid JSON')}));
-  await assert.rejects(loadResult('./', 1001, {fetchResult: async () => new Response(read(1000))}), /match this volume/);
+  await assert.rejects(loadResult('./', 1001, {fetchResult: withCatalog(async () => new Response(read(1000)))}), /size|integrity|match this volume/);
 });
 
 test('rejects mismatched mesh histories, invalid times, and extra internal fields', () => {
@@ -55,4 +58,22 @@ test('passes cancellation to the fetch request', async () => {
     assert.equal(options.signal, signal);
     options.signal.throwIfAborted();
   }}), {name:'AbortError'});
+});
+
+
+test('checks integrity, caches validated results and leaves failed downloads retryable', async () => {
+  let requests = 0;
+  let corrupt = true;
+  const fetchResult = withCatalog(async () => {
+    requests++;
+    const data = Buffer.from(read(1000));
+    if (corrupt) data[data.length - 10] ^= 1;
+    return new Response(data);
+  });
+  await assert.rejects(loadResult('./verified/', 1000, {fetchResult}), /integrity/);
+  corrupt = false;
+  const first = await loadResult('./verified/', 1000, {fetchResult});
+  assert.equal(await loadResult('./verified/', 1000, {fetchResult}), first);
+  assert.equal(requests, 2);
+  assert.ok(Object.isFrozen(first.media_c));
 });

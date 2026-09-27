@@ -11,9 +11,8 @@ if (PAGES.projects.isActive === false) {
 export async function getStaticPaths() {
     if (PAGES.projects.isActive === false) return [];
     const projects = (await getCollection("projects")).filter(isPublished);
-    return projects.map((project: any) => ({
+    return projects.map(project => ({
         params: { id: project.id },
-        props: { project },
     }));
 }
 

@@ -20,6 +20,8 @@
 - **Icons:** `src/assets/icons/*.svg`, loaded by name through `src/assets/icons.ts`
 - **Static assets:** `public/` - `xdr2000/` and `thermal-control/` (interactive explorers with precomputed results), `cornell/` (project figures), `files/`, `images/`
 - **Build checks:** `scripts/check-*.mjs` verify explorer result manifests after each build
+- **Shared checks:** `scripts/result-files.mjs` verifies paths, inventories, sizes and checksums. Keep scientific/schema checks in each explorer's checker. `check-project-hierarchy.mjs` reads project frontmatter and validates listings against the same selection policy as the pages; `check-project-redirect.mjs` separately preserves the legacy XDR URL.
+- **Client behavior:** `src/utils/result-frames.mjs` owns result-iframe sizing and Astro navigation cleanup; import it directly in tests.
 - **Release:** `.github/workflows/deploy.yml` deploys `main` to GitHub Pages; `scheduled-merge.yml` merges a planned pull request on a set date (see `docs/scheduled-release.md`)
 
 ## Key Constraints
@@ -34,5 +36,6 @@
 ## Notes
 - Tailwind CSS v4 via `@tailwindcss/vite` (no tailwind.config.js); it supplies the reset and theme tokens, utilities are not used in markup
 - LaTeX math rendering via remark-math/rehype-katex
-- Analytics via GA4 (`ga4Id`) and Umami (`umami.websiteId`) in `src/config/site.ts`
+- Analytics via Umami (`umami.websiteId`) in `src/config/site.ts`
+- Pull requests run tests and a production build. Deployment and scheduled-release candidates also run all tests before building.
 - No lint/typecheck scripts configured

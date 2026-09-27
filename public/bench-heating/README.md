@@ -1,7 +1,9 @@
 # Bench thermal simulation viewer
 
-Open index.html directly, or copy this entire bench-heating folder into your website's public directory.
-The page contains its own scripts and precomputed display histories and works offline.
+Serve this bench-heating folder over HTTP(S), or copy it into your website's public directory.
+The published viewer loads only the selected precomputed scenario. For offline file opening, use index.html from the separately generated bench-heating-website.zip.
+Also copy model-figure-watermark.js and result-transport.js from the exported public directory into the website's public directory, beside bench-heating/.
+Keep the ZIP's parent-folder layout when opening its inline offline viewer.
 
 Choose the vessel and scenario; drag the 3D cutaway, play, or scrub time. Open index.html#vessel=<id>&mode=<scenario> to start on a given view.
 Coral outlines identify the heating blanket, holder block, or water jacket; surface colors show temperature.

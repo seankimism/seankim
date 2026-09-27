@@ -140,7 +140,7 @@ All styles are defined in `src/styles/global.css`. No inline `<style>` allowed i
 - **One accent color per theme:** Never use multiple accent colors together.
 
 ### Theme System
-- Themes configured in `src/config/themes.ts` - unified THEMES object with `isDark` flag
+- Themes configured in `src/config/themes.ts` - unified THEMES object
 - Each theme defines 6 tokens: `background`, `foreground`, `accent`, `muted`, `border`, `surface`
 - All CSS variables injected into `src/styles/global.css`
 - Users select active light/dark themes via `src/config/site.ts` (`THEME_CONFIG.themeLight`, `THEME_CONFIG.themeDark`)

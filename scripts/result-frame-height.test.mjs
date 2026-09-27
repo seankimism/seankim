@@ -1,13 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
-import {runInNewContext} from 'node:vm';
-import {transformSync} from 'esbuild';
-
-const layout = readFileSync(new URL('../src/layouts/BaseDetail.astro', import.meta.url), 'utf8');
-const source = layout.match(/<script>\s*([\s\S]*?)<\/script>/)?.[1];
-assert.ok(source, 'BaseDetail includes the iframe sizing script');
-const {code} = transformSync(source, {loader: 'ts', format: 'iife'});
+import {installResultFrames} from '../src/utils/result-frames.mjs';
 
 function frameFixture(height, loaded = true) {
   const main = {height, getBoundingClientRect() { return {height: this.height}; }};
@@ -30,7 +23,7 @@ function boot(frames, readyState = 'complete') {
     observe(target) { this.target = target; }
     disconnect() { this.disconnected = true; }
   }
-  runInNewContext(code, {document, window: {location: {origin: 'http://localhost:4321'}}, URL, ResizeObserver});
+  installResultFrames({document, window: {location: {origin: 'http://localhost:4321'}}, ResizeObserver});
   return {document, observers, dispatch: name => document.dispatchEvent(new Event(name))};
 }
 
@@ -47,6 +40,15 @@ test('direct page load sizes both result frames without an Astro event and track
   assert.equal(bench.frame.style.height, '1653px');
   app.dispatch('astro:page-load');
   assert.equal(app.observers.length, 2, 'duplicate lifecycle events do not attach duplicate observers');
+});
+
+test('cross-origin frames are not inspected or resized', () => {
+  const external = frameFixture(1000);
+  external.frame.src = 'https://example.com/result';
+  Object.defineProperty(external.frame, 'contentDocument', {get() { throw new Error('Cross-origin access'); }});
+  const app = boot([external.frame]);
+  assert.equal(external.frame.style.height, undefined);
+  assert.equal(app.observers.length, 0);
 });
 
 test('DOM readiness and a later lazy iframe load both attach sizing', () => {

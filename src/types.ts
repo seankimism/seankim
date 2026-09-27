@@ -27,7 +27,6 @@ export interface ThemeConfig {
 }
 
 export interface AnalyticsConfig {
-    ga4Id?: string;
     umami?: { websiteId: string; src: string };
 }
 
@@ -44,14 +43,6 @@ export interface SocialLink {
     isActive: boolean;
 }
 
-export interface PageConfig {
-    title: string;
-    subtitle: string;
-    isActive: boolean;
-}
-
-export type PagesConfig = Record<string, PageConfig>;
-
 export interface ThemeColors {
     background: string;
     foreground: string;
@@ -60,9 +51,3 @@ export interface ThemeColors {
     border: string;
     surface: string;
 }
-
-export interface Theme extends ThemeColors {
-    isDark: boolean;
-}
-
-export type ThemeName = string;

@@ -1,19 +1,9 @@
 import assert from 'node:assert/strict';
-import {readFileSync, readdirSync, realpathSync} from 'node:fs';
-import {createHash} from 'node:crypto';
-import {gunzipSync} from 'node:zlib';
+import {readFileSync, realpathSync} from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {validateCatalog, validateScenario} from '../public/thermal-control/loader.js';
-
-const checksum = bytes => createHash('sha256').update(bytes).digest('hex');
-function walk(directory) {
-  return readdirSync(directory, {withFileTypes: true}).flatMap(entry => {
-    const location = path.join(directory, entry.name);
-    assert.ok(!entry.isSymbolicLink(), `Unexpected symbolic link: ${location}`);
-    return entry.isDirectory() ? walk(location) : [location];
-  });
-}
+import {assertInventory, decodeVerifiedGzip, readVerifiedFile, walkFiles} from './result-files.mjs';
 
 export function checkControlResults(directory = 'public/thermal-control') {
   const root = realpathSync(path.resolve(directory));
@@ -33,14 +23,8 @@ export function checkControlResults(directory = 'public/thermal-control') {
   });
   let totalBytes = 0;
   for (const file of catalog.files) {
-    const location = realpathSync(path.resolve(root, file.path));
-    assert.ok(location.startsWith(root + path.sep), 'A result path escapes the public result directory.');
-    const bytes = readFileSync(location);
-    assert.equal(bytes.length, file.bytes, `Compressed size mismatch: ${file.key}`);
-    assert.equal(checksum(bytes), file.sha256, `Compressed checksum mismatch: ${file.key}`);
-    const decoded = gunzipSync(bytes, {maxOutputLength: file.json_bytes});
-    assert.equal(decoded.length, file.json_bytes, `Decoded size mismatch: ${file.key}`);
-    assert.equal(checksum(decoded), file.json_sha256, `Decoded checksum mismatch: ${file.key}`);
+    const bytes = readVerifiedFile(root, file, file.key);
+    const decoded = decodeVerifiedGzip(bytes, file, file.key);
     const result = validateScenario(JSON.parse(decoded), catalog, {volume_l: file.volume_l, p_index: file.p_index, i_index: file.i_index});
     assert.equal(result.times_s.length, 2161);
     result.times_s.forEach((time, index) => assert.equal(time, index * 60));
@@ -57,11 +41,10 @@ export function checkControlResults(directory = 'public/thermal-control') {
     }
     totalBytes += bytes.length;
   }
-  const resultFiles = walk(path.join(root, 'results')).map(location => path.relative(root, location).split(path.sep).join('/'));
-  assert.deepEqual(resultFiles.sort(), catalog.files.map(file => file.path).sort(), 'The published result tree contains missing or unlisted artifacts.');
+  assertInventory(path.join(root, 'results'), catalog.files.map(file => file.path.replace(/^results\//, '')));
   const permittedAssets = new Set(['index.html', 'explorer.js', 'loader.js', 'explorer.css', 'catalog.json']);
   const forbidden = /heating-solver-source|solver_config|XDRHeatingSolver|function\s+(?:buildModel|simulate|factor)\s*\(|contact_resistance_m2_k_w|steel_conductivity_w_m_k|capacity_j_k|conductance_w_k|physical_inputs|state_matrix|eigenvectors/;
-  for (const location of walk(root)) {
+  for (const location of walkFiles(root)) {
     const relative = path.relative(root, location).split(path.sep).join('/');
     if (relative.startsWith('results/')) continue; // Every decoded field was checked against the strict schema above.
     assert.ok(permittedAssets.has(relative), `Unexpected published artifact: ${relative}`);

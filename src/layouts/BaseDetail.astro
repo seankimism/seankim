@@ -58,41 +58,6 @@ const article = paper
 </BaseLayout>
 
 <script>
-  // Size local result exports to their content, including their mobile controls.
-  // Observing the inner main avoids a feedback loop with the iframe's own height.
-  function connectResultFrames() {
-    document.querySelectorAll<HTMLIFrameElement>('iframe[data-content-height]').forEach(frame => {
-      if (frame.dataset.connected) return;
-      frame.dataset.connected = 'true';
-      let observer: ResizeObserver | undefined;
-      const connect = () => {
-        observer?.disconnect();
-        if (new URL(frame.src).origin !== window.location.origin) return;
-        const doc = frame.contentDocument;
-        const main = doc?.querySelector('main');
-        if (!doc?.body || !main || !frame.contentWindow) return;
-        const resize = () => {
-          const bodyStyle = frame.contentWindow!.getComputedStyle(doc.body);
-          const padding = parseFloat(bodyStyle.paddingTop) + parseFloat(bodyStyle.paddingBottom);
-          frame.style.height = `${Math.ceil(main.getBoundingClientRect().height + padding + 2)}px`;
-        };
-        observer = new ResizeObserver(resize);
-        observer.observe(main);
-        resize();
-      };
-      frame.addEventListener('load', connect);
-      connect();
-      document.addEventListener('astro:before-swap', () => {
-        observer?.disconnect();
-        frame.removeEventListener('load', connect);
-        delete frame.dataset.connected;
-      }, { once: true });
-    });
-  }
-  document.addEventListener('astro:page-load', connectResultFrames);
-  // Direct page loads must not depend on an Astro navigation event.
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', connectResultFrames, { once: true });
-  }
-  connectResultFrames();
+  import { installResultFrames } from '../utils/result-frames.mjs';
+  installResultFrames({ document, window, ResizeObserver });
 </script>

@@ -1,3 +1,4 @@
+import {download, loadJson, deepFreeze, ResultCache} from '../result-transport.js';
 // Loads display data only. Each file is a separately calculated volume scenario.
 const fields = [
   'geometry', 'bands', 'times_s', 'media_c', 'water_c', 'air_c', 'steel_c',
@@ -37,19 +38,28 @@ export function validateResult(result, volume) {
   return result;
 }
 
+// Catalogs/caches are scoped to the fetch function so tests and different transports
+// cannot accidentally reuse each other's responses. Failed requests never enter a cache.
+const contexts = new WeakMap();
 export async function loadResult(root, volume, {signal, fetchResult = fetch} = {}) {
   if (!Number.isInteger(volume) || volume < 400 || volume > 2000) throw new Error('Choose a whole-liter volume from 400 to 2,000 L.');
-  const response = await fetchResult(`${root}${volume}.json.gz`, {signal});
-  if (!response.ok) throw new Error('The saved result could not be downloaded.');
-  const bytes = new Uint8Array(await response.arrayBuffer());
-  let result;
-  // Some hosts decode Content-Encoding automatically; accept either transport.
-  if (bytes[0] === 0x1f && bytes[1] === 0x8b) {
-    if (typeof DecompressionStream === 'undefined') throw new Error('Please use a current browser to load saved results.');
-    const decoded = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
-    result = await new Response(decoded).json();
-  } else {
-    result = JSON.parse(new TextDecoder().decode(bytes));
+  signal?.throwIfAborted();
+  let roots = contexts.get(fetchResult);
+  if (!roots) { roots = new Map(); contexts.set(fetchResult, roots); }
+  let context = roots.get(root);
+  if (!context) {
+    const bytes = await download(`${root}manifest.json`, {signal, fetchResult}, 1_000_000);
+    const manifest = JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(bytes));
+    if (manifest.schema_version !== 1 || manifest.count !== 1601 || !Array.isArray(manifest.files)
+        || manifest.files.length !== 1601 || manifest.files.some((file, index) => file.volume_l !== 400 + index)) {
+      throw new Error('The saved volume catalog is incomplete.');
+    }
+    context = {files: manifest.files, cache: new ResultCache()};
+    roots.set(root, context);
   }
-  return validateResult(result, volume);
+  const cached = context.cache.get(volume);
+  if (cached) return cached;
+  const result = await loadJson(`${root}${volume}.json.gz`, context.files[volume - 400], {signal, fetchResult});
+  signal?.throwIfAborted();
+  return context.cache.set(volume, deepFreeze(validateResult(result, volume)));
 }

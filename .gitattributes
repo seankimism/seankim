@@ -9,3 +9,7 @@ public/**/*.svg text eol=lf
 public/agitation-thermal/**/*.html text eol=lf
 public/agitation-thermal/**/*.json text eol=lf
 public/figure-watermarks.json text eol=lf
+
+# Keep generated loader/template provenance identical on all platforms.
+public/**/*.js text eol=lf
+public/**/*.json text eol=lf

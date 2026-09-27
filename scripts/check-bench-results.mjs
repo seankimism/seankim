@@ -1,10 +1,9 @@
 import assert from 'node:assert/strict';
-import {readFileSync, readdirSync, realpathSync} from 'node:fs';
-import {createHash} from 'node:crypto';
+import {readFileSync, realpathSync} from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
-
-const checksum = bytes => createHash('sha256').update(bytes).digest('hex');
+import {assertInventory, decodeVerifiedGzip, readVerifiedFile, walkFiles} from './result-files.mjs';
+import {validateCatalog, validateScenario} from '../public/bench-heating/bench-loader.js';
 const scenarios = ['controlled', 'fed_batch_cold_feed', 'fed_batch_warm_feed', 'perfusion'];
 // Culture scenarios: the two fed-batch cases add scheduled cell-free boluses
 // (volume steps up); perfusion keeps its constant volume with stream heat excluded.
@@ -31,6 +30,21 @@ export function readBenchDisplay(html) {
   assert.equal(scripts.length, 1, 'Expected exactly one embedded model-data script');
   assert.match(scripts[0][1], /(?:^|\s)type\s*=\s*(["'])application\/json\1/i);
   return JSON.parse(scripts[0][2]);
+}
+
+/** Reconstruct the display histories for scientific checks, without a browser. */
+export function loadBenchDisplay(directory = 'public/bench-heating', catalog) {
+  const root = realpathSync(path.resolve(directory));
+  catalog = validateCatalog(catalog ?? readBenchDisplay(readFileSync(path.join(root, 'index.html'), 'utf8')));
+  return {
+    schema_version: 1, default_vessel: catalog.default_vessel, default_mode: catalog.default_mode,
+    vessels: catalog.vessels.map(vessel => ({...vessel,
+      scenarios: Object.fromEntries(Object.entries(vessel.scenarios).map(([name, file]) => {
+        const decoded = decodeVerifiedGzip(readVerifiedFile(root, file), file);
+        return [name, validateScenario(JSON.parse(decoded), vessel, name)];
+      })),
+    })),
+  };
 }
 
 export function validateBenchDisplay(data) {
@@ -146,24 +160,21 @@ export function validateBenchDisplay(data) {
   return data;
 }
 
-function walk(directory) {
-  return readdirSync(directory, {withFileTypes: true}).flatMap(entry => {
-    const location = path.join(directory, entry.name);
-    assert.ok(!entry.isSymbolicLink(), `Unexpected symbolic link: ${location}`);
-    return entry.isDirectory() ? walk(location) : [location];
-  });
-}
-
 export function checkBenchResults(directory = 'public/bench-heating') {
   const root = realpathSync(path.resolve(directory));
-  const actualFiles = walk(root).map(location => path.relative(root, location).split(path.sep).join('/'));
+  const actualFiles = walkFiles(root).map(location => path.relative(root, location).split(path.sep).join('/'));
   const manifest = JSON.parse(readFileSync(path.join(root, 'manifest.json'), 'utf8'));
-  keys(manifest, 'schema_version playback temperature_rounding_c vessels files', 'bench manifest');
-  assert.equal(manifest.schema_version, 1);
+  const catalog = validateCatalog(readBenchDisplay(readFileSync(path.join(root, 'index.html'), 'utf8')));
+  keys(manifest, 'schema_version catalog_version playback temperature_rounding_c vessels files', 'bench manifest');
+  assert.equal(manifest.schema_version, 2);
+  assert.equal(manifest.catalog_version, catalog.version, 'Bench catalog version mismatch');
   assert.equal(manifest.temperature_rounding_c, 0.0001);
   text(manifest.playback, 'playback description');
   assert.ok(Array.isArray(manifest.files));
-  const permitted = new Set(['index.html', 'README.md']);
+  const permitted = new Set(['index.html', 'README.md', 'bench-loader.js']);
+  for (const vessel of catalog.vessels) {
+    for (const file of Object.values(vessel.scenarios)) permitted.add(file.path);
+  }
   for (const vessel of Object.keys(volumes)) {
     for (const folder of ['', '/fed_batch_cold_feed', '/fed_batch_warm_feed', '/perfusion']) {
       for (const figure of ['vessel_3d', 'temperature_over_time']) {
@@ -173,24 +184,26 @@ export function checkBenchResults(directory = 'public/bench-heating') {
   }
   let bytes = 0;
   for (const file of manifest.files) {
-    keys(file, 'path bytes sha256', 'manifest file');
+    const hasProvenance = Object.hasOwn(file, 'source_bytes') || Object.hasOwn(file, 'source_sha256');
+    keys(file, 'path bytes sha256' + (hasProvenance ? ' source_bytes source_sha256' : ''), 'manifest file');
     assert.ok(permitted.has(file.path), `Unexpected or unsafe asset path: ${file.path}`);
+    if (hasProvenance) {
+      assert.match(file.path, /\.(png|svg)$/, 'Only watermarked figures carry source provenance');
+      assert.ok(Number.isSafeInteger(file.source_bytes) && file.source_bytes > 0, 'Invalid original figure size');
+      assert.match(file.source_sha256, /^[a-f0-9]{64}$/, 'Invalid original figure checksum');
+    }
     assert.ok(Number.isSafeInteger(file.bytes) && file.bytes > 0);
     assert.match(file.sha256, /^[a-f0-9]{64}$/);
-    const location = realpathSync(path.resolve(root, file.path));
-    assert.ok(location.startsWith(root + path.sep), 'An asset path escapes the bench directory');
-    const buffer = readFileSync(location);
-    assert.equal(buffer.length, file.bytes, `Size mismatch: ${file.path}`);
-    assert.equal(checksum(buffer), file.sha256, `Checksum mismatch: ${file.path}`);
+    const buffer = readVerifiedFile(root, file);
     bytes += buffer.length;
   }
   assert.deepEqual(manifest.files.map(file => file.path).sort(), [...permitted].sort(), 'Missing or duplicate manifest assets');
-  assert.deepEqual(actualFiles.sort(), [...permitted, 'manifest.json'].sort(), 'Unlisted bench artifacts');
+  assertInventory(root, [...permitted, 'manifest.json']);
   const forbidden = /heating-solver-source|solver_config|physical_inputs|thermal_config|kp_scale|integral_time_scale|q_o2_pmol_cell_day|steel_conductivity_w_m_k|capacity_j_k|conductance_w_k|state_matrix|eigenvectors/;
-  for (const relative of actualFiles.filter(file => /\.(?:html|svg|json|md)$/i.test(file))) {
+  for (const relative of actualFiles.filter(file => /\.(?:html|svg|json|md|js)$/i.test(file))) {
     assert.ok(!forbidden.test(readFileSync(path.join(root, relative), 'utf8')), `Computational source or parameters found in ${relative}`);
   }
-  const data = validateBenchDisplay(readBenchDisplay(readFileSync(path.join(root, 'index.html'), 'utf8')));
+  const data = validateBenchDisplay(loadBenchDisplay(root, catalog));
   assert.ok(Array.isArray(manifest.vessels));
   assert.deepEqual(manifest.vessels.map(vessel => vessel.id), data.vessels.map(vessel => vessel.id));
   for (const item of manifest.vessels) {

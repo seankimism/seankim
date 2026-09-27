@@ -121,6 +121,7 @@ async function main() {
   };
   const build = () => {
     execFileSync('npm', ['ci'], { stdio: 'inherit' });
+    execFileSync('npm', ['test'], { stdio: 'inherit' });
     execFileSync('npm', ['run', 'build'], { stdio: 'inherit' });
   };
   await runRelease({ config, dryRun: process.env.DRY_RUN === 'true', api, git, build, log });

@@ -1,3 +1,4 @@
+import {download, loadJson, deepFreeze, ResultCache} from '../result-transport.js';
 // Download and validate display results. This module performs no thermal calculation.
 const catalogKeys = ['schema_version', 'version', 'volumes_l', 'p_scales', 'i_scales', 'defaults', 'baseline_gains_by_volume', 'conditions', 'files'];
 const gainKeys = ['outer_kp', 'outer_ti_min', 'inner_kp', 'inner_ti_min'];
@@ -16,14 +17,6 @@ const positive = value => Number.isFinite(value) && value > 0;
 const close = (left, right, tolerance = 0.00001) => Math.abs(left - right) <= tolerance;
 const requireValid = (condition, message = 'The saved result is incomplete or inconsistent.') => { if (!condition) throw new Error(message); };
 const isIndex = (value, values) => Number.isInteger(value) && value >= 0 && value < values.length;
-
-function deepFreeze(value) {
-  if (value && typeof value === 'object' && !Object.isFrozen(value)) {
-    Object.freeze(value);
-    Object.values(value).forEach(deepFreeze);
-  }
-  return value;
-}
 
 export function validateCatalog(catalog) {
   requireValid(sameKeys(catalog, catalogKeys), 'The tuning catalog has an unexpected format.');
@@ -114,53 +107,11 @@ function absoluteCatalogUrl(value) {
   return url;
 }
 
-async function download(url, {signal, fetchResult}, limit) {
-  signal?.throwIfAborted();
-  const response = await fetchResult(url.href, {signal, credentials: 'same-origin'});
-  requireValid(response.ok, 'The temperature response could not be downloaded. Please try again.');
-  requireValid(!response.url || response.url === url.href, 'The result download was redirected unexpectedly.');
-  const length = Number(response.headers.get('content-length'));
-  requireValid(!Number.isFinite(length) || length <= limit, 'The result download is larger than expected.');
-  const bytes = new Uint8Array(await response.arrayBuffer());
-  signal?.throwIfAborted();
-  requireValid(bytes.length <= limit, 'The result download is larger than expected.');
-  return bytes;
-}
-
-async function verifyBytes(bytes, length, checksum) {
-  requireValid(bytes.length === length, 'The saved response has an unexpected size.');
-  requireValid(globalThis.crypto?.subtle, 'Open this page over HTTPS to check the saved responses.');
-  const digest = new Uint8Array(await globalThis.crypto.subtle.digest('SHA-256', bytes));
-  requireValid(Array.from(digest, value => value.toString(16).padStart(2, '0')).join('') === checksum, 'The saved response failed its integrity check.');
-}
-
-async function unpack(bytes, limit) {
-  requireValid(typeof DecompressionStream !== 'undefined', 'Please use a current browser to view the temperature responses.');
-  const reader = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip')).getReader();
-  const chunks = [];
-  let length = 0;
-  try {
-    while (true) {
-      const {done, value} = await reader.read();
-      if (done) break;
-      length += value.length;
-      requireValid(length <= limit, 'The saved response expands beyond its expected size.');
-      chunks.push(value);
-    }
-  } finally {
-    await reader.cancel();
-  }
-  const decoded = new Uint8Array(length);
-  let offset = 0;
-  for (const chunk of chunks) { decoded.set(chunk, offset); offset += chunk.length; }
-  return decoded;
-}
-
 export async function loadCatalog(url = './catalog.json', {signal, fetchResult = fetch} = {}) {
   const location = absoluteCatalogUrl(url);
   const bytes = await download(location, {signal, fetchResult}, 1_000_000);
   const catalog = deepFreeze(validateCatalog(JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(bytes))));
-  contexts.set(catalog, {root: new URL('./', location), cache: new Map()});
+  contexts.set(catalog, {root: new URL('./', location), cache: new ResultCache()});
   return catalog;
 }
 
@@ -169,22 +120,10 @@ export async function loadScenario(catalog, selection, {signal, fetchResult = fe
   const context = contexts.get(catalog);
   requireValid(context, 'Load the tuning catalog before choosing a response.');
   const file = selectedFile(catalog, selection);
-  if (context.cache.has(file.key)) {
-    const result = context.cache.get(file.key);
-    context.cache.delete(file.key);
-    context.cache.set(file.key, result);
-    return result;
-  }
-  let bytes = await download(new URL(file.path, context.root), {signal, fetchResult}, Math.max(file.bytes, file.json_bytes));
-  // Hosts may send the stored gzip or decode it through Content-Encoding.
-  if (bytes[0] === 0x1f && bytes[1] === 0x8b) {
-    await verifyBytes(bytes, file.bytes, file.sha256);
-    bytes = await unpack(bytes, file.json_bytes);
-  }
-  await verifyBytes(bytes, file.json_bytes, file.json_sha256);
-  const result = deepFreeze(validateScenario(JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(bytes)), catalog, selection));
+  const cached = context.cache.get(file.key);
+  if (cached) return cached;
+  const data = await loadJson(new URL(file.path, context.root), file, {signal, fetchResult});
+  const result = deepFreeze(validateScenario(data, catalog, selection));
   signal?.throwIfAborted();
-  context.cache.set(file.key, result);
-  if (context.cache.size > 8) context.cache.delete(context.cache.keys().next().value);
-  return result;
+  return context.cache.set(file.key, result);
 }

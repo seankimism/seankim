@@ -1,13 +1,15 @@
 import assert from 'node:assert/strict';
-import {cpSync, mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync} from 'node:fs';
+import {cpSync, mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync} from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import test from 'node:test';
-import {checkBenchResults, readBenchDisplay, validateBenchDisplay} from './check-bench-results.mjs';
+import {checkBenchResults, loadBenchDisplay, readBenchDisplay, validateBenchDisplay} from './check-bench-results.mjs';
+import {checksum} from './result-files.mjs';
+import {watermarkFigures} from './watermark-model-figures.mjs';
 
 const source = fileURLToPath(new URL('../public/bench-heating', import.meta.url));
-const display = () => readBenchDisplay(readFileSync(path.join(source, 'index.html'), 'utf8'));
+const display = () => loadBenchDisplay(source);
 
 test('published bench export passes artifact and display checks', () => {
   const result = checkBenchResults(source);
@@ -75,4 +77,46 @@ test('a manifest checksum misreport and an escaping path both fail', t => {
   manifest.files[0].path = '../outside.html';
   writeFileSync(filename, JSON.stringify(manifest));
   assert.throws(() => checkBenchResults(directory), /unsafe asset path/);
+});
+
+test('on-demand catalog rejects invalid decoded lengths and mismatched scenario identities', () => {
+  const catalog = () => readBenchDisplay(readFileSync(path.join(source, 'index.html'), 'utf8'));
+  const changed = catalog();
+  const file = changed.vessels[0].scenarios.controlled;
+  // The content address stays valid; the declared decoded length must still match.
+  file.json_bytes += 1;
+  assert.throws(() => loadBenchDisplay(source, changed), /Size mismatch: decoded/);
+  const mismatched = catalog();
+  mismatched.vessels[0].scenarios.controlled = mismatched.vessels[1].scenarios.controlled;
+  assert.throws(() => loadBenchDisplay(source, mismatched), /incomplete or inconsistent/);
+});
+
+test('a newly exported figure remains valid after watermarking records its source', async t => {
+  const temporaryRoot = realpathSync(os.tmpdir());
+  const root = mkdtempSync(path.join(temporaryRoot, 'bench-watermark-test-'));
+  assert.equal(path.dirname(realpathSync(root)), temporaryRoot);
+  t.after(() => rmSync(root, {recursive: true, force: true}));
+  const directory = path.join(root, 'public/bench-heating');
+  mkdirSync(path.dirname(directory));
+  cpSync(source, directory, {recursive: true});
+  cpSync(path.join(source, '../figure-watermarks.json'), path.join(root, 'public/figure-watermarks.json'));
+  const filename = path.join(directory, 'manifest.json');
+  const manifest = JSON.parse(readFileSync(filename, 'utf8'));
+  const entry = manifest.files.find(file => file.path.endsWith('.svg'));
+  const original = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><path d="M20 20L300 250"/></svg>';
+  writeFileSync(path.join(directory, entry.path), original);
+  Object.assign(entry, {bytes: Buffer.byteLength(original), sha256: checksum(original)});
+  delete entry.source_bytes;
+  delete entry.source_sha256;
+  writeFileSync(filename, JSON.stringify(manifest));
+  await watermarkFigures({root});
+  const updated = JSON.parse(readFileSync(filename, 'utf8')).files.find(file => file.path === entry.path);
+  assert.equal(updated.source_bytes, Buffer.byteLength(original));
+  assert.equal(updated.source_sha256, checksum(original));
+  assert.equal(checkBenchResults(directory).scenarios, 12);
+  delete updated.source_bytes;
+  const broken = JSON.parse(readFileSync(filename, 'utf8'));
+  broken.files[broken.files.findIndex(file => file.path === entry.path)] = updated;
+  writeFileSync(filename, JSON.stringify(broken));
+  assert.throws(() => checkBenchResults(directory), /Unexpected fields in manifest file/);
 });

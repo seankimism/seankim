@@ -23,4 +23,4 @@ agitation page's publication from draft on September 14.
 
 ## New laptop setup
 
-See the [new-laptop setup guide](docs/new-laptop-setup.md) for cloning the recovery branch, installing dependencies, and restoring optional original figures.
+See the [current setup guide](docs/setup.md) for installation, checks, preview, and deployment. The [September migration notes](docs/new-laptop-setup.md) retain historical recovery instructions.

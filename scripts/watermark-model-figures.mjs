@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import sharp from 'sharp';
+import {readVerifiedFile} from './result-files.mjs';
 
 export const VERSION = 'sean-kim-model-figure-v4';
 const repository = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -67,39 +68,52 @@ async function writeJsonIfChanged(file, value) {
   if (await readFile(file, 'utf8').catch(() => '') !== next) await writeFile(file, next);
 }
 
-async function refreshManifests(publicRoot, processed) {
-  const benchPath = path.join(publicRoot, 'bench-heating/manifest.json');
-  const bench = await readJson(benchPath, null);
-  if (bench) {
-    for (const file of bench.files) {
-      if (file.path !== 'index.html' && !processed.has('bench-heating/' + file.path)) continue;
-      const bytes = await readFile(path.join(publicRoot, 'bench-heating', file.path));
-      file.bytes = bytes.length;
-      file.sha256 = checksum(bytes);
-    }
-    await writeJsonIfChanged(benchPath, bench);
-  }
-  const agitationPath = path.join(publicRoot, 'agitation-thermal/manifest.json');
-  const agitation = await readJson(agitationPath, null);
-  if (agitation) {
-    for (const [relative, asset] of Object.entries(agitation.artifacts)) {
-      const location = path.join(publicRoot, 'agitation-thermal', relative);
-      let bytes = await readFile(location);
-      if (/\.(html|svg|json)$/.test(relative)) {
-        const normalized = Buffer.from(bytes.toString().replace(/\r\n?/g, '\n'));
-        if (!normalized.equals(bytes)) await writeFile(location, normalized);
-        bytes = normalized;
+// Validate the imported release before any mutation. A watermark update may
+// rewrite only figures it actually transformed, never bless unrelated changes.
+async function exportManifests(publicRoot) {
+  const manifests = [];
+  for (const directory of ['bench-heating', 'agitation-thermal']) {
+    const location = path.join(publicRoot, directory, 'manifest.json');
+    const data = await readJson(location, null);
+    if (!data) continue;
+    const entries = directory === 'bench-heating' ? data.files.map(file => [file.path, file])
+      : Object.entries(data.artifacts);
+    for (const [relative, entry] of entries) {
+      try {
+        readVerifiedFile(path.join(publicRoot, directory), {...entry, path: relative});
+      } catch (error) {
+        throw new Error(`Export integrity mismatch: ${directory}/${relative}. Restore or regenerate the release before watermarking.`, {cause: error});
       }
-      asset.bytes = bytes.length;
-      asset.sha256 = checksum(bytes);
     }
-    agitation.artifact_bytes = Object.values(agitation.artifacts).reduce((total, asset) => total + asset.bytes, 0);
-    await writeJsonIfChanged(agitationPath, agitation);
+    manifests.push({directory, location, data, entries});
+  }
+  return manifests;
+}
+
+async function refreshManifests(publicRoot, manifests, transformed) {
+  for (const {directory, location, data, entries} of manifests) {
+    let changed = false;
+    for (const [relative, entry] of entries) {
+      const source = transformed.get(`${directory}/${relative}`);
+      if (!source) continue;
+      const bytes = await readFile(path.join(publicRoot, directory, relative));
+      entry.source_bytes = source.bytes;
+      entry.source_sha256 = source.sha256;
+      entry.bytes = bytes.length;
+      entry.sha256 = checksum(bytes);
+      changed = true;
+    }
+    if (changed) {
+      if (data.artifacts) data.artifact_bytes = Object.values(data.artifacts).reduce((total, asset) => total + asset.bytes, 0);
+      await writeJsonIfChanged(location, data);
+    }
   }
 }
 
 export async function watermarkFigures({ root = repository, check = false } = {}) {
   const publicRoot = path.join(root, 'public');
+  const exports = await exportManifests(publicRoot);
+  const transformed = new Map();
   const manifestPath = path.join(publicRoot, 'figure-watermarks.json');
   const previous = await readJson(manifestPath, { files: {} });
   const files = (await Promise.all(roots.map(relative => walk(path.join(publicRoot, relative))))).flat().sort();
@@ -134,13 +148,14 @@ export async function watermarkFigures({ root = repository, check = false } = {}
     });
     await writeFile(file, result);
     manifest.files[relative] = { source_sha256: sourceHash, sha256: checksum(result), bytes: result.length };
+    transformed.set(relative, {bytes: source.length, sha256: sourceHash});
     changed++;
   }
   if (check) {
     if (Object.keys(previous.files).length !== processed.size) throw new Error('Watermark inventory is stale');
   } else {
     await writeJsonIfChanged(manifestPath, manifest);
-    await refreshManifests(publicRoot, processed);
+    await refreshManifests(publicRoot, exports, transformed);
   }
   return { figures: processed.size, changed };
 }

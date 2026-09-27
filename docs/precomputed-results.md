@@ -8,9 +8,11 @@ Each result contains only display geometry, ring boundaries, temperature histori
 
 ## Updating results
 
-Keep the computational source, internal parameters, and offline generator outside this repository and its public deployment. Run the private generator for the complete catalog when model inputs change, then copy only the display results into a new version directory. Update the viewer's `results_root` and embedded default, and update the fixture path in `scripts/result-loader.test.mjs`. Remove obsolete result directories from the deployment after verifying the new catalog.
+Keep the computational source, internal parameters, and offline generator outside this repository and its public deployment. The tracked generator lives in `bioprocess-modeling`: run `python -m bioreactor.website.xdr_catalog --output-dir output/xdr_catalog_release` for all 1,601 volumes. Its release manifest records input, solver, driver and template hashes. Use `--reference-catalog <existing-results-directory>` to compare every selected result with a prior release. Copy only the generated `public/` tree; keep `inputs/` and the release manifest in the modeling repository. Update the viewer's `results_root` and embedded default, and update the fixture path in `scripts/result-loader.test.mjs`. Remove obsolete result directories from the deployment after verifying the new catalog.
 
 Run `node --test scripts/result-loader.test.mjs` and `npm run build`. The build checks every saved volume, checksum, result shape, and target crossing; checks for known computational source or parameter markers; and verifies the site's size. Gzip is storage compression, not source protection: model privacy depends on keeping the solver and internal configuration out of public files.
+
+XDR, tuning and bench viewers share `public/result-transport.js` for bounded downloads, gzip decoding, SHA-256 verification and caching. Both compressed and decoded sizes and hashes are checked before model-specific validation.
 
 The loader uses the browser's native `DecompressionStream` API. It also accepts JSON that the host has already decompressed. Relative URLs preserve both root hosting and GitHub Pages repository paths.
 

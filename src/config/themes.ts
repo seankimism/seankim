@@ -1,8 +1,6 @@
-import type { Theme, ThemeColors, ThemeName } from "../types";
+import type { ThemeColors } from "../types";
 
-export { type Theme, type ThemeName, type ThemeColors };
-
-export const THEMES: Record<string, Theme> = {
+export const THEMES: Record<string, ThemeColors> = {
     light_default: {
         background: "#ffffff",
         foreground: "#192c36",
@@ -10,7 +8,6 @@ export const THEMES: Record<string, Theme> = {
         muted: "#576770",
         border: "#dce4e8",
         surface: "#f4f7f8",
-        isDark: false,
     },
     dark_default: {
         background: "#141e26",
@@ -19,10 +16,8 @@ export const THEMES: Record<string, Theme> = {
         muted: "#a9bbc5",
         border: "#344752",
         surface: "#1a2933",
-        isDark: true,
     },
     light_notepad: {
-        isDark: false,
         background: '#fdf8e9',
         surface: '#fdf8e9',
         foreground: '#29231c',
@@ -31,7 +26,6 @@ export const THEMES: Record<string, Theme> = {
         accent: '#b84c30',
     },
     dark_notepad: {
-        isDark: true,
         background: '#241f1c',
         surface: '#241f1c',
         foreground: '#e6dfd3',

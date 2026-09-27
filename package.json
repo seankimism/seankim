@@ -7,10 +7,10 @@
   },
   "scripts": {
     "watermark:figures": "node scripts/watermark-model-figures.mjs",
-    "predev": "npm run watermark:figures",
-    "prebuild": "npm run watermark:figures",
+    "predev": "node scripts/watermark-model-figures.mjs --check",
+    "prebuild": "node scripts/watermark-model-figures.mjs --check",
     "dev": "astro dev",
-    "build": "astro build && node scripts/check-xdr-results.mjs dist/xdr2000 && node scripts/check-control-results.mjs dist/thermal-control && node scripts/check-bench-results.mjs dist/bench-heating && node scripts/check-project-redirect.mjs dist",
+    "build": "astro build && node scripts/check-xdr-results.mjs dist/xdr2000 && node scripts/check-control-results.mjs dist/thermal-control && node scripts/check-bench-results.mjs dist/bench-heating && node scripts/check-project-redirect.mjs dist && node scripts/check-project-hierarchy.mjs dist && node scripts/check-agitation-results.mjs dist/agitation-thermal",
     "preview": "astro preview",
     "astro": "astro",
     "test": "node --test scripts/*.test.mjs src/utils/*.test.mjs .github/scripts/*.test.mjs"
@@ -27,6 +27,7 @@
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
-    "sharp": "0.34.5"
+    "sharp": "0.34.5",
+    "yaml": "^2.9.1"
   }
 }

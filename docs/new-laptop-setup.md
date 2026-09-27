@@ -1,4 +1,7 @@
-# Set up this website branch on a new laptop
+# September 2026 migration notes
+
+Historical recovery instructions. For the current checkout, use [setup.md](setup.md).
+
 
 The `laptop-reset-2026-09-25` branch preserves the local website work from the
 September 2026 laptop migration, including the gas-transfer project page and

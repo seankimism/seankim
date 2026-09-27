@@ -1,11 +1,12 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "catalog_version": "652cc3097da430a1c132c1269b18addd25506523fa5a060f279472f29485c46d",
   "playback": "Precomputed frames with linear display interpolation; fed-batch boluses step volume, liquid level and cumulative feed; perfusion keeps volume fixed; no calculation of new scenarios",
   "temperature_rounding_c": 0.0001,
   "vessels": [
     {
       "id": "applikon3l",
-      "volume_l": 2,
+      "volume_l": 2.0,
       "band_count": 50,
       "frames": {
         "controlled": 1441,
@@ -27,7 +28,7 @@
     },
     {
       "id": "xdr2000",
-      "volume_l": 1500,
+      "volume_l": 1500.0,
       "band_count": 184,
       "frames": {
         "controlled": 193,
@@ -40,8 +41,78 @@
   "files": [
     {
       "path": "index.html",
-      "bytes": 11411579,
-      "sha256": "c28268d1d12d173df5a08627e167a59eee1f604a7ffc12810f62d893131f2ef0"
+      "bytes": 93645,
+      "sha256": "48f624339eae1513928819f1597f1561119f383f142a7eef76686a6c71e6ad2e"
+    },
+    {
+      "path": "bench-loader.js",
+      "bytes": 6735,
+      "sha256": "78152ceb9917c82294125a09b9f591e091cd1189844a36c951ca7a18a87eb30e"
+    },
+    {
+      "path": "results/fd02411d76a3c04e1213da4290df329c897f198a6fc445b8b3c0e81d0d3cb120.json.gz",
+      "bytes": 116081,
+      "sha256": "75512d50193fa5491f4544d311647684c56277531a3c2561266fe2129ef30214"
+    },
+    {
+      "path": "results/9fb7e91540e4ab45a8f89556ccaecc5935cff87b8b5d536480e7d5fdcd41165a.json.gz",
+      "bytes": 89428,
+      "sha256": "6e9a91672a902ab68fe2ea8db97b31d590df84c927e3fa3aeddc02eee8fc3d70"
+    },
+    {
+      "path": "results/d8de95127b74f8f3e992bd4dc6beff6b90bdd1aa9582280b07a68fe7e4bae220.json.gz",
+      "bytes": 88744,
+      "sha256": "c16f42451f773829431e17b8e9fcecc67069124dce38ee0278556f35cfc0d9a1"
+    },
+    {
+      "path": "results/2ad36cb4380864cd70ee9fa7a08638c4261855a71516c11b3695ca341c4d2bb8.json.gz",
+      "bytes": 271547,
+      "sha256": "ff27ba0dde0a3175af6bb0bc4c3c040dc5c8febd925016e2c01b27c307731a3c"
+    },
+    {
+      "path": "results/bd5286d8b7302041ebbbe8142cbc595c9ad6407c3ff9a8d5ef98f2fd1c421ab7.json.gz",
+      "bytes": 59021,
+      "sha256": "5fcede7815ba645ee1ac28787cac47f3a07a8b38a8cbcb8bfc039663233a7747"
+    },
+    {
+      "path": "results/60fc46020e41582afda8c78974a431bdd51b0f9196236eb63791d65f6e02d6db.json.gz",
+      "bytes": 75674,
+      "sha256": "7a93fe9d5829e52759c4d605dfb28f69b8961f93b5757c7f8107ceb9e32f986a"
+    },
+    {
+      "path": "results/8e46adcc81e07546edbdee20ce04e61e3543b35b05e32ab51d00cc21e11d8be6.json.gz",
+      "bytes": 73385,
+      "sha256": "8d3a92b96b0d9479ca872cb395a28b3e7176fd4a9fb1d64d4dc2e773ddb9b25d"
+    },
+    {
+      "path": "results/45a1bfea208edaa61503551e188449eec59521bcbf6bc8efab07040225cde858.json.gz",
+      "bytes": 183924,
+      "sha256": "7cc305e75c43646e36fa0f25acdb8de0815f63dc3a280bb88cf2755bb9549e83"
+    },
+    {
+      "path": "results/d43cb23d9e6f3ed7bf4fc4b77571220e7c913119bd21957d1e3c71a5dcc27e00.json.gz",
+      "bytes": 30534,
+      "sha256": "97c3f053553f4983bd0b767b7e1b29f5337b05fd53cacaf3520762bb71cf458b"
+    },
+    {
+      "path": "results/b4fd10c0163eacd628c9f27fbd2650432a26e16d21cccc5428c98b7b223187c1.json.gz",
+      "bytes": 134797,
+      "sha256": "c7504c328fa9c244a2439ec9c2dc09b4cac8a651b07d3e1e7cae263a692577f1"
+    },
+    {
+      "path": "results/3eba384fbd29fc5036e6e7d2d333433d02fcddb09cf1453862ad291f5afbbf40.json.gz",
+      "bytes": 133748,
+      "sha256": "83c2cfec0c79f08807241e7ddfce13c9f816306a0b048a8a32e9305f0053757a"
+    },
+    {
+      "path": "results/9e0c9999b675ea42e6f674f55a58ecf9e2ecdecd3d6734be361aea01035f485f.json.gz",
+      "bytes": 259333,
+      "sha256": "041a77330fbfd3889f9af4957b1139294c99e273487f7e066644c2f0f602643a"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3397,
+      "sha256": "ad859b46b69a2b0e80890f057d0b253450bda35d932212ac2914e8b957a08e80"
     },
     {
       "path": "applikon3l/vessel_3d.png",
@@ -282,11 +353,6 @@
       "path": "xdr2000/perfusion/temperature_over_time.svg",
       "bytes": 32422,
       "sha256": "8b2dfaf0b45e9b0b033ca22018d21c0987d44ed133e57f7816842d8c74b5cbd9"
-    },
-    {
-      "path": "README.md",
-      "bytes": 3098,
-      "sha256": "db1648d41ec6a100c08099abec6f584229766bd98aa88b616300955d57537af4"
     }
   ]
 }

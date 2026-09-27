@@ -1,9 +1,8 @@
 import assert from 'node:assert/strict';
-import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { createHash } from 'node:crypto';
-import { gunzipSync } from 'node:zlib';
+import { readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { validateResult } from '../public/xdr2000/result-loader.js';
+import { assertInventory, decodeVerifiedGzip, readVerifiedFile, resolveInside, walkFiles } from './result-files.mjs';
 
 const root = path.resolve(process.argv[2] || 'public/xdr2000');
 const html = readFileSync(path.join(root, 'index.html'), 'utf8');
@@ -16,7 +15,7 @@ const {colors, volume_limits_l, results_root, ...defaultResult} = embedded;
 validateResult(defaultResult, 1000);
 assert.deepEqual(volume_limits_l, {min:400, max:2000});
 assert.ok(Object.values(colors).every(value => /^#[a-f\d]{6}$/i.test(value)));
-const directory = path.resolve(root, results_root);
+const directory = resolveInside(root, results_root);
 const manifest = JSON.parse(readFileSync(path.join(directory, 'manifest.json'), 'utf8'));
 assert.equal(manifest.schema_version, 1);
 assert.equal(manifest.version, path.basename(directory));
@@ -27,13 +26,12 @@ assert.equal(manifest.step_l, 1);
 assert.equal(manifest.default_volume_l, 1000);
 assert.equal(manifest.format, 'json+gzip');
 assert.deepEqual(manifest.files.map(file => file.volume_l), Array.from({length:1601}, (_, i) => i + 400));
-assert.deepEqual(readdirSync(directory).sort(), [...manifest.files.map(file => `${file.volume_l}.json.gz`), 'manifest.json'].sort());
+assertInventory(directory, [...manifest.files.map(file => `${file.volume_l}.json.gz`), 'manifest.json']);
 let bytes = 0;
 for (const file of manifest.files) {
-  const buffer = readFileSync(path.join(directory, `${file.volume_l}.json.gz`));
-  assert.equal(buffer.length, file.bytes, `Size mismatch at ${file.volume_l} L`);
-  assert.equal(createHash('sha256').update(buffer).digest('hex'), file.sha256, `Checksum mismatch at ${file.volume_l} L`);
-  const result = validateResult(JSON.parse(gunzipSync(buffer)), file.volume_l);
+  const asset = {...file, path: `${file.volume_l}.json.gz`};
+  const buffer = readVerifiedFile(directory, asset, `${file.volume_l} L`);
+  const result = validateResult(JSON.parse(decodeVerifiedGzip(buffer, asset)), file.volume_l);
   assert.equal(result.times_s.at(-1), 28800);
   assert.equal(result.media_c[0], 4);
   assert.equal(result.inlet_c, 40);
@@ -62,15 +60,9 @@ for (const file of manifest.files) {
   bytes += buffer.length;
 }
 
-function walk(directory) {
-  return readdirSync(directory, {withFileTypes:true}).flatMap(entry => {
-    const location = path.join(directory, entry.name);
-    return entry.isDirectory() ? walk(location) : [location];
-  });
-}
 // Fail the build if a future export accidentally ships the computational model.
 const forbidden = /heating-solver-source|solver_config|XDRHeatingSolver|function\s+(?:buildModel|simulate|factor)\s*\(|contact_resistance_m2_k_w|steel_conductivity_w_m_k|capacity_j_k|conductance_w_k/;
-const siteFiles = walk(path.dirname(root));
+const siteFiles = walkFiles(path.dirname(root));
 for (const file of siteFiles) {
   if (/\.(?:html|js|json|map|mjs|cjs|py|ts|txt|md|ipynb)$/i.test(file)) assert.ok(!forbidden.test(readFileSync(file, 'utf8')), `Computational source or parameters found in ${file}`);
   if (file.startsWith(root + path.sep)) assert.ok(!/\.(?:py|cjs|wasm|map)$/i.test(file), `Unexpected code artifact: ${file}`);
