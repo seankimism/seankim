@@ -176,6 +176,9 @@ li::marker { color:var(--accent); }
 .project-outline > p { margin:0 0 10px; font-weight:600; }
 .project-outline ol { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 28px; margin:0; padding-left:20px; font-size:.9375rem; }
 .project-outline li { margin:0; padding-left:2px; }
+.prose .project-references { list-style:decimal; padding-left:1.75rem; font-size:.9375rem; line-height:1.65; }
+.project-references li { margin:0 0 1rem; padding-left:.25rem; scroll-margin-top:2rem; }
+.project-references li::marker { color:var(--text-muted); }
 .xdr-details { margin:22px 0; padding:16px 20px; border:1px solid var(--border); border-radius:6px; }
 .xdr-details > summary { color:var(--accent); cursor:pointer; font-weight:500; }
 .xdr-details[open] > summary { margin-bottom:16px; }
