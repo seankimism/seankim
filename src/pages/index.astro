@@ -6,7 +6,7 @@ import { withBase } from "../utils/paths";
 import { selectNewestProjects } from "../utils/project-selection.mjs";
 const bio = (await getEntry('bio','bio'))!;
 const { Content } = await render(bio);
-const projects = selectNewestProjects(await getCollection('projects'));
+const projects = selectNewestProjects(await getCollection('projects'), { includeDrafts: import.meta.env.DEV });
 const papers = (await getCollection('publications')).filter(p => p.data.featured).sort((a,b) => b.data.year-a.data.year);
 const linkedIn = SOCIALS.find(link => link.name === 'LinkedIn' && link.isActive);
 ---
