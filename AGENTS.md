@@ -26,7 +26,8 @@
 - **No `<style>` in `.astro` files** - Use global.css classes
 - **Two-column layout:** Left sidebar (sticky profile), right main (scrollable content)
 - **Markdown-driven:** All content in `.md` files with YAML frontmatter; project pages may use inline HTML for figures and cards
-- **Projects on the About page** are selected automatically: the newest `publishedDate` per `organization`, excluding drafts. The separate Projects listing retains its manual `order`.
+- **Project grouping:** `parentProject` links a study to its overview. About and Projects list the overview when it is visible; study URLs stay available and link back to the overview. If the parent is absent or an unpublished draft, the studies remain listed.
+- **Projects on the About page** are selected automatically: the newest visible overview's `publishedDate` per `organization`, excluding drafts in production. The separate Projects listing retains its manual `order`.
 - **Drafts:** a project with `draft: true` renders in `npm run dev` but is excluded from production builds, listings, and the sitemap (`src/utils/content.ts`)
 - **Theme config:** `THEME_CONFIG` selects the light and dark palettes from `themes.ts`
 

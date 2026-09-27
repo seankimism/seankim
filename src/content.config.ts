@@ -22,6 +22,8 @@ const projects = defineCollection({
     /** Publication of the project page, independent of research period or routine edits. */
     publishedDate: z.coerce.date(),
     tags: z.array(z.string()).default([]), order: z.number(),
+    /** Group a detailed study under an overview while preserving its own route. */
+    parentProject: z.string().optional(),
     /** Drafts render in `npm run dev` but are left out of production builds. */
     draft: z.boolean().default(false),
   }),
