@@ -349,14 +349,14 @@
       "bytes": 192811
     },
     "gas-transfer/surface_kla_global_expanded_fit.svg": {
-      "source_sha256": "2a24529421cb0904d64e12c99c8fd553ac1c8e9a26e0b0cb3f145a69acf03967",
-      "sha256": "67aa2f7b51057dd87deea22a66195ff175ef1e73c1539fd84b4c9ec66998d9ab",
-      "bytes": 40182
+      "source_sha256": "a28a3293537c6151731c4cdf83c3a946cdbf6bf1b6987d6b06cc7b91c17b8dfc",
+      "sha256": "efee84f42b686dad69064f6e53d8753e1a16dbf2b9338aa246ba24ecd6c6913f",
+      "bytes": 60430
     },
     "gas-transfer/surface_kla_scale.svg": {
-      "source_sha256": "797187082b96b66bd1d4d3874ff0a6c3843a20148c237d76cf853277850597b7",
-      "sha256": "81848e8d35685d73fe663a2057fbc620ded7382549f721ed08ae3dc44b6b2a94",
-      "bytes": 41843
+      "source_sha256": "da966639870adc630127d5bb9eea306eb4f6c727c66e13d8f6518b5ec85056e9",
+      "sha256": "08c512813e6fe116a107e4e3136e6e68a0ae203b0ca2d98dac73b7e91b21478c",
+      "bytes": 66394
     },
     "mixing/shared_circulation_factor_parity.png": {
       "source_sha256": "b6996e2fb107fe2cd68472eb7492b3d185a9f00507f9359dffd517e0168e7b68",

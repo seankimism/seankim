@@ -27,8 +27,8 @@ I built this model to understand how surface gas transfer changes with reactor s
 Bowers reported a fivefold decrease in surface O₂ transfer between 8 and 2,000 L <a href="#ref-1">[1]</a>. The smaller vessels in the studies below generally have higher coefficients, although their agitation, media and gas flows differ. I use this comparison to show the range of reported surface transfer across scales.
 
 <figure class="xdr-figure">
-  <a href="/gas-transfer/surface_kla_scale.svg" target="_blank" rel="noopener noreferrer" aria-label="Open the surface transfer scale plot at full size">
-    <img src="/gas-transfer/surface_kla_scale.svg" alt="Thirty-two reported surface oxygen-transfer conditions against working volume on logarithmic axes, spanning 13 mL to 2,000 L. Individual colored markers show seven source studies, with separate markers for the two ambr 15 fills. No range bars or Bowers connector are shown. A single gray dotted line slopes downward across the measurements as a visual guide. The legend spans four columns and two rows." width="2023" height="1276" loading="lazy" decoding="async" />
+  <a href="/gas-transfer/surface_kla_scale.svg?v=08c512813e6f" target="_blank" rel="noopener noreferrer" aria-label="Open the surface transfer scale plot at full size">
+    <img src="/gas-transfer/surface_kla_scale.svg?v=08c512813e6f" alt="Thirty-two reported surface oxygen-transfer conditions against working volume on logarithmic axes, spanning 13 mL to 2,000 L. Individual colored markers show seven source studies, with separate markers for the two ambr 15 fills. No range bars or Bowers connector are shown. A single gray dotted line slopes downward across the measurements as a visual guide. The legend spans four columns and two rows." width="2023" height="1276" loading="lazy" decoding="async" />
   </a>
   <figcaption>Surface oxygen transfer from 13 mL to 2,000 L. Points show reported conditions; some means overlap. The ambr 15 data are Nienow’s water measurements at 37 °C and 300–1,500 rpm <a href="#ref-2">[2]</a>; the ambr 250 point is Clark’s 215 mL, 300 rpm condition <a href="#ref-3">[3]</a>. The gray dotted line guides the eye across the measurements. CO₂ and de Lamotte data are omitted.</figcaption>
 </figure>
@@ -144,8 +144,8 @@ I removed the six de Lamotte conditions <a href="#ref-9">[9]</a> after reviewing
 The fit includes ten ambr 15 water measurements, eight 1 L PBS measurements, two 5.4 L water measurements and four 40 L water measurements. Their reported or reconstructed P/V ranges from 0.31 to 483 W/m³. [Download the inputs and predictions](/gas-transfer/surface_kla_combined_parity.csv).
 
 <figure class="xdr-figure">
-  <a href="/gas-transfer/surface_kla_global_expanded_fit.svg" target="_blank" rel="noopener noreferrer" aria-label="Open the surface-transfer literature calibration parity plot">
-    <img src="/gas-transfer/surface_kla_global_expanded_fit.svg" alt="Global calibration parity plot for 24 conditions from four studies on shared logarithmic axes, excluding de Lamotte. Filled markers distinguish studies, including all ten ambr 15 water conditions. One coefficient, C equals 0.1265, is fitted without a power-range restriction." width="1584" height="1584" loading="lazy" decoding="async" />
+  <a href="/gas-transfer/surface_kla_global_expanded_fit.svg?v=efee84f42b68" target="_blank" rel="noopener noreferrer" aria-label="Open the surface-transfer literature calibration parity plot">
+    <img src="/gas-transfer/surface_kla_global_expanded_fit.svg?v=efee84f42b68" alt="Global calibration parity plot for 24 conditions from four studies on shared logarithmic axes, excluding de Lamotte. Filled markers distinguish studies, including all ten ambr 15 water conditions. One coefficient, C equals 0.1265, is fitted without a power-range restriction." width="1584" height="1584" loading="lazy" decoding="async" />
   </a>
   <figcaption>Predicted and measured surface oxygen transfer for ambr 15 <a href="#ref-2">[2]</a>, 1 L <a href="#ref-7">[7]</a>, 5.4 L <a href="#ref-8">[8]</a> and 40 L <a href="#ref-10">[10]</a>.</figcaption>
 </figure>
