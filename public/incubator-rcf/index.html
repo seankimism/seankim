@@ -18,7 +18,7 @@
     h2 { font-size:1.1rem; margin:0 0 18px; }
     p { margin:0 0 16px; }
     .intro { max-width:760px; color:var(--muted); }
-    .layout { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:20px; align-items:start; margin-top:28px; }
+    .layout { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:20px; align-items:stretch; margin-top:28px; }
     .inputs,.result { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px; min-width:0; }
     .sites { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
     fieldset { border:0; padding:0; margin:0; min-width:0; }
@@ -29,7 +29,6 @@
     .bounds { display:grid; grid-template-columns:1fr 1fr; gap:0 14px; }
     .muted,.note { color:var(--muted); font-size:.875rem; }
     .note { margin-top:10px; }
-    .result { border-top:4px solid var(--accent); }
     .status { color:var(--accent); font-size:.9rem; font-weight:650; margin-bottom:14px; }
     .result[data-state=invalid] .status,.result[data-state=no_match] .status { color:var(--warning); }
     .speed { font-size:clamp(2.4rem,5vw,3.5rem); line-height:1.2; font-weight:650; letter-spacing:-.04em; margin:8px 0 20px; overflow-wrap:anywhere; }
