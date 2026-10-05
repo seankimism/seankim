@@ -18,7 +18,7 @@
     h2 { font-size:1.1rem; margin:0 0 18px; }
     p { margin:0 0 16px; }
     .intro { max-width:760px; color:var(--muted); }
-    .layout { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(260px,1fr); gap:24px; align-items:start; margin-top:28px; }
+    .layout { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:20px; align-items:start; margin-top:28px; }
     .inputs,.result { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px; min-width:0; }
     .sites { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
     fieldset { border:0; padding:0; margin:0; min-width:0; }
@@ -32,11 +32,9 @@
     .result { border-top:4px solid var(--accent); }
     .status { color:var(--accent); font-size:.9rem; font-weight:650; margin-bottom:14px; }
     .result[data-state=invalid] .status,.result[data-state=no_match] .status { color:var(--warning); }
-    .speed { font-size:clamp(2.4rem,5vw,3.5rem); line-height:1.2; font-weight:650; letter-spacing:-.04em; margin:8px 0 20px; }
+    .speed { font-size:clamp(2.4rem,5vw,3.5rem); line-height:1.2; font-weight:650; letter-spacing:-.04em; margin:8px 0 20px; overflow-wrap:anywhere; }
     .unit { font-size:1.1rem; font-weight:450; letter-spacing:0; }
-    .ratio { padding-top:16px; border-top:1px solid var(--line); margin-bottom:18px; }
-    .ratio strong { display:block; font-size:1.45rem; }
-    .rcf-values { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:18px; }
+    .rcf-values { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
     .rcf-values span { display:block; font-size:.875rem; color:var(--muted); }
     .rcf-values strong { font-size:1.1rem; font-variant-numeric:tabular-nums; }
     ul { margin:12px 0 0; padding-left:20px; }
@@ -45,8 +43,9 @@
     footer { margin-top:24px; max-width:850px; font-size:.875rem; color:var(--muted); }
     code { overflow-wrap:anywhere; }
     [hidden] { display:none!important; }
-    @media(max-width:760px) { .layout { grid-template-columns:1fr; } main { padding:24px 16px; } }
-    @media(max-width:440px) { .sites { grid-template-columns:1fr; } .inputs,.result { padding:18px; } }
+    @media(max-width:1000px) { .inputs,.result { padding:20px; } legend { margin-bottom:12px; } .result h2 { margin-bottom:12px; } .status { margin-bottom:10px; } .speed { margin:4px 0 14px; } }
+    @media(max-width:700px) { .layout { grid-template-columns:1fr; } }
+    @media(max-width:440px) { .sites { grid-template-columns:1fr; } main { padding:24px 16px; } .inputs,.result { padding:18px; } }
   </style>
 </head>
 <body>
@@ -60,15 +59,19 @@
         <div class="sites">
           <fieldset>
             <legend>Transferring site</legend>
+            <div class="site-fields">
             <label for="source-orbit">Full orbital diameter (mm)<input id="source-orbit" name="sourceOrbitMm" type="number" min="0" step="any" value="25"></label>
             <label for="source-rpm">Current shaking speed (rpm)<input id="source-rpm" name="sourceRpm" type="number" min="0" step="any" value="120"></label>
+            </div>
           </fieldset>
           <fieldset>
             <legend>Receiving site</legend>
+            <div class="site-fields receiving">
             <label for="target-orbit">Full orbital diameter (mm)<input id="target-orbit" name="targetOrbitMm" type="number" min="0" step="any" value="50"></label>
             <div class="bounds">
               <label for="min-rpm">Minimum rpm<input id="min-rpm" name="targetMinRpm" type="number" min="0" step="any" value="50"></label>
               <label for="max-rpm">Maximum rpm<input id="max-rpm" name="targetMaxRpm" type="number" min="0" step="any" value="250"></label>
+            </div>
             </div>
           </fieldset>
         </div>
@@ -76,16 +79,12 @@
       <section class="result" id="result" data-state="candidate" aria-labelledby="result-heading" aria-live="polite" aria-atomic="true">
         <h2 id="result-heading">Receiving-site RCF match</h2>
         <p class="status" id="status">Calculating…</p>
-        <p class="muted" id="speed-label">Matching shaking speed</p>
-        <p class="speed"><span id="speed">—</span><span class="unit" id="speed-unit"> rpm</span></p>
+        <p class="speed" id="speed-block"><span id="speed">—</span><span class="unit"> rpm</span></p>
         <div class="rcf-values" id="rcf-block" hidden>
           <div><span>Source RCF</span><strong id="source-rcf">—</strong></div>
           <div><span>Receiving RCF</span><strong id="target-rcf">—</strong></div>
         </div>
-        <div class="ratio" id="ratio-block" hidden><span>Receiving RCF relative to source</span><strong id="ratio">—</strong><span class="muted" id="ratio-note">At the displayed speed, rounded to 1 rpm</span></div>
-        <p id="exact" class="muted" hidden></p>
-        <ul id="reasons"></ul>
-        <p class="note">Matches nominal orbital acceleration. Equal RCF alone does not establish equal mixing or cell stress.</p>
+        <ul id="reasons" hidden></ul>
       </section>
     </div>
     <footer>Inputs stay in this page and are not sent to a server. Whole-rpm rounding assumes your equipment supports 1 rpm settings.</footer>
@@ -95,8 +94,8 @@
  * Match nominal orbital acceleration (RCF, in multiples of standard gravity).
  * Full orbit D is the shaker's orbital diameter, not the flask diameter.
  * RCF = (2*pi*rpm/60)^2 * (D_mm/2000) / 9.80665.
- * Flask construction, nominal size and liquid fill are optional transfer
- * records; they do not change this kinematic calculation.
+ * Flask construction, nominal size and liquid fill are not inputs to this
+ * kinematic calculation.
  */
 
 const STANDARD_GRAVITY_M_S2 = 9.80665;
@@ -194,29 +193,25 @@ function calculateTransfer(inputs) {
       const form = document.getElementById('transfer-form');
       const result = document.getElementById('result');
       const numberNames = ['sourceRpm','sourceOrbitMm','targetOrbitMm','targetMinRpm','targetMaxRpm'];
-      const statuses = {candidate:'RCF match within receiving speed limits',invalid:'Check the inputs',no_match:'No RCF match within receiving speed limits'};
+      const statuses = {invalid:'Check the inputs',no_match:'No RCF match within receiving speed limits'};
       function update() {
         const inputs = {};
         for (const name of numberNames) { const value = form.elements[name].value.trim(); inputs[name] = value === '' ? NaN : Number(value); }
         const calculated = calculateTransfer(inputs);
         result.dataset.state = calculated.status;
-        document.getElementById('status').textContent = statuses[calculated.status];
         const candidate = calculated.status === 'candidate';
+        const status = document.getElementById('status');
+        status.hidden = candidate;
+        status.textContent = statuses[calculated.status] ?? '';
         const displaySpeed = candidate ? (calculated.roundedRpm ?? calculated.candidateRpm) : null;
         document.getElementById('speed').textContent = displaySpeed === null ? '—' : String(displaySpeed);
-        document.getElementById('speed-unit').hidden = displaySpeed === null;
-        document.getElementById('speed-label').hidden = displaySpeed === null;
-        document.getElementById('rcf-block').hidden = calculated.sourceRcfG === null;
+        document.getElementById('speed-block').hidden = displaySpeed === null;
+        document.getElementById('rcf-block').hidden = !candidate;
         const formatRcf = value => value === null ? '—' : (value >= 0.000001 && value < 1000000 ? value.toFixed(6) : value.toExponential(4)) + ' ×g';
         document.getElementById('source-rcf').textContent = formatRcf(calculated.sourceRcfG);
         document.getElementById('target-rcf').textContent = formatRcf(calculated.targetRcfG);
-        document.getElementById('ratio-block').hidden = !candidate;
-        document.getElementById('ratio').textContent = candidate ? (100 * (calculated.relativeRcfAtRoundedRpm ?? 1)).toFixed(3) + '%' : '—';
-        document.getElementById('ratio-note').textContent = calculated.roundedRpm === null ? 'At the exact, unrounded speed' : 'At the displayed speed, rounded to 1 rpm';
-        const exact = document.getElementById('exact');
-        exact.hidden = !candidate;
-        exact.textContent = candidate ? `Calculated speed before rounding: ${calculated.roundedRpm === null ? String(calculated.candidateRpm) : calculated.candidateRpm.toFixed(2)} rpm.` : '';
         const reasons = document.getElementById('reasons');
+        reasons.hidden = calculated.reasons.length === 0;
         reasons.replaceChildren(...calculated.reasons.map(reason => { const li = document.createElement('li'); li.textContent = reason; return li; }));
       }
       form.addEventListener('input',update);

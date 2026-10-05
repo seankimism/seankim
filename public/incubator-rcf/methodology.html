@@ -66,7 +66,7 @@
     <div class="jump" aria-label="Page sections">
       <a href="#rcf-equation">RCF equation</a>
       <a href="#worked-example">Worked example</a>
-      <a href="#scope">Interpretation</a>
+      <a href="#scope">Limitations</a>
       <a href="#references">Sources</a>
     </div>
 
@@ -94,11 +94,7 @@
         <li>Calculate the exact receiving speed and check it against those equipment limits.</li>
         <li>Round to the nearest positive whole rpm only when that setting also falls within the limits. Otherwise retain the exact speed if the equipment supports it.</li>
       </ol>
-      <p>The calculator reports source RCF and receiving RCF at the displayed speed, plus the exact matching speed and the effect of rounding. At a whole-rpm receiving setting, the relative RCF is:</p>
-      <div class="equation" role="math" aria-label="Rounded receiving-to-source RCF ratio equals the rounded receiving rpm divided by source rpm, squared, times receiving orbital diameter divided by source orbital diameter.">
-        <p>RCF ratio = (n<sub>receiving,rounded</sub> / n<sub>source</sub>)<sup>2</sup> &times; (D<sub>receiving</sub> / D<sub>source</sub>)</p>
-      </div>
-      <p class="subtle">Multiply this ratio by 100 for a percentage. The entered equipment limits determine whether a matching speed is available.</p>
+      <p>The calculator displays the receiving rpm, source RCF and receiving RCF at the displayed speed. Whole-rpm rounding can create a small difference between the two RCF values. The entered equipment limits determine whether a matching speed is available.</p>
     </section>
 
     <section id="worked-example">
@@ -112,24 +108,27 @@
         </tbody>
       </table></div>
       <div class="example">
-        <p>120 &times; &radic;(25 / 50) gives <strong>84.852814 rpm</strong>. If the receiving equipment permits <strong>85 rpm</strong>, rounding gives <strong>0.201983 &times;g</strong>, or <strong>100.347%</strong> of the source RCF.</p>
-        <p>The exact speeds match RCF. The percentage shows the numerical effect of whole-rpm rounding.</p>
+        <p>120 &times; &radic;(25 / 50) gives <strong>84.852814 rpm</strong>. If the receiving equipment permits <strong>85 rpm</strong>, rounding gives <strong>0.201983 &times;g</strong>, compared with the source's <strong>0.201284 &times;g</strong>.</p>
+        <p>The exact speeds match RCF. The displayed RCF values reflect the small difference introduced by whole-rpm rounding.</p>
       </div>
     </section>
 
     <section id="scope">
-      <h2>What the match means</h2>
-      <p>Equal orbital RCF matches nominal shaker acceleration. It does not establish equal liquid hydrodynamics, oxygen transfer, or cell performance. <a href="#ref-1">[1]</a></p>
+      <h2>Limitations for tech transfer</h2>
+      <p>Equal orbital RCF matches nominal shaker acceleration. It does not account for flask size, geometry, working volume or liquid properties. Changing flask scale can change the liquid environment, so equal RCF alone is not sufficient to transfer a process between different flask scales. <a href="#ref-3">[3]</a></p>
+      <p>For a scale change, assess a process-relevant criterion such as power input per liquid volume (P/V, W/m<sup>3</sup>), measured mixing time or oxygen-transfer capacity where relevant. Use measurements or correlations supported for the actual vessels and operating conditions; P/V relationships have limits on the flask sizes and flow regimes studied. <a href="#ref-4">[4]</a> Confirm culture performance at the receiving site.</p>
     </section>
     <section id="references">
       <h2>Sources</h2>
       <ol class="refs">
         <li id="ref-1"><strong>TPP (2026).</strong> <a href="https://www.tpp.ch/page/downloads/IFU_TechDoc_Statement/TechDoc-Bioreactor-Orbit-RPM-EN.pdf">Shaking Cells: Orbit and Rate per Minute (RPM)</a>, version 04/2026. Defines radius as half the orbit and gives the orbital RCF equation and matching-speed calculation.</li>
         <li id="ref-2"><strong>Eppendorf.</strong> <a href="https://www.eppendorf.com/au-en/lab-academy/lab-solutions/others/shaker-orbit-revolving-in-space-around-the-samples">Shaker Orbit: Revolving in Space Around the Samples</a>. Defines the shaker orbit as the diameter of the platform's circular path.</li>
+        <li id="ref-3"><strong>Kuhner.</strong> <a href="https://kuhner.com/wAssets/docs/download/KuhnerNotes/EquipNote_Change-Orbit-Diameter_2025.pdf">Changing Your Shaker Orbit Diameters</a>. Describes how changes in vessel size, orbit and speed affect the liquid environment during scale transfer.</li>
+        <li id="ref-4"><strong>Dinter et al.</strong> <a href="https://publications.rwth-aachen.de/record/1000106/files/1000106.pdf">Exploration of the Out-of-Phase Phenomenon in Shake Flasks by CFD Calculations of Volumetric Power Input, kLa Value and Shear Rate at Elevated Viscosity</a>. <em>Biotechnology and Bioengineering</em>, DOI: 10.1002/bit.28892. Section 2.3 describes a P/V correlation based on studied 100–2000 mL shake flasks under in-phase operating conditions.</li>
       </ol>
     </section>
     <footer>
-      <p>Reviewed 4 October 2026. RCF and the matching speed are calculated from orbital geometry; the percentage is calculated at the rounded speed.</p>
+      <p>Reviewed 4 October 2026. RCF and the matching speed are calculated from orbital geometry; receiving RCF uses the displayed speed.</p>
       <a href="index.html">Return to the calculator</a>
     </footer>
   </main>
