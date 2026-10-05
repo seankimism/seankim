@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Formula and sources for matching orbital relative centrifugal force between incubator shakers.">
+  <title>Incubator transfer: methods and sources</title>
+  <style>
+    :root { color-scheme:light dark; --bg:#f5f7fa; --surface:#fff; --text:#172438; --muted:#526276; --line:#cbd4df; --accent:#176b77; --soft:#edf5f6; --warning:#8a4312; }
+    @media(prefers-color-scheme:dark) { :root { --bg:#111b29; --surface:#192638; --text:#edf2f7; --muted:#b4c3d4; --line:#4f6075; --accent:#85d6df; --soft:#213b44; --warning:#ffbd86; } }
+    * { box-sizing:border-box; }
+    html { scroll-padding-top:20px; }
+    body { margin:0; background:var(--bg); color:var(--text); font:16px/1.65 system-ui,sans-serif; }
+    main { max-width:1040px; margin:auto; padding:32px 24px 56px; }
+    nav { display:flex; flex-wrap:wrap; gap:10px 24px; margin-bottom:28px; }
+    nav a { font-size:.95rem; }
+    nav a[aria-current] { color:var(--text); font-weight:650; text-decoration:none; }
+    h1 { font-size:clamp(1.8rem,4vw,2.5rem); line-height:1.2; letter-spacing:-.035em; margin:0 0 16px; }
+    h2 { font-size:1.4rem; line-height:1.3; margin:0 0 16px; }
+    h3 { font-size:1.1rem; margin:22px 0 10px; }
+    p { margin:0 0 16px; max-width:850px; }
+    a { color:var(--accent); overflow-wrap:anywhere; }
+    a:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+    .intro { color:var(--muted); font-size:1.05rem; }
+    .notice { border-left:4px solid var(--accent); padding:14px 18px; margin:24px 0; background:var(--soft); }
+    .notice p:last-child { margin:0; }
+    .jump { display:flex; flex-wrap:wrap; gap:8px 18px; margin:20px 0 26px; font-size:.95rem; }
+    section { border-top:1px solid var(--line); padding-top:30px; margin-top:34px; }
+    .table-wrap { overflow-x:auto; margin:20px 0; }
+    table { border-collapse:collapse; width:100%; font-size:.95rem; }
+    th,td { padding:12px 14px 12px 0; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); }
+    th { font-weight:650; }
+    .vessels { min-width:640px; }
+    .enabled { color:var(--accent); font-weight:600; }
+    .needed { color:var(--warning); font-weight:600; }
+    .subtle { color:var(--muted); font-size:.9rem; }
+    .equation { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:18px 20px; margin:18px 0; }
+    .equation p { margin:0; font-size:1.05rem; overflow-wrap:anywhere; }
+    .equation p+p { margin-top:12px; }
+    .formula-row { display:block; }
+    .symbols { display:grid; grid-template-columns:110px minmax(0,1fr); gap:8px 20px; max-width:780px; margin:20px 0; }
+    .symbols dt { font-weight:650; }
+    .symbols dd { margin:0; }
+    .steps { padding-left:24px; }
+    li { padding-left:2px; margin-bottom:10px; }
+    .example { border-left:4px solid var(--accent); padding-left:20px; margin:24px 0; }
+    .example strong { font-variant-numeric:tabular-nums; }
+    .refs { padding-left:24px; }
+    .refs li { margin-bottom:20px; }
+    code { font-size:.9em; overflow-wrap:anywhere; }
+    footer { border-top:1px solid var(--line); margin-top:34px; padding-top:22px; color:var(--muted); font-size:.875rem; }
+    @media(max-width:600px) { main { padding:24px 16px 40px; } .equation { padding:14px; } .equation p { font-size:1rem; } .symbols { grid-template-columns:70px minmax(0,1fr); gap:8px 12px; } th,td { padding-right:12px; } }
+    @media print { body { background:white; color:black; } main { max-width:none; padding:0; } .equation,.notice { break-inside:avoid; } a { color:inherit; } nav,.jump { display:none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Calculator pages">
+      <a href="index.html">RCF calculator</a>
+
+      <a href="methodology.html" aria-current="page">RCF methods</a>
+
+    </nav>
+    <h1>Matching orbital RCF between incubators</h1>
+    <p class="intro">The calculator finds the receiving-site speed that gives the same nominal orbital relative centrifugal force (RCF) as the source shaker.</p>
+    <div class="notice">
+      <p><strong>Required inputs:</strong> source speed, each shaker's full orbital diameter, and the receiving equipment's speed limits. Flask construction, nominal volume, and working fill are optional records; they do not change the RCF calculation.</p>
+    </div>
+    <div class="jump" aria-label="Page sections">
+      <a href="#rcf-equation">RCF equation</a>
+      <a href="#vessel-routes">Flask types</a>
+      <a href="#worked-example">Worked example</a>
+      <a href="#rocking-bags">Rocking bags</a>
+      <a href="#scope">Interpretation</a>
+      <a href="#references">Sources</a>
+    </div>
+
+    <section id="rcf-equation">
+      <h2>Orbit and speed determine nominal RCF</h2>
+      <p>The orbit is the <strong>full diameter of the circular path followed by the shaker platform</strong>, not the flask diameter. <a href="#ref-2">[2]</a> Its radius is half that diameter. TPP uses this radius and speed squared to calculate orbital RCF and solve for a matching speed on another orbit. <a href="#ref-1">[1]</a></p>
+      <div class="equation" role="math" aria-label="Relative centrifugal force equals two pi times rpm divided by sixty, squared, times orbital diameter in millimetres divided by two thousand, divided by standard gravity.">
+        <p>RCF = (2&pi;n / 60)<sup>2</sup> &times; (D / 2000) / 9.80665</p>
+      </div>
+      <dl class="symbols">
+        <dt>RCF</dt><dd>Orbital acceleration divided by standard gravity; expressed as &times;g.</dd>
+        <dt>n</dt><dd>Shaking speed in rpm.</dd>
+        <dt>D</dt><dd>Full orbital diameter in mm. D / 2000 converts it to radius in metres.</dd>
+        <dt>9.80665</dt><dd>Standard gravitational acceleration in m/s<sup>2</sup>, used by this calculator.</dd>
+      </dl>
+      <p class="subtle">TPP writes the same relationship with the rounded coefficient 1.118 &times; 10<sup>&minus;5</sup>, radius in cm, and speed in rpm. <a href="#ref-1">[1]</a> The calculator evaluates the equation above directly.</p>
+      <h3>Solving for receiving speed</h3>
+      <p>Setting the source and receiving RCF equal cancels the shared constants:</p>
+      <div class="equation" role="math" aria-label="Receiving rpm equals source rpm times the square root of source orbital diameter divided by receiving orbital diameter.">
+        <p>n<sub>receiving</sub> = n<sub>source</sub> &times; &radic;(D<sub>source</sub> / D<sub>receiving</sub>)</p>
+      </div>
+      <ol class="steps">
+        <li>Enter positive source speed and full orbital diameters for both shakers.</li>
+        <li>Enter the receiving equipment's minimum and maximum rpm. The minimum may be zero for a stopped setting; the maximum must be positive and at least the minimum.</li>
+        <li>Calculate the exact receiving speed and check it against those equipment limits.</li>
+        <li>Round to the nearest positive whole rpm only when that setting also falls within the limits. Otherwise retain the exact speed if the equipment supports it.</li>
+      </ol>
+      <p>The calculator reports source RCF and receiving RCF at the displayed speed, plus the exact matching speed and the effect of rounding. At a whole-rpm receiving setting, the relative RCF is:</p>
+      <div class="equation" role="math" aria-label="Rounded receiving-to-source RCF ratio equals the rounded receiving rpm divided by source rpm, squared, times receiving orbital diameter divided by source orbital diameter.">
+        <p>RCF ratio = (n<sub>receiving,rounded</sub> / n<sub>source</sub>)<sup>2</sup> &times; (D<sub>receiving</sub> / D<sub>source</sub>)</p>
+      </div>
+      <p class="subtle">Multiply this ratio by 100 for a percentage. The limits are the receiving equipment's limits; there is no flask-correlation operating envelope in this calculation.</p>
+    </section>
+
+    <section id="vessel-routes">
+      <h2>The same equation applies to all orbital flask types</h2>
+      <div class="table-wrap">
+        <table class="vessels">
+          <thead><tr><th scope="col">Vessel construction</th><th scope="col">Calculator method</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="#unbaffled-glass">Unbaffled glass</a></th><td>Orbital RCF matching</td></tr>
+            <tr><th scope="row"><a href="#baffled-glass">Baffled glass</a></th><td>Orbital RCF matching</td></tr>
+            <tr><th scope="row"><a href="#disposable-unbaffled">Unbaffled disposable / plastic</a></th><td>Orbital RCF matching</td></tr>
+            <tr><th scope="row"><a href="#disposable-baffled">Baffled disposable / plastic</a></th><td>Orbital RCF matching</td></tr>
+            <tr><th scope="row"><a href="#rocking-bags">Wave / rocking bag</a></th><td>Outside this calculator</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Construction, nominal flask volume, and working fill describe the transfer conditions. They do not enter the orbital acceleration equation.</p>
+    </section>
+
+    <section id="unbaffled-glass">
+      <h2>Unbaffled glass</h2>
+      <p>Use the source and receiving orbit diameters and speed limits in the shared RCF equation. Flask size and fill can be recorded alongside the result.</p>
+    </section>
+    <section id="baffled-glass">
+      <h2>Baffled glass</h2>
+      <p>The same orbital RCF equation applies. Selecting a baffled flask adds no correction or calibration requirement to this acceleration calculation.</p>
+    </section>
+    <section id="disposable-unbaffled">
+      <h2>Unbaffled disposable / plastic</h2>
+      <p>The same orbital RCF equation applies. Material and nominal volume are optional records, rather than mathematical inputs.</p>
+    </section>
+    <section id="disposable-baffled">
+      <h2>Baffled disposable / plastic</h2>
+      <p>The same orbital RCF equation applies. Baffles and working fill do not alter the calculated acceleration of the shaker platform.</p>
+    </section>
+
+    <section id="worked-example">
+      <h2>Worked example: 25 mm to 50 mm orbit</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Input or result</th><th scope="col">Source</th><th scope="col">Receiving</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Full orbital diameter</th><td>25 mm</td><td>50 mm</td></tr>
+          <tr><th scope="row">Exact speed</th><td>120 rpm</td><td>84.852814 rpm</td></tr>
+          <tr><th scope="row">RCF at exact speed</th><td>0.201284 &times;g</td><td>0.201284 &times;g</td></tr>
+        </tbody>
+      </table></div>
+      <div class="example">
+        <p>120 &times; &radic;(25 / 50) gives <strong>84.852814 rpm</strong>. If the receiving equipment permits <strong>85 rpm</strong>, rounding gives <strong>0.201983 &times;g</strong>, or <strong>100.347%</strong> of the source RCF.</p>
+        <p>The exact speeds match RCF. The percentage shows the numerical effect of whole-rpm rounding.</p>
+      </div>
+    </section>
+
+    <section id="rocking-bags">
+      <h2>Wave / rocking bags</h2>
+      <p>Rocking motion does not follow a shaker's circular orbit. Wave bags are outside this RCF calculator and need a separate method based on their rocking motion and geometry.</p>
+    </section>
+    <section id="scope">
+      <h2>What the match means</h2>
+      <p>Equal orbital RCF matches nominal shaker acceleration. It does not establish equal liquid hydrodynamics, oxygen transfer, or cell performance. TPP recommends testing the effect of speed and fill for the culture. <a href="#ref-1">[1]</a></p>
+    </section>
+    <section id="references">
+      <h2>Sources</h2>
+      <ol class="refs">
+        <li id="ref-1"><strong>TPP (2026).</strong> <a href="https://www.tpp.ch/page/downloads/IFU_TechDoc_Statement/TechDoc-Bioreactor-Orbit-RPM-EN.pdf">Shaking Cells: Orbit and Rate per Minute (RPM)</a>, version 04/2026. Defines radius as half the orbit, gives the orbital RCF equation and matching-speed calculation, and discusses checking speed and fill for the culture.</li>
+        <li id="ref-2"><strong>Eppendorf.</strong> <a href="https://www.eppendorf.com/au-en/lab-academy/lab-solutions/others/shaker-orbit-revolving-in-space-around-the-samples">Shaker Orbit: Revolving in Space Around the Samples</a>. Defines the shaker orbit as the diameter of the platform's circular path.</li>
+      </ol>
+    </section>
+    <footer>
+      <p>Reviewed 4 October 2026. RCF and the matching speed are calculated from orbital geometry; the percentage is calculated at the rounded speed.</p>
+      <a href="index.html">Return to the calculator</a>
+    </footer>
+  </main>
+</body>
+</html>

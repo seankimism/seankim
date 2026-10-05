@@ -54,3 +54,16 @@ I built these studies around those differences. I compare model predictions with
     </div>
   </article>
 </div>
+
+## Tech transfer tools
+
+<div class="paper-list">
+  <article class="paper-card no-figure" id="incubator-rcf-calculator">
+    <div class="paper-card-body">
+      <p class="eyebrow">Tech transfer · Orbital shaker settings</p>
+      <h3><a href="/projects/incubator-rcf-calculator/">Incubator RCF calculator</a></h3>
+      <p>Translate a source shaking speed into a receiving setting with equal nominal orbital acceleration when incubator orbits differ. Use the result as a documented starting point for tech transfer.</p>
+      <p class="paper-card-links"><a href="/projects/incubator-rcf-calculator/">Open calculator →</a></p>
+    </div>
+  </article>
+</div>
