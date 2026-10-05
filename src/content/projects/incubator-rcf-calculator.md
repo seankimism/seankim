@@ -14,7 +14,7 @@ draft: false
 
 ## Compare source and receiving settings
 
-Enter the source speed, each incubator's full orbital diameter, and the receiving equipment's speed limits. Orbit means the diameter of the shaker platform's circular path, rather than the flask diameter. Flask construction, nominal volume and working fill can be recorded alongside the settings; they do not change the RCF calculation.
+Enter the source speed, each incubator's full orbital diameter, and the receiving equipment's speed limits. Orbit means the diameter of the shaker platform's circular path, rather than the flask diameter.
 
 For example, **120 rpm on a 25 mm orbit** matches **84.852813742 rpm on a 50 mm orbit**. Rounding to **85 rpm** gives **100.347%** of the source's nominal orbital RCF. The calculator checks whether the receiving speed falls within the entered equipment limits and reports the effect of rounding.
 
@@ -22,9 +22,5 @@ For example, **120 rpm on a 25 mm orbit** matches **84.852813742 rpm on a 50 mm 
   <iframe src="/incubator-rcf/index.html" title="Incubator RCF calculator: match nominal orbital acceleration between source and receiving shaker settings" width="800" height="1100" loading="lazy" data-content-height></iframe>
   <figcaption><a href="/incubator-rcf/index.html" target="_blank" rel="noopener noreferrer">Open the RCF calculator in a full window ↗</a> · <a href="/incubator-rcf/methodology.html" target="_blank" rel="noopener noreferrer">Calculation and sources ↗</a></figcaption>
 </figure>
-
-## Record the transfer conditions
-
-Record both incubator models and installed orbits, source and receiving speeds, flask and closure products, working fill, and culture conditions. An RCF match provides a documented comparison of nominal shaker acceleration; evaluate the receiving culture under its actual operating conditions.
 
 The [calculation and sources](/incubator-rcf/methodology.html) explain the orbital RCF equation, speed conversion and manufacturer guidance. Inputs are calculated in the browser and are not sent to a server.

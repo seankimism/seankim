@@ -14,7 +14,6 @@
     nav { display:flex; flex-wrap:wrap; gap:10px 24px; margin-bottom:24px; }
     nav a { font-size:.95rem; }
     nav a[aria-current] { color:var(--text); font-weight:650; text-decoration:none; }
-    .method-link { display:block; margin:-7px 0 14px; font-weight:450; font-size:.875rem; }
     h1 { font-size:clamp(1.7rem,4vw,2.3rem); margin:0 0 8px; letter-spacing:-.035em; }
     h2 { font-size:1.1rem; margin:0 0 18px; }
     p { margin:0 0 16px; }
@@ -25,8 +24,8 @@
     fieldset { border:0; padding:0; margin:0; min-width:0; }
     legend { font-weight:650; margin-bottom:18px; }
     label { display:block; font-size:.9rem; font-weight:550; margin-bottom:14px; }
-    input[type=number],select { display:block; width:100%; margin-top:6px; padding:10px 12px; min-height:44px; border:1px solid var(--line); border-radius:6px; color:var(--text); background:var(--surface); font:inherit; }
-    input:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+    input[type=number] { display:block; width:100%; margin-top:6px; padding:10px 12px; min-height:44px; border:1px solid var(--line); border-radius:6px; color:var(--text); background:var(--surface); font:inherit; }
+    input:focus-visible,a:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
     .bounds { display:grid; grid-template-columns:1fr 1fr; gap:0 14px; }
     .muted,.note { color:var(--muted); font-size:.875rem; }
     .note { margin-top:10px; }
@@ -40,13 +39,8 @@
     .rcf-values { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:18px; }
     .rcf-values span { display:block; font-size:.875rem; color:var(--muted); }
     .rcf-values strong { font-size:1.1rem; font-variant-numeric:tabular-nums; }
-    #record-warning { color:var(--warning); }
-    #records .sites { margin-top:20px; }
     ul { margin:12px 0 0; padding-left:20px; }
     li { margin-bottom:8px; }
-    details { margin-top:24px; border-top:1px solid var(--line); padding-top:18px; }
-    summary { cursor:pointer; font-weight:600; }
-    details p { margin-top:14px; }
     a { color:var(--accent); overflow-wrap:anywhere; }
     footer { margin-top:24px; max-width:850px; font-size:.875rem; color:var(--muted); }
     code { overflow-wrap:anywhere; }
@@ -78,37 +72,6 @@
             </div>
           </fieldset>
         </div>
-        <details id="records">
-          <summary>Vessel and working-volume records (optional)</summary>
-          <p class="muted">Record different flasks or fills at the two sites. These details do not enter the RCF calculation.</p>
-          <div class="sites">
-            <fieldset>
-              <legend>Transferring vessel</legend>
-              <label for="source-flask">Flask construction<select id="source-flask" name="sourceFlaskType">
-                <option value="unbaffled_glass">Unbaffled glass</option>
-                <option value="baffled_glass">Baffled glass</option>
-                <option value="disposable_unbaffled" selected>Unbaffled disposable / plastic</option>
-                <option value="disposable_baffled">Baffled disposable / plastic</option>
-              </select></label>
-              <a class="method-link" id="source-method" href="methodology.html#disposable-unbaffled" aria-label="Method for transferring-site flask type">Method for this flask type</a>
-              <label for="source-nominal">Nominal flask size (mL)<input id="source-nominal" name="sourceNominalMl" type="number" min="0" step="any" value="125"></label>
-              <label for="source-fill">Working liquid volume (mL)<input id="source-fill" name="sourceFillMl" type="number" min="0" step="any" value="30"></label>
-            </fieldset>
-            <fieldset>
-              <legend>Receiving vessel</legend>
-              <label for="target-flask">Flask construction<select id="target-flask" name="targetFlaskType">
-                <option value="unbaffled_glass">Unbaffled glass</option>
-                <option value="baffled_glass">Baffled glass</option>
-                <option value="disposable_unbaffled" selected>Unbaffled disposable / plastic</option>
-                <option value="disposable_baffled">Baffled disposable / plastic</option>
-              </select></label>
-              <a class="method-link" id="target-method" href="methodology.html#disposable-unbaffled" aria-label="Method for receiving-site flask type">Method for this flask type</a>
-              <label for="target-nominal">Nominal flask size (mL)<input id="target-nominal" name="targetNominalMl" type="number" min="0" step="any" value="250"></label>
-              <label for="target-fill">Working liquid volume (mL)<input id="target-fill" name="targetFillMl" type="number" min="0" step="any" value="60"></label>
-            </fieldset>
-          </div>
-          <p class="muted" id="record-warning" role="status" hidden></p>
-        </details>
       </form>
       <section class="result" id="result" data-state="candidate" aria-labelledby="result-heading" aria-live="polite" aria-atomic="true">
         <h2 id="result-heading">Receiving-site RCF match</h2>
@@ -122,20 +85,9 @@
         <div class="ratio" id="ratio-block" hidden><span>Receiving RCF relative to source</span><strong id="ratio">—</strong><span class="muted" id="ratio-note">At the displayed speed, rounded to 1 rpm</span></div>
         <p id="exact" class="muted" hidden></p>
         <ul id="reasons"></ul>
-        <p class="note">Matches nominal orbital acceleration. Flask type and fill do not change this equation; equal RCF alone does not establish equal mixing or cell stress.</p>
+        <p class="note">Matches nominal orbital acceleration. Equal RCF alone does not establish equal mixing or cell stress.</p>
       </section>
     </div>
-    <details>
-      <summary>What to record for a real transfer</summary>
-      <p>Record the incubator make/model and installed full orbit diameter at each site, the source rpm, and the receiving equipment’s actual speed range and setting resolution. Confirm the equipment supports the flask, clamp, and load.</p>
-      <p>Keep the flask and cap product numbers, working volumes, feed schedule, cell process, temperature, gas settings, and humidity in your transfer record. They provide process context and do not alter the RCF match.</p>
-    </details>
-    <details>
-      <summary>Calculation and applicability</summary>
-      <p>RCF = (2π × rpm / 60)<sup>2</sup> × (full orbit in mm / 2,000) / 9.80665. Equal RCF gives receiving rpm = source rpm × √(source orbit / receiving orbit).</p>
-      <p>The same formula applies to glass and disposable flasks, with or without baffles, on a circular orbital shaker. Only the receiving equipment’s entered speed limits constrain the match. Receiving RCF is recalculated after rounding to a whole rpm.</p>
-      <p><a href="methodology.html">Read the equations, per-vessel explanation, worked example, and cited sources</a>.</p>
-    </details>
     <footer>Inputs stay in this page and are not sent to a server. Whole-rpm rounding assumes your equipment supports 1 rpm settings.</footer>
   </main>
   <script>
@@ -243,12 +195,9 @@ function calculateTransfer(inputs) {
       const result = document.getElementById('result');
       const numberNames = ['sourceRpm','sourceOrbitMm','targetOrbitMm','targetMinRpm','targetMaxRpm'];
       const statuses = {candidate:'RCF match within receiving speed limits',invalid:'Check the inputs',no_match:'No RCF match within receiving speed limits'};
-      const methodAnchors = {unbaffled_glass:'unbaffled-glass',baffled_glass:'baffled-glass',disposable_unbaffled:'disposable-unbaffled',disposable_baffled:'disposable-baffled'};
       function update() {
         const inputs = {};
         for (const name of numberNames) { const value = form.elements[name].value.trim(); inputs[name] = value === '' ? NaN : Number(value); }
-        document.getElementById('source-method').href = 'methodology.html#' + methodAnchors[form.elements.sourceFlaskType.value];
-        document.getElementById('target-method').href = 'methodology.html#' + methodAnchors[form.elements.targetFlaskType.value];
         const calculated = calculateTransfer(inputs);
         result.dataset.state = calculated.status;
         document.getElementById('status').textContent = statuses[calculated.status];
@@ -269,17 +218,6 @@ function calculateTransfer(inputs) {
         exact.textContent = candidate ? `Calculated speed before rounding: ${calculated.roundedRpm === null ? String(calculated.candidateRpm) : calculated.candidateRpm.toFixed(2)} rpm.` : '';
         const reasons = document.getElementById('reasons');
         reasons.replaceChildren(...calculated.reasons.map(reason => { const li = document.createElement('li'); li.textContent = reason; return li; }));
-        const recordMessages = [];
-        for (const [prefix,label] of [['source','Source'],['target','Receiving']]) {
-          const nominalText = form.elements[prefix + 'NominalMl'].value.trim();
-          const fillText = form.elements[prefix + 'FillMl'].value.trim();
-          if (nominalText && (!Number.isFinite(Number(nominalText)) || Number(nominalText) <= 0)) recordMessages.push(label + ' nominal size must be positive.');
-          if (fillText && (!Number.isFinite(Number(fillText)) || Number(fillText) <= 0)) recordMessages.push(label + ' working volume must be positive.');
-          if (nominalText && fillText && Number(fillText) >= Number(nominalText)) recordMessages.push(label + ' working volume should be below nominal size.');
-        }
-        const recordWarning = document.getElementById('record-warning');
-        recordWarning.hidden = recordMessages.length === 0;
-        recordWarning.textContent = recordMessages.join(' ') + (recordMessages.length ? ' These record checks do not change the RCF result.' : '');
       }
       form.addEventListener('input',update);
       form.addEventListener('change',update);
