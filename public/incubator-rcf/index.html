@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Compare incubator shaker settings during tech transfer by calculating a receiving-site rpm with equal nominal orbital RCF.">
+  <title>Incubator transfer: RCF calculator</title>
+  <style>
+    :root { color-scheme: light dark; --bg:#f5f7fa; --surface:#fff; --text:#172438; --muted:#526276; --line:#cbd4df; --accent:#176b77; --soft:#edf5f6; --warning:#8a4312; }
+    @media(prefers-color-scheme:dark) { :root { --bg:#111b29; --surface:#192638; --text:#edf2f7; --muted:#b4c3d4; --line:#4f6075; --accent:#85d6df; --soft:#213b44; --warning:#ffbd86; } }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font:16px/1.5 system-ui,sans-serif; }
+    main { max-width:1100px; margin:auto; padding:36px 24px; }
+    nav { display:flex; flex-wrap:wrap; gap:10px 24px; margin-bottom:24px; }
+    nav a { font-size:.95rem; }
+    nav a[aria-current] { color:var(--text); font-weight:650; text-decoration:none; }
+    h1 { font-size:clamp(1.7rem,4vw,2.3rem); margin:0 0 8px; letter-spacing:-.035em; }
+    h2 { font-size:1.1rem; margin:0 0 18px; }
+    p { margin:0 0 16px; }
+    .intro { max-width:760px; color:var(--muted); }
+    .layout { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:20px; align-items:stretch; margin-top:28px; }
+    .inputs,.result { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px; min-width:0; }
+    .sites { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    fieldset { border:0; padding:0; margin:0; min-width:0; }
+    legend { font-weight:650; margin-bottom:18px; }
+    label { display:block; font-size:.9rem; font-weight:550; margin-bottom:14px; }
+    input[type=number] { display:block; width:100%; margin-top:6px; padding:10px 12px; min-height:44px; border:1px solid var(--line); border-radius:6px; color:var(--text); background:var(--surface); font:inherit; }
+    input:focus-visible,a:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+    .bounds { display:grid; grid-template-columns:1fr 1fr; gap:0 14px; }
+    .muted,.note { color:var(--muted); font-size:.875rem; }
+    .note { margin-top:10px; }
+    .status { color:var(--accent); font-size:.9rem; font-weight:650; margin-bottom:14px; }
+    .result[data-state=invalid] .status,.result[data-state=no_match] .status { color:var(--warning); }
+    .speed { font-size:clamp(2.4rem,5vw,3.5rem); line-height:1.2; font-weight:650; letter-spacing:-.04em; margin:8px 0 20px; overflow-wrap:anywhere; }
+    .unit { font-size:1.1rem; font-weight:450; letter-spacing:0; }
+    .rcf-values { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .rcf-values span { display:block; font-size:.875rem; color:var(--muted); }
+    .rcf-values strong { font-size:1.1rem; font-variant-numeric:tabular-nums; }
+    ul { margin:12px 0 0; padding-left:20px; }
+    li { margin-bottom:8px; }
+    a { color:var(--accent); overflow-wrap:anywhere; }
+    footer { margin-top:24px; max-width:850px; font-size:.875rem; color:var(--muted); }
+    code { overflow-wrap:anywhere; }
+    [hidden] { display:none!important; }
+    @media(max-width:1000px) { .inputs,.result { padding:20px; } legend { margin-bottom:12px; } .result h2 { margin-bottom:12px; } .status { margin-bottom:10px; } .speed { margin:4px 0 14px; } }
+    @media(max-width:700px) { .layout { grid-template-columns:1fr; } }
+    @media(max-width:440px) { .sites { grid-template-columns:1fr; } main { padding:24px 16px; } .inputs,.result { padding:18px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Calculator pages"><a href="index.html" aria-current="page">RCF calculator</a><a href="methodology.html">RCF methods and sources</a></nav>
+    <h1>Incubator-to-incubator RCF calculator</h1>
+    <p class="intro">During tech transfer, a shake-flask process may move between incubators with different orbital diameters. Copying the same rpm changes the nominal acceleration when the orbit changes. This calculator translates the transferring site's established speed into a receiving-site rpm with equal orbital relative centrifugal force (RCF, ×g). It provides a clear, documented starting point for comparing equipment settings and planning transfer studies, alongside confirmation of vessel conditions and culture performance.</p>
+    <p class="note">Use the installed <strong>full orbit diameter</strong>, not the flask diameter or orbit radius. Replace the example values with your equipment specifications.</p>
+    <div class="layout">
+      <form class="inputs" id="transfer-form" novalidate>
+        <div class="sites">
+          <fieldset>
+            <legend>Transferring site</legend>
+            <div class="site-fields">
+            <label for="source-orbit">Full orbital diameter (mm)<input id="source-orbit" name="sourceOrbitMm" type="number" min="0" step="any" value="25"></label>
+            <label for="source-rpm">Current shaking speed (rpm)<input id="source-rpm" name="sourceRpm" type="number" min="0" step="any" value="120"></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Receiving site</legend>
+            <div class="site-fields receiving">
+            <label for="target-orbit">Full orbital diameter (mm)<input id="target-orbit" name="targetOrbitMm" type="number" min="0" step="any" value="50"></label>
+            <div class="bounds">
+              <label for="min-rpm">Minimum rpm<input id="min-rpm" name="targetMinRpm" type="number" min="0" step="any" value="50"></label>
+              <label for="max-rpm">Maximum rpm<input id="max-rpm" name="targetMaxRpm" type="number" min="0" step="any" value="250"></label>
+            </div>
+            </div>
+          </fieldset>
+        </div>
+      </form>
+      <section class="result" id="result" data-state="candidate" aria-labelledby="result-heading" aria-live="polite" aria-atomic="true">
+        <h2 id="result-heading">Receiving-site RCF match</h2>
+        <p class="status" id="status">Calculating…</p>
+        <p class="speed" id="speed-block"><span id="speed">—</span><span class="unit"> rpm</span></p>
+        <div class="rcf-values" id="rcf-block" hidden>
+          <div><span>Source RCF</span><strong id="source-rcf">—</strong></div>
+          <div><span>Receiving RCF</span><strong id="target-rcf">—</strong></div>
+        </div>
+        <ul id="reasons" hidden></ul>
+      </section>
+    </div>
+    <footer>Inputs stay in this page and are not sent to a server. Whole-rpm rounding assumes your equipment supports 1 rpm settings.</footer>
+  </main>
+  <script>
+    ﻿/*
+ * Match nominal orbital acceleration (RCF, in multiples of standard gravity).
+ * Full orbit D is the shaker's orbital diameter, not the flask diameter.
+ * RCF = (2*pi*rpm/60)^2 * (D_mm/2000) / 9.80665.
+ * Flask construction, nominal size and liquid fill are not inputs to this
+ * kinematic calculation.
+ */
+
+const STANDARD_GRAVITY_M_S2 = 9.80665;
+
+function orbitalRcfG(orbitMm, rpm) {
+  // Log space avoids overflowing an intermediate product when the final
+  // derived value is representable.
+  return Math.exp(2 * (Math.log(2 * Math.PI / 60) + Math.log(rpm))
+    + Math.log(orbitMm) - Math.log(2000 * STANDARD_GRAVITY_M_S2));
+}
+
+function calculateTransfer(inputs) {
+  const result = {
+    status: "invalid",
+    reasons: [],
+    candidateRpm: null,
+    roundedRpm: null,
+    sourceRcfG: null,
+    targetRcfG: null,
+    relativeRcfAtRoundedRpm: null,
+    rpmRange: null,
+  };
+  if (inputs === null || typeof inputs !== "object" || Array.isArray(inputs)) {
+    result.reasons.push("Supply the source rpm, both orbital diameters, and receiving speed limits.");
+    return result;
+  }
+
+  const positiveFields = {
+    sourceRpm: "Source speed",
+    sourceOrbitMm: "Source full orbital diameter",
+    targetOrbitMm: "Receiving full orbital diameter",
+    targetMaxRpm: "Receiving maximum speed",
+  };
+  for (const [key, label] of Object.entries(positiveFields)) {
+    if (!Number.isFinite(inputs[key]) || inputs[key] <= 0) {
+      result.reasons.push(`${label} must be a finite positive number.`);
+    }
+  }
+  if (!Number.isFinite(inputs.targetMinRpm) || inputs.targetMinRpm < 0) {
+    result.reasons.push("Receiving minimum speed must be a finite nonnegative number.");
+  }
+  if (result.reasons.length) return result;
+  if (inputs.targetMinRpm > inputs.targetMaxRpm) {
+    result.reasons.push("Receiving minimum speed must not exceed its maximum speed.");
+    return result;
+  }
+
+  const sourceRcf = orbitalRcfG(inputs.sourceOrbitMm, inputs.sourceRpm);
+  if (!Number.isFinite(sourceRcf) || sourceRcf <= 0) {
+    result.reasons.push("These inputs exceed the numerical range for orbital RCF. Use realistic rpm and orbit values.");
+    return result;
+  }
+  result.sourceRcfG = sourceRcf;
+  result.rpmRange = { min: inputs.targetMinRpm, max: inputs.targetMaxRpm };
+
+  // Equal acceleration means n_r = n_s * sqrt(D_s / D_r).
+  const orbitRatio = inputs.sourceOrbitMm / inputs.targetOrbitMm;
+  const directCandidate = inputs.sourceRpm * Math.sqrt(orbitRatio);
+  // Subnormal orbit ratios lose significant digits; evaluate those in logs.
+  const candidate = orbitRatio >= 2 ** -1022 && Number.isFinite(directCandidate) && directCandidate > 0 ? directCandidate
+    : Math.exp(Math.log(inputs.sourceRpm)
+      + 0.5 * (Math.log(inputs.sourceOrbitMm) - Math.log(inputs.targetOrbitMm)));
+  result.status = "no_match";
+  if (!Number.isFinite(candidate) || candidate <= 0) {
+    result.reasons.push("There is no finite positive receiving speed for these inputs.");
+    return result;
+  }
+  result.candidateRpm = candidate;
+  if (candidate < inputs.targetMinRpm || candidate > inputs.targetMaxRpm) {
+    result.reasons.push(`The calculated RCF match is outside the receiving equipment's ${inputs.targetMinRpm}–${inputs.targetMaxRpm} rpm limits.`);
+    return result;
+  }
+
+  result.status = "candidate";
+  result.targetRcfG = sourceRcf;
+  const rounded = Math.round(candidate);
+  if (rounded <= 0 || rounded < inputs.targetMinRpm || rounded > inputs.targetMaxRpm) {
+    result.reasons.push("A whole-rpm setting is unavailable within the receiving limits. Use the exact speed only if the equipment supports it.");
+    return result;
+  }
+  const roundedRcf = orbitalRcfG(inputs.targetOrbitMm, rounded);
+  if (!Number.isFinite(roundedRcf) || roundedRcf <= 0) {
+    result.reasons.push("The rounded setting has an unrepresentable RCF. Use realistic rpm and orbit values.");
+    return result;
+  }
+  result.roundedRpm = rounded;
+  result.targetRcfG = roundedRcf;
+  result.relativeRcfAtRoundedRpm = (rounded / candidate) ** 2;
+  return result;
+}
+
+  </script>
+  <script>
+    (() => {
+      const form = document.getElementById('transfer-form');
+      const result = document.getElementById('result');
+      const numberNames = ['sourceRpm','sourceOrbitMm','targetOrbitMm','targetMinRpm','targetMaxRpm'];
+      const statuses = {invalid:'Check the inputs',no_match:'No RCF match within receiving speed limits'};
+      function update() {
+        const inputs = {};
+        for (const name of numberNames) { const value = form.elements[name].value.trim(); inputs[name] = value === '' ? NaN : Number(value); }
+        const calculated = calculateTransfer(inputs);
+        result.dataset.state = calculated.status;
+        const candidate = calculated.status === 'candidate';
+        const status = document.getElementById('status');
+        status.hidden = candidate;
+        status.textContent = statuses[calculated.status] ?? '';
+        const displaySpeed = candidate ? (calculated.roundedRpm ?? calculated.candidateRpm) : null;
+        document.getElementById('speed').textContent = displaySpeed === null ? '—' : String(displaySpeed);
+        document.getElementById('speed-block').hidden = displaySpeed === null;
+        document.getElementById('rcf-block').hidden = !candidate;
+        const formatRcf = value => value === null ? '—' : (value >= 0.000001 && value < 1000000 ? value.toFixed(6) : value.toExponential(4)) + ' ×g';
+        document.getElementById('source-rcf').textContent = formatRcf(calculated.sourceRcfG);
+        document.getElementById('target-rcf').textContent = formatRcf(calculated.targetRcfG);
+        const reasons = document.getElementById('reasons');
+        reasons.hidden = calculated.reasons.length === 0;
+        reasons.replaceChildren(...calculated.reasons.map(reason => { const li = document.createElement('li'); li.textContent = reason; return li; }));
+      }
+      form.addEventListener('input',update);
+      form.addEventListener('change',update);
+      form.addEventListener('submit',event => event.preventDefault());
+      update();
+    })();
+  </script>
+</body>
+</html>
