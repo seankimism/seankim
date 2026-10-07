@@ -224,6 +224,21 @@ li::marker { color:var(--accent); }
 @media (max-width:520px) { .xdr-conditions { grid-template-columns:1fr; gap:14px; padding:18px; } }
 @media (max-width:640px) { .xdr-sources { grid-template-columns:1fr; } .xdr-sources > section { padding:18px; } }
 @media (max-width:640px) { .paper-card { grid-template-columns:1fr; } .paper-card-figure { max-width:320px; } .video-grid { grid-template-columns:1fr; } }
+/* Shake-flask methods: readable comparisons within the project article. */
+.flask-methods-table { --method-border:color-mix(in srgb,var(--foreground) 35%,var(--background)); margin:24px 0 30px; max-width:100%; overflow-x:auto; border:1px solid var(--method-border); border-radius:6px; }
+.flask-methods-table table { width:100%; min-width:32rem; border-collapse:collapse; table-layout:fixed; font-size:.95rem; line-height:1.65; }
+.flask-methods-table th,.flask-methods-table td { padding:18px 20px; text-align:left; vertical-align:top; border-bottom:1px solid var(--method-border); border-right:1px solid var(--method-border); }
+.flask-methods-table th:last-child,.flask-methods-table td:last-child { border-right:0; }
+.flask-methods-table thead th { background:color-mix(in srgb,var(--accent) 12%,var(--background)); font-weight:650; }
+.flask-methods-table thead th:first-child { width:30%; }
+.flask-methods-table tbody th { font-weight:600; }
+.flask-methods-table tbody tr:nth-child(even) { background:var(--surface); }
+.flask-methods-table tbody tr:last-child th,.flask-methods-table tbody tr:last-child td { border-bottom:0; }
+.prose .flask-methods-table p { margin:0; }
+.prose .flask-methods-table .method-source { margin-top:10px; font-size:.875rem; }
+.flask-methods-table a { text-decoration:underline; overflow-wrap:anywhere; }
+@media(max-width:600px) { .flask-methods-table th,.flask-methods-table td { padding:14px 16px; } }
+
 .detail-citation { margin-top:30px; border-top:1px solid var(--border); padding-top:20px; }
 .detail-citation h2 { margin-bottom:12px; }
 .detail-citation p { color:var(--text-muted); font-size:.9375rem; overflow-wrap:anywhere; }
