@@ -1,5 +1,5 @@
 ---
-import { getEntry, render } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import { SITE } from '../config';
 import { withBase } from '../utils/paths';
@@ -10,6 +10,10 @@ const entry = (await getEntry(collection,id))!;
 const { Content } = await render(entry);
 const data = entry.data;
 const project = collection === 'projects';
+const draftStudies = import.meta.env.DEV && project
+  ? (await getCollection('projects', child => child.data.draft && child.data.parentProject === id))
+      .sort((a, b) => a.data.order - b.data.order || a.id.localeCompare(b.id))
+  : [];
 const paper = 'author' in data ? data : null;
 const parentId = project && 'parentProject' in data ? data.parentProject : undefined;
 const parentEntry = parentId && parentId !== id ? await getEntry('projects', parentId) : undefined;
@@ -52,6 +56,17 @@ const article = paper
     {paper?.description && <p>{paper.description}</p>}
     {paper?.image && <figure class="xdr-figure"><a href={paper.external_url} target="_blank" rel="noopener noreferrer" aria-label="Open the publication"><img src={withBase(paper.image)} alt={paper.imageAlt ?? ''} width={paper.imageWidth} height={paper.imageHeight} loading="lazy" decoding="async" /></a></figure>}
     <Content />
+    {draftStudies.length > 0 && <section aria-labelledby="draft-studies-heading">
+      <h2 id="draft-studies-heading">In progress</h2>
+      <div class="paper-list">{draftStudies.map(study => <article class="paper-card no-figure">
+        <div class="paper-card-body">
+          <p class="eyebrow">Draft study</p>
+          <h3><a href={withBase(`/projects/${study.id}/`)}>{study.data.title}</a></h3>
+          <p>{study.data.description}</p>
+          <p class="paper-card-links"><a href={withBase(`/projects/${study.id}/`)}>Read study →</a></p>
+        </div>
+      </article>)}</div>
+    </section>}
   </div>
   {paper && <section class="detail-citation"><h2>Citation</h2><p>{paper.author} ({paper.year}). {paper.title}. {paper.journal}{paper.citation ? `, ${paper.citation}` : ''}.{paper.doi && <> <a href={paper.external_url}>doi:{paper.doi}</a></>}</p></section>}
   </article>

@@ -1,0 +1,3 @@
+# Preserve the manifest's HTML byte hashes across Windows and Linux checkouts.
+*.html text eol=lf
+manifest.json text eol=lf

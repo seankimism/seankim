@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "status": "Development-only calculator review snapshot",
+  "recorded_date": "2026-10-06",
+  "modeling_repository": "bioprocess-modeling",
+  "exporter": "bioreactor/website/incubator_transfer.py",
+  "export_command": ".venv/Scripts/python.exe -m bioreactor.website.incubator_transfer --output output/incubator_transfer_review/index.html",
+  "source_files": {
+    "website/incubator_transfer.html": {
+      "bytes": 8869,
+      "sha256": "922e107d3941dd86c6a2ef6a48e62f9db1f0a9f1000749d63c3d090c22326885"
+    },
+    "website/incubator_transfer.mjs": {
+      "bytes": 4041,
+      "sha256": "4e0f218e192ff30c5a60336df15df81f74e0bef568628dc24b67e5631c400616"
+    },
+    "website/incubator_transfer_methodology.html": {
+      "bytes": 10874,
+      "sha256": "3577c6ff6856b1e57a2aec747108ba6b1898bb2966109e4ba3eae9eb57340a6c"
+    },
+    "website/vessel_agitation.html": {
+      "bytes": 18665,
+      "sha256": "77443f5f89b6f99105296ba7fa630ca457846fe898f2beeb3ff35ff2f213eb79"
+    },
+    "website/vessel_agitation.mjs": {
+      "bytes": 11613,
+      "sha256": "15e694b5708da18061df6bb4fd7f9b2b979e433e06e0413216f6dac6e787ee1c"
+    },
+    "website/vessel_agitation_methodology.html": {
+      "bytes": 14993,
+      "sha256": "c801d100e8023df46c6b35bcb3dbd6d85ae80486bb540208268643832b740c46"
+    }
+  },
+  "snapshot_files": {
+    "index.html": {
+      "bytes": 12870,
+      "sha256": "a038c8332dd7e2e56f153ea9ed32c8b1bfd865405e3e6a08d4190549ce610714"
+    },
+    "methodology.html": {
+      "bytes": 10856,
+      "sha256": "2f68393b45c307c367e1f176000955f089df52f18bde306515c7860a66d4e535"
+    },
+    "vessel-agitation.html": {
+      "bytes": 30240,
+      "sha256": "ace2ce0b26768104e3ac370e4ce3434abcb6983a0b7274cfe1de500bbf2810df"
+    },
+    "agitation-methodology.html": {
+      "bytes": 14984,
+      "sha256": "3429ab6e6a409722d4ed4df67828d98c77035797b427186fefaa4abd8b2d8b73"
+    }
+  }
+}

@@ -1,0 +1,403 @@
+{
+  "schema_version": 1,
+  "status": "Development-only project draft",
+  "renderer": "bioprocess-modeling/bioreactor/plots/shake_flask_wave_project.py",
+  "watermark": "sean-kim-model-figure-v4",
+  "render": {
+    "schema_version": 1,
+    "source": "Previously saved model results; no simulations or fits run",
+    "archive_root": "docs/future-releases/gas-transfer/assets",
+    "inputs": {
+      "shake-flask/summary.csv": {
+        "bytes": 1336308,
+        "sha256": "d47b593e43717ece0aa28d96ec29a5be037684122f5e151b86d517eca7bcd261"
+      },
+      "wave-bag/summary.csv": {
+        "bytes": 2068289,
+        "sha256": "88273e03b9fe95838fba1787f81d173264ac8a6d0bebe0b2dabd078471f36d11"
+      },
+      "wave-bag/baseline.json": {
+        "bytes": 216219,
+        "sha256": "3e4656d00b659770e18e9f7b032d9639ed88d987172c47d87486eba8a0bf82b7"
+      },
+      "wave-bag/high_demand.json": {
+        "bytes": 8204,
+        "sha256": "b26e417be721def56a999367ef33b3dc159b2b16395321847d404949a915c9a2"
+      }
+    },
+    "renderer_sha256": "38421015bf24407e3c36615ccb73c83527de47fb4b01291b305a37c57ab9b368",
+    "renderer_dependencies_sha256": {
+      "bioreactor/plots/style.py": "7f57f71f1c7a487ffd55f9614bc9195012224d332232395b2bf8d1a6f9e3eec4"
+    },
+    "runtime": {
+      "python": "3.14.5",
+      "numpy": "2.4.1",
+      "matplotlib": "3.10.8"
+    },
+    "flask_curves": [
+      {
+        "panel": 0,
+        "label": "19 mm",
+        "settings": {
+          "orbital_diameter_mm": 19,
+          "fill_fraction": 0.2
+        },
+        "case_ids": [
+          "case_0272",
+          "case_0275",
+          "case_0278",
+          "case_0281",
+          "case_0284"
+        ],
+        "rpm": [
+          100,
+          150,
+          200,
+          250,
+          300
+        ],
+        "kla_1_h": [
+          15.737683868101323,
+          25.08985025998059,
+          34.93129826276583,
+          45.15335522550331,
+          55.68932824835386
+        ]
+      },
+      {
+        "panel": 0,
+        "label": "25 mm",
+        "settings": {
+          "orbital_diameter_mm": 25,
+          "fill_fraction": 0.2
+        },
+        "case_ids": [
+          "case_0287",
+          "case_0290",
+          "case_0293",
+          "case_0296",
+          "case_0299"
+        ],
+        "rpm": [
+          100,
+          150,
+          200,
+          250,
+          300
+        ],
+        "kla_1_h": [
+          17.22948640343841,
+          27.468160978556654,
+          38.24249702287265,
+          49.43352061508225,
+          60.968216918909974
+        ]
+      },
+      {
+        "panel": 0,
+        "label": "50 mm",
+        "settings": {
+          "orbital_diameter_mm": 50,
+          "fill_fraction": 0.2
+        },
+        "case_ids": [
+          "case_0302",
+          "case_0305",
+          "case_0308",
+          "case_0311",
+          "case_0314"
+        ],
+        "rpm": [
+          100,
+          150,
+          200,
+          250,
+          300
+        ],
+        "kla_1_h": [
+          21.657694845264057,
+          34.527845723564276,
+          48.071330232862074,
+          62.138596562858844,
+          76.63786408781777
+        ]
+      },
+      {
+        "panel": 1,
+        "label": "10%",
+        "settings": {
+          "orbital_diameter_mm": 50,
+          "fill_fraction": 0.1
+        },
+        "case_ids": [
+          "case_0301",
+          "case_0304",
+          "case_0307",
+          "case_0310",
+          "case_0313"
+        ],
+        "rpm": [
+          100,
+          150,
+          200,
+          250,
+          300
+        ],
+        "kla_1_h": [
+          36.172158655892176,
+          57.667573695270036,
+          80.28757429662973,
+          103.78238263975327,
+          127.99870894105982
+        ]
+      },
+      {
+        "panel": 1,
+        "label": "20%",
+        "settings": {
+          "orbital_diameter_mm": 50,
+          "fill_fraction": 0.2
+        },
+        "case_ids": [
+          "case_0302",
+          "case_0305",
+          "case_0308",
+          "case_0311",
+          "case_0314"
+        ],
+        "rpm": [
+          100,
+          150,
+          200,
+          250,
+          300
+        ],
+        "kla_1_h": [
+          21.657694845264057,
+          34.527845723564276,
+          48.071330232862074,
+          62.138596562858844,
+          76.63786408781777
+        ]
+      },
+      {
+        "panel": 1,
+        "label": "30%",
+        "settings": {
+          "orbital_diameter_mm": 50,
+          "fill_fraction": 0.3
+        },
+        "case_ids": [
+          "case_0303",
+          "case_0306",
+          "case_0309",
+          "case_0312",
+          "case_0315"
+        ],
+        "rpm": [
+          100,
+          150,
+          200,
+          250,
+          300
+        ],
+        "kla_1_h": [
+          16.043706132740663,
+          25.577727183953105,
+          35.61054402032173,
+          46.03137083046666,
+          56.772217858390285
+        ]
+      }
+    ],
+    "wave_grids": {
+      "rates_rpm": [
+        17,
+        20,
+        24,
+        28,
+        31
+      ],
+      "angles_deg": [
+        4,
+        6,
+        7,
+        8,
+        10
+      ],
+      "case_ids": [
+        [
+          "case_0025",
+          "case_0265",
+          "case_0505",
+          "case_0745",
+          "case_0985"
+        ],
+        [
+          "case_0073",
+          "case_0313",
+          "case_0553",
+          "case_0793",
+          "case_1033"
+        ],
+        [
+          "case_0121",
+          "case_0361",
+          "case_0601",
+          "case_0841",
+          "case_1081"
+        ],
+        [
+          "case_0169",
+          "case_0409",
+          "case_0649",
+          "case_0889",
+          "case_1129"
+        ],
+        [
+          "case_0217",
+          "case_0457",
+          "case_0697",
+          "case_0937",
+          "case_1177"
+        ]
+      ],
+      "capacity_million_ml": [
+        [
+          1.8243096655935715,
+          2.67770748300228,
+          4.100170590221112,
+          5.846943405684862,
+          7.3637025427514144
+        ],
+        [
+          2.3814405953821454,
+          3.4870682501890244,
+          5.318202121008285,
+          7.546948785793908,
+          9.46467972327428
+        ],
+        [
+          2.6343498638928096,
+          3.8531960497065993,
+          5.866015164599698,
+          8.306143966470817,
+          10.39723725859274
+        ],
+        [
+          2.87446364890175,
+          4.200063366217359,
+          6.383194142333764,
+          9.019845122453617,
+          11.270725070208954
+        ],
+        [
+          3.324009832908214,
+          4.847553679166968,
+          7.343906037371249,
+          10.337844884038613,
+          12.87574165122577
+        ]
+      ],
+      "power_w_m3": [
+        [
+          6.298242879454764,
+          7.409697505240899,
+          8.89163700628908,
+          10.373576507337258,
+          11.485031133123394
+        ],
+        [
+          14.228934506546683,
+          16.73992294887845,
+          20.087907538654143,
+          23.43589212842983,
+          25.9468805707616
+        ],
+        [
+          19.41866948987205,
+          22.845493517496532,
+          27.414592220995843,
+          31.98369092449515,
+          35.410514952119634
+        ],
+        [
+          25.441165564109266,
+          29.930783016599136,
+          35.91693961991896,
+          41.90309622323879,
+          46.39271367572867
+        ],
+        [
+          39.89921984206443,
+          46.94025863772286,
+          56.32831036526744,
+          65.716362092812,
+          72.75740088847044
+        ]
+      ]
+    },
+    "transients": [
+      {
+        "source": "baseline.json",
+        "sample_count": 1441,
+        "end_time_s": 7200,
+        "final_do_percent": 79.54781230101662,
+        "status": "completed"
+      },
+      {
+        "source": "high_demand.json",
+        "sample_count": 48,
+        "end_time_s": 234.9488643594575,
+        "final_do_percent": 0,
+        "status": "oxygen_depleted"
+      }
+    ],
+    "files": {
+      "shake_flask_orbit_fill.svg": {
+        "bytes": 62385,
+        "sha256": "4a0eb81b70f6a535283bcf76548510e118d77970e821e0b6e2150661859395ec"
+      },
+      "shake_flask_orbit_fill.png": {
+        "bytes": 125557,
+        "sha256": "3d6e1cd54d7ee32c88eb58dd158b2af9d0c73a1f326917f737c267bd83d9ea90"
+      },
+      "wave_capacity_power.svg": {
+        "bytes": 90834,
+        "sha256": "73a3c1c6567de7e11f1604ffd0044b818655e0f8e8b87727cafc137351f8206a"
+      },
+      "wave_capacity_power.png": {
+        "bytes": 145016,
+        "sha256": "ff0a9e207644d738c072cfd477b6168bc800a56902a7a25d18b83f9e1914b814"
+      },
+      "wave_oxygen_demand.svg": {
+        "bytes": 53780,
+        "sha256": "e98541756e88512610eacd96f064fd3ae9562f0795d5f17a85fea8f877eb5a07"
+      },
+      "wave_oxygen_demand.png": {
+        "bytes": 100381,
+        "sha256": "3fec7ed781bae7f415f17c3ee075b03c1117789b329785dc78dc91906daca944"
+      }
+    }
+  },
+  "figures": {
+    "shake_flask_orbit_fill.svg": {
+      "source_sha256": "4a0eb81b70f6a535283bcf76548510e118d77970e821e0b6e2150661859395ec",
+      "source_bytes": 62385,
+      "sha256": "be879e71c628e7d237dc40e8c0dde81ab3610fd58ba3128eb9ef1321b4e66774",
+      "bytes": 64088
+    },
+    "wave_capacity_power.svg": {
+      "source_sha256": "73a3c1c6567de7e11f1604ffd0044b818655e0f8e8b87727cafc137351f8206a",
+      "source_bytes": 90834,
+      "sha256": "e7b78a8b7ef6a9210ec736937891098ad48c58b4cee4348fdb0c53a24859c7b7",
+      "bytes": 92549
+    },
+    "wave_oxygen_demand.svg": {
+      "source_sha256": "e98541756e88512610eacd96f064fd3ae9562f0795d5f17a85fea8f877eb5a07",
+      "source_bytes": 53780,
+      "sha256": "70e3ef5f3cccc175e17c230108a44e93f5605d01dc624bb8fea15a2967c96ffa",
+      "bytes": 55358
+    }
+  }
+}
