@@ -154,7 +154,7 @@ The fit includes ten ambr 15 water measurements, eight 1 L PBS measurements, two
 
 ## Sneak peek: shake-flask CFD
 
-I'm still working on a CFD model of the moving liquid–air interface in shake flasks. This animation is an early preview; I'm refining the setup and validating the flow before using it to study surface gas transfer.
+I’m working on a CFD model of the moving liquid–air interface in shake flasks. This animation is an early preview.
 
 <figure class="xdr-figure">
   <a href="/gas-transfer/shake_flask_cfd_sneak_peek.gif" target="_blank" rel="noopener noreferrer" aria-label="Open the shake-flask CFD work-in-progress animation at full size">
