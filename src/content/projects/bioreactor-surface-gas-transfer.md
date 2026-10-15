@@ -17,6 +17,7 @@ I built this model to understand how surface gas transfer changes with reactor s
   <ol>
     <li><a href="#literature-review-headspace-and-surface-gas-transfer">Literature review</a></li>
     <li><a href="#surface-transfer-correlation-and-validation">Correlation model and validation</a></li>
+    <li><a href="#sneak-peek-shake-flask-cfd">Sneak peek: shake-flask CFD</a></li>
     <li><a href="#references">References</a></li>
   </ol>
 </nav>
@@ -149,6 +150,17 @@ The fit includes ten ambr 15 water measurements, eight 1 L PBS measurements, two
     <img src="/gas-transfer/surface_kla_global_expanded_fit.svg?v=efee84f42b68" alt="Global calibration parity plot for 24 conditions from four studies on shared logarithmic axes, excluding de Lamotte. Filled markers distinguish studies, including all ten ambr 15 water conditions. One coefficient, C equals 0.1265, is fitted without a power-range restriction." width="1584" height="1584" loading="lazy" decoding="async" />
   </a>
   <figcaption>Predicted and measured surface oxygen transfer for ambr 15 <a href="#ref-2">[2]</a>, 1 L <a href="#ref-7">[7]</a>, 5.4 L <a href="#ref-8">[8]</a> and 40 L <a href="#ref-10">[10]</a>.</figcaption>
+</figure>
+
+## Sneak peek: shake-flask CFD
+
+I'm still working on a CFD model of the moving liquid–air interface in shake flasks. This animation is an early preview; I'm refining the setup and validating the flow before using it to study surface gas transfer.
+
+<figure class="xdr-figure">
+  <a href="/gas-transfer/shake_flask_cfd_sneak_peek.gif" target="_blank" rel="noopener noreferrer" aria-label="Open the shake-flask CFD work-in-progress animation at full size">
+    <img src="/gas-transfer/shake_flask_cfd_sneak_peek.gif" alt="Early CFD simulation of liquid moving in an orbitally shaken Erlenmeyer flask, with an isometric view on the left and a central cut view on the right." width="1260" height="740" loading="lazy" decoding="async" />
+  </a>
+  <figcaption>Work in progress: a 250 mL unbaffled flask with 50 mL of water, shaken at 150 rpm on a 25 mm orbit. Isometric view (left) and central cut (right). The animation shows 5 seconds of simulated time at half-speed playback.</figcaption>
 </figure>
 
 ## References
