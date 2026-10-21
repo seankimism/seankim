@@ -154,13 +154,15 @@ The fit includes ten ambr 15 water measurements, eight 1 L PBS measurements, two
 
 ## Sneak peek: shake-flask CFD
 
-I’m working on a CFD model of the moving liquid–air interface in shake flasks. This animation is an early preview.
+Headspace plays an important role in gas transfer in small-scale bioreactors, especially shake flasks. Headspace oxygen sets the equilibrium concentration, $c^*$, while $k_La$ describes how readily oxygen transfers into the liquid for a given driving force. The correlation above estimates $k_L$ from vessel-mean dissipation and uses a simplified surface area. In a shake flask, orbital motion changes that area and brings fresh liquid into contact with the headspace.
+
+I’m developing this CFD model to resolve the moving interface and the liquid flow beneath it, so I can explore how shaking speed, orbit and fill affect surface area and mixing. This animation is an early preview of the fluid motion. Coupling that flow to oxygen transport and testing predicted $k_La$ against measurements are next steps.
 
 <figure class="xdr-figure">
   <a href="/gas-transfer/shake_flask_cfd_sneak_peek.gif" target="_blank" rel="noopener noreferrer" aria-label="Open the shake-flask CFD work-in-progress animation at full size">
     <img src="/gas-transfer/shake_flask_cfd_sneak_peek.gif" alt="Early CFD simulation of liquid moving in an orbitally shaken Erlenmeyer flask, with an isometric view on the left and a central cut view on the right." width="1260" height="740" loading="lazy" decoding="async" />
   </a>
-  <figcaption>Work in progress: a 250 mL unbaffled flask with 50 mL of water, shaken at 150 rpm on a 25 mm orbit. Isometric view (left) and central cut (right). The animation shows 5 seconds of simulated time at half-speed playback.</figcaption>
+  <figcaption>Work in progress: a 250 mL unbaffled flask with 50 mL of water, shaken at 150 rpm on a 25 mm orbit. Isometric view (left) and central cut (right).</figcaption>
 </figure>
 
 ## References
