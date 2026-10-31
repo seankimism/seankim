@@ -7,7 +7,7 @@ publishedDate: "2026-10-31"
 period: "2026–present"
 tags: ["Shake flasks", "CFD", "Mixing", "Baffle geometry"]
 order: 4
-draft: false
+draft: true
 ---
 
 <p class="project-lede">I compared plain and four-baffle shake-flask models to see how baffles change startup mixing under matched conditions. The videos show a passive tracer spreading from a stationary initial tag. The mixing times are preliminary model results.</p>

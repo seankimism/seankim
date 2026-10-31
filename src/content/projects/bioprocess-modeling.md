@@ -53,15 +53,6 @@ I built these studies around those differences. I compare model predictions with
       <p class="paper-card-links"><a href="/projects/bioreactor-surface-gas-transfer/">Read study →</a></p>
     </div>
   </article>
-  <article class="paper-card" id="shake-flask-mixing">
-    <a class="paper-card-figure" href="/projects/shake-flask-baffles-and-mixing/" aria-label="Read the shake-flask baffles and mixing study"><img src="/flask-mixing/duran_poster.jpg" alt="Paired surface tracer-concentration views of plain and four-baffle DURAN-style flask models during startup mixing." width="1920" height="1080" loading="lazy" decoding="async" /></a>
-    <div class="paper-card-body">
-      <p class="eyebrow">Shake flasks · CFD · Tracer mixing</p>
-      <h3><a href="/projects/shake-flask-baffles-and-mixing/">Shake-flask baffles and mixing</a></h3>
-      <p>I compared plain and four-baffle 250 mL flask models at matched shaking conditions. Paired concentration videos show startup mixing, alongside preliminary whole-volume mixing times and the current validation limits.</p>
-      <p class="paper-card-links"><a href="/projects/shake-flask-baffles-and-mixing/">Read study →</a></p>
-    </div>
-  </article>
 </div>
 
 ## Tech transfer tools
