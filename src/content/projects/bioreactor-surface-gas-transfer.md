@@ -165,6 +165,8 @@ I’m developing this CFD model to resolve the moving interface and the liquid f
   <figcaption>Work in progress: a 250 mL unbaffled flask with 50 mL of water, shaken at 150 rpm on a 25 mm orbit. Isometric view (left) and central cut (right).</figcaption>
 </figure>
 
+The related [shake-flask baffles and mixing study](/projects/shake-flask-baffles-and-mixing/) now compares plain and four-baffle models using a stationary initial tracer tag at 60 mL fill and 125 rpm. It includes paired concentration videos and preliminary whole-volume mixing times; it does not yet predict oxygen transfer.
+
 ## References
 
 <ol class="project-references">
