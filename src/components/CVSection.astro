@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { groupByInstitution } from "../utils/cv-entries.mjs";
 
 type Props = CollectionEntry<"cv">["data"]["sections"][number];
 
@@ -8,25 +9,29 @@ const { id, title, entries } = Astro.props;
 
 <section class="section" aria-labelledby={id}>
   <h2 id={id}>{title}</h2>
-  {entries.map(entry => (
+  {groupByInstitution(entries).map(group => (
     <article class="cv-entry">
-      <div class="entry-header">
-        <h3>{entry.title}</h3>
-        {entry.period && <span class="entry-period">{entry.period}</span>}
-      </div>
-      {entry.institution && <p class="entry-institution">{entry.institution}</p>}
-      {entry.description && <p class="entry-description">{entry.description}</p>}
-      {entry.thesis && <p class="entry-thesis">Dissertation: <em>{entry.thesis}</em></p>}
-      {entry.links && entry.links.length > 0 && (
-        <p class="entry-links">
-          {entry.links.map((link, index) => (
-            <Fragment>
-              {index > 0 && <span aria-hidden="true"> · </span>}
-              <a href={link.url}>{link.label}</a>
-            </Fragment>
-          ))}
-        </p>
-      )}
+      {group.institution && <p class="cv-institution">{group.institution}</p>}
+      {group.entries.map(entry => (
+        <div class="cv-item">
+          <div class="entry-header">
+            <h3>{entry.title}</h3>
+            {entry.period && <span class="entry-period">{entry.period}</span>}
+          </div>
+          {entry.description && <p class="entry-description">{entry.description}</p>}
+          {entry.thesis && <p class="entry-thesis">Dissertation: <em>{entry.thesis}</em></p>}
+          {entry.links && entry.links.length > 0 && (
+            <p class="entry-links">
+              {entry.links.map((link, index) => (
+                <Fragment>
+                  {index > 0 && <span aria-hidden="true"> · </span>}
+                  <a href={link.url}>{link.label}</a>
+                </Fragment>
+              ))}
+            </p>
+          )}
+        </div>
+      ))}
     </article>
   ))}
 </section>

@@ -102,7 +102,11 @@ li::marker { color:var(--accent); }
 .entry-period { color:var(--text-muted); font-size:.75rem; }
 [aria-labelledby="talks-and-conference-contributions"] .entry-header,
 [aria-labelledby="conference-abstracts"] .entry-header { flex-direction:column; align-items:flex-start; }
-.entry-institution { color:var(--accent); font-size:.875rem; margin:4px 0 8px; }
+.cv-institution { color:var(--accent); font-size:.875rem; line-height:1.5; }
+.cv-institution + .cv-item { margin-top:4px; }
+.cv-item + .cv-item { margin-top:18px; }
+.cv-item:not(:has(.entry-description, .entry-thesis, .entry-links)) + .cv-item { margin-top:8px; }
+.entry-description { margin-top:6px; }
 .entry-description,.entry-thesis { font-size:.875rem; line-height:1.7; }
 .entry-thesis { margin-top:7px; color:var(--text-muted); }
 .entry-links { font-size:.875rem; margin-top:8px; }
