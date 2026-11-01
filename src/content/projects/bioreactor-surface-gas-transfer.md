@@ -4,7 +4,7 @@ description: "Published surface oxygen-transfer measurements from ambr 15 to 2,0
 organization: "Independent project"
 parentProject: "bioprocess-modeling"
 publishedDate: "2026-09-27"
-period: "2026–present"
+period: "September 2026"
 tags: ["Gas transfer", "kLa", "Headspace", "Scale-down"]
 order: 2
 draft: false

@@ -3,7 +3,7 @@ title: "Bioprocess modeling"
 description: "Modeling temperature control, mixing, and gas transfer to understand how the culture environment changes with bioreactor scale."
 organization: "Independent project"
 publishedDate: "2026-09-27"
-period: "2026–present"
+period: "September 2026–present"
 tags: ["Bioreactors", "Scale-up", "Heat transfer", "Gas transfer"]
 order: -1
 draft: false
@@ -78,15 +78,15 @@ I built these studies around those differences. I compare model predictions with
   </article>
 </div>
 
-## Plans
+## Literature reviews
 
 <div class="paper-list">
   <article class="paper-card no-figure" id="cho-cell-model-cfd">
     <div class="paper-card-body">
-      <p class="eyebrow">Development plan · CHO kinetics · CFD coupling</p>
-      <h3><a href="/projects/cho-cell-model-cfd/">Coupling a CHO cell model to CFD</a></h3>
-      <p>I describe how I plan to develop a CHO kinetic model with explicit dependence on dissolved oxygen, pH and pCO₂, add the lactate metabolic shift with an exposure memory, and couple both to CFD-derived compartments and cell lifelines.</p>
-      <p class="paper-card-links"><a href="/projects/cho-cell-model-cfd/">Read the plan →</a></p>
+      <p class="eyebrow">CHO kinetics · Lactate metabolic shift · CFD coupling</p>
+      <h3><a href="/projects/cho-cell-model-cfd/">Coupling CHO cell models to CFD: a literature review</a></h3>
+      <p>I review how CHO kinetic models can respond to dissolved oxygen, pH and pCO₂, with particular attention to the lactate metabolic shift. I also compare approaches for coupling such models to CFD, from frozen flow fields to compartment models and cell lifelines.</p>
+      <p class="paper-card-links"><a href="/projects/cho-cell-model-cfd/">Read review →</a></p>
     </div>
   </article>
 </div>

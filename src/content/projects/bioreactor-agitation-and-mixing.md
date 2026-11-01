@@ -4,7 +4,7 @@ description: "Agitation and mixing calibration, spatial heating, mesh sensitivit
 organization: "Independent project"
 parentProject: "bioprocess-modeling"
 publishedDate: "2026-09-14"
-period: "2026-present"
+period: "September 2026"
 tags: ["Agitation", "Mixing time", "Heat transfer", "Scale-up"]
 order: 0
 draft: false

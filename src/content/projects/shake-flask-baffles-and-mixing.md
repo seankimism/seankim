@@ -4,7 +4,7 @@ description: "An exploratory CFD comparison of startup tracer mixing in plain an
 organization: "Independent project"
 parentProject: "bioprocess-modeling"
 publishedDate: "2026-10-31"
-period: "2026–present"
+period: "October 2026"
 tags: ["Shake flasks", "CFD", "Mixing", "Baffle geometry"]
 order: 4
 draft: false

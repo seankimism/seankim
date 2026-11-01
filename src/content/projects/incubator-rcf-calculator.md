@@ -4,7 +4,7 @@ description: "Translate shaking speed between incubators with different orbital 
 organization: "Independent project"
 parentProject: "bioprocess-modeling"
 publishedDate: "2026-10-04"
-period: "2026–present"
+period: "October 2026"
 tags: ["Tech transfer", "Shake flasks", "Orbital RCF", "Calculator"]
 order: 3
 draft: false
