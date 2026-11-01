@@ -74,5 +74,7 @@ const article = paper
 
 <script>
   import { installResultFrames } from '../utils/result-frames.mjs';
+  import { installFlaskViewers } from '../utils/flask-viewers.mjs';
   installResultFrames({ document, window, ResizeObserver });
+  installFlaskViewers();
 </script>
