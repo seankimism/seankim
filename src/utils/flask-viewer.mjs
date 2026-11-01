@@ -6,7 +6,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 export async function createFlaskViewer(mount) {
   const family = mount.dataset.family;
   if (family !== 'glass' && family !== 'plastic') return () => {};
-  const title = family === 'glass' ? 'Glass flask' : 'Plastic flask';
+  const title = family === 'glass' ? 'Pressed-baffle geometry' : 'V-fold geometry';
   const baffles = family === 'glass' ? 'Four pressed baffles' : 'Four V-fold baffles';
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const abort = new AbortController();

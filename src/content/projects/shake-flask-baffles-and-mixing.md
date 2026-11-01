@@ -14,7 +14,7 @@ draft: false
 
 ## Matched flasks and conditions
 
-I used two 250 mL flask families: a glass body with four pressed baffles and a plastic body with four V-fold baffles. Each baffled model has a matching plain control. The internal baffle shapes are assumed research geometries rather than verified replicas of commercial flasks.
+I used two 250 mL flask families: one with four pressed baffles and one with four V-fold baffles. Each baffled model has a matching plain control. The internal baffle shapes are assumed research geometries rather than verified replicas of commercial flasks.
 
 <dl class="xdr-conditions">
   <div><dt>Nominal flask size</dt><dd>250 mL</dd></div>
@@ -31,13 +31,13 @@ The tag occupies a small central surface region before shaking starts, while the
 
 Rotate and zoom the paired models to compare their shapes. The vertical cutaway starts enabled so you can look inside; adjust its angle and position to inspect the baffles at the base.
 
-### Glass flask — pressed baffles
+### Pressed baffles
 
-<div class="flask-viewer" data-family="glass" aria-label="Interactive glass flask geometry comparison"><p>Enable JavaScript for interactive 3D, or <a href="/flask-mixing/geometry/duran_geometry_comparison.png">view the glass flask geometry comparison image</a>.</p></div>
+<div class="flask-viewer" data-family="glass" aria-label="Interactive pressed-baffle geometry comparison"><p>Enable JavaScript for interactive 3D, or <a href="/flask-mixing/geometry/duran_geometry_comparison.png">view the pressed-baffle geometry comparison image</a>.</p></div>
 
-### Plastic flask — V-fold baffles
+### V-fold baffles
 
-<div class="flask-viewer" data-family="plastic" aria-label="Interactive plastic flask geometry comparison"><p>Enable JavaScript for interactive 3D, or <a href="/flask-mixing/geometry/biofil_geometry_comparison.png">view the plastic flask geometry comparison image</a>.</p></div>
+<div class="flask-viewer" data-family="plastic" aria-label="Interactive V-fold geometry comparison"><p>Enable JavaScript for interactive 3D, or <a href="/flask-mixing/geometry/biofil_geometry_comparison.png">view the V-fold geometry comparison image</a>.</p></div>
 
 These are the exact interior-wall surfaces used to define the CFD domains. Caps, threads and physical wall thickness are omitted. The cutaway exposes the interior for viewing; it leaves the study geometry unchanged.
 
@@ -47,11 +47,11 @@ Each video places **No baffles** on the left and **Four baffles** on the right a
 
 These views show the exterior liquid surface. A uniform-looking surface does not establish whole-volume mixing; the times below come from liquid-volume metrics.
 
-### Glass flask — pressed baffles
+### Pressed baffles
 
 <figure class="research-video" id="duran-mixing-video">
-  <div class="youtube-player youtube-player--widescreen" data-youtube-id="3zvR3yYa11w" data-youtube-title="Glass flask mixing: no baffles vs four pressed baffles | CFD">
-    <button type="button" class="youtube-player__button" aria-label="Play glass flask startup tracer mixing: no baffles on the left and four pressed baffles on the right">
+  <div class="youtube-player youtube-player--widescreen" data-youtube-id="3zvR3yYa11w" data-youtube-title="Pressed-baffle geometry mixing: no baffles vs four pressed baffles | CFD">
+    <button type="button" class="youtube-player__button" aria-label="Play pressed-baffle geometry startup tracer mixing: no baffles on the left and four pressed baffles on the right">
       <img src="/flask-mixing/duran_poster.jpg" alt="" loading="lazy" decoding="async" width="1920" height="1080" />
       <span class="youtube-player__play" aria-hidden="true">&#9654;</span>
     </button>
@@ -59,16 +59,16 @@ These views show the exterior liquid surface. A uniform-looking surface does not
   <figcaption>Physical time 0–3.24 s, shown in 6.56 s at half speed. The panels share a camera and concentration scale. <a href="/flask-mixing/duran_plain_vs_baffled.mp4">MP4</a> · <a href="/flask-mixing/duran_plain_vs_baffled.webm">WebM</a> · <a href="https://www.youtube.com/watch?v=3zvR3yYa11w" target="_blank" rel="noopener noreferrer">Watch on YouTube</a></figcaption>
 </figure>
 
-### Plastic flask — V-fold baffles
+### V-fold baffles
 
 <figure class="research-video" id="biofil-mixing-video">
-  <div class="youtube-player youtube-player--widescreen" data-youtube-id="dXgKskhZURg" data-youtube-title="Plastic flask mixing: no baffles vs four V-fold baffles | CFD">
-    <button type="button" class="youtube-player__button" aria-label="Play plastic flask startup tracer mixing: no baffles on the left and four V-fold baffles on the right">
+  <div class="youtube-player youtube-player--widescreen" data-youtube-id="dXgKskhZURg" data-youtube-title="V-fold geometry mixing: no baffles vs four V-fold baffles | CFD">
+    <button type="button" class="youtube-player__button" aria-label="Play V-fold geometry startup tracer mixing: no baffles on the left and four V-fold baffles on the right">
       <img src="/flask-mixing/biofil_poster.jpg" alt="" loading="lazy" decoding="async" width="1920" height="1080" />
       <span class="youtube-player__play" aria-hidden="true">&#9654;</span>
     </button>
   </div>
-  <figcaption>Physical time 0–2.88 s, shown in 5.84 s at half speed. The plain plastic flask uses the completed recovered scalar run. <a href="/flask-mixing/biofil_plain_vs_baffled.mp4">MP4</a> · <a href="/flask-mixing/biofil_plain_vs_baffled.webm">WebM</a> · <a href="https://www.youtube.com/watch?v=dXgKskhZURg" target="_blank" rel="noopener noreferrer">Watch on YouTube</a></figcaption>
+  <figcaption>Physical time 0–2.88 s, shown in 5.84 s at half speed. The V-fold geometry's plain control uses the completed recovered scalar run. <a href="/flask-mixing/biofil_plain_vs_baffled.mp4">MP4</a> · <a href="/flask-mixing/biofil_plain_vs_baffled.webm">WebM</a> · <a href="https://www.youtube.com/watch?v=dXgKskhZURg" target="_blank" rel="noopener noreferrer">Watch on YouTube</a></figcaption>
 </figure>
 
 ## Whole-volume mixing onsets
@@ -79,14 +79,14 @@ I define **t95** and **t99** as the first saved times when 95% or 99% of the liq
 
 | Model | Baffles | t95, s | t99, s | Saved stop, s |
 | --- | --- | ---: | ---: | ---: |
-| Glass flask | None | 2.48 | 2.72 | 3.72 |
-| Glass flask | Four pressed | 2.16 | 2.24 | 3.24 |
-| Plastic flask | None | 2.44 | 2.76 | 3.76 |
-| Plastic flask | Four V-folds | 1.80 | 1.88 | 2.88 |
+| Pressed-baffle geometry | None | 2.48 | 2.72 | 3.72 |
+| Pressed-baffle geometry | Four pressed | 2.16 | 2.24 | 3.24 |
+| V-fold geometry | None | 2.44 | 2.76 | 3.76 |
+| V-fold geometry | Four V-folds | 1.80 | 1.88 | 2.88 |
 
 </div>
 
-Within these models, four pressed baffles shortened t99 by **17.6%** for the glass pair, and four V-fold baffles shortened it by **31.9%** for the plastic pair. Both full plain runs continued beyond their paired video's endpoint to complete the persistence check. The 3.24 s and 2.88 s clips therefore do not show the full 0.96 s confirmation window for the plain cases.
+Within these models, four pressed baffles shortened t99 by **17.6%** for the pressed-baffle pair, and four V-fold baffles shortened it by **31.9%** for the V-fold pair. Both full plain runs continued beyond their paired video's endpoint to complete the persistence check. The 3.24 s and 2.88 s clips therefore do not show the full 0.96 s confirmation window for the plain cases.
 
 The two families also have different body shapes. Their cross-family difference cannot be attributed to pressed baffles versus V-folds alone.
 
@@ -96,7 +96,7 @@ These are **exploratory saved-flow results**. A time-step-halving check passed, 
 
 The assumed baffle dimensions, mesh and wetting behavior also need sensitivity checks and experimental validation. The results do not establish cell-culture growth, shear safety or oxygen-transfer performance.
 
-The glass body draws on the DURAN 250 mL flask family, and the plastic body on the Biofil-style 250 mL flask family. The pressed-baffle and V-fold names describe the modeled geometry; manufacturer names identify the source families.
+The pressed-baffle body draws on the DURAN 250 mL flask family, and the V-fold body on the Biofil-style 250 mL flask family. The pressed-baffle and V-fold names describe the modeled geometry; manufacturer names identify the source families.
 
 <details class="xdr-details">
   <summary>Tracer transport, visualization and recovery details</summary>
@@ -105,9 +105,9 @@ I transported a passive scalar through the original saved startup CFD flow. All 
 
 The uniform reference is $C_\mathrm{ref}(t)=M_0/V_\mathrm{liq}(t)$, where $M_0$ is the fixed initial volume-weighted tracer inventory. The current liquid volume uses water-volume fractions bounded to 0–1 for this normalization. Surface color uses water-fraction-weighted cell-to-point interpolation, $\mathrm{Point}(\alpha C/C_\mathrm{ref})/\mathrm{Point}(\alpha)$, on the liquid region $\mathrm{Point}(\alpha)\geq0.5$.
 
-The first plain plastic flask attempt stopped after detecting a tiny inherited liquid-fraction overshoot. A separate recovery bounded only the private source's internal water fraction and adjusted mixture density in the affected cells. Its largest water-volume change was 5.738 × 10⁻¹⁰ of the initial volume. Initial dose and concentration fields were preserved, and the original numerical-health and mixing thresholds stayed in force. The table uses this completed recovery, not the failed attempt.
+The first attempt for the V-fold geometry's plain control stopped after detecting a tiny inherited liquid-fraction overshoot. A separate recovery bounded only the private source's internal water fraction and adjusted mixture density in the affected cells. Its largest water-volume change was 5.738 × 10⁻¹⁰ of the initial volume. Initial dose and concentration fields were preserved, and the original numerical-health and mixing thresholds stayed in force. The table uses this completed recovery, not the failed attempt.
 
-The glass flask videos contain 82 native snapshots and the plastic flask videos 73, at 0.04 s intervals. Each snapshot is repeated twice at 25 fps, with no temporal field interpolation. Including the last snapshot holds it for 0.08 s, which explains the difference between twice the final physical timestamp and the file duration. There is no added experimental footage or synthetic motion.
+The pressed-baffle geometry videos contain 82 native snapshots and the V-fold geometry videos 73, at 0.04 s intervals. Each snapshot is repeated twice at 25 fps, with no temporal field interpolation. Including the last snapshot holds it for 0.08 s, which explains the difference between twice the final physical timestamp and the file duration. There is no added experimental footage or synthetic motion.
 
 [Media properties, checksums and study provenance](/flask-mixing/manifest.json).
 
