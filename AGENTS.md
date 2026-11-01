@@ -11,6 +11,7 @@
 
 ## Architecture
 - **Content:** `src/content/` - Markdown with YAML frontmatter: `bio.md`, `cv.md`, `publication-notes.md`, and one file per entry in `projects/` and `publications/`. Schemas live in `src/content.config.ts`.
+- **CV:** each `cv.md` entry renders its `institution` first, then the title, period and details. Consecutive entries with the same `institution` share one institution line (`src/utils/cv-entries.mjs`).
 - **Pages:** `src/pages/` - About (`index.astro`), projects, publications, CV, 404, robots.txt
 - **Layouts:** `src/layouts/` - `BaseLayout.astro` (shell, theme, analytics), `BaseDetail.astro` (project and publication pages)
 - **Components:** `src/components/` - `LeftSidebar`, `Navbar`, `RightMain`, `Footer`, `CVSection`, `Icon`
