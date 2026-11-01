@@ -1,28 +1,27 @@
 ---
-title: "Coupling a CHO cell model to CFD"
-description: "A development plan for a CHO kinetic model that responds to local dissolved oxygen, pH and pCO₂, coupled to bioreactor flow through CFD-derived compartments and cell lifelines."
+title: "Coupling CHO cell models to CFD: a literature review"
+description: "A review of how CHO kinetic models can respond to local dissolved oxygen, pH and pCO₂, and of approaches for coupling them to bioreactor flow through CFD-derived compartments and cell lifelines."
 organization: "Independent project"
 parentProject: "bioprocess-modeling"
 publishedDate: "2026-11-01"
-period: "2026–present"
-tags: ["CHO", "Mechanistic modeling", "CFD", "Scale-up"]
+period: "November 2026"
+tags: ["Literature review", "CHO", "Mechanistic modeling", "CFD", "Scale-up"]
 order: 5
 draft: false
 ---
 
-<p class="project-lede">Most mechanistic models of CHO cell culture assume a perfectly stirred bioreactor without oxygen limitation and with pH under control <a href="#ref-1">[1]</a>. However, these assumptions become less reliable as bioreactor volume increases, and cells may respond to local conditions that a single probe does not measure. The objective of this work is to develop a cell-line model that responds to its local environment and to couple it with flow fields from CFD at a computational cost suitable for a laptop.</p>
+<p class="project-lede">Most mechanistic models of Chinese hamster ovary (CHO) cell culture assume a perfectly stirred bioreactor without oxygen limitation and with pH under control <a href="#ref-1">[1]</a>. However, these assumptions become less reliable as bioreactor volume increases, and cells may respond to local conditions that a single probe does not measure. In this review, I examine how CHO kinetic models can represent the local environment and how they can be coupled with computational fluid dynamics (CFD), with an emphasis on approaches whose computational cost is suitable for a laptop.</p>
 
-This plan builds on my [shake-flask baffles and mixing study](/projects/shake-flask-baffles-and-mixing/), in which I used CFD to compare startup tracer mixing in plain and baffled flask models and began preparing stirred-bioreactor models for future flow studies. The cell model described here is an unstructured kinetic model with explicit environmental dependence, including the shift between lactate production and consumption. Structured metabolism, product quality and population heterogeneity will be considered once this model is calibrated. None of the models described here has been implemented yet. This page documents the proposed approach and the evidence on which it is based.
+This review follows from my [shake-flask baffles and mixing study](/projects/shake-flask-baffles-and-mixing/), in which I used CFD to compare startup tracer mixing in plain and baffled flask models and began preparing stirred-bioreactor models for future flow studies. Flow models of this kind predict how dissolved species are transported through a vessel, but not how cells respond to the resulting conditions. I focus on unstructured kinetic models with explicit environmental dependence, including the shift between lactate production and consumption. Structured metabolism, product quality and population heterogeneity are outside the scope of this review.
 
 <nav class="project-outline" aria-label="On this page">
   <p>On this page</p>
   <ol>
     <li><a href="#gradients-at-production-scale">Gradients at production scale</a></li>
-    <li><a href="#model-architecture">Model architecture</a></li>
-    <li><a href="#cho-cell-model">CHO cell model</a></li>
+    <li><a href="#cho-kinetic-models">CHO kinetic models</a></li>
     <li><a href="#coupling-with-cfd">Coupling with CFD</a></li>
     <li><a href="#validation-targets">Validation targets</a></li>
-    <li><a href="#development-sequence">Development sequence</a></li>
+    <li><a href="#summary-and-outlook">Summary and outlook</a></li>
     <li><a href="#references">References</a></li>
   </ol>
 </nav>
@@ -54,27 +53,18 @@ The calculation uses $q_{\mathrm{O_2}}$ = 5.5 pmol/(cell·day), which lies withi
 
 The XDR-2000 mixing times compiled in my [agitation and mixing study](/projects/bioreactor-agitation-and-mixing/) range from 28 to 38 s. Using the rule of thumb that the 95% mixing time corresponds to about four circulation times <a href="#ref-7">[7]</a>, liquid circulates through the vessel approximately every 7–10 s. At typical fed-batch cell densities, dissolved oxygen therefore lasts for several circulations, suggesting that consumption alone produces only modest DO gradients at 2,000 L. Above about 50 million cells/mL, or in larger vessels with longer mixing times, the oxygen in the liquid lasts approximately one mixing time. Local DO then depends on where gas transfer occurs and how long cells remain away from it. Similar considerations apply to pH near base addition and to CO₂ removal.
 
-## Model architecture
+## CHO kinetic models
 
-<figure class="xdr-figure">
-  <a href="/cho-cfd/cho_cfd_coupling.svg" target="_blank" rel="noopener noreferrer" aria-label="Open the coupling diagram at full size">
-    <img src="/cho-cfd/cho_cfd_coupling.svg" alt="CFD computes the flow field a few times. In the coupled simulation, a compartment model uses that flow to calculate mass transfer and exchange between zones, and the CHO cell model receives local conditions from each zone and returns rates. The coupled simulation produces catabolic and anabolic predictions." width="960" height="376" loading="lazy" decoding="async" />
-  </a>
-  <figcaption>Proposed workflow. CFD computes the flow field, which the compartment model uses to calculate mass transfer and exchange between zones. The cell model receives the local conditions in each zone and returns uptake and production rates. Particle tracks through the same flow field provide the exposure histories used by the cell model. The coupled simulation produces catabolic and anabolic predictions. None of these components has been implemented yet.</figcaption>
-</figure>
+Unstructured models represent the culture as a single cell population and describe metabolism with a small number of specific rates. Xing et al. used this approach for 5,000 L fed-batch cultures, with six differential equations and 18 parameters, 12 of which were estimated by Markov chain Monte Carlo (MCMC) from seven runs <a href="#ref-8">[8]</a>. Bayesian estimation of this kind suits coupled simulations, because parameter distributions, rather than single best-fit values, can be propagated through the spatial model. In the approach reviewed by Ben Yahia et al., the stoichiometry linking extracellular inputs and outputs is defined first, kinetic expressions are then added, and the system is closed with bioreactor mass balances <a href="#ref-9">[9]</a>.
 
-The workflow separates calculations by computational cost. CFD solves the flow field a limited number of times for each vessel and operating condition. Python then uses these solutions to transport species between compartments and to follow simulated cells, and these calculations can be repeated as the biological model changes. The cell model receives local conditions and returns specific rates. It can therefore run unchanged in a well-mixed vessel or in any compartment, independently of vessel geometry and controller settings.
+A model that responds to its environment needs states beyond cells, substrates and byproducts, including those that determine pH and the partial pressure of CO₂ (pCO₂). Based on the studies discussed in this section, such a model would include the following states.
 
-## CHO cell model
+<div class="xdr-experiment-plan xdr-data-table" role="region" aria-label="State variables of an environment-responsive cell model and their roles" tabindex="0">
 
-The cell model is unstructured, meaning that the culture is represented as a single cell population and metabolism is described by a small number of specific rates. Xing et al. used this approach for 5,000 L fed-batch cultures, with six differential equations and 18 parameters, 12 of which were estimated by Markov chain Monte Carlo (MCMC) from seven runs <a href="#ref-8">[8]</a>. I plan to retain this Bayesian approach because parameter distributions, rather than single best-fit values, can then be propagated through the coupled simulations. Following Ben Yahia et al., I will first define the stoichiometry linking extracellular inputs and outputs, then add kinetic expressions, and finally close the system with bioreactor mass balances <a href="#ref-9">[9]</a>.
-
-<div class="xdr-experiment-plan xdr-data-table" role="region" aria-label="State variables in the cell model and their purpose" tabindex="0">
-
-| State variables | Purpose |
+| State variables | Role |
 | --- | --- |
 | Viable and dead cells | Growth, death and lysis |
-| Glucose, glutamine and glutamate | Primary carbon and nitrogen sources; GS cell lines also synthesize glutamine |
+| Glucose, glutamine and glutamate | Primary carbon and nitrogen sources; glutamine synthetase (GS) cell lines also synthesize glutamine |
 | Lactate and ammonium | Inhibitory byproducts; lactate may later be consumed |
 | Lumped inhibitor | Other growth-inhibiting byproducts of amino acid metabolism <a href="#ref-10">[10]</a> |
 | Exposure memory | Recent exposure to low DO, elevated pH or elevated pCO₂ |
@@ -84,21 +74,21 @@ The cell model is unstructured, meaning that the culture is represented as a sin
 
 </div>
 
-The specific growth rate is expressed as the product of substrate limitation, inhibition and environmental terms:
+The specific growth rate is commonly expressed as a product of substrate limitation and inhibition terms. Environmental dependence can be added as further factors:
 
 $$
 \mu=\mu_{\max}\prod_j\frac{S_j}{K_j+S_j}\prod_k\frac{K_{I,k}}{K_{I,k}+I_k}\;f_{\mathrm{DO}}\,f_{\mathrm{pH}}\,f_{\mathrm{CO_2}}\,f_T\,f_{\mathrm{osm}}.
 $$
 
-Uptake and secretion rates are related to growth through yield coefficients and maintenance terms, each with its own environmental dependence. These environmental terms are the main difference from most published models, which assume a perfectly stirred bioreactor without oxygen limitation and with controlled pH <a href="#ref-1">[1]</a>. In addition, most studies of mammalian cell metabolism were performed in shake flasks, where pH and DO cannot be controlled <a href="#ref-11">[11]</a>. Estimating the environmental terms therefore requires data from controlled bioreactors.
+Uptake and secretion rates are related to growth through yield coefficients and maintenance terms, each of which can have its own environmental dependence. These environmental terms distinguish such a model from most published models, which assume a perfectly stirred bioreactor without oxygen limitation and with controlled pH <a href="#ref-1">[1]</a>. In addition, most studies of mammalian cell metabolism were performed in shake flasks, where pH and DO cannot be controlled <a href="#ref-11">[11]</a>. Estimating the environmental terms therefore requires data from controlled bioreactors.
 
-I will use Monod and inhibition terms as the default rate expressions. Haldane- or Luong-type terms are appropriate for lactate, which acts as both a carbon source and an inhibitor, and switching functions with independently specified transition points and sharpness can represent changes between culture phases <a href="#ref-1">[1]</a>. Sharp switching functions make the equations stiff, which requires an implicit solver.
+In addition to Monod and simple inhibition terms, González-Hernández and Perré describe Haldane- or Luong-type terms for lactate, which acts as both a carbon source and an inhibitor. They also describe switching functions with independently specified transition points and sharpness, which can represent changes between culture phases <a href="#ref-1">[1]</a>. Sharp switching functions make the equations stiff, which requires an implicit solver.
 
 The lactate metabolic shift requires particular attention. Many CHO fed-batch cultures produce lactate during early growth and consume it later in the culture. Reported triggers of this shift include glucose or glutamine depletion, extracellular lactate concentration, and pH and temperature shifts, with cellular redox state proposed as a common underlying factor <a href="#ref-12">[12]</a>. Zalai et al. controlled the shift over a broad range through the timing of pH and temperature shifts, and associated it mainly with decreasing glycolytic flux <a href="#ref-13">[13]</a>. CO₂ and oxygen also influence the shift. In fed-batch cultures at 150 mmHg pCO₂, Brunner et al. observed no shift to lactate consumption, whereas control cultures at 94 mmHg began consuming lactate at about day 5 <a href="#ref-14">[14]</a>. Okamura et al. found more pronounced lactate consumption at higher DO and low glutamine concentrations, although their model represented DO at only two levels, 50% and 10% <a href="#ref-15">[15]</a>.
 
-Each of these conditions can vary within a large bioreactor, and the shift also depends on the history of the culture. In the glycolysis model of Mulukutla et al., lactate inhibition and Akt signaling reshape two coexisting steady states. As a result, the transition to low glycolytic flux can occur only in certain regions, and the final metabolic state depends on the trajectory of the culture <a href="#ref-16">[16]</a>. Cells circulating through a large bioreactor follow different trajectories through its gradients. The model therefore requires exposure histories in addition to bulk averages.
+Each of these conditions can vary within a large bioreactor, and the shift also depends on the history of the culture. In the glycolysis model of Mulukutla et al., lactate inhibition and Akt signaling reshape two coexisting steady states. As a result, the transition to low glycolytic flux can occur only under certain combinations of conditions, and the final metabolic state depends on the trajectory of the culture <a href="#ref-16">[16]</a>. Cells circulating through a large bioreactor follow different trajectories through its gradients. A model of the shift at large scale therefore requires exposure histories in addition to bulk averages.
 
-As a starting point, I will represent the shift as a smooth transition between lactate production and consumption:
+The switching functions described above provide a simple way to represent these observations. The shift can be written as a smooth transition between lactate production and consumption:
 
 $$
 q_{\mathrm{Lac}}=(1-\sigma)\,q_{\mathrm{Lac}}^{+}-\sigma\,q_{\mathrm{Lac}}^{-},\qquad \sigma=\frac{1}{1+\exp\left[-(z-z_0)/w\right]}.
@@ -110,46 +100,45 @@ $$
 \tau_m\frac{dm}{dt}=s(\mathrm{DO},\mathrm{pH},p\mathrm{CO_2})-m.
 $$
 
-A single memory state is the simplest formulation in which brief excursions have little effect while sustained exposure alters the response. Anane et al. observed no response to DO gradients until exposure exceeded about 90 s <a href="#ref-3">[3]</a>, which provides an initial estimate. The time constant itself must be determined from oscillation experiments with the cell line of interest.
+A single memory state is the simplest formulation in which brief excursions have little effect while sustained exposure alters the response. The threshold of about 90 s observed by Anane et al. provides an initial estimate of the time constant <a href="#ref-3">[3]</a>. For a specific cell line, the time constant would need to be determined from oscillation experiments.
 
-Before selecting a final formulation, I will evaluate the model of O’Brien et al., which combines a mechanistic metabolic model with submodels for cell growth, signaling and the bioreactor environment <a href="#ref-17">[17]</a>. The model reproduced run-to-run variability in manufacturing data, which was attributed in part to the metabolic state of the inoculum, and represented differences in scale through CO₂ removal capacity. Its MATLAB code is publicly available.
+O’Brien et al. took a more detailed approach, combining a mechanistic metabolic model with submodels for cell growth, signaling and the bioreactor environment <a href="#ref-17">[17]</a>. The model reproduced run-to-run variability in manufacturing data, which was attributed in part to the metabolic state of the inoculum, and represented differences in scale through CO₂ removal capacity. Its MATLAB code is publicly available, so it can serve as a reference for simpler formulations.
 
-Mulukutla et al. identified nine byproducts of amino acid metabolism that accumulate in fed-batch culture and inhibited growth when added to cultures. Maintaining selected amino acids at 0.5–1 mM during the growth phase reduced their accumulation <a href="#ref-10">[10]</a>. A single lumped inhibitor state can represent their combined effect. In addition, the model should reproduce the stationary-phase behavior reported by Templeton et al., who observed net lactate consumption from the start of the stationary phase and highly oxidative metabolism at peak antibody production <a href="#ref-18">[18]</a>.
+Mulukutla et al. identified nine byproducts of amino acid metabolism that accumulate in fed-batch culture and inhibited growth when added to cultures. Maintaining selected amino acids at 0.5–1 mM during the growth phase reduced their accumulation <a href="#ref-10">[10]</a>. In an unstructured model, a single lumped inhibitor state can represent their combined effect. Templeton et al. observed net lactate consumption from the start of the stationary phase and highly oxidative metabolism at peak antibody production <a href="#ref-18">[18]</a>. A model of the lactate shift should also reproduce this stationary-phase behavior.
 
-pH will be calculated at each step from carbonate, lactate, ammonium and strong-ion totals using electroneutrality, rather than integrated as a separate state. Gas transfer acts on dissolved CO₂ rather than on total inorganic carbon. The model will also report the oxygen uptake rate (OUR) and CO₂ evolution rate (CER). Their ratio, the respiratory quotient (RQ), provides an independent check on the predicted shift. In the fed-batch cultures of Goh et al., RQ was on average above 1 during lactate production and below 1 during lactate consumption <a href="#ref-19">[19]</a>. Finally, the temperature term will connect this model to my [temperature-control study](/projects/bioreactor-temperature-control/), in which cell density is currently prescribed and metabolic heat could be calculated from OUR.
+Because pH and pCO₂ enter the rate expressions, both must be calculated rather than prescribed. pH can be calculated at each step from carbonate, lactate, ammonium and strong-ion totals using electroneutrality, rather than integrated as a separate state. Gas transfer then acts on dissolved CO₂ rather than on total inorganic carbon. Such a model can also report the oxygen uptake rate (OUR) and CO₂ evolution rate (CER). Their ratio, the respiratory quotient (RQ), provides an independent check on the predicted shift. In the fed-batch cultures of Goh et al., RQ was on average above 1 during lactate production and below 1 during lactate consumption <a href="#ref-19">[19]</a>. A temperature term would also connect such a model to my [temperature-control study](/projects/bioreactor-temperature-control/), in which cell density is currently prescribed and metabolic heat could be calculated from OUR.
 
-I will calibrate the model using well-mixed, controlled fed-batch cultures at bench scale before introducing spatial variation. Möller et al. found significant differences in parameter estimates between 30 mL shake flasks and 250 mL controlled bioreactors, but none between 250 mL and 2 L, and predicted a 50 L run using the resulting parameter distributions <a href="#ref-20">[20]</a>. González-Hernández and Perré recommend experiments that cover conditions both within and outside industrial operating ranges, include batch and fed-batch cultures, and reserve some runs for validation <a href="#ref-1">[1]</a>. Sensitivity analysis will then be used to restrict the calibration to the most influential parameters.
+The reviewed studies support calibrating such a model in well-mixed, controlled fed-batch cultures at bench scale before introducing spatial variation. Möller et al. found significant differences in parameter estimates between 30 mL shake flasks and 250 mL controlled bioreactors, but none between 250 mL and 2 L, and predicted a 50 L run using the resulting parameter distributions <a href="#ref-20">[20]</a>. González-Hernández and Perré recommend experiments that cover conditions both within and outside industrial operating ranges, include batch and fed-batch cultures, and reserve some runs for validation <a href="#ref-1">[1]</a>. Sensitivity analysis can then restrict the calibration to the most influential parameters.
 
 ## Coupling with CFD
 
-Reviews by Wang et al. and Singh et al. describe the challenges of coupling cell models with CFD and compare coupling approaches in terms of computational load <a href="#ref-21">[21]</a>, <a href="#ref-22">[22]</a>. The proposed coupling is feasible because the relevant processes occur on different timescales. As shown above, dissolved oxygen is consumed within seconds to minutes, whereas cell density and most metabolite concentrations change over hours. The slow biological states can therefore be held constant over a short interval while the faster gas and pH fields approach a quasi-steady state, and then updated.
+Reviews by Wang et al. and Singh et al. describe the challenges of coupling cell models with CFD and compare coupling approaches in terms of computational load <a href="#ref-21">[21]</a>, <a href="#ref-22">[22]</a>. Coupling is tractable because the relevant processes occur on different timescales. As shown above, dissolved oxygen is consumed within seconds to minutes, whereas cell density and most metabolite concentrations change over hours. The slow biological states can therefore be held constant over a short interval while the faster gas and pH fields approach a quasi-steady state, and then updated.
 
-I will also treat cells as passive tracers that follow the liquid. At 20 million cells/mL, cells with a diameter of 15 µm occupy about 3.5% of the liquid volume, so the flow field is held constant as the culture grows.
+Cells can also be treated as passive tracers that follow the liquid. At 20 million cells/mL, cells with a diameter of 15 µm occupy about 3.5% of the liquid volume, so the flow field can be held constant as the culture grows. The reviewed approaches differ mainly in the information they provide and in their computational cost.
 
-<div class="xdr-experiment-plan xdr-data-table" role="region" aria-label="Approaches for coupling the cell model to CFD, from lowest to highest computational cost" tabindex="0">
+<div class="xdr-experiment-plan xdr-data-table" role="region" aria-label="Approaches for coupling a cell model to CFD, from lowest to highest computational cost" tabindex="0">
 
-| Approach | Information provided | Computational cost | Role in this plan |
+| Approach | Information provided | Computational cost | Suited to |
 | --- | --- | --- | --- |
-| Frozen flow with switching between steady states <a href="#ref-23">[23]</a> | Concentration fields for each operating condition, with the flow switching to a new steady state when operating conditions change | Lowest | Initial DO and pH estimates over a complete culture |
-| CFD-derived compartment models <a href="#ref-24">[24]</a>, <a href="#ref-25">[25]</a> | Spatial concentrations calculated from exchange flows between zones | Low once the flow is solved | Primary model |
-| Lifelines on a frozen flow field <a href="#ref-7">[7]</a>, <a href="#ref-26">[26]</a> | Exposure histories along simulated cell trajectories | Moderate | Input to the exposure memory and design of scale-down experiments |
-| Fully transient, two-way CFD | Time-resolved flow, mass transfer and control | High | Not planned; reference case only |
+| Frozen flow with switching between steady states <a href="#ref-23">[23]</a> | Concentration fields for each operating condition, with the flow switching to a new steady state when operating conditions change | Lowest | First estimates of DO and pH over a complete culture |
+| CFD-derived compartment models <a href="#ref-24">[24]</a>, <a href="#ref-25">[25]</a> | Spatial concentrations calculated from exchange flows between zones | Low once the flow is solved | Coupled simulations of a complete culture |
+| Lifelines on a frozen flow field <a href="#ref-7">[7]</a>, <a href="#ref-26">[26]</a> | Exposure histories along simulated cell trajectories | Moderate | Exposure statistics and the design of scale-down experiments |
+| Fully transient, two-way CFD | Time-resolved flow, mass transfer and control | High | Reference calculations |
 
 </div>
 
-The proposed workflow consists of five steps:
+Delafosse et al. developed compartment models of bioreactor mixing from CFD flow fields <a href="#ref-24">[24]</a>. Maldonado de León et al. extended this approach with machine learning, allowing a single compartment model to follow changes in liquid volume and agitation rate during a fed-batch process <a href="#ref-25">[25]</a>. In their simulation of an industrial *Penicillium chrysogenum* fermentation, Haringa et al. described five applications of lifelines: a model response study, lifeline-based scale-down design, numerical verification of the scale-down system, reactor optimization through feed location, and long-term fed-batch simulation <a href="#ref-26">[26]</a>. In an earlier study, they treated cells as massless tracers, with a discrete random-walk model representing turbulent dispersion, and recorded local conditions every 0.03 s <a href="#ref-7">[7]</a>.
 
-<div class="xdr-experiment-plan xdr-data-table" role="region" aria-label="Proposed coupling workflow, with the check applied at each step" tabindex="0">
+These approaches can also be combined. In the structure below, compartments provide the concentration fields and lifelines provide the exposure histories.
 
-| Step | Calculation | Check |
-| --- | --- | --- |
-| 1. Flow | Steady rotating-frame CFD at selected agitation rates and fill volumes | Frozen-flow tracer mixing times compared with the measurements compiled in my agitation and mixing study |
-| 2. Compartments | Compartment network built from CFD face fluxes, retaining forward and reverse exchange across each boundary | Compartment tracer response compared with the CFD |
-| 3. Species | DO, glucose, carbonate species and base transported between compartments in Python, with cell-model rates as sources and sinks | Uniform conditions reproduce the well-mixed result, and species inventories are conserved |
-| 4. Lifelines | Massless particles tracked through the frozen flow, with compartment concentrations sampled along each trajectory | Exposure statistics checked for sensitivity to particle number and sampling interval |
-| 5. Experiments | Scale-down oscillation experiments designed from the exposure statistics | Exposure memory refitted to the experimental results |
+<figure class="xdr-figure">
+  <a href="/cho-cfd/cho_cfd_coupling.svg" target="_blank" rel="noopener noreferrer" aria-label="Open the coupling diagram at full size">
+    <img src="/cho-cfd/cho_cfd_coupling.svg" alt="CFD computes the flow field a few times. In the coupled simulation, a compartment model uses that flow to calculate mass transfer and exchange between zones, and the CHO cell model receives local conditions from each zone and returns rates. The coupled simulation produces catabolic and anabolic predictions." width="960" height="376" loading="lazy" decoding="async" />
+  </a>
+  <figcaption>Coupling structure that combines the reviewed approaches. CFD computes the flow field, which the compartment model uses to calculate mass transfer and exchange between zones. The cell model receives the local conditions in each zone and returns uptake and production rates. Particle tracks through the same flow field provide the exposure histories used by the cell model. The coupled simulation produces catabolic and anabolic predictions.</figcaption>
+</figure>
 
-</div>
+This structure separates calculations by computational cost. CFD solves the flow field a limited number of times for each vessel and operating condition. The compartment and lifeline calculations reuse these solutions and can be repeated as the biological model changes. The cell model receives local conditions and returns specific rates. It can therefore run unchanged in a well-mixed vessel or in any compartment, independently of vessel geometry and controller settings. The two models exchange the following quantities.
 
 <div class="xdr-experiment-plan xdr-data-table" role="region" aria-label="Quantities exchanged between the flow model and the cell model" tabindex="0">
 
@@ -160,17 +149,15 @@ The proposed workflow consists of five steps:
 
 </div>
 
-Delafosse et al. developed compartment models of bioreactor mixing from CFD flow fields <a href="#ref-24">[24]</a>. Maldonado de León et al. extended this approach with machine learning, allowing a single compartment model to follow changes in liquid volume and agitation rate during a fed-batch process <a href="#ref-25">[25]</a>. Haringa et al. described five applications of lifelines that correspond closely to this plan: a model response study, lifeline-based scale-down design, numerical verification of the scale-down system, reactor optimization through feed location, and long-term fed-batch simulation <a href="#ref-26">[26]</a>. Their lifelines treated cells as massless tracers, with a discrete random-walk model representing turbulent dispersion, and recorded local conditions every 0.03 s <a href="#ref-7">[7]</a>. These studies modeled microbial fermentations, and this plan applies the same methods to CHO cell culture.
+Gas–liquid transfer requires separate treatment. Sieblist et al. found that CO₂ stripping in large cell-culture bioreactors depends mainly on changes in gas composition between the sparger and the headspace, and that the impellers partially recirculate the gas rather than allowing it to pass through in plug flow <a href="#ref-27">[27]</a>. CO₂ removal therefore requires a gas-phase balance along the gas path in addition to a transfer coefficient. The analysis by Gray et al. of a 500 L perfusion bioreactor illustrates the importance of CO₂ removal. Oxygen supply could have supported 2.1 × 10⁷ cells/mL, whereas CO₂ removal limited the predicted cell density to 2.4 × 10⁶ cells/mL <a href="#ref-28">[28]</a>. A coupled model can start from a prescribed gas composition, with transfer concentrated within the bubble plume, and add gas-phase balances later. Surface transfer can be estimated with the correlation from my [headspace study](/projects/bioreactor-surface-gas-transfer/).
 
-Gas–liquid transfer requires separate treatment. Sieblist et al. found that CO₂ stripping in large cell-culture bioreactors depends mainly on changes in gas composition between the sparger and the headspace, and that the impellers partially recirculate the gas rather than allowing it to pass through in plug flow <a href="#ref-27">[27]</a>. CO₂ removal therefore requires a gas-phase balance along the gas path in addition to a transfer coefficient. The analysis by Gray et al. of a 500 L perfusion bioreactor illustrates the importance of CO₂ removal. Oxygen supply could have supported 2.1 × 10⁷ cells/mL, whereas CO₂ removal limited the predicted cell density to 2.4 × 10⁶ cells/mL <a href="#ref-28">[28]</a>. I will initially prescribe the gas composition and concentrate transfer within the bubble plume, and then add gas-phase balances. Surface transfer will be taken from my [headspace study](/projects/bioreactor-surface-gas-transfer/).
-
-Hydrodynamic stress will be evaluated as a constraint rather than included in the kinetic rates. Neunstoecklin et al. found no effect of hydrodynamic stress on CHO growth, metabolism, productivity or product quality below a maximum stress of 32.4 ± 4.4 Pa in oscillating-stress scale-down devices <a href="#ref-29">[29]</a>. I will compare the maximum stresses predicted by the CFD with this threshold.
+Hydrodynamic stress can be treated as a constraint rather than as a term in the kinetic rates. Neunstoecklin et al. found no effect of hydrodynamic stress on CHO growth, metabolism, productivity or product quality below a maximum stress of 32.4 ± 4.4 Pa in oscillating-stress scale-down devices <a href="#ref-29">[29]</a>. The maximum stresses predicted by CFD can be compared with this threshold.
 
 ## Validation targets
 
-The following published observations provide targets for the coupled model. Because they were obtained with specific cell lines and processes, I will use them as qualitative targets rather than as parameter values.
+The following published observations provide targets for a coupled model. Because they were obtained with specific cell lines and processes, they are better suited to qualitative comparison than to parameter estimation.
 
-<div class="xdr-experiment-plan xdr-data-table" role="region" aria-label="Published CHO responses the coupled model should reproduce" tabindex="0">
+<div class="xdr-experiment-plan xdr-data-table" role="region" aria-label="Published CHO responses a coupled model should reproduce" tabindex="0">
 
 | Observation | Experimental system | Expected model response |
 | --- | --- | --- |
@@ -184,21 +171,23 @@ The following published observations provide targets for the coupled model. Beca
 
 </div>
 
-## Development sequence
+## Summary and outlook
 
-<div class="xdr-experiment-plan" role="region" aria-label="Development phases, their work and the criterion before the next phase" tabindex="0">
+The reviewed studies lead to three conclusions. First, most published models assume uniform, controlled conditions <a href="#ref-1">[1]</a>, and most metabolic studies were performed in shake flasks, where pH and DO cannot be controlled <a href="#ref-11">[11]</a>. The environmental terms of a coupled model therefore have to be estimated from controlled bioreactor data. Second, the response to gradients depends on exposure history. In the scale-down experiments of Anane et al., CHO cells did not respond to DO gradients until exposure exceeded about 90 s <a href="#ref-3">[3]</a>, and in the model of Mulukutla et al., the final metabolic state depends on the trajectory of the culture <a href="#ref-16">[16]</a>. Third, oxygen is consumed within seconds to minutes, whereas cells grow over days. This separation of timescales allows the flow to be solved a limited number of times and reused through compartment models and lifelines.
 
-| Phase | Work | Criterion before the next phase |
+These conclusions suggest a sequence in which the cell model and the flow model are each tested before they are coupled.
+
+<div class="xdr-experiment-plan" role="region" aria-label="Suggested development stages, their work and the test before the next stage" tabindex="0">
+
+| Stage | Work | Test before the next stage |
 | --- | --- | --- |
-| 1. Cell model in a well-mixed vessel | Kinetic model with environmental terms, lactate metabolic shift and exposure memory; Bayesian calibration using bench-scale fed-batch data, including off-gas, base-addition and Raman measurements, and DO and pH oscillation experiments in a well-mixed vessel and a two-compartment system | Prediction of held-out runs, including OUR, CER and the timing of the lactate shift; memory time constant estimated from the oscillation data |
-| 2. Flow and compartments | CFD simulations at selected operating conditions; compartment network derived from face fluxes | Agreement of mixing time and compartment tracer response with the reference data |
-| 3. Coupled simulations | Species transport with cell-model rates; particle tracking and exposure statistics | Recovery of the well-mixed result under uniform conditions, species conservation and prediction of the scale-down experiments |
+| 1. Cell model in a well-mixed vessel | Kinetic model with environmental terms, the lactate metabolic shift and an exposure memory, calibrated with bench-scale fed-batch data that include off-gas, base-addition and Raman measurements, and with DO and pH oscillation experiments in a well-mixed vessel and a two-compartment system | Prediction of held-out runs, including OUR, CER and the timing of the lactate shift, and a memory time constant estimated from the oscillation data |
+| 2. Flow and compartments | Steady rotating-frame CFD at selected agitation rates and fill volumes, and a compartment network built from CFD face fluxes that retains forward and reverse exchange across each boundary | Frozen-flow mixing times that agree with measured values, and compartment tracer responses that agree with the CFD |
+| 3. Coupled simulations | Species transport between compartments with cell-model rates as sources and sinks, and lifelines that sample compartment concentrations along each trajectory | Recovery of the well-mixed result under uniform conditions, conservation of species, exposure statistics that do not depend on particle number or sampling interval, and prediction of scale-down experiments designed from those statistics |
 
 </div>
 
-Each phase concludes with a decision. If the coupled and well-mixed models agree for a given vessel and operating range, the well-mixed model is sufficient for that case, which is itself a useful outcome.
-
-Several extensions are deferred. These include structured metabolism, such as kinetic-metabolic networks and genome-scale models, as well as product quality and impurities, population balance models and machine-learning corrections. Fully transient two-phase CFD will serve only as a reference case.
+Each stage ends with a decision. If the coupled and well-mixed models agree for a given vessel and operating range, the well-mixed model is sufficient for that case, which is itself a useful result. Once an unstructured model has been tested in this way, structured metabolism, product quality and population heterogeneity can be added where the data justify them.
 
 ## References
 

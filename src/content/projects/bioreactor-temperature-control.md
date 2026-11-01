@@ -4,7 +4,7 @@ description: "An investigation of how vessel scale, metabolic heat, and feed add
 organization: "Independent project"
 parentProject: "bioprocess-modeling"
 publishedDate: "2026-09-11"
-period: "2026–present"
+period: "September 2026"
 tags: ["Temperature control", "Bioreactor modeling", "Scale-up"]
 order: -1
 ---

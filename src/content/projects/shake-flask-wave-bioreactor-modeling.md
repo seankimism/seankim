@@ -4,7 +4,7 @@ description: "Extending the surface kLa project to orbital shaking and rocking b
 organization: "Independent project"
 parentProject: "bioprocess-modeling"
 publishedDate: "2026-09-27"
-period: "2026–present"
+period: "September 2026"
 tags: ["Shake flasks", "Wave bioreactors", "Oxygen transfer", "Scale-down"]
 order: 3
 draft: true
