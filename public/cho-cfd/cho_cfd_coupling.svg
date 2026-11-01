@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="376" viewBox="0 0 960 376" role="img" aria-labelledby="title desc" font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+  <title id="title">Coupling a CHO cell model to CFD</title>
+  <desc id="desc">CFD computes the flow field a few times. In the coupled simulation, a compartment model uses that flow to calculate mass transfer and exchange between zones, and the CHO cell model receives the local conditions in each zone and returns rates. The coupled simulation produces catabolic and anabolic predictions.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#236775"/>
+    </marker>
+  </defs>
+  <rect width="960" height="376" fill="#ffffff"/>
+
+  <!-- CFD -->
+  <rect x="16" y="46" width="200" height="200" rx="10" fill="#ffffff" stroke="#b9c7ce" stroke-width="1.5"/>
+  <text x="36" y="82" fill="#192c36" font-size="21" font-weight="700">CFD</text>
+  <g fill="#3d4f59" font-size="17">
+    <text x="36" y="118">Flow field at a</text>
+    <text x="36" y="142">chosen operating</text>
+    <text x="36" y="166">condition</text>
+  </g>
+  <text x="36" y="228" fill="#576770" font-size="15">Run a few times</text>
+
+  <!-- Coupled simulation -->
+  <rect x="300" y="12" width="644" height="252" rx="14" fill="#f4f7f8" stroke="#c9d5db" stroke-width="1.2" stroke-dasharray="6 4"/>
+  <text x="316" y="34" fill="#576770" font-size="13" font-weight="700" letter-spacing="0.08em">COUPLED SIMULATION</text>
+
+  <rect x="316" y="46" width="250" height="200" rx="10" fill="#ffffff" stroke="#b9c7ce" stroke-width="1.5"/>
+  <text x="334" y="82" fill="#192c36" font-size="21" font-weight="700">Compartment model</text>
+  <g fill="#3d4f59" font-size="17">
+    <text x="334" y="118">Mass transfer and</text>
+    <text x="334" y="142">exchange between zones</text>
+  </g>
+  <text x="334" y="228" fill="#576770" font-size="15">Rerun as the biology changes</text>
+
+  <rect x="676" y="46" width="252" height="200" rx="10" fill="#e8f2f4" stroke="#236775" stroke-width="1.6"/>
+  <text x="694" y="82" fill="#192c36" font-size="21" font-weight="700">CHO cell model</text>
+  <text x="694" y="228" fill="#576770" font-size="15">Evaluated in every zone</text>
+
+  <!-- Predictions -->
+  <rect x="16" y="296" width="928" height="64" rx="10" fill="#ffffff" stroke="#236775" stroke-width="1.6"/>
+  <text x="480" y="335" fill="#192c36" font-size="20" font-weight="700" text-anchor="middle">Catabolic and anabolic predictions</text>
+
+  <!-- Connections -->
+  <g stroke="#236775" stroke-width="2" fill="none" marker-end="url(#arrow)">
+    <line x1="218" y1="146" x2="312" y2="146"/>
+    <line x1="568" y1="120" x2="672" y2="120"/>
+    <line x1="672" y1="180" x2="568" y2="180"/>
+    <line x1="622" y1="265" x2="622" y2="292"/>
+  </g>
+  <g fill="#236775" font-size="15" text-anchor="middle">
+    <text x="258" y="134">flow field</text>
+    <text x="620" y="108">conditions</text>
+    <text x="620" y="168">rates</text>
+  </g>
+</svg>
