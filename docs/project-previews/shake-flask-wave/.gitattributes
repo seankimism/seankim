@@ -1,3 +1,0 @@
-# Preserve recorded preview bytes on Windows and Linux checkouts.
-*.svg text eol=lf
-manifest.json text eol=lf
