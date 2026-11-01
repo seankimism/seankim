@@ -21,6 +21,7 @@ I built these studies around those differences. I compare model predictions with
   <div class="arc-row"><span class="arc-number">01</span><div><h3><a href="#temperature-control">Temperature control</a></h3><p>How do metabolic heat, vessel heat loss, and feed additions change heating and cooling requirements?</p></div></div>
   <div class="arc-row"><span class="arc-number">02</span><div><h3><a href="#agitation-and-mixing">Agitation and mixing</a></h3><p>How do power input and mixing time change across vessels, and what does that mean for local temperature gradients?</p></div></div>
   <div class="arc-row"><span class="arc-number">03</span><div><h3><a href="#headspace-gas-transfer">Headspace gas transfer</a></h3><p>How does surface oxygen transfer change with scale, and how well can a common correlation describe the measurements?</p></div></div>
+  <div class="arc-row"><span class="arc-number">04</span><div><h3><a href="#cho-cell-model-cfd">Cell model and CFD coupling</a></h3><p>How should a CHO cell model respond to the local conditions predicted by CFD, and how can the two be coupled efficiently?</p></div></div>
 </nav>
 
 ## Modeling studies
@@ -73,6 +74,19 @@ I built these studies around those differences. I compare model predictions with
       <h3><a href="/projects/incubator-rcf-calculator/">Incubator RCF calculator</a></h3>
       <p>Translate a source shaking speed into a receiving setting with equal nominal orbital acceleration when incubator orbits differ. Use the result as a documented starting point for tech transfer.</p>
       <p class="paper-card-links"><a href="/projects/incubator-rcf-calculator/">Open calculator →</a></p>
+    </div>
+  </article>
+</div>
+
+## Plans
+
+<div class="paper-list">
+  <article class="paper-card no-figure" id="cho-cell-model-cfd">
+    <div class="paper-card-body">
+      <p class="eyebrow">Development plan · CHO kinetics · CFD coupling</p>
+      <h3><a href="/projects/cho-cell-model-cfd/">Coupling a CHO cell model to CFD</a></h3>
+      <p>I describe how I plan to develop a CHO kinetic model with explicit dependence on dissolved oxygen, pH and pCO₂, add the lactate metabolic shift with an exposure memory, and couple both to CFD-derived compartments and cell lifelines.</p>
+      <p class="paper-card-links"><a href="/projects/cho-cell-model-cfd/">Read the plan →</a></p>
     </div>
   </article>
 </div>
