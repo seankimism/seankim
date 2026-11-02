@@ -88,9 +88,9 @@ I define **t95** and **t99** as the first saved times when 95% or 99% of the liq
 
 <figure class="xdr-figure" id="mixing-progress-graph">
   <a href="/flask-mixing/mixing_comparison.svg" target="_blank" rel="noopener noreferrer" aria-label="Open the whole-volume mixing progress graph at full size">
-    <img src="/flask-mixing/mixing_comparison.svg" alt="Mixing curves for all four flask cases: concentration variation above and the percentage of liquid within 5 percent of the uniform reference below, with t95 and t99 markers." width="1596" height="1710" loading="lazy" decoding="async" />
+    <img src="/flask-mixing/mixing_comparison.svg" alt="Mixing curves for all four flask cases: concentration variation above and the percentage of liquid within 5 percent of the uniform reference below." width="1596" height="1444" loading="lazy" decoding="async" />
   </a>
-  <figcaption>Lower concentration variation means more uniform mixing. The lower panel shows liquid volume within ±5% of the uniform reference; circles mark t95 and squares t99. Dashed lines are plain controls; solid lines have four baffles. <a href="/flask-mixing/mixing_comparison.png">Download PNG</a>.</figcaption>
+  <figcaption><strong>Mixing after shaking starts.</strong> 60 mL water · 125 rpm · 25 mm orbit diameter · 36.5 °C. The upper panel shows concentration variation (CoV = coefficient of variation); lower values mean more uniform mixing. The lower panel shows the approach to uniform concentration: liquid volume within ±5% of the reference, defined as initial tracer inventory divided by current liquid volume. Dashed lines are plain controls; solid lines have four baffles. Preliminary model results from the existing saved-flow tracer histories; t95 and t99 are listed in the table above. <a href="/flask-mixing/mixing_comparison.png">Download PNG</a>.</figcaption>
 </figure>
 
 Within these models, four pressed baffles shortened t99 by **17.6%** for the pressed-baffle pair, and four V-fold baffles shortened it by **31.9%** for the V-fold pair.
