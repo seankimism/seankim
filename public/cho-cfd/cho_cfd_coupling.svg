@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="376" viewBox="0 0 960 376" role="img" aria-labelledby="title desc" font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
-  <title id="title">Coupling a CHO cell model to CFD</title>
-  <desc id="desc">CFD computes the flow field a few times. In the coupled simulation, a compartment model uses that flow to calculate mass transfer and exchange between zones, and the CHO cell model receives the local conditions in each zone and returns rates. The coupled simulation produces catabolic and anabolic predictions.</desc>
+  <title id="title">Coupling CFD compartments to CHO cell parcels with exposure memory</title>
+  <desc id="desc">CFD provides flow fields at selected operating conditions. A compartment model calculates local concentrations, gas transfer and exchange between zones. CHO cell parcels move between zones while carrying their exposure memory. Each parcel responds to local conditions, and its uptake and production rates are weighted by the biomass it represents and summed into conservative compartment reaction sources. The coupled simulation predicts concentrations, rates and exposure statistics.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#236775"/>
@@ -28,15 +28,20 @@
     <text x="334" y="118">Mass transfer and</text>
     <text x="334" y="142">exchange between zones</text>
   </g>
-  <text x="334" y="228" fill="#576770" font-size="15">Rerun as the biology changes</text>
+  <text x="334" y="228" fill="#576770" font-size="15">Conservative reaction sources</text>
 
   <rect x="676" y="46" width="252" height="200" rx="10" fill="#e8f2f4" stroke="#236775" stroke-width="1.6"/>
   <text x="694" y="82" fill="#192c36" font-size="21" font-weight="700">CHO cell model</text>
-  <text x="694" y="228" fill="#576770" font-size="15">Evaluated in every zone</text>
+  <g fill="#3d4f59" font-size="17">
+    <text x="694" y="118">Cell parcels carry</text>
+    <text x="694" y="142">exposure memory</text>
+  </g>
+  <text x="694" y="186" fill="#3d4f59" font-size="15">Rates weighted by biomass</text>
+  <text x="694" y="228" fill="#576770" font-size="15">Memory moves with cells</text>
 
   <!-- Predictions -->
   <rect x="16" y="296" width="928" height="64" rx="10" fill="#ffffff" stroke="#236775" stroke-width="1.6"/>
-  <text x="480" y="335" fill="#192c36" font-size="20" font-weight="700" text-anchor="middle">Catabolic and anabolic predictions</text>
+  <text x="480" y="335" fill="#192c36" font-size="19" font-weight="700" text-anchor="middle">Predicted concentrations, rates and exposure statistics</text>
 
   <!-- Connections -->
   <g stroke="#236775" stroke-width="2" fill="none" marker-end="url(#arrow)">
@@ -48,6 +53,6 @@
   <g fill="#236775" font-size="15" text-anchor="middle">
     <text x="258" y="134">flow field</text>
     <text x="620" y="108">conditions</text>
-    <text x="620" y="168">rates</text>
+    <text x="620" y="168" font-size="13">weighted rates</text>
   </g>
 </svg>
