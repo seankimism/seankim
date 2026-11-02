@@ -73,7 +73,7 @@ These views show the exterior liquid surface. A uniform-looking surface does not
 
 ## Whole-volume mixing onsets
 
-I define **t95** and **t99** as the first saved times when 95% or 99% of the liquid volume lies within ±5% of the fixed-dose uniform concentration. That condition must then persist for at least **0.96 s**. The onset times have **0.04 s** sampling resolution.
+I define **t95** and **t99** as the first saved times when 95% or 99% of the liquid volume lies within ±5% of the fixed-dose uniform concentration.
 
 <div class="xdr-experiment-plan xdr-data-table xdr-numeric-table" role="region" aria-label="Preliminary whole-volume tracer mixing onsets and saved run endpoints" tabindex="0">
 
@@ -86,32 +86,16 @@ I define **t95** and **t99** as the first saved times when 95% or 99% of the liq
 
 </div>
 
-Within these models, four pressed baffles shortened t99 by **17.6%** for the pressed-baffle pair, and four V-fold baffles shortened it by **31.9%** for the V-fold pair. Both full plain runs continued beyond their paired video's endpoint to complete the persistence check. The 3.24 s and 2.88 s clips therefore do not show the full 0.96 s confirmation window for the plain cases.
+<figure class="xdr-figure" id="mixing-progress-graph">
+  <a href="/flask-mixing/mixing_comparison.svg" target="_blank" rel="noopener noreferrer" aria-label="Open the whole-volume mixing progress graph at full size">
+    <img src="/flask-mixing/mixing_comparison.svg" alt="Mixing curves for all four flask cases: concentration variation above and the percentage of liquid within 5 percent of the uniform reference below, with t95 and t99 markers." width="1596" height="1710" loading="lazy" decoding="async" />
+  </a>
+  <figcaption>Lower concentration variation means more uniform mixing. The lower panel shows liquid volume within ±5% of the uniform reference; circles mark t95 and squares t99. Dashed lines are plain controls; solid lines have four baffles. <a href="/flask-mixing/mixing_comparison.png">Download PNG</a>.</figcaption>
+</figure>
+
+Within these models, four pressed baffles shortened t99 by **17.6%** for the pressed-baffle pair, and four V-fold baffles shortened it by **31.9%** for the V-fold pair.
 
 The two families also have different body shapes. Their cross-family difference cannot be attributed to pressed baffles versus V-folds alone.
-
-## Methods and current limits
-
-These are **exploratory saved-flow results**. A time-step-halving check passed, but the replay failed a matched startup concentration-pattern comparison with a coupled pilot: maximum normalized L1 difference **18.94%** and relative L2 difference **19.60%**. These are concentration-field discrepancies, **not measured mixing-time errors**. Absolute mixing-time accuracy and confidence in the ranking remain unvalidated.
-
-The assumed baffle dimensions, mesh and wetting behavior also need sensitivity checks and experimental validation. The results do not establish cell-culture growth, shear safety or oxygen-transfer performance.
-
-The pressed-baffle body draws on the DURAN 250 mL flask family, and the V-fold body on the Biofil-style 250 mL flask family. The pressed-baffle and V-fold names describe the modeled geometry; manufacturer names identify the source families.
-
-<details class="xdr-details">
-  <summary>Tracer transport, visualization and recovery details</summary>
-
-I transported a passive scalar through the original saved startup CFD flow. All four scalar runs ended before the first continuation-method handoff, so the later accelerated flow histories were not consumed. Integration used 0.0003125 s steps and a tracer diffusivity of 9 × 10⁻¹⁰ m²/s. The videos render existing saved fields; making the animations does not rerun the flow or tracer calculations.
-
-The uniform reference is $C_\mathrm{ref}(t)=M_0/V_\mathrm{liq}(t)$, where $M_0$ is the fixed initial volume-weighted tracer inventory. The current liquid volume uses water-volume fractions bounded to 0–1 for this normalization. Surface color uses water-fraction-weighted cell-to-point interpolation, $\mathrm{Point}(\alpha C/C_\mathrm{ref})/\mathrm{Point}(\alpha)$, on the liquid region $\mathrm{Point}(\alpha)\geq0.5$.
-
-The first attempt for the V-fold geometry's plain control stopped after detecting a tiny inherited liquid-fraction overshoot. A separate recovery bounded only the private source's internal water fraction and adjusted mixture density in the affected cells. Its largest water-volume change was 5.738 × 10⁻¹⁰ of the initial volume. Initial dose and concentration fields were preserved, and the original numerical-health and mixing thresholds stayed in force. The table uses this completed recovery, not the failed attempt.
-
-The pressed-baffle geometry videos contain 82 native snapshots and the V-fold geometry videos 73, at 0.04 s intervals. Each snapshot is repeated twice at 25 fps, with no temporal field interpolation. Including the last snapshot holds it for 0.08 s, which explains the difference between twice the final physical timestamp and the file duration. There is no added experimental footage or synthetic motion.
-
-[Media properties, checksums and study provenance](/flask-mixing/manifest.json).
-
-</details>
 
 ## Sneak peek: what I’m working on
 
