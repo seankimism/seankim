@@ -1,0 +1,91 @@
+{
+  "created_utc": "2026-11-05T00:25:20.751603+00:00",
+  "status": "draft_comparison_ready",
+  "common_window_s": [
+    9.8,
+    11.24
+  ],
+  "frames": 37,
+  "orbits": 3,
+  "rows": [
+    {
+      "case": "duran_plain",
+      "geometry": "Pressed \u2014 no baffles",
+      "window_start_s": 9.8,
+      "window_end_s": 11.24,
+      "mean_shear_stress_Pa": 0.05951790738407728,
+      "p99_shear_stress_Pa": 0.5470126259703731,
+      "integral_surface_transfer_proxy_h_inv": 5.835215879251234,
+      "liquid_side_area_proxy_m2": 0.0037646109365285095,
+      "mean_shear_stress_Pa__orbit_min": 0.05897685173131101,
+      "mean_shear_stress_Pa__orbit_max": 0.06005080341858144,
+      "p99_shear_stress_Pa__orbit_min": 0.5443684354426209,
+      "p99_shear_stress_Pa__orbit_max": 0.5489857615139643,
+      "integral_surface_transfer_proxy_h_inv__orbit_min": 5.811983237698692,
+      "integral_surface_transfer_proxy_h_inv__orbit_max": 5.8531930927560465
+    },
+    {
+      "case": "duran_baffled",
+      "geometry": "Pressed \u2014 four baffles",
+      "window_start_s": 9.8,
+      "window_end_s": 11.24,
+      "mean_shear_stress_Pa": 0.06277435857521789,
+      "p99_shear_stress_Pa": 0.39352207497150987,
+      "integral_surface_transfer_proxy_h_inv": 9.171644620418801,
+      "liquid_side_area_proxy_m2": 0.005361371256181817,
+      "mean_shear_stress_Pa__orbit_min": 0.06210375375680509,
+      "mean_shear_stress_Pa__orbit_max": 0.06338377546026726,
+      "p99_shear_stress_Pa__orbit_min": 0.3854407475918276,
+      "p99_shear_stress_Pa__orbit_max": 0.4009061740543604,
+      "integral_surface_transfer_proxy_h_inv__orbit_min": 9.035864881030871,
+      "integral_surface_transfer_proxy_h_inv__orbit_max": 9.344633722724275
+    },
+    {
+      "case": "biofil_plain",
+      "geometry": "V-fold \u2014 no baffles",
+      "window_start_s": 9.8,
+      "window_end_s": 11.24,
+      "mean_shear_stress_Pa": 0.05750229982355904,
+      "p99_shear_stress_Pa": 0.517929358297401,
+      "integral_surface_transfer_proxy_h_inv": 5.520490189905609,
+      "liquid_side_area_proxy_m2": 0.0036411498964369266,
+      "mean_shear_stress_Pa__orbit_min": 0.05692734125713599,
+      "mean_shear_stress_Pa__orbit_max": 0.05835488998266924,
+      "p99_shear_stress_Pa__orbit_min": 0.5125511489406175,
+      "p99_shear_stress_Pa__orbit_max": 0.5238897809430367,
+      "integral_surface_transfer_proxy_h_inv__orbit_min": 5.482416263061116,
+      "integral_surface_transfer_proxy_h_inv__orbit_max": 5.5428840780583535
+    },
+    {
+      "case": "biofil_baffled",
+      "geometry": "V-fold \u2014 four baffles",
+      "window_start_s": 9.8,
+      "window_end_s": 11.24,
+      "mean_shear_stress_Pa": 0.06518219035737209,
+      "p99_shear_stress_Pa": 0.42098599350044036,
+      "integral_surface_transfer_proxy_h_inv": 7.755737711630741,
+      "liquid_side_area_proxy_m2": 0.004633896631902637,
+      "mean_shear_stress_Pa__orbit_min": 0.06495410385962153,
+      "mean_shear_stress_Pa__orbit_max": 0.06556547475125396,
+      "p99_shear_stress_Pa__orbit_min": 0.4132629185140634,
+      "p99_shear_stress_Pa__orbit_max": 0.42929664001259976,
+      "integral_surface_transfer_proxy_h_inv__orbit_min": 7.71292252759982,
+      "integral_surface_transfer_proxy_h_inv__orbit_max": 7.810314891771647
+    }
+  ],
+  "bar_metrics": {
+    "mean_shear_stress_Pa": "Liquid-volume-weighted mean of resolved equivalent molecular shear stress.",
+    "integral_surface_transfer_proxy_h_inv": "3600*sum(localTransferProxy*cellVolume)/sum(alpha*cellVolume), time averaged; exactly the video proxy definition."
+  },
+  "retained_data_metrics": {
+    "p99_shear_stress_Pa": "Retained in source data only: time average of each snapshot liquid-volume-weighted 99th percentile, not a time-pooled percentile."
+  },
+  "uncertainty_display": "No confidence intervals shown. Individual orbit ranges retained inCSV only.",
+  "figure": "flask_shear_transfer_comparison.svg",
+  "display_labels": {
+    "mean_shear_stress_Pa": "Mean liquid shear stress (Pa)",
+    "integral_surface_transfer_proxy_h_inv": "Calculated surface kLa (h\u207b\u00b9)"
+  },
+  "caption": "Average liquid shear stress (top, Pa) and calculated surface kLa (bottom, h\u207b\u00b9). Gray bars represent plain flasks; blue bars represent flasks with four baffles.",
+  "scientific_notes": "Matched 9.80\u201311.24 s window, three shaking orbits. Resolved shear uses water viscosity and saved velocity gradients. Local transfer is a liquid-side diffuse-interface proxy using local resolved dissipation; its domain integral is divided by liquid volume. It changes the published correlation input basis and is not experimentally validated flask kLa. Known mesh and numerical transport limitations apply."
+}
