@@ -1,0 +1,20 @@
+{
+  "status": "illustrative_model_output",
+  "experimental_data": false,
+  "parameters": "mostly placeholders",
+  "source_csv_sha256": "0f16f001d60a9fddac5c141e54e7b046fa621a46dbbe0646b4166ece9fec9fbe",
+  "source": "default_run.csv supplied with the Phase 1 model",
+  "rows": 281,
+  "output_interval_day": 0.05,
+  "initial_volume_L": 1.0,
+  "temperature_shift_day": 5,
+  "temperature_degC": [
+    37,
+    33
+  ],
+  "pH_setpoint": 7.0,
+  "DO_percent_air_saturation": 40,
+  "main_feed": "3% of initial volume daily on days 3\u201313, with conditional glucose top-ups",
+  "simulation_rerun": false,
+  "model_source_modified": false
+}
