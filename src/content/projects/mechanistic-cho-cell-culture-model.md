@@ -33,13 +33,13 @@ I used the review to decide what to build first and what data I would need to te
 
 Xing et al. provided a useful starting point: six differential equations and 18 parameters to describe large-scale CHO fed-batch cultures. Six parameters came from culture data, and twelve were fitted using Markov chain Monte Carlo <a href="#ref-1">[1]</a>. I’m starting with that kind of small kinetic model before adding more detail inside the cell.
 
-The culture environment matters too. Goudar et al. measured how respiration changed under different perfusion conditions <a href="#ref-2">[2]</a>. Brunner et al. found that elevated pCO₂ changed lactate behavior in their fed-batch cultures <a href="#ref-3">[3]</a>. These studies help me decide which effects to include. Their measured responses still need to be checked for the cell line and process I want to model.
+The culture environment matters too. Goudar et al. measured how respiration changed under different perfusion conditions <a href="#ref-2">[2]</a>. In Brunner et al.’s fed-batch experiments, cultures at elevated pCO₂ did not switch to lactate consumption, while the lower-pCO₂ controls did <a href="#ref-3">[3]</a>. These studies help me decide which effects to include. Their measured responses still need to be checked for the cell line and process I want to model.
 
 I also want to account for what the cells experienced earlier. Anane et al. observed culture responses when residence times exceeded about 90 seconds in their dissolved-oxygen scale-down loop <a href="#ref-4">[4]</a>. That timing belongs to their experimental setup, but it gives me a reason to track exposure duration. O’Brien et al. showed how metabolism, growth signaling and the starting state of the cells can contribute to differences in lactate behavior between runs <a href="#ref-5">[5]</a>.
 
 ## What the model does
 
-The first version tracks 19 states, including cells, nutrients, metabolites and broth chemistry. As the culture changes, the model recalculates the environment and how quickly the cells grow, consume nutrients and make product. Feed and liquid base additions also increase volume and dilute the broth.
+The first version tracks 19 variables, including cells, nutrients, metabolites and broth chemistry. Two of these variables record the cumulative amounts of base and CO₂ added. As the culture changes, the model recalculates the environment and how quickly the cells grow, consume nutrients and make product. Feed and liquid base additions also increase volume and dilute the broth.
 
 <div class="xdr-experiment-plan xdr-data-table" role="region" aria-label="Components implemented in the first-stage CHO model" tabindex="0">
 
@@ -55,7 +55,7 @@ The first version tracks 19 states, including cells, nutrients, metabolites and 
 
 </div>
 
-Growth depends on temperature, pH, dissolved oxygen, pCO₂ and osmolality, as well as nutrient availability and byproduct inhibition. Other rates use fewer of these inputs. Oxygen uptake currently depends on temperature, pH and DO; product formation depends on temperature, osmolality and glucose availability.
+Growth depends on temperature, pH, dissolved oxygen, pCO₂ and osmolality, as well as nutrient availability and byproduct inhibition. With the current parameters, DO has its strongest direct effect on growth near oxygen depletion; that direct growth effect changes little between 20% and 40% DO. Other rates use fewer of these inputs. Oxygen uptake currently depends on temperature, pH and DO; product formation depends on temperature, osmolality and glucose availability.
 
 The feedback between the cells and the broth is what I want to capture. Lactate, ammonium and CO₂ production change pH and the carbonate balance. The controller responds by adding liquid base or sparging CO₂. Base changes volume and ionic composition, while CO₂ changes the inorganic carbon balance. Those changes affect the conditions the cells experience next. For now, the pH calculation uses simplified bicarbonate chemistry; other medium buffers still need to be added.
 
@@ -83,9 +83,13 @@ This example follows a 14-day fed-batch culture at the conditions below. I’m u
 
 The upper-left panel shows viable cell density rising and then declining late in the run. Product keeps accumulating in the upper-right panel, even as cell density falls.
 
-In the lower-left panel, lactate builds up early and is consumed as the model switches behavior. Dissolved CO₂ falls at first, then rises later as respiration, gas transfer and pH control interact. I want to compare all of these curves with measurements, because matching titer alone would leave a lot of the culture behavior unchecked.
+In the lower-left panel, lactate builds up early and is consumed as the model switches behavior.
 
-I can also compare pH set points, CO₂ stripping, temperature-shift timing, changing DO and base chemistry. The DO-cycling example needs more frequent saved results before I can use its plots to examine the response to each oxygen cycle.
+In the lower-right panel, pCO₂ falls early as lactate production reduces bicarbonate and CO₂ is stripped out. Later, lactate consumption and ammonium release raise the bicarbonate balance, and the pH controller adds CO₂ to hold pH near its set point. Earlier base additions also affect that balance. This curve reflects the simplified carbonate chemistry and control settings in this model.
+
+I want to compare all of these curves with measurements, because matching titer alone would leave a lot of the culture behavior unchecked.
+
+I can also compare pH set points, CO₂ stripping, temperature-shift timing, changing DO and base chemistry. The DO-cycling example uses fine internal calculation steps, but saves results only every 72 minutes. That output interval cannot show individual five-minute cycles, so I need more frequent saved results before using the plots to examine the response timing.
 
 ## What I’m adding next
 
@@ -119,9 +123,9 @@ My earlier [CFD-coupling review](/projects/cho-cell-model-cfd/) looks at using f
 
 <ol class="project-references">
   <li id="ref-1">Xing, Z., Bishop, N., Leister, K., and Li, Z. J. (2010). Modeling kinetics of a large-scale fed-batch CHO cell culture by Markov chain Monte Carlo method. <em>Biotechnology Progress</em> 26, 208–219. <a href="https://doi.org/10.1002/btpr.284" target="_blank" rel="noopener noreferrer">doi:10.1002/btpr.284</a>.</li>
-  <li id="ref-2">Goudar, C. T., Piret, J. M., and Konstantinov, K. B. (2011). Estimating cell specific oxygen uptake and carbon dioxide production rates for mammalian cells in perfusion culture. <em>Biotechnology Progress</em>. <a href="https://doi.org/10.1002/btpr.646" target="_blank" rel="noopener noreferrer">doi:10.1002/btpr.646</a>.</li>
+  <li id="ref-2">Goudar, C. T., Piret, J. M., and Konstantinov, K. B. (2011). Estimating cell specific oxygen uptake and carbon dioxide production rates for mammalian cells in perfusion culture. <em>Biotechnology Progress</em> 27, 1347–1357. <a href="https://doi.org/10.1002/btpr.646" target="_blank" rel="noopener noreferrer">doi:10.1002/btpr.646</a>.</li>
   <li id="ref-3">Brunner, M., Doppler, P., Klein, T., Herwig, C., and Fricke, J. (2018). Elevated pCO₂ affects the lactate metabolic shift in CHO cell culture processes. <em>Engineering in Life Sciences</em> 18, 204–214. <a href="https://doi.org/10.1002/elsc.201700131" target="_blank" rel="noopener noreferrer">doi:10.1002/elsc.201700131</a>.</li>
-  <li id="ref-4">Anane, E., et al. (2021). Scale-down cultivation in mammalian cell bioreactors—The effect of bioreactor mixing time on the response of CHO cells to dissolved oxygen gradients. <em>Biochemical Engineering Journal</em> 166, 107870. <a href="https://doi.org/10.1016/j.bej.2020.107870" target="_blank" rel="noopener noreferrer">doi:10.1016/j.bej.2020.107870</a>.</li>
+  <li id="ref-4">Anane, E., Knudsen, I. M., and Wilson, G. C. (2021). Scale-down cultivation in mammalian cell bioreactors—The effect of bioreactor mixing time on the response of CHO cells to dissolved oxygen gradients. <em>Biochemical Engineering Journal</em> 166, 107870. <a href="https://doi.org/10.1016/j.bej.2020.107870" target="_blank" rel="noopener noreferrer">doi:10.1016/j.bej.2020.107870</a>.</li>
   <li id="ref-5">O’Brien, C. M., Zhang, Q., Daoutidis, P., and Hu, W.-S. (2021). A hybrid mechanistic-empirical model for in silico mammalian cell bioprocess simulation. <em>Metabolic Engineering</em> 66, 31–40. <a href="https://doi.org/10.1016/j.ymben.2021.03.016" target="_blank" rel="noopener noreferrer">doi:10.1016/j.ymben.2021.03.016</a>.</li>
   <li id="ref-6">Jimenez del Val, I., Nagy, J. M., and Kontoravdi, C. (2011). A dynamic mathematical model for monoclonal antibody N-linked glycosylation and nucleotide sugar donor transport within a maturing Golgi apparatus. <em>Biotechnology Progress</em> 27, 1730–1743. <a href="https://doi.org/10.1002/btpr.688" target="_blank" rel="noopener noreferrer">doi:10.1002/btpr.688</a>.</li>
   <li id="ref-7">Kontoravdi, C., Pistikopoulos, E. N., and Mantalaris, A. (2010). Systematic development of predictive mathematical models for animal cell cultures. <em>Computers &amp; Chemical Engineering</em> 34, 1192–1198. The paper demonstrates the workflow in hybridoma cultures. <a href="https://doi.org/10.1016/j.compchemeng.2010.03.012" target="_blank" rel="noopener noreferrer">doi:10.1016/j.compchemeng.2010.03.012</a>.</li>
