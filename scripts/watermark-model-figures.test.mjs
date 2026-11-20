@@ -8,6 +8,8 @@ import {createHash} from 'node:crypto';
 import { VERSION, isModelFigure, watermarkSvg, watermarkPng, watermarkFigures } from './watermark-model-figures.mjs';
 
 test('only original modeling figures are included', () => {
+  assert.equal(isModelFigure('cho-model/ambr_combined_parity.svg'), true);
+  assert.equal(isModelFigure('cho-model/ambr_combined_parity.png'), true);
   assert.equal(isModelFigure('mixing/parity.svg'), true);
   assert.equal(isModelFigure('xdr2000/bench/temperature.png'), true);
   for (const file of ['cornell/paper.png', 'images/sean-kim.jpg', 'favicon.svg',
