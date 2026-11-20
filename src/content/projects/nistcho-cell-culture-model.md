@@ -33,7 +33,7 @@ The released calibration predicted the held-out HIP spin-tube condition within 1
 
 ## Published NISTCHO data
 
-The model draws on two publications that culture the same cell line in different vessels and laboratories. The 2026 feeding study compared four strategies in spin tubes without pH control <a href="#ref-2">[2]</a>. The 2025 reference cell line study ran the same blended feed at two sites, in ambr 15 and ambr 250 bioreactors held at pH 6.9, and also measured glutamine, glutamate, and ammonium <a href="#ref-1">[1]</a>.
+The model draws on two publications that culture the same cell line in different vessels and laboratories. I used four of the spin-tube feeding strategies from the 2026 study, which ran without pH control <a href="#ref-2">[2]</a>. The 2025 reference cell line study ran the same blended feed at two sites, in ambr 15 and ambr 250 bioreactors held at pH 6.9, and also measured glutamine, glutamate, and ammonium <a href="#ref-1">[1]</a>.
 
 <div class="xdr-experiment-plan xdr-data-table" role="region" aria-label="Published NISTCHO cultures and their role in calibration and testing" tabindex="0">
 
@@ -73,9 +73,13 @@ In addition, the model can take a dissolved-oxygen input, either as a prescribed
 
 ## Governing equations and fitting
 
-The equations below describe the well-mixed model used for the fits on this page. One consistent choice of solver units is time in days, cell density in cells/L, and solutes in mol/L. On that basis, use mol per active cell per day for solute fluxes and g per active cell per day for antibody production. Use mol of nitrogen per liter for the pooled amino-acid nitrogen. For glucose and lactate, divide the reported concentration in g/L by the molar mass in g/mol before applying the balances, then convert the model outputs back to g/L.
+I developed the well-mixed model used on this page by combining material balances with rate laws informed by prior CHO studies and by the NISTCHO measurements. Dahodwala et al. supplied the ambr and 2025 spin-tube measurements, and Schäpertöns et al. supplied the 2026 spin-tube measurements <a href="#ref-1">[1]</a> <a href="#ref-2">[2]</a>.
+
+One consistent choice of solver units is time in days, cell density in cells/L, and solutes in mol/L. On that basis, use mol per active cell per day for solute fluxes and g per active cell per day for antibody production. Use mol of nitrogen per liter for the pooled amino-acid nitrogen. For glucose and lactate, divide the reported concentration in g/L by the molar mass in g/mol before applying the balances, then convert the model outputs back to g/L.
 
 ### Cell growth and viability
+
+Earlier CHO models used distinct populations to describe progression through apoptosis <a href="#ref-5">[5]</a>. I used an intact but metabolically inactive state to represent the delayed loss of viability after carbon depletion in the LoG spin tubes <a href="#ref-2">[2]</a>.
 
 Let $X_h$, $X_a$, and $X_d$ denote the densities of active, apoptotic, and dead cells. Cells enter apoptosis at rate $k_d$, remain intact for a mean time $\tau_e$, and then enter the dead-cell pool. Dead cells lyse at rate $k_\ell$.
 
@@ -89,7 +93,9 @@ $$
 
 The viable count is $X_v=X_h+X_a$ and viability is $X_v/(X_v+X_d)$. Only $X_h$ contributes to cellular uptake and production. Start with the inoculum viable density in $X_h$ and calculate $X_d$ from the initial viability. Initialize $X_a$ and the starvation exposure $S$ at zero.
 
-Growth is reduced by an inhibitor $I$ that accumulates with active cell density, an inoculum adaptation factor $A$, and starvation exposure $S$. Define a saturation function $M(c,K)=c/(K+c)$ and an inhibition function $B(z,K,n)=1/[1+(z/K)^n]$. Let $B_\mu$ and $B_g$ be inhibition functions of $I$, with separate coefficients for growth and glycolysis. Let $f_N=M(N,K_N)$, where $N$ is the nitrogen in amino acids other than the explicitly tracked glutamine, glutamate, and asparagine.
+Growth is reduced by an inhibitor $I$ that accumulates with active cell density, an inoculum adaptation factor $A$, and starvation exposure $S$. Ben Yahia et al. linked CHO growth to integrated viable cell density <a href="#ref-6">[6]</a>. In this model, $I$ accumulates with active cell density between feeds and serves as a proxy for inhibition of both growth and glycolysis.
+
+Define a Monod-type saturation function $M(c,K)=c/(K+c)$ and a Hill-type inhibition function $B(z,K,n)=1/[1+(z/K)^n]$. Let $B_\mu$ and $B_g$ be inhibition functions of $I$, with separate coefficients for growth and glycolysis. Let $f_N=M(N,K_N)$, where $N$ is the nitrogen in amino acids other than the explicitly tracked glutamine, glutamate, and asparagine.
 
 $$
 \begin{aligned}
@@ -113,7 +119,7 @@ Here $B_I$ is an inhibition function of $I$ and $B_S$ is one of $S$. Their compl
 
 ### Glucose, lactate, and antibody
 
-Glucose uptake $J_G$ combines basal and inhibitor-sensitive terms. A feed factor $F$ enters with the main nutrient feed and is consumed in proportion to active cell density. Initialize $F$ at zero and assign a value of one in the main feed and zero in glucose stock and water. Its normalization can be absorbed into the coefficient $\alpha$.
+Glucose uptake $J_G$ combines basal and inhibitor-sensitive terms. I added a feed factor $F$ to represent the transient increase in glucose uptake inferred from the 2026 spin-tube data after nutrient feeds <a href="#ref-2">[2]</a>. The factor enters with the main feed and is consumed in proportion to active cell density. Initialize $F$ at zero and assign a value of one in the main feed and zero in glucose stock and water. Its normalization can be absorbed into the coefficient $\alpha$.
 
 $$
 \begin{aligned}
@@ -122,7 +128,9 @@ J_G &= (J_0+J_1 B_g)M(G,K_G)(1+\alpha F).
 \end{aligned}
 $$
 
-Lactate production begins when glycolysis approaches the oxidative capacity $J_{\mathrm{ox}}$. The model uses the smooth positive part $\phi_\epsilon(z)=\epsilon\ln(1+e^{z/\epsilon})$. One mole of glucose routed to overflow produces two moles of lactate. Lactate uptake uses spare oxidative capacity and is repressed by glucose.
+The oxidative-capacity term draws on redox-dependent CHO modeling by Nolan and Lee and on Zalai et al.'s observation that the switch to lactate uptake accompanied a decrease in glycolytic flux <a href="#ref-7">[7]</a> <a href="#ref-8">[8]</a>. I represented the switch with a single capacity $J_{\mathrm{ox}}$. Glycolysis near or above this capacity produces lactate, with two moles of lactate per mole of glucose routed to overflow. The softplus function $\phi_\epsilon(z)=\epsilon\ln(1+e^{z/\epsilon})$ provides a smooth approximation to $\max(z,0)$.
+
+Lactate uptake uses spare oxidative capacity. CHO cultures have been observed to switch to lactate uptake after glucose depletion <a href="#ref-9">[9]</a>. I used a glucose-dependent repression term to represent the greater lactate uptake inferred for LoG than for STD at similar glucose uptake rates <a href="#ref-2">[2]</a>.
 
 $$
 \begin{aligned}
@@ -134,7 +142,7 @@ J_L &= R\,M(L,K_L)\,[1-M(G,K_R)],\\
 \end{aligned}
 $$
 
-The antibody production rate $q_P$ increases as the growth brake engages and falls with starvation exposure. The factor $1-\sigma$ also reduces synthesis as soon as available carbon drops. For antibody titer $P$, use compatible mass units for $q_P$ and $P$.
+The antibody production rate $q_P$ increases as the growth brake engages and falls with starvation exposure. I included the factor $1-\sigma$ to represent the drop in antibody productivity inferred from LoG when carbon ran out <a href="#ref-2">[2]</a>. For antibody titer $P$, use compatible mass units for $q_P$ and $P$.
 
 $$
 \begin{aligned}
@@ -146,7 +154,9 @@ $$
 <details class="xdr-details">
   <summary>Nitrogen balances</summary>
 
-Let $Q$, $E$, $U$, and $H$ be extracellular glutamine, glutamate, asparagine, and ammonium. For each nitrogen carrier $j$, compute its demand $D_j=b_j\mu+p_jq_P$ from its contribution per new cell and per unit mass of antibody. Obtain these coefficients from a biomass composition estimate and the antibody amino-acid composition. Include the biomass amide demand $b_{\mathrm{am}}\mu$ in $D_Q$. This demand returns glutamate to the intracellular pool.
+I treat the intracellular nitrogen carriers as quasi-steady, following an approach used in dynamic CHO modeling <a href="#ref-7">[7]</a>. The reduced network includes asparagine deamidation as a source of ammonium, a flux identified in the CHOmpact analysis of GS-CHO cultures <a href="#ref-10">[10]</a>.
+
+Let $Q$, $E$, $U$, and $H$ be extracellular glutamine, glutamate, asparagine, and ammonium. For each nitrogen carrier $j$, compute its demand $D_j=b_j\mu+p_jq_P$ from its contribution per new cell and per unit mass of antibody. The biomass coefficients use CHO composition estimates informed by CHOmpact and measurements from Széliová et al. <a href="#ref-10">[10]</a> <a href="#ref-11">[11]</a>. The product coefficients use the published NISTmAb amino-acid sequence <a href="#ref-12">[12]</a>. Include the biomass amide demand $b_{\mathrm{am}}\mu$ in $D_Q$. This demand returns glutamate to the intracellular pool.
 
 First calculate saturable asparagine uptake $J_U=V_U M(U,K_U)$. The deficit is supplied by asparagine synthetase at rate $s_U=\phi_{\epsilon_N}(D_U-J_U)$. The surplus is deamidated at rate $d_U=\phi_{\epsilon_N}(J_U-D_U)$. Asparagine synthesis consumes a glutamine amide and returns glutamate.
 
@@ -170,7 +180,7 @@ J_N &= D_N+v_T+v_N+s_U-d_U.
 \end{aligned}
 $$
 
-In the medium, glutamine decays chemically at rate $r_Q=k_Q Q$, releasing one ammonium and leaving one nitrogen in pyroglutamate per glutamine. The extracellular equations are
+In the medium, glutamine decays by the first-order law $r_Q=k_Q Q$, consistent with culture-medium measurements by Ozturk and Palsson <a href="#ref-13">[13]</a>. Each glutamine releases one ammonium and leaves one nitrogen in pyroglutamate. The extracellular equations are
 
 $$
 \begin{aligned}
@@ -186,7 +196,7 @@ The net fluxes $J_Q$, $v_{\mathrm{GS}}$, and $J_N$ are signed. Use a smaller smo
 
 ### Feed events and calibration
 
-Between events, integrate the rate equations at fixed volume. At a sampling and feeding event, remove the well-mixed sample, leaving volume $V_r=V^--V_s$. Mix each feed of volume $V_f$ and concentration $c_f$ by amount.
+Between events, integrate the rate equations at fixed volume. At a sampling and feeding event, remove the well-mixed sample, leaving volume $V_r=V^--V_s$. The feed updates follow from conservation of volume and of the amount of each species during mixing. Each feed adds volume $V_f$ at concentration $c_f$.
 
 $$
 \begin{aligned}
@@ -279,4 +289,13 @@ In each compartment, the NISTCHO model will use local glucose, lactate, and diss
   <li id="ref-2">Schäpertöns, V., Hofer, L., Berger, T., et al. (2026). <a href="https://doi.org/10.1038/s41540-026-00686-3">Effects of feeding strategies on culture performance and product quality in NISTCHO</a>. npj Systems Biology and Applications, 12, 67.</li>
   <li id="ref-3">Anane, E., Knudsen, I. M., &amp; Wilson, G. C. (2021). <a href="https://doi.org/10.1016/j.bej.2020.107870">Scale-down cultivation in mammalian cell bioreactors—The effect of bioreactor mixing time on the response of CHO cells to dissolved oxygen gradients</a>. Biochemical Engineering Journal, 166, 107870.</li>
   <li id="ref-4">Goudar, C. T., Piret, J. M., &amp; Konstantinov, K. B. (2011). <a href="https://doi.org/10.1002/btpr.646">Estimating cell specific oxygen uptake and carbon dioxide production rates for mammalian cells in perfusion culture</a>. Biotechnology Progress, 27(5), 1347–1357.</li>
+  <li id="ref-5">Meshram, M., Naderi, S., McConkey, B., et al. (2012). <a href="https://doi.org/10.1002/bit.24392">Population-based modeling of the progression of apoptosis in mammalian cell culture</a>. Biotechnology and Bioengineering, 109(5), 1193–1204.</li>
+  <li id="ref-6">Ben Yahia, B., Malphettes, L., &amp; Heinzle, E. (2021). <a href="https://doi.org/10.1016/j.ymben.2021.04.004">Predictive macroscopic modeling of cell growth, metabolism and monoclonal antibody production: Case study of a CHO fed-batch production</a>. Metabolic Engineering, 66, 204–216.</li>
+  <li id="ref-7">Nolan, R. P., &amp; Lee, K. (2011). <a href="https://doi.org/10.1016/j.ymben.2010.09.003">Dynamic model of CHO cell metabolism</a>. Metabolic Engineering, 13(1), 108–124.</li>
+  <li id="ref-8">Zalai, D., Koczka, K., Párta, L., et al. (2015). <a href="https://doi.org/10.1002/btpr.2179">Combining mechanistic and data-driven approaches to gain process knowledge on the control of the metabolic shift to lactate uptake in a fed-batch CHO process</a>. Biotechnology Progress, 31(6), 1657–1668.</li>
+  <li id="ref-9">Martínez, V. S., Dietmair, S., Quek, L.-E., et al. (2013). <a href="https://doi.org/10.1002/bit.24728">Flux balance analysis of CHO cells before and after a metabolic switch from lactate production to consumption</a>. Biotechnology and Bioengineering, 110(2), 660–666.</li>
+  <li id="ref-10">Jiménez del Val, I., Kyriakopoulos, S., Albrecht, S., et al. (2023). <a href="https://doi.org/10.1002/bit.28459">CHOmpact: A reduced metabolic model of Chinese hamster ovary cells with enhanced interpretability</a>. Biotechnology and Bioengineering, 120(9), 2479–2493.</li>
+  <li id="ref-11">Széliová, D., Ruckerbauer, D. E., Galleguillos, S. N., et al. (2020). <a href="https://doi.org/10.1016/j.ymben.2020.06.002">What CHO is made of: Variations in the biomass composition of Chinese hamster ovary cell lines</a>. Metabolic Engineering, 61, 288–300.</li>
+  <li id="ref-12">National Institute of Standards and Technology (2026). <a href="https://tsapps.nist.gov/srmext/certificates/8671.pdf#page=2">NISTmAb, Humanized IgG1κ Monoclonal Antibody</a>. Reference Material 8671 Information Sheet, Figure 1.</li>
+  <li id="ref-13">Ozturk, S. S., &amp; Palsson, B. O. (1990). <a href="https://doi.org/10.1021/bp00002a005">Chemical decomposition of glutamine in cell culture media: effect of media type, pH, and serum concentration</a>. Biotechnology Progress, 6(2), 121–128.</li>
 </ol>
