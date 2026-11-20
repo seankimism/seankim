@@ -63,6 +63,15 @@ I built these studies around those differences. I compare model predictions with
       <p class="paper-card-links"><a href="/projects/shake-flask-baffles-and-mixing/">Read study →</a></p>
     </div>
   </article>
+  <article class="paper-card" id="nistcho-cell-culture-model">
+    <a class="paper-card-figure" href="/projects/nistcho-cell-culture-model/" aria-label="Read the NISTCHO cell-culture study"><img src="/cho-model/ambr_combined_parity.svg" alt="Parity plots comparing predicted and measured NISTCHO culture variables in ambr reactors and spin tubes." width="3036" height="1548" loading="lazy" decoding="async" /></a>
+    <div class="paper-card-body">
+      <p class="eyebrow">CHO culture · Fed-batch kinetics · Model validation</p>
+      <h3><a href="/projects/nistcho-cell-culture-model/">Mechanistic model of NISTCHO fed-batch culture</a></h3>
+      <p>I fitted a reduced reaction-network model to published NISTCHO data from spin tubes and ambr reactors. A shared calibration predicted day-5 lactate within 0.18 g/L at both ambr sites. I plan to use the model to test how CFD-derived concentration gradients affect growth and metabolism.</p>
+      <p class="paper-card-links"><a href="/projects/nistcho-cell-culture-model/">Read study →</a></p>
+    </div>
+  </article>
 </div>
 
 ## Tech transfer tools
