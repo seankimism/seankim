@@ -343,6 +343,36 @@
       "sha256": "6f8354f29693c8e7d9215347a8453032d65c71bc9a8ddb2f887c9e7e363bf85a",
       "bytes": 3859204
     },
+    "cho-model/ambr_combined_parity.png": {
+      "source_sha256": "c25f92d71a85db20ca698322982833b38c080a5204ef9965e83eb9a8b2c470ce",
+      "sha256": "da60908b22dce9e8394309f3340801af28fb5072f446d90ca26a2e775a8b3873",
+      "bytes": 362115
+    },
+    "cho-model/ambr_combined_parity.svg": {
+      "source_sha256": "dd69f48ec8187c954db2a4583a2289940d08d0d24e23430c15e93395f6a748eb",
+      "sha256": "4c9f8c72f96bcc43b04cf077d6fc6208fb418ba1447bd03239e718e387944951",
+      "bytes": 254826
+    },
+    "cho-model/ambr_sites_2025.png": {
+      "source_sha256": "68576ba1966ea757dc10b4577c47a00d718398cbdd57451cca5a32999b47c940",
+      "sha256": "31df94b3fe85541884e1b2c2472fcfa0c7932eb4d0ef354bc7dd635ba74dcdd4",
+      "bytes": 360232
+    },
+    "cho-model/ambr_sites_2025.svg": {
+      "source_sha256": "b18fd0b323c60cddb0f6158a9f53691dc26521a12b731e4819146fd6cf9fdf6d",
+      "sha256": "c9b345f5b6347d7e4363fd303b76d77eba926362edc6154c53d94f564f7a5fc0",
+      "bytes": 205476
+    },
+    "cho-model/spin_tubes_2026.png": {
+      "source_sha256": "42843542c3a435affe738359c9db4bf413bc19caf4cbc659cb6e09a77bbd2fdc",
+      "sha256": "ed371a0495cbaa6d1a5fd27130c0d4c99367a8ebab5a556a23ec35e4d550abc6",
+      "bytes": 394351
+    },
+    "cho-model/spin_tubes_2026.svg": {
+      "source_sha256": "aa18b1d85045e42ef8b281f7cb96585366b09d97e42113f4496125848e6e6d86",
+      "sha256": "a4d41ab7980d3a915a29d0d72c5d30179cf1f7ac0159e74959e0e5f515f7e829",
+      "bytes": 275216
+    },
     "fedbatch-feed/feed_scale_comparison.png": {
       "source_sha256": "ba06524b20add8f8b8d73f23a37115ec13b767ddc56a4dad86e94c1b1f5c6b6b",
       "sha256": "fe54df552e3cc4efa2a83e94a01b7cce9b77022789e55106ef89ce18576f35ad",
