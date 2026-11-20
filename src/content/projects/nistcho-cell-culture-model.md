@@ -21,6 +21,7 @@ The released calibration predicted the held-out HIP spin-tube condition within 1
   <ol>
     <li><a href="#published-nistcho-data">Published NISTCHO data</a></li>
     <li><a href="#model-structure">Model structure</a></li>
+    <li><a href="#governing-equations-and-fitting">Equations and fitting</a></li>
     <li><a href="#calibration-and-held-out-testing">Calibration and testing</a></li>
     <li><a href="#spin-tube-cultures">Spin-tube cultures</a></li>
     <li><a href="#lactate-in-ph-controlled-bioreactors">Lactate in ambr bioreactors</a></li>
@@ -70,11 +71,147 @@ Each mechanism reproduces a feature of the development data:
 
 In addition, the model can take a dissolved-oxygen input, either as a prescribed profile or from an oxygen balance with a given kLa, and then adds the hypoxia response of my earlier CHO model. A stress state integrates the time spent below about 5% air saturation, so cells respond only after about 90 s of severe hypoxia. This delay matches a scale-down study in which CHO cells accumulated lactate only when their exposure to low dissolved oxygen exceeded 90 s <a href="#ref-3">[3]</a>. At full stress, growth falls by half, glucose uptake rises by half and is converted entirely to lactate, and death rises by 0.3 per day. Antibody productivity is unchanged, as observed in the same study, and specific oxygen uptake is 5.4 pmol/cell/day, within the range measured for CHO cells in perfusion culture <a href="#ref-4">[4]</a>. Unlike the mechanisms above, the remaining values are uncalibrated placeholders, because the NISTCHO data cannot calibrate them. The ambr bioreactors held dissolved oxygen at 40%, and the spin tubes had no oxygen measurement. Without an oxygen input, the model reproduces the calibrated results exactly.
 
+## Governing equations and fitting
+
+The equations below describe the well-mixed model used for the fits on this page. One consistent choice of solver units is time in days, cell density in cells/L, and solutes in mol/L. On that basis, use mol per active cell per day for solute fluxes and g per active cell per day for antibody production. Use mol of nitrogen per liter for the pooled amino-acid nitrogen. For glucose and lactate, divide the reported concentration in g/L by the molar mass in g/mol before applying the balances, then convert the model outputs back to g/L.
+
+### Cell growth and viability
+
+Let $X_h$, $X_a$, and $X_d$ denote the densities of active, apoptotic, and dead cells. Cells enter apoptosis at rate $k_d$, remain intact for a mean time $\tau_e$, and then enter the dead-cell pool. Dead cells lyse at rate $k_\ell$.
+
+$$
+\begin{aligned}
+\dot X_h &= (\mu-k_d)X_h,\\
+\dot X_a &= k_d X_h-X_a/\tau_e,\\
+\dot X_d &= X_a/\tau_e-k_\ell X_d.
+\end{aligned}
+$$
+
+The viable count is $X_v=X_h+X_a$ and viability is $X_v/(X_v+X_d)$. Only $X_h$ contributes to cellular uptake and production. Start with the inoculum viable density in $X_h$ and calculate $X_d$ from the initial viability. Initialize $X_a$ and the starvation exposure $S$ at zero.
+
+Growth is reduced by an inhibitor $I$ that accumulates with active cell density, an inoculum adaptation factor $A$, and starvation exposure $S$. Define a saturation function $M(c,K)=c/(K+c)$ and an inhibition function $B(z,K,n)=1/[1+(z/K)^n]$. Let $B_\mu$ and $B_g$ be inhibition functions of $I$, with separate coefficients for growth and glycolysis. Let $f_N=M(N,K_N)$, where $N$ is the nitrogen in amino acids other than the explicitly tracked glutamine, glutamate, and asparagine.
+
+$$
+\begin{aligned}
+\dot I &= X_h, \qquad I(0)=X_h(0)/\mu_{\max},\\
+\dot A &= (1-A)/\tau_A,\\
+\mu &= \mu_{\max}B_\mu A(1-S)f_N.
+\end{aligned}
+$$
+
+Glucose $G$ and lactate $L$ contribute to a carbon availability $C=G+L/2$ on a molar basis. The starvation signal is $\sigma=K_s^2/(K_s^2+C^2)$. Exposure builds during carbon depletion and relaxes when carbon becomes available.
+
+$$
+\begin{aligned}
+\dot S &= \frac{\sigma(1-S)}{\tau_{\mathrm{starve}}}
+          -\frac{(1-\sigma)S}{\tau_{\mathrm{recover}}},\\
+k_d &= k_{d0}+k_{dI}(1-B_I)+k_{dS}(1-B_S).
+\end{aligned}
+$$
+
+Here $B_I$ is an inhibition function of $I$ and $B_S$ is one of $S$. Their complements give the increases in apoptosis with accumulated cell-days and starvation exposure. The time constants for starvation and recovery are separate.
+
+### Glucose, lactate, and antibody
+
+Glucose uptake $J_G$ combines basal and inhibitor-sensitive terms. A feed factor $F$ enters with the main nutrient feed and is consumed in proportion to active cell density. Initialize $F$ at zero and assign a value of one in the main feed and zero in glucose stock and water. Its normalization can be absorbed into the coefficient $\alpha$.
+
+$$
+\begin{aligned}
+\dot F &= -k_F X_h F,\\
+J_G &= (J_0+J_1 B_g)M(G,K_G)(1+\alpha F).
+\end{aligned}
+$$
+
+Lactate production begins when glycolysis approaches the oxidative capacity $J_{\mathrm{ox}}$. The model uses the smooth positive part $\phi_\epsilon(z)=\epsilon\ln(1+e^{z/\epsilon})$. One mole of glucose routed to overflow produces two moles of lactate. Lactate uptake uses spare oxidative capacity and is repressed by glucose.
+
+$$
+\begin{aligned}
+J_{\mathrm{over}} &= \min\!\big[J_G,\phi_\epsilon(J_G-J_{\mathrm{ox}})\big],\\
+R &= k_L\phi_\epsilon(J_{\mathrm{ox}}-J_G),\\
+J_L &= R\,M(L,K_L)\,[1-M(G,K_R)],\\
+\dot G &= -X_h J_G,\\
+\dot L &= X_h(2J_{\mathrm{over}}-J_L).
+\end{aligned}
+$$
+
+The antibody production rate $q_P$ increases as the growth brake engages and falls with starvation exposure. The factor $1-\sigma$ also reduces synthesis as soon as available carbon drops. For antibody titer $P$, use compatible mass units for $q_P$ and $P$.
+
+$$
+\begin{aligned}
+q_P &= [q_0+q_1(1-B_\mu)](1-S)f_N(1-\sigma),\\
+\dot P &= X_h q_P.
+\end{aligned}
+$$
+
+<details class="xdr-details">
+  <summary>Nitrogen balances</summary>
+
+Let $Q$, $E$, $U$, and $H$ be extracellular glutamine, glutamate, asparagine, and ammonium. For each nitrogen carrier $j$, compute its demand $D_j=b_j\mu+p_jq_P$ from its contribution per new cell and per unit mass of antibody. Obtain these coefficients from a biomass composition estimate and the antibody amino-acid composition. Include the biomass amide demand $b_{\mathrm{am}}\mu$ in $D_Q$. This demand returns glutamate to the intracellular pool.
+
+First calculate saturable asparagine uptake $J_U=V_U M(U,K_U)$. The deficit is supplied by asparagine synthetase at rate $s_U=\phi_{\epsilon_N}(D_U-J_U)$. The surplus is deamidated at rate $d_U=\phi_{\epsilon_N}(J_U-D_U)$. Asparagine synthesis consumes a glutamine amide and returns glutamate.
+
+Net glutamine export $J_Q$ combines growth-linked export and saturable uptake. The glutamine synthetase flux $v_{\mathrm{GS}}$ meets that export and the cellular demand. The ammonium availability factor $f_H=M(H,K_H)$ limits export and increases the contribution of intracellular deamination as extracellular ammonium is depleted.
+
+$$
+\begin{aligned}
+J_Q &= a_Q\mu f_H-b_Q^{\mathrm{up}}M(Q,K_Q),\\
+v_{\mathrm{GS}} &= J_Q+D_Q+s_U,\\
+J_E &= (a_E+b_E^{\mathrm{up}}\mu)M(E,K_E).
+\end{aligned}
+$$
+
+The intracellular glutamate deficit $\Delta_E$ is supplied by transamination at rate $v_T=\phi_{\epsilon_N}(\Delta_E)$. A surplus is deaminated at rate $v_D=\phi_{\epsilon_N}(-\Delta_E)$. The remaining amino-acid nitrogen supplies growth, antibody synthesis, and these transfers.
+
+$$
+\begin{aligned}
+\Delta_E &= D_E+v_{\mathrm{GS}}-J_E-b_{\mathrm{am}}\mu-s_U,\\
+v_N &= V_N M(N,K_D)+(1-f_H)(D_Q+s_U),\\
+J_N &= D_N+v_T+v_N+s_U-d_U.
+\end{aligned}
+$$
+
+In the medium, glutamine decays chemically at rate $r_Q=k_Q Q$, releasing one ammonium and leaving one nitrogen in pyroglutamate per glutamine. The extracellular equations are
+
+$$
+\begin{aligned}
+\dot U &= -X_hJ_U,\qquad \dot E=-X_hJ_E,\\
+\dot N &= -X_hJ_N,\qquad \dot Q=X_hJ_Q-r_Q,\\
+\dot H &= X_h(d_U+v_D+v_N-v_{\mathrm{GS}})+r_Q.
+\end{aligned}
+$$
+
+The net fluxes $J_Q$, $v_{\mathrm{GS}}$, and $J_N$ are signed. Use a smaller smoothing width $\epsilon_N$ for the nitrogen reactions. These equations close the intracellular balances for asparagine, glutamine, glutamate, and the amino donor pool. When checking total nitrogen, keep a ledger of nitrogen entering in feeds, leaving in samples, and incorporated into biomass, antibody, and pyroglutamate.
+
+</details>
+
+### Feed events and calibration
+
+Between events, integrate the rate equations at fixed volume. At a sampling and feeding event, remove the well-mixed sample, leaving volume $V_r=V^--V_s$. Mix each feed of volume $V_f$ and concentration $c_f$ by amount.
+
+$$
+\begin{aligned}
+V^+ &= V_r+\sum_f V_f,\\
+c^+ &= \frac{V_r c^-+\sum_f V_f c_f}{V^+}.
+\end{aligned}
+$$
+
+Apply this update to medium species, cell densities, antibody titer, and inhibitor $I$. Assign zero cells and zero inhibitor to the feeds. The cell states $A$ and $S$ carry over without dilution. Store the state just before the additions for comparison with pre-feed assays.
+
+To top up glucose when $G^+<G_{\mathrm{target}}$, solve the mixing equation for the stock volume and apply it as a second addition.
+
+$$
+V_{\mathrm{top}}=V^+\frac{G_{\mathrm{target}}-G^+}{G_{\mathrm{stock}}-G_{\mathrm{target}}}.
+$$
+
+1. **Assemble the inputs.** Record sample times, viable density, viability, titer, concentrations, feed composition, feed volumes, and sampling events for each culture. The ambr supplementary workbook provides site means and standard deviations. The spin-tube study reports replicate assays, feed doses, and a supplementary amino-acid composition table. Record assumptions for unpublished ambr inputs, including sampling phase and feed volumes. Use the [ambr study supplement](#ref-1) and the [spin-tube data archive](https://zenodo.org/records/18609042).
+2. **Fit the cell and carbon kinetics first.** For each candidate parameter set, solve for each inoculum block's $A(0)$ by matching its mean pre-feed day-3 viable count. Use the closest bound and retain the discrepancy in the objective if the target is outside the attainable range. Fit viable density, viability, titer, glucose, and lactate in the development cultures by bounded least squares in log-parameter space. Scale residuals by replicate spread with a floor for assay precision. Use multiple starting points. For a reported glucose or lactate value of zero, penalize only the amount by which a prediction exceeds the assay floor.
+3. **Fit nitrogen and test transfer.** Hold the carbon coefficients fixed while estimating nitrogen rates and the ambr feed amino-acid scale from Site 1. Score the held-out cultures against the same assay definitions. For the shared ambr comparison, refit the glucose and lactate coefficients to both ambr sites and evaluate the spin tubes with those coefficients.
+
 ## Calibration and held-out testing
 
 For the released calibration, I fitted STD, LoG, HiF, and Site 1 and held out HIP, Site 2, and the 2025 spin tubes. Residuals were scaled by tolerances declared before scoring. For the spin tubes, the tolerance was the replicate spread of STD and LoG or the assay floor. For the ambr bioreactors, Site 1 was judged on its own duplicate-vessel spread during fitting. The held-out Site 2 used a tolerance based on the difference between the two sites. A variable passed when its scaled error was within twice its tolerance.
 
-Two inputs came directly from the data. First, each experiment's inoculum lag was set from its own day-3 cell count, because seed trains differed between experiments and the day-3 sample was taken before any condition-specific treatment. The day-3 count was therefore an input and was never scored. Second, every sample and feed was placed on the cell counter's time stamps rather than on nominal culture days. This correction mattered, because nominal days were off by up to 4.8 hours, which changed the modeled glucose concentration by 0.49 g/L.
+Two inputs came directly from the data. First, each experiment's inoculum lag was set from its own day-3 cell count, because seed trains differed between experiments and the day-3 sample was taken before any condition-specific treatment. That count served as the conditioning target. Second, for the 2026 spin tubes, I placed samples and feeds on the cell counter's timestamps. The nominal days differed by up to 4.8 hours, which changed the modeled glucose concentration by 0.49 g/L. The 2025 runs used the reported culture days.
 
 I fitted the parameters by bounded least squares in log space from five starting points. I compared three forms of the density brake and selected cumulative cell-days by the corrected Akaike information criterion (AICc). Then, I fitted the nitrogen reactions on Site 1, the only fitted culture with nitrogen measurements, while holding the carbon kinetics fixed. Whenever I tested a new mechanism, I wrote down the rule for accepting it before running the fit.
 
