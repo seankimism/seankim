@@ -4,7 +4,7 @@ description: "A mechanistic NISTCHO fed-batch model with spin-tube and ambr comp
 organization: "Independent project"
 parentProject: "bioprocess-modeling"
 publishedDate: "2026-11-19"
-period: "2026–present"
+period: "November 2026"
 tags: ["Cell culture", "CHO metabolism", "Mechanistic modeling", "Model validation"]
 order: 4
 draft: false
