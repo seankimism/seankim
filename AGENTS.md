@@ -29,6 +29,7 @@
 - **No `<style>` in `.astro` files** - Use global.css classes
 - **Two-column layout:** Left sidebar (sticky profile), right main (scrollable content)
 - **Markdown-driven:** All content in `.md` files with YAML frontmatter; project pages may use inline HTML for figures and cards
+- **NISTCHO figures:** Put parity figure titles, subtitles, and explanatory notes in the page caption. Use the chart for axes, panel labels, RMSE, and the dataset legend. Label ambr panels by vessel name and put site numbers and fit status in the caption. Report glucose and lactate in g/L.
 - **Project grouping:** `parentProject` links a study to its overview. About and Projects list the overview when it is visible; study URLs stay available and link back to the overview. If the parent is absent or an unpublished draft, the studies remain listed.
 - **Projects on the About page** are selected automatically: the newest visible overview's `publishedDate` per `organization`, excluding drafts in production. The separate Projects listing retains its manual `order`.
 - **Drafts:** a project with `draft: true` renders in `npm run dev` but is excluded from production builds, listings, and the sitemap (`src/utils/content.ts`)
@@ -40,3 +41,4 @@
 - Analytics via Umami (`umami.websiteId`) in `src/config/site.ts`
 - Pull requests run tests and a production build. Deployment and scheduled-release candidates also run all tests before building.
 - No lint/typecheck scripts configured
+- Commit as `seankimism <118485345+seankimism@users.noreply.github.com>` with no `Co-authored-by` lines. GitHub credits a commit to the account whose ID is in its no-reply email, so any other ID credits a stranger, and it lists every co-author as a repository contributor. A local `commit-msg` hook refuses both.
