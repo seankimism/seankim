@@ -11,6 +11,10 @@ const papers = (await getCollection('publications')).filter(p => p.data.featured
 const linkedIn = SOCIALS.find(link => link.name === 'LinkedIn' && link.isActive);
 ---
 <BaseLayout title="About" fullTitle="Byumsu “Sean” Kim - Bioprocess Engineer">
+  {bio.data.showreel.length > 0 && <div class="home-reel">{bio.data.showreel.map(item => <a class="reel-tile" href={withBase(item.href)}>
+    <img src={withBase(`/home-reel/${item.clip}-still.jpg`)} alt={item.description} width="480" height="600" decoding="async" />
+    <picture><source srcset={withBase(`/home-reel/${item.clip}.webp`)} type="image/webp" /><img src={withBase(`/home-reel/${item.clip}.gif`)} alt="" width="480" height="600" loading="lazy" decoding="async" /></picture>
+  </a>)}</div>}
   <header class="page-header"><p class="eyebrow">Bioprocessing · Modeling · Biofabrication</p><h1 class="page-title">About me</h1></header>
   <div class="prose home-bio"><Content /></div>
   <section class="home-section" aria-labelledby="focus-heading"><h2 id="focus-heading" class="section-title">Research focus</h2><div class="focus-list">{bio.data.researchAreas.map((area,index) => <div class="focus-row"><span class="focus-number">0{index+1}</span><div><h3>{area.title}</h3><p>{area.description}</p></div></div>)}</div></section>

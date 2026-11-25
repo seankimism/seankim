@@ -19,7 +19,7 @@
 - **Types:** `src/types.ts` - config and theme types
 - **Styles:** `src/styles/global.css` - all classes, theme tokens, base styles
 - **Icons:** `src/assets/icons/*.svg`, loaded by name through `src/assets/icons.ts`
-- **Static assets:** `public/` - `xdr2000/` and `thermal-control/` (interactive explorers with precomputed results), `cornell/` (project figures), `files/`, `images/`
+- **Static assets:** `public/` - `xdr2000/` and `thermal-control/` (interactive explorers with precomputed results), `cornell/` (project figures), `home-reel/` (About-page animations listed in `bio.md` `showreel`: animated WebP, GIF fallback and a first-frame still per clip), `files/`, `images/`
 - **Build checks:** `scripts/check-*.mjs` verify explorer result manifests after each build
 - **Shared checks:** `scripts/result-files.mjs` verifies paths, inventories, sizes and checksums. Keep scientific/schema checks in each explorer's checker. `check-project-hierarchy.mjs` reads project frontmatter and validates listings against the same selection policy as the pages; `check-project-redirect.mjs` separately preserves the legacy XDR URL.
 - **Client behavior:** `src/utils/result-frames.mjs` owns result-iframe sizing and Astro navigation cleanup; import it directly in tests.

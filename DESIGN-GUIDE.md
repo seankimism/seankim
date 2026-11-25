@@ -35,6 +35,7 @@ All styles are defined in `src/styles/global.css`. No inline `<style>` allowed i
 ### About page
 | Class | Description |
 |-------|-------------|
+| `home-reel`, `reel-tile` | Three linked looping animations above "About me" (still image under an animated WebP with GIF fallback) |
 | `home-bio`, `home-section` | Bio and section spacing |
 | `focus-list`, `focus-row`, `focus-number` | Numbered research-focus rows |
 | `home-projects`, `home-project`, `read-more` | Selected-work cards |
@@ -194,7 +195,7 @@ All styles are defined in `src/styles/global.css`. No inline `<style>` allowed i
 ## Accessibility
 
 - **Focus rings:** Visible dashed outline for keyboard navigation.
-- **Reduced motion:** Respect `prefers-reduced-motion` media query.
+- **Reduced motion:** Respect `prefers-reduced-motion` media query. Exception, by the site owner's choice: the About-page animations (`home-reel`) always loop and have no pause control.
 - **Alt text:** Required for all images.
 
 ---

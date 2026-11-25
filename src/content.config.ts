@@ -34,6 +34,12 @@ const bio = defineCollection({
     name: z.string(), avatar: z.string().optional(), shortBio: z.string(),
     institution: z.string().optional(), role: z.string().optional(), location: z.string().optional(),
     researchAreas: z.array(z.object({ title: z.string(), description: z.string() })),
+    /** Looping animations above About me; `clip` names `<clip>.webp`, its `<clip>.gif` fallback and `<clip>-still.jpg` (the first frame) in public/home-reel/. */
+    showreel: z.array(z.object({
+      href: z.string(), clip: z.string().regex(/^[a-z0-9-]+$/),
+      /** Alt text for the animation; it also names the link to `href`. */
+      description: z.string(),
+    })).default([]),
   }),
 });
 const cv = defineCollection({

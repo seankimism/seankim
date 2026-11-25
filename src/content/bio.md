@@ -9,6 +9,16 @@ researchAreas:
     description: "First-principles models, machine learning, and digital twins for process development and scale-up."
   - title: "Biomechanics and biofabrication"
     description: "Scaffold mechanics, cell behavior, and bioreactor design for tissue quality and manufacturing reproducibility."
+showreel:
+  - href: "/projects/shake-flask-baffles-and-mixing/#duran-mixing-video"
+    clip: "flask-mixing"
+    description: "CFD of the liquid surface in an orbitally shaken flask with four pressed baffles. A tagged tracer, in red, spreads through the liquid after shaking starts."
+  - href: "/projects/shake-flask-baffles-and-mixing/#glass-impeller-preview"
+    clip: "bioreactor-impeller"
+    description: "Model geometry of a glass stirred bioreactor, with its shaft and three-blade impeller rotating at an illustrative 60 rpm."
+  - href: "/projects/mechanics-and-biofabrication/"
+    clip: "scaffold-compression"
+    description: "Micro-CT reconstructions of a honeycomb collagen scaffold at six compressive strains from 0 to 40 percent. The scaffold contracts laterally as an interior cell, in red, and an edge cell, in yellow, buckle and fold."
 ---
 
 I am a bioprocess engineer working in upstream process development, computational modeling, and tissue engineering. My work investigates the relationships among process conditions, cell behavior, and product quality by combining physics-based models with experiments. Understanding such relationships is critical for controlling cell-based manufacturing and improving its reproducibility.
