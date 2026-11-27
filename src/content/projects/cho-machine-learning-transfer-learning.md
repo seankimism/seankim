@@ -25,7 +25,7 @@ Several reviews cover neighboring ground. They address machine learning for smal
     <li><a href="#transferring-models-between-systems">Transferring models between systems</a></li>
     <li><a href="#designing-media-and-feeds-with-machine-learning">Designing media and feeds with machine learning</a></li>
     <li><a href="#transferring-sensor-calibrations">Transferring sensor calibrations</a></li>
-    <li><a href="#summary-and-outlook">Summary and outlook</a></li>
+    <li><a href="#summary">Summary</a></li>
     <li><a href="#references">References</a></li>
   </ol>
 </nav>
@@ -218,17 +218,13 @@ Soft sensors built on other signals face the same question. Jossen et al. relate
 
 Overall, calibrations have transferred most reliably for glucose and lactate. Cell density and titer models were more sensitive to scale and clone <a href="#ref-101">[101]</a>, <a href="#ref-98">[98]</a>, and late-culture concentrations and the nitrogen balance still need offline assays.
 
-## Summary and outlook
+## Summary
 
 Frozen-parameter models have predicted CHO cultures with new feeds, initial conditions and culture modes <a href="#ref-12">[12]</a>, <a href="#ref-15">[15]</a>, <a href="#ref-9">[9]</a>, <a href="#ref-16">[16]</a>. At the largest scale steps in this review, the models used measurements from each test run <a href="#ref-11">[11]</a>, <a href="#ref-47">[47]</a>. When a perfusion model was carried from ambr 250 to a 5 L working volume, the predictions deviated after day 12.5 and the authors added retention terms and refitted parameters <a href="#ref-31">[31]</a>. Filtering can reconstruct measured trajectories in a new culture. Parameter drift may indicate that the model is absorbing the effect of a process it does not describe, as in the temperature-shift case of Yu et al. <a href="#ref-7">[7]</a>.
 
 Within-process tests remain common among the hybrid and data-driven studies reviewed here <a href="#ref-23">[23]</a>, <a href="#ref-27">[27]</a>, <a href="#ref-20">[20]</a>, <a href="#ref-36">[36]</a>. Tests across systems include simulation, next-day prediction, and adaptation during a measured run <a href="#ref-50">[50]</a>, <a href="#ref-59">[59]</a>, <a href="#ref-52">[52]</a>, <a href="#ref-53">[53]</a>. Growth and titer can also transfer more readily than metabolite trajectories. In Sietaram et al.’s independent 15-clone test, the squared correlation for titer was 0.88 and the normalized error for lactate was 82% <a href="#ref-62">[62]</a>.
 
 Of the sensor calibrations reviewed, glucose and lactate generally transferred more readily than cell density or titer <a href="#ref-101">[101]</a>, <a href="#ref-98">[98]</a>, <a href="#ref-104">[104]</a>. Errors near depletion still warrant offline checks <a href="#ref-88">[88]</a>, <a href="#ref-89">[89]</a>, <a href="#ref-90">[90]</a>. In media and feed design, prospective experiments show whether selected formulations improve a specified outcome <a href="#ref-69">[69]</a>, <a href="#ref-70">[70]</a>. The CHO-K1 media study reported a growth advantage in CHO-K1 that did not carry over to HeLa-S3 <a href="#ref-68">[68]</a>.
-
-For CFD coupling, I looked for tests in which a CHO model with fixed parameters predicts the metabolic response to an independently measured spatial gradient. The studies reviewed here tested parts of that problem. Okamura et al. fitted one shaken-tank run and predicted a second run under a similar bulk dissolved-oxygen shift. The reported R² values were 0.67 for lactate and 0.71 for viable cells <a href="#ref-120">[120]</a>. Dasgupta et al. coupled CFD, CHO kinetics and feed control in 14-day simulations at 250 mL, 1,000 L and 2,000 L <a href="#ref-121">[121]</a>. In scale-down experiments, Anane et al. observed a metabolic response to a dissolved-oxygen gradient once residence time in a plug-flow loop exceeded 90 s <a href="#ref-122">[122]</a>.
-
-For a new cell line, scale or product, I would compare frozen prediction, filtering and refitting on the same held-out runs. To estimate the contribution of transfer, I would compare the transferred model with a target-only model given the same amount of target data up to the same cutoff. The seven feeding strategies in the open NISTCHO dataset could support a held-out feed comparison within one cell line <a href="#ref-123">[123]</a>. For media design, the corresponding test would carry a selected formulation into a second CHO clone or to a second scale and report the response against a matched control.
 
 ## References
 
@@ -352,8 +348,4 @@ For a new cell line, scale or product, I would compare frozen prediction, filter
   <li id="ref-117">Jossen et al. (2026). <a href="https://doi.org/10.1007/s00253-026-13882-2">Oxygen-based soft-sensing of glucose demand in Chinese hamster ovary fed-batch cultures across scales</a>. Applied Microbiology and Biotechnology, 110(1), 257.</li>
   <li id="ref-118">Ohadi et al. (2015). <a href="https://doi.org/10.1002/bit.25339">Development of a soft-sensor based on multi-wavelength fluorescence spectroscopy and a dynamic metabolic model for monitoring mammalian cell cultures</a>. Biotechnology and Bioengineering, 112(1), 197–208.</li>
   <li id="ref-119">Narayanan et al. (2020). <a href="https://doi.org/10.1002/bit.27437">Hybrid-EKF: Hybrid model coupled with extended Kalman filter for real-time monitoring and control of mammalian cell culture</a>. Biotechnology and Bioengineering, 117(9), 2703–2714.</li>
-  <li id="ref-120">Okamura et al. (2024). <a href="https://doi.org/10.1002/btpr.3486">Modeling of cell cultivation for monoclonal antibody production processes considering lactate metabolic shifts</a>. Biotechnology Progress, 40(6), e3486.</li>
-  <li id="ref-121">Dasgupta et al. (2025). <a href="https://doi.org/10.1016/j.jbiotec.2025.06.012">Integrative in-silico models for mammalian cell cultures in single-use bioreactors: Bridging hydrodynamics, kinetics, and process control across scales</a>. Journal of Biotechnology, 406, 42–52.</li>
-  <li id="ref-122">Anane et al. (2021). <a href="https://doi.org/10.1016/j.bej.2020.107870">Scale-down cultivation in mammalian cell bioreactors—The effect of bioreactor mixing time on the response of CHO cells to dissolved oxygen gradients</a>. Biochemical Engineering Journal, 166, 107870.</li>
-  <li id="ref-123">Schäpertöns et al. (2026). <a href="https://doi.org/10.1038/s41540-026-00686-3">Effects of feeding strategies on culture performance and product quality in NISTCHO</a>. npj Systems Biology and Applications, 12(1), 67. Data on <a href="https://doi.org/10.5281/zenodo.18609042">Zenodo</a> (CC BY 4.0).</li>
 </ol>
