@@ -19,11 +19,11 @@ Enter the source speed, each incubator's full orbital diameter, and the receivin
 For example, **120 rpm on a 25 mm orbit** gives a receiving setting of **85 rpm on a 50 mm orbit**, after rounding to the nearest whole rpm. The calculator checks the receiving speed limits and displays the source and receiving RCF at these settings.
 
 <figure class="xdr-explorer">
-  <iframe src="/incubator-rcf/index.html" title="Incubator RCF calculator: match nominal orbital acceleration between source and receiving shaker settings" width="800" height="1100" loading="lazy" data-content-height></iframe>
-  <figcaption><a href="/incubator-rcf/index.html" target="_blank" rel="noopener noreferrer">Open the RCF calculator in a full window ↗</a> · <a href="/incubator-rcf/methodology.html" target="_blank" rel="noopener noreferrer">Calculation and sources ↗</a></figcaption>
+  <iframe src="./index.html" title="Incubator RCF calculator: match nominal orbital acceleration between source and receiving shaker settings" width="800" height="1100" loading="lazy" data-content-height></iframe>
+  <figcaption><a href="./index.html" target="_blank" rel="noopener noreferrer">Open the RCF calculator in a full window ↗</a> · <a href="./methodology.html" target="_blank" rel="noopener noreferrer">Calculation and sources ↗</a></figcaption>
 </figure>
 
-The [calculation and sources](/incubator-rcf/methodology.html) explain the orbital RCF equation, speed conversion and manufacturer guidance. Inputs are calculated in the browser and are not sent to a server.
+The [calculation and sources](./methodology.html) explain the orbital RCF equation, speed conversion and manufacturer guidance. Inputs are calculated in the browser and are not sent to a server.
 
 ## Other methods for relating flask scale to rpm
 
