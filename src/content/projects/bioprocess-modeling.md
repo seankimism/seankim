@@ -98,4 +98,12 @@ I built these studies around those differences. I compare model predictions with
       <p class="paper-card-links"><a href="/projects/cho-cell-model-cfd/">Read review →</a></p>
     </div>
   </article>
+  <article class="paper-card no-figure" id="cho-machine-learning-transfer-learning">
+    <div class="paper-card-body">
+      <p class="eyebrow">CHO models &middot; Machine learning &middot; Transfer learning</p>
+      <h3><a href="/projects/cho-machine-learning-transfer-learning/">Literature review of machine learning and transfer learning for CHO metabolic modeling</a></h3>
+      <p>I compare what CHO models can predict across cell lines, scales and culture conditions. I also examine how learned models guide media design and how sensor calibrations transfer between systems.</p>
+      <p class="paper-card-links"><a href="/projects/cho-machine-learning-transfer-learning/">Read review &rarr;</a></p>
+    </div>
+  </article>
 </div>
